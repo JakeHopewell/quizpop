@@ -3,339 +3,218 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuizPop – Daily Brain Challenge</title>
-<meta name="description" content="10 AI-generated questions every day. One shot. How big is your brain?">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3563124573162722"
-     crossorigin="anonymous"></script>
-<meta property="og:title" content="QuizPop – Daily Brain Challenge">
-<meta property="og:description" content="10 questions. One chance per day. Can you beat your streak?">
-<link href="https://fonts.googleapis.com/css2?family=Righteous&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<title>QuizPop - Daily Brain Challenge</title>
+<link href="https://fonts.googleapis.com/css2?family=Righteous&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f0e17;
-    --surface: #1a1826;
-    --card: #22203a;
-    --accent: #ff6b35;
-    --accent2: #ffd166;
-    --green: #06d6a0;
-    --red: #ef476f;
-    --text: #fffffe;
-    --muted: #a7a5b8;
-    --border: rgba(255,255,255,0.08);
+    --bg:#0f0e17; --surface:#1a1826; --card:#22203a;
+    --accent:#ff6b35; --accent2:#ffd166; --green:#06d6a0;
+    --red:#ef476f; --text:#fffffe; --muted:#a7a5b8;
+    --border:rgba(255,255,255,0.08);
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background:
-      radial-gradient(ellipse 80% 50% at 20% 10%, rgba(255,107,53,0.12) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(255,209,102,0.08) 0%, transparent 60%);
-    pointer-events: none; z-index: 0;
-  }
-  .wrap {
-    position: relative; z-index: 1;
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 0 16px 60px;
-  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+  body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(255,107,53,0.12),transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(255,209,102,0.08),transparent 60%);pointer-events:none;z-index:0}
+  .wrap{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:0 16px 60px}
 
-  /* ── AD SLOTS ── */
-  .ad-slot {
-    background: linear-gradient(135deg, var(--surface), var(--card));
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    min-height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .ad-slot::after {
-    content: 'AD';
-    position: absolute;
-    top: 5px; right: 8px;
-    font-size: 9px;
-    color: var(--muted);
-    opacity: 0.4;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-  }
-  /* Placeholder styling — remove when you add real AdSense code */
-  .ad-placeholder {
-    display: flex; align-items: center; gap: 10px;
-    color: var(--muted); font-size: 12px;
-    padding: 16px 20px;
-  }
-  .ad-top    { margin: 14px 0 20px; }
-  .ad-mid    { margin: 20px 0; }
-  .ad-bottom { margin: 28px 0 0; }
+  .ad-slot{background:linear-gradient(135deg,var(--surface),var(--card));border:1px solid var(--border);border-radius:12px;text-align:center;position:relative;min-height:80px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;gap:8px}
+  .ad-slot::after{content:'AD';position:absolute;top:5px;right:8px;font-size:9px;color:var(--muted);opacity:0.4;font-weight:700}
+  .ad-top{margin:14px 0 20px} .ad-mid{margin:20px 0} .ad-bottom{margin:28px 0 0}
 
-  /* ── SCREENS ── */
-  .screen { display: none; animation: fadeUp 0.35s ease; }
-  .screen.active { display: block; }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  .screen{display:none;animation:fadeUp .35s ease}
+  .screen.active{display:block}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 
-  /* ── HEADER ── */
-  header {
-    display: flex; align-items: center;
-    justify-content: space-between;
-    padding: 22px 0 6px;
-  }
-  .logo { font-family: 'Righteous', cursive; font-size: 26px; color: var(--accent); letter-spacing: 1px; }
-  .logo span { color: var(--accent2); }
-  .streak-pill {
-    display: flex; align-items: center; gap: 5px;
-    background: var(--card); border: 1px solid var(--border);
-    padding: 5px 13px; border-radius: 20px;
-    font-size: 13px; font-weight: 600;
-  }
+  header{display:flex;align-items:center;justify-content:space-between;padding:22px 0 10px}
+  .logo{font-family:'Righteous',cursive;font-size:26px;color:var(--accent);letter-spacing:1px;cursor:pointer}
+  .logo span{color:var(--accent2)}
+  .streak-pill{display:flex;align-items:center;gap:5px;background:var(--card);border:1px solid var(--border);padding:5px 13px;border-radius:20px;font-size:13px;font-weight:600}
 
-  /* ── HOME ── */
-  .hero { text-align: center; padding: 28px 0 24px; }
-  .hero-emoji { font-size: 68px; display: block; margin-bottom: 14px; animation: float 3s ease-in-out infinite; }
-  @keyframes float { 0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)} }
-  .hero h1 { font-family: 'Righteous', cursive; font-size: 34px; line-height: 1.1; margin-bottom: 10px; }
-  .hero h1 em { color: var(--accent); font-style: normal; }
-  .hero p { color: var(--muted); font-size: 15px; line-height: 1.6; max-width: 320px; margin: 0 auto 26px; }
+  .tabs{display:flex;gap:6px;margin-bottom:20px;background:var(--card);border-radius:14px;padding:5px}
+  .tab{flex:1;padding:9px;border-radius:10px;border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-align:center}
+  .tab.active{background:var(--accent);color:#fff}
+  .tab:hover:not(.active){color:var(--text)}
 
-  .chips-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 26px; }
-  .chip {
-    background: var(--card); border: 1px solid var(--border);
-    padding: 7px 14px; border-radius: 20px;
-    font-size: 13px; display: flex; align-items: center; gap: 6px;
-  }
-  .chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
+  .hero{text-align:center;padding:20px 0 16px}
+  .hero-emoji{font-size:60px;display:block;margin-bottom:12px;animation:float 3s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .hero h1{font-family:'Righteous',cursive;font-size:30px;line-height:1.1;margin-bottom:8px}
+  .hero h1 em{color:var(--accent);font-style:normal}
+  .hero p{color:var(--muted);font-size:14px;line-height:1.6;max-width:300px;margin:0 auto}
+  .chips-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:14px 0 20px}
+  .chip{background:var(--card);border:1px solid var(--border);padding:6px 12px;border-radius:20px;font-size:12px;display:flex;align-items:center;gap:5px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
 
-  .cat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 10px; text-align: center; }
-  .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-bottom: 24px; }
-  .cat-btn {
-    background: var(--card); border: 2px solid var(--border);
-    border-radius: 14px; padding: 13px 8px;
-    text-align: center; cursor: pointer;
-    transition: all 0.18s; color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-  }
-  .cat-btn:hover { border-color: var(--accent); transform: translateY(-2px); }
-  .cat-btn.sel   { border-color: var(--accent); background: rgba(255,107,53,0.14); }
-  .cat-btn .ce   { font-size: 26px; display: block; margin-bottom: 5px; }
-  .cat-btn .cn   { font-size: 11px; font-weight: 600; }
+  .day-summary{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 18px;margin-bottom:20px;display:flex;align-items:center;gap:14px}
+  .ds-ring{position:relative;width:56px;height:56px;flex-shrink:0}
+  .ds-ring svg{transform:rotate(-90deg)}
+  .ds-lbl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Righteous',cursive;font-size:13px}
+  .ds-info{flex:1}
+  .ds-title{font-weight:600;font-size:15px;margin-bottom:3px}
+  .ds-sub{font-size:12px;color:var(--muted)}
+  .ds-streak{font-family:'Righteous',cursive;font-size:22px}
 
-  /* ── BUTTONS ── */
-  .btn {
-    display: block; width: 100%; padding: 15px;
-    border-radius: 14px; border: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px; font-weight: 600;
-    cursor: pointer; transition: all 0.18s; text-align: center;
-  }
-  .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none !important; }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--accent), #ff8c5a);
-    color: #fff; box-shadow: 0 4px 20px rgba(255,107,53,0.35);
-  }
-  .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(255,107,53,0.5); }
-  .btn-secondary { background: var(--card); border: 1px solid var(--border); color: var(--text); }
-  .btn-secondary:hover { border-color: var(--accent2); }
-  .btn-green { background: linear-gradient(135deg,#25D366,#128C7E); color:#fff; box-shadow:0 4px 16px rgba(37,211,102,0.3); }
-  .btn-green:hover:not(:disabled) { transform:translateY(-2px); }
+  .cat-cards{display:grid;gap:10px;margin-bottom:6px}
+  .cat-card{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:16px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .2s}
+  .cat-card:hover{border-color:var(--accent);transform:translateX(4px)}
+  .cat-card.done{border-color:var(--green);background:rgba(6,214,160,0.06)}
+  .cat-card.done:hover{border-color:var(--green);transform:translateX(4px)}
+  .cc-emoji{font-size:28px;flex-shrink:0}
+  .cc-info{flex:1}
+  .cc-name{font-weight:600;font-size:15px;margin-bottom:2px}
+  .cc-sub{font-size:12px;color:var(--muted)}
+  .cc-score{font-family:'Righteous',cursive;font-size:20px;color:var(--green);flex-shrink:0}
+  .cc-badge{background:var(--green);color:#0f0e17;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;flex-shrink:0}
+  .cc-arrow{color:var(--muted);font-size:20px;flex-shrink:0}
 
-  /* ── LOADING ── */
-  .loader-wrap { text-align: center; padding: 80px 20px; }
-  .dots { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; }
-  .dot-b {
-    width: 12px; height: 12px; border-radius: 50%;
-    animation: db 0.8s infinite;
-  }
-  .dot-b:nth-child(1) { background: var(--accent); }
-  .dot-b:nth-child(2) { background: var(--accent2); animation-delay: .15s; }
-  .dot-b:nth-child(3) { background: var(--green); animation-delay: .3s; }
-  @keyframes db { 0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)} }
-  .loading-msg strong { display: block; font-size: 18px; color: var(--text); margin-bottom: 6px; }
-  .loading-msg { font-size: 14px; color: var(--muted); }
+  .past-list{display:grid;gap:10px}
+  .past-day{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 16px;cursor:pointer;transition:all .2s}
+  .past-day:hover{border-color:var(--accent2);transform:translateX(4px)}
+  .pd-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .pd-date{font-weight:600;font-size:14px}
+  .pd-score{font-family:'Righteous',cursive;font-size:16px;color:var(--accent2)}
+  .pd-cats{display:flex;gap:6px;flex-wrap:wrap}
+  .pd-chip{font-size:11px;background:var(--surface);border:1px solid var(--border);padding:3px 8px;border-radius:20px}
+  .pd-chip.done{border-color:var(--green);color:var(--green)}
+  .pd-chip.undone{color:var(--muted);opacity:0.5}
+  .no-past{text-align:center;padding:40px 20px;color:var(--muted);font-size:14px}
+  .no-past .np-emoji{font-size:48px;display:block;margin-bottom:12px}
 
-  /* ── QUIZ ── */
-  .qhdr { display: flex; align-items: center; gap: 12px; padding: 18px 0 14px; }
-  .qctr { font-family: 'Righteous', cursive; font-size: 14px; color: var(--muted); white-space: nowrap; }
-  .pbwrap { flex: 1; height: 6px; background: var(--card); border-radius: 3px; overflow: hidden; }
-  .pbfill { height:100%; background: linear-gradient(90deg,var(--accent),var(--accent2)); border-radius:3px; transition: width .4s cubic-bezier(.4,0,.2,1); }
-  .tbadge {
-    background: var(--card); border: 1px solid var(--border);
-    padding: 4px 11px; border-radius: 20px;
-    font-size: 14px; font-weight: 700;
-    font-family: 'Righteous', cursive;
-    min-width: 50px; text-align: center;
-  }
-  .tbadge.urg { color: var(--red); border-color: var(--red); animation: shk .25s infinite; }
-  @keyframes shk { 0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)} }
+  .loader-wrap{text-align:center;padding:80px 20px}
+  .dots{display:flex;gap:8px;justify-content:center;margin-bottom:20px}
+  .dot-b{width:12px;height:12px;border-radius:50%;animation:db .8s infinite}
+  .dot-b:nth-child(1){background:var(--accent)}
+  .dot-b:nth-child(2){background:var(--accent2);animation-delay:.15s}
+  .dot-b:nth-child(3){background:var(--green);animation-delay:.3s}
+  @keyframes db{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+  .loading-msg strong{display:block;font-size:18px;color:var(--text);margin-bottom:6px}
+  .loading-msg{font-size:14px;color:var(--muted)}
 
-  .qcard {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 20px; padding: 26px 22px 22px;
-    margin-bottom: 14px; position: relative; overflow: hidden;
-  }
-  .qcard::before {
-    content: ''; position: absolute; top:0;left:0;right:0; height:3px;
-    background: linear-gradient(90deg,var(--accent),var(--accent2),var(--green));
-  }
-  .qtag {
-    display: inline-block;
-    background: rgba(255,107,53,0.14); border: 1px solid rgba(255,107,53,0.28);
-    color: var(--accent); padding: 3px 10px; border-radius: 20px;
-    font-size: 11px; font-weight: 600; text-transform: uppercase;
-    letter-spacing: .06em; margin-bottom: 13px;
-  }
-  .qtext { font-size: 19px; font-weight: 600; line-height: 1.4; }
+  .qhdr{display:flex;align-items:center;gap:12px;padding:18px 0 14px}
+  .qctr{font-family:'Righteous',cursive;font-size:14px;color:var(--muted);white-space:nowrap}
+  .pbwrap{flex:1;height:6px;background:var(--card);border-radius:3px;overflow:hidden}
+  .pbfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+  .tbadge{background:var(--card);border:1px solid var(--border);padding:4px 11px;border-radius:20px;font-size:14px;font-weight:700;font-family:'Righteous',cursive;min-width:50px;text-align:center}
+  .tbadge.urg{color:var(--red);border-color:var(--red);animation:shk .25s infinite}
+  @keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
+  .qcard{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:26px 22px 22px;margin-bottom:14px;position:relative;overflow:hidden}
+  .qcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--green))}
+  .qtag{display:inline-block;background:rgba(255,107,53,0.14);border:1px solid rgba(255,107,53,0.28);color:var(--accent);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:13px}
+  .qtext{font-size:19px;font-weight:600;line-height:1.4}
+  .opts{display:grid;gap:9px;margin-bottom:14px}
+  .opt{background:var(--surface);border:2px solid var(--border);border-radius:14px;padding:13px 16px;text-align:left;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--text);transition:all .15s;display:flex;align-items:center;gap:11px}
+  .opt:hover:not(:disabled){border-color:var(--accent2);transform:translateX(4px)}
+  .opt .ol{width:28px;height:28px;border-radius:8px;background:var(--card);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0}
+  .opt.correct{border-color:var(--green);background:rgba(6,214,160,0.1)}
+  .opt.correct .ol{background:var(--green);color:#0f0e17}
+  .opt.wrong{border-color:var(--red);background:rgba(239,71,111,0.1)}
+  .opt.wrong .ol{background:var(--red);color:#fff}
+  .opt:disabled{cursor:default}
+  .factbox{background:rgba(255,209,102,0.08);border:1px solid rgba(255,209,102,0.2);border-radius:12px;padding:11px 15px;font-size:13px;color:var(--accent2);line-height:1.5;display:none;margin-bottom:14px}
+  .factbox.show{display:block;animation:fadeUp .3s ease}
+  .factbox strong{display:block;margin-bottom:3px;font-size:10px;text-transform:uppercase;letter-spacing:.08em;opacity:.65}
 
-  .opts { display: grid; gap: 9px; margin-bottom: 14px; }
-  .opt {
-    background: var(--surface); border: 2px solid var(--border);
-    border-radius: 14px; padding: 13px 16px;
-    text-align: left; cursor: pointer;
-    font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--text);
-    transition: all .15s; display: flex; align-items: center; gap: 11px;
-  }
-  .opt:hover:not(:disabled) { border-color: var(--accent2); transform: translateX(4px); }
-  .opt .ol {
-    width: 28px; height: 28px; border-radius: 8px; background: var(--card);
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 13px; flex-shrink: 0; transition: all .15s;
-  }
-  .opt.correct { border-color: var(--green); background: rgba(6,214,160,0.1); }
-  .opt.correct .ol { background: var(--green); color: #0f0e17; }
-  .opt.wrong { border-color: var(--red); background: rgba(239,71,111,0.1); }
-  .opt.wrong .ol { background: var(--red); color: #fff; }
-  .opt:disabled { cursor: default; }
+  .res-hero{text-align:center;padding:24px 0 18px}
+  .sring{width:130px;height:130px;margin:0 auto 16px;position:relative}
+  .sring svg{transform:rotate(-90deg)}
+  .sring-lbl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .snum{font-family:'Righteous',cursive;font-size:34px;line-height:1}
+  .stot{font-size:12px;color:var(--muted)}
+  .rtitle{font-family:'Righteous',cursive;font-size:22px;margin-bottom:6px}
+  .rsub{color:var(--muted);font-size:14px;margin-bottom:20px}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:20px}
+  .sc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 10px;text-align:center}
+  .sv{font-family:'Righteous',cursive;font-size:20px;color:var(--accent2)}
+  .sl{font-size:11px;color:var(--muted);margin-top:3px}
+  .share-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;font-size:13px;font-family:monospace;color:var(--muted);white-space:pre-wrap;line-height:1.7;margin-bottom:12px}
+  .share-btns{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:9px}
+  .btn-copy.done{border-color:var(--green);color:var(--green)}
+  .rvw-title{font-family:'Righteous',cursive;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin:22px 0 10px}
+  .rvw{display:grid;gap:8px;margin-bottom:22px}
+  .ri{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:11px 14px;display:flex;align-items:flex-start;gap:9px;font-size:14px}
+  .ri-ico{font-size:17px;flex-shrink:0;margin-top:1px}
+  .ri-q{color:var(--muted);font-size:12px;margin-bottom:2px}
+  .ri-a{font-weight:600}
+  .ri.ok .ri-a{color:var(--green)}
+  .ri.bad .ri-a{color:var(--red)}
+  .next-reset{text-align:center;color:var(--muted);font-size:13px;margin-top:18px}
+  .cdown{font-family:'Righteous',cursive;color:var(--accent2);font-size:18px;display:block;margin-top:4px}
 
-  .factbox {
-    background: rgba(255,209,102,0.08); border: 1px solid rgba(255,209,102,0.2);
-    border-radius: 12px; padding: 11px 15px;
-    font-size: 13px; color: var(--accent2); line-height: 1.5;
-    display: none; margin-bottom: 14px;
-  }
-  .factbox.show { display: block; animation: fadeUp .3s ease; }
-  .factbox strong { display:block; margin-bottom:3px; font-size:10px; text-transform:uppercase; letter-spacing:.08em; opacity:.65; }
+  .btn{display:block;width:100%;padding:14px;border-radius:14px;border:none;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .18s;text-align:center}
+  .btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important}
+  .btn-primary{background:linear-gradient(135deg,var(--accent),#ff8c5a);color:#fff;box-shadow:0 4px 20px rgba(255,107,53,0.35)}
+  .btn-primary:hover:not(:disabled){transform:translateY(-2px)}
+  .btn-secondary{background:var(--card);border:1px solid var(--border);color:var(--text)}
+  .btn-secondary:hover{border-color:var(--accent2)}
+  .btn-green{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff}
+  .btn-green:hover:not(:disabled){transform:translateY(-2px)}
+  .btn-back{background:transparent;border:none;color:var(--muted);font-size:13px;padding:8px 0;cursor:pointer;display:flex;align-items:center;gap:6px;margin-bottom:4px;font-family:'DM Sans',sans-serif}
+  .btn-back:hover{color:var(--text)}
 
-  /* ── RESULTS ── */
-  .res-hero { text-align: center; padding: 28px 0 20px; }
-  .sring { width:140px; height:140px; margin:0 auto 18px; position:relative; }
-  .sring svg { transform: rotate(-90deg); }
-  .sring-lbl {
-    position:absolute; inset:0;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-  }
-  .snum { font-family:'Righteous',cursive; font-size:36px; line-height:1; }
-  .stot { font-size:12px; color:var(--muted); }
-  .rtitle { font-family:'Righteous',cursive; font-size:24px; margin-bottom:7px; }
-  .rsub { color:var(--muted); font-size:14px; margin-bottom:22px; }
-
-  .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-bottom:22px; }
-  .sc { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:15px 10px; text-align:center; }
-  .sv { font-family:'Righteous',cursive; font-size:22px; color:var(--accent2); }
-  .sl { font-size:11px; color:var(--muted); margin-top:3px; }
-
-  .share-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 14px; padding: 14px;
-    font-size: 13px; font-family: monospace;
-    color: var(--muted); white-space: pre-wrap;
-    line-height: 1.7; margin-bottom: 12px;
-  }
-  .share-btns { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-bottom:9px; }
-  .btn-copy.done { border-color:var(--green); color:var(--green); }
-
-  .rvw-title {
-    font-family:'Righteous',cursive; font-size:13px;
-    color:var(--muted); text-transform:uppercase; letter-spacing:.1em;
-    margin:22px 0 10px;
-  }
-  .rvw { display:grid; gap:8px; margin-bottom:22px; }
-  .ri {
-    background:var(--card); border:1px solid var(--border);
-    border-radius:12px; padding:11px 14px;
-    display:flex; align-items:flex-start; gap:9px; font-size:14px;
-  }
-  .ri-ico { font-size:17px; flex-shrink:0; margin-top:1px; }
-  .ri-q { color:var(--muted); font-size:12px; margin-bottom:2px; }
-  .ri-a { font-weight:600; }
-  .ri.ok .ri-a { color:var(--green); }
-  .ri.bad .ri-a { color:var(--red); }
-
-  .next-reset { text-align:center; color:var(--muted); font-size:13px; margin-top:18px; }
-  .cdown { font-family:'Righteous',cursive; color:var(--accent2); font-size:18px; display:block; margin-top:4px; }
-
-  /* ── ALREADY PLAYED ── */
-  .ap-wrap { text-align:center; padding:36px 20px; }
-  .ap-wrap .big { font-size:58px; margin-bottom:14px; display:block; }
-
-  /* ── CONFETTI ── */
-  .cf {
-    position:fixed; width:8px; height:12px; border-radius:2px;
-    top:-20px; animation:cfall linear forwards;
-    z-index:999; pointer-events:none;
-  }
-  @keyframes cfall { to { transform:translateY(110vh) rotate(720deg); opacity:0; } }
+  .cf{position:fixed;width:8px;height:12px;border-radius:2px;top:-20px;animation:cfall linear forwards;z-index:999;pointer-events:none}
+  @keyframes cfall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+  .footer{text-align:center;font-size:11px;color:#555;padding:20px 0}
+  .footer a{color:#555}
 </style>
 </head>
 <body>
 <div class="wrap">
+  <div class="ad-slot ad-top">Advertisement</div>
 
-  <!-- TOP AD — replace inner div with your AdSense code -->
-  <div class="ad-slot ad-top">
-    <div class="ad-placeholder">📢 <span>Advertisement</span></div>
-  </div>
-
-  <!-- ══ HOME ══ -->
+  <!-- HOME -->
   <div class="screen active" id="sHome">
     <header>
-      <div class="logo">Quiz<span>Pop</span></div>
-      <div class="streak-pill">🔥 <span id="hStreak">0</span> day streak</div>
+      <div class="logo" onclick="goHome()">Quiz<span>Pop</span></div>
+      <div class="streak-pill">&#x1F525; <span id="hStreak">0</span> day streak</div>
     </header>
     <div class="hero">
-      <span class="hero-emoji">🧠</span>
+      <span class="hero-emoji">&#x1F9E0;</span>
       <h1>Today's <em>Daily</em><br>Brain Challenge</h1>
-      <p>10 fresh questions every day. One shot to prove your brain power.</p>
+      <p>Complete all 6 categories and build your streak!</p>
     </div>
     <div class="chips-row">
       <div class="chip"><span class="dot"></span>Live today</div>
-      <div class="chip">⏱ ~5 mins</div>
-      <div class="chip">🏆 10 questions</div>
+      <div class="chip">&#x23F1; 15s per question</div>
+      <div class="chip">&#x1F3C6; 6 categories</div>
     </div>
-    <p class="cat-label">Choose your category</p>
-    <div class="cat-grid">
-      <button class="cat-btn sel" data-cat="mixed"      onclick="pickCat(this)"><span class="ce">🎲</span><span class="cn">Mixed</span></button>
-      <button class="cat-btn"    data-cat="science"     onclick="pickCat(this)"><span class="ce">🔬</span><span class="cn">Science</span></button>
-      <button class="cat-btn"    data-cat="history"     onclick="pickCat(this)"><span class="ce">📜</span><span class="cn">History</span></button>
-      <button class="cat-btn"    data-cat="popculture"  onclick="pickCat(this)"><span class="ce">🎬</span><span class="cn">Pop Culture</span></button>
-      <button class="cat-btn"    data-cat="geography"   onclick="pickCat(this)"><span class="ce">🌍</span><span class="cn">Geography</span></button>
-      <button class="cat-btn"    data-cat="sports"      onclick="pickCat(this)"><span class="ce">⚽</span><span class="cn">Sports</span></button>
+    <div class="day-summary">
+      <div class="ds-ring">
+        <svg width="56" height="56" viewBox="0 0 56 56">
+          <circle cx="28" cy="28" r="22" fill="none" stroke="var(--surface)" stroke-width="6"/>
+          <circle cx="28" cy="28" r="22" fill="none" stroke="url(#dsg)" stroke-width="6"
+            stroke-linecap="round" stroke-dasharray="138" id="dayArc" stroke-dashoffset="138"/>
+          <defs><linearGradient id="dsg" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ff6b35"/><stop offset="100%" stop-color="#06d6a0"/>
+          </linearGradient></defs>
+        </svg>
+        <div class="ds-lbl" id="dayLbl">0/6</div>
+      </div>
+      <div class="ds-info">
+        <div class="ds-title" id="dayTitle">Start today's challenge!</div>
+        <div class="ds-sub" id="daySub">Complete all 6 categories for a perfect day</div>
+      </div>
+      <div class="ds-streak" id="dayStreakEl">&#x1F525;0</div>
     </div>
-    <button class="btn btn-primary" id="startBtn" onclick="startQuiz()">Let's Go! 🚀</button>
+    <div class="tabs">
+      <button class="tab active" id="tabToday" onclick="switchTab('today')">Today</button>
+      <button class="tab" id="tabPast" onclick="switchTab('past')">Past Quizzes</button>
+    </div>
+    <div id="panelToday"><div class="cat-cards" id="catCards"></div></div>
+    <div id="panelPast" style="display:none"><div class="past-list" id="pastList"></div></div>
   </div>
 
-  <!-- ══ LOADING ══ -->
+  <!-- LOADING -->
   <div class="screen" id="sLoad">
     <div class="loader-wrap">
       <div class="dots"><div class="dot-b"></div><div class="dot-b"></div><div class="dot-b"></div></div>
-      <div class="loading-msg"><strong>Loading today's questions…</strong>Fetching your daily challenge ✨</div>
+      <div class="loading-msg"><strong>Loading questions...</strong>Get ready! &#x2728;</div>
     </div>
   </div>
 
-  <!-- ══ QUIZ ══ -->
+  <!-- QUIZ -->
   <div class="screen" id="sQuiz">
+    <button class="btn-back" onclick="goHome()">&#8592; Back to categories</button>
     <div class="qhdr">
       <span class="qctr" id="qCtr">1 / 10</span>
       <div class="pbwrap"><div class="pbfill" id="pBar" style="width:10%"></div></div>
@@ -343,311 +222,419 @@
     </div>
     <div class="qcard">
       <span class="qtag" id="qTag">Mixed</span>
-      <div class="qtext" id="qText">…</div>
+      <div class="qtext" id="qText">Loading...</div>
     </div>
     <div class="opts" id="opts"></div>
-    <div class="factbox" id="factBox"><strong>💡 Did you know?</strong><span id="factTxt"></span></div>
-    <button class="btn btn-secondary" id="nextBtn" onclick="nextQ()" style="display:none">Next Question →</button>
+    <div class="factbox" id="factBox"><strong>Did you know?</strong><span id="factTxt"></span></div>
+    <button class="btn btn-secondary" id="nextBtn" onclick="nextQ()" style="display:none">Next Question</button>
   </div>
 
-  <!-- ══ RESULTS ══ -->
+  <!-- RESULTS -->
   <div class="screen" id="sResults">
+    <button class="btn-back" onclick="goHome()">&#8592; Back to categories</button>
     <header>
-      <div class="logo">Quiz<span>Pop</span></div>
-      <div class="streak-pill">🔥 <span id="rStreak">0</span> day streak</div>
+      <div class="logo" onclick="goHome()">Quiz<span>Pop</span></div>
+      <div class="streak-pill">&#x1F525; <span id="rStreak">0</span> day streak</div>
     </header>
     <div class="res-hero">
       <div class="sring">
-        <svg width="140" height="140" viewBox="0 0 140 140">
-          <circle cx="70" cy="70" r="60" fill="none" stroke="var(--card)" stroke-width="12"/>
-          <circle cx="70" cy="70" r="60" fill="none" stroke="url(#sg)" stroke-width="12"
-            stroke-linecap="round" stroke-dasharray="377" id="sArc" stroke-dashoffset="377"/>
-          <defs>
-            <linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="var(--accent)"/>
-              <stop offset="100%" stop-color="var(--accent2)"/>
-            </linearGradient>
-          </defs>
+        <svg width="130" height="130" viewBox="0 0 130 130">
+          <circle cx="65" cy="65" r="55" fill="none" stroke="var(--card)" stroke-width="11"/>
+          <circle cx="65" cy="65" r="55" fill="none" stroke="url(#sg)" stroke-width="11"
+            stroke-linecap="round" stroke-dasharray="345" id="sArc" stroke-dashoffset="345"/>
+          <defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ff6b35"/><stop offset="100%" stop-color="#ffd166"/>
+          </linearGradient></defs>
         </svg>
         <div class="sring-lbl">
           <span class="snum" id="rScore">0</span>
           <span class="stot" id="rTotal">/ 10</span>
         </div>
       </div>
-      <div class="rtitle" id="rTitle">…</div>
-      <div class="rsub"   id="rSub"></div>
+      <div class="rtitle" id="rTitle">...</div>
+      <div class="rsub" id="rSub"></div>
     </div>
-
     <div class="stats">
       <div class="sc"><div class="sv" id="stC">0</div><div class="sl">Correct</div></div>
-      <div class="sc"><div class="sv" id="stT">0s</div><div class="sl">Avg. Time</div></div>
-      <div class="sc"><div class="sv" id="stS">0🔥</div><div class="sl">Streak</div></div>
+      <div class="sc"><div class="sv" id="stT">0s</div><div class="sl">Avg Time</div></div>
+      <div class="sc"><div class="sv" id="stS">0</div><div class="sl">Streak</div></div>
     </div>
-
     <div class="share-card" id="shareCard"></div>
     <div class="share-btns">
-      <button class="btn btn-green" onclick="doShare('whatsapp')">📲 WhatsApp</button>
-      <button class="btn btn-copy btn-secondary" id="copyBtn" onclick="doCopy()">📋 Copy</button>
+      <button class="btn btn-green" onclick="doShare('whatsapp')">WhatsApp</button>
+      <button class="btn btn-secondary btn-copy" id="copyBtn" onclick="doCopy()">Copy</button>
     </div>
-    <button class="btn btn-secondary" onclick="doShare('twitter')" style="margin-bottom:4px">🐦 Share on X</button>
-
-    <!-- MID AD — replace with AdSense code -->
-    <div class="ad-slot ad-mid">
-      <div class="ad-placeholder">🎯 <span>Advertisement</span></div>
-    </div>
-
+    <button class="btn btn-secondary" onclick="doShare('twitter')" style="margin-bottom:4px">Share on X</button>
+    <div class="ad-slot ad-mid">Advertisement</div>
     <div class="rvw-title">Review Your Answers</div>
     <div class="rvw" id="rvwList"></div>
-
-    <div class="next-reset">
-      Next quiz resets in
-      <span class="cdown" id="cdown1">--:--:--</span>
-    </div>
+    <div class="next-reset">Next quiz resets in<span class="cdown" id="cdown1">--:--:--</span></div>
   </div>
 
-  <!-- ══ ALREADY PLAYED ══ -->
-  <div class="screen" id="sAlready">
-    <header>
-      <div class="logo">Quiz<span>Pop</span></div>
-      <div class="streak-pill">🔥 <span id="aStreak">0</span> day streak</div>
-    </header>
-    <div class="ap-wrap">
-      <span class="big">✅</span>
-      <h2 style="font-family:'Righteous',cursive;font-size:24px;margin-bottom:9px;">Already played today!</h2>
-      <p style="color:var(--muted);margin-bottom:22px;">Come back tomorrow for a fresh set.</p>
-      <div class="stats">
-        <div class="sc"><div class="sv" id="apS">0</div><div class="sl">Today's Score</div></div>
-        <div class="sc"><div class="sv" id="apSt">0🔥</div><div class="sl">Streak</div></div>
-        <div class="sc"><div class="sv" id="apB">0</div><div class="sl">Best Score</div></div>
-      </div>
-      <button class="btn btn-primary"   style="margin-bottom:10px" onclick="goResults()">See My Results →</button>
-      <button class="btn btn-secondary"                             onclick="doShare('whatsapp')">📲 Share My Score</button>
-      <div class="next-reset" style="margin-top:18px">
-        Next quiz resets in
-        <span class="cdown" id="cdown2">--:--:--</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- BOTTOM AD — replace with AdSense code -->
-  <div class="ad-slot ad-bottom">
-    <div class="ad-placeholder">✨ <span>Advertisement</span></div>
-  </div>
-
-</div><!-- /wrap -->
+  <div class="ad-slot ad-bottom">Advertisement</div>
+  <div class="footer"><a href="/privacy.html">Privacy Policy</a> &middot; &copy; 2026 QuizPop</div>
+</div>
 
 <script>
-// ══════════════════════════════════════════
-//  CONFIG
-// ══════════════════════════════════════════
-const CATS = {
-  mixed:     { label: 'Mixed',       emoji: '🎲' },
-  science:   { label: 'Science',     emoji: '🔬' },
-  history:   { label: 'History',     emoji: '📜' },
-  popculture:{ label: 'Pop Culture', emoji: '🎬' },
-  geography: { label: 'Geography',   emoji: '🌍' },
-  sports:    { label: 'Sports',      emoji: '⚽' },
+var TODAY_Q = {"mixed":[{"question":"What is the capital of Australia?","options":["Sydney","Melbourne","Canberra","Brisbane"],"correct":2,"fact":"Canberra was purpose-built as a compromise between rivals Sydney and Melbourne."},{"question":"How many sides does a hexagon have?","options":["5","6","7","8"],"correct":1,"fact":"The word hexagon comes from Greek: 'hex' meaning six and 'gonia' meaning angle."},{"question":"Which planet is known as the Red Planet?","options":["Venus","Jupiter","Saturn","Mars"],"correct":3,"fact":"Mars gets its red colour from iron oxide (rust) on its surface."},{"question":"What is the chemical symbol for gold?","options":["Go","Gd","Au","Ag"],"correct":2,"fact":"Au comes from the Latin word 'aurum', meaning gold."},{"question":"Who painted the Mona Lisa?","options":["Michelangelo","Raphael","Leonardo da Vinci","Donatello"],"correct":2,"fact":"Da Vinci likely painted the Mona Lisa between 1503 and 1519."},{"question":"What is the largest ocean on Earth?","options":["Atlantic","Indian","Arctic","Pacific"],"correct":3,"fact":"The Pacific Ocean covers more area than all of Earth's land masses combined."},{"question":"How many bones are in the adult human body?","options":["196","206","216","226"],"correct":1,"fact":"Babies are born with around 270 bones — many fuse together as we grow."},{"question":"In which year did the Berlin Wall fall?","options":["1987","1988","1989","1990"],"correct":2,"fact":"The Berlin Wall stood for 28 years, from 1961 to 1989."},{"question":"What is the fastest land animal?","options":["Lion","Cheetah","Greyhound","Gazelle"],"correct":1,"fact":"Cheetahs can reach 70mph (112km/h) but can only sustain it for about 30 seconds."},{"question":"What language has the most native speakers worldwide?","options":["English","Spanish","Hindi","Mandarin Chinese"],"correct":3,"fact":"Mandarin has around 920 million native speakers — nearly double second-place Spanish."}],"science":[{"question":"What is the atomic number of carbon?","options":["4","6","8","12"],"correct":1,"fact":"Carbon is the basis of all known life and can form more compounds than any other element."},{"question":"What gas do plants absorb during photosynthesis?","options":["Oxygen","Nitrogen","Carbon Dioxide","Hydrogen"],"correct":2,"fact":"A single large tree can absorb up to 48 pounds of CO₂ per year."},{"question":"What is the speed of light in a vacuum?","options":["300,000 km/s","150,000 km/s","450,000 km/s","200,000 km/s"],"correct":0,"fact":"Light from the Sun takes about 8 minutes and 20 seconds to reach Earth."},{"question":"What is the powerhouse of the cell?","options":["Nucleus","Ribosome","Mitochondria","Vacuole"],"correct":2,"fact":"Mitochondria have their own DNA, evidence they were once free-living bacteria."},{"question":"What is the most abundant gas in Earth's atmosphere?","options":["Oxygen","Carbon Dioxide","Argon","Nitrogen"],"correct":3,"fact":"Nitrogen makes up about 78% of Earth's atmosphere, while oxygen is only 21%."},{"question":"How many chromosomes do humans normally have?","options":["23","44","46","48"],"correct":2,"fact":"Humans have 46 chromosomes arranged in 23 pairs — one set from each parent."},{"question":"What is H₂O more commonly known as?","options":["Salt","Water","Hydrogen","Acid"],"correct":1,"fact":"Water is the only natural substance found in all three states at Earth's surface temperatures."},{"question":"Which scientist developed the theory of general relativity?","options":["Newton","Bohr","Einstein","Hawking"],"correct":2,"fact":"Einstein published his general theory of relativity in 1915, revolutionising our understanding of gravity."},{"question":"What is the hardest natural substance on Earth?","options":["Quartz","Ruby","Diamond","Titanium"],"correct":2,"fact":"Diamond scores 10 on the Mohs scale — the maximum possible."},{"question":"What type of waves does a microwave oven use?","options":["Radio waves","Gamma rays","Microwaves","Infrared"],"correct":2,"fact":"Microwave ovens were invented by accident in 1945 when a radar engineer melted a chocolate bar."}],"history":[{"question":"In which year did World War II end?","options":["1943","1944","1945","1946"],"correct":2,"fact":"WWII ended on September 2, 1945, with Japan's formal surrender aboard the USS Missouri."},{"question":"Who was the first person to walk on the Moon?","options":["Buzz Aldrin","Neil Armstrong","Yuri Gagarin","John Glenn"],"correct":1,"fact":"Armstrong's famous words were slightly garbled — he intended to say 'one small step for a man'."},{"question":"Which ancient wonder was located in Alexandria, Egypt?","options":["Colossus of Rhodes","Hanging Gardens","Great Lighthouse","Temple of Artemis"],"correct":2,"fact":"The Lighthouse of Alexandria stood over 100 metres tall and guided ships for centuries."},{"question":"In which year did the Titanic sink?","options":["1910","1911","1912","1913"],"correct":2,"fact":"The Titanic sank on its maiden voyage on April 15, 1912, after hitting an iceberg."},{"question":"Who was the first Emperor of Rome?","options":["Julius Caesar","Nero","Augustus","Caligula"],"correct":2,"fact":"Augustus ruled Rome for 41 years, the longest reign of any Roman emperor."},{"question":"The Great Wall of China was primarily built to defend against which group?","options":["Persians","Mongols","Japanese","Romans"],"correct":1,"fact":"The Great Wall spans over 13,000 miles and took hundreds of years to complete."},{"question":"Which country was the first to give women the right to vote?","options":["USA","UK","New Zealand","Australia"],"correct":2,"fact":"New Zealand granted women the right to vote in 1893, decades ahead of most nations."},{"question":"What was the name of the first artificial Earth satellite?","options":["Explorer 1","Sputnik 1","Vostok 1","Apollo 1"],"correct":1,"fact":"Sputnik 1 was launched by the Soviet Union in 1957 and orbited Earth every 96 minutes."},{"question":"How long did the Hundred Years' War last?","options":["100 years","116 years","99 years","87 years"],"correct":1,"fact":"The Hundred Years' War between England and France actually lasted from 1337 to 1453 — 116 years."},{"question":"Who wrote 'The Communist Manifesto'?","options":["Lenin & Stalin","Marx & Engels","Trotsky & Marx","Engels & Lenin"],"correct":1,"fact":"Marx and Engels wrote the manifesto in 1848 — it was only 23 pages long."}],"popculture":[{"question":"Which film won the first ever Academy Award for Best Picture?","options":["Wings","Sunrise","The Jazz Singer","Metropolis"],"correct":0,"fact":"Wings (1927) won Best Picture at the very first Oscars ceremony in 1929."},{"question":"How many Harry Potter books are in the main series?","options":["6","7","8","9"],"correct":1,"fact":"J.K. Rowling wrote the 7 main Harry Potter books over 10 years, from 1997 to 2007."},{"question":"Which band performed at the most-watched Super Bowl halftime show?","options":["Beyoncé","Bruno Mars","Katy Perry","Lady Gaga"],"correct":2,"fact":"Katy Perry's 2015 halftime show drew 121 million viewers, the most in Super Bowl history."},{"question":"In which year was the first iPhone released?","options":["2005","2006","2007","2008"],"correct":2,"fact":"Steve Jobs unveiled the first iPhone on January 9, 2007, calling it 'revolutionary'."},{"question":"Which TV show features a chemistry teacher turned drug lord?","options":["Ozark","Narcos","Breaking Bad","The Wire"],"correct":2,"fact":"Bryan Cranston won four Emmy Awards for his role as Walter White in Breaking Bad."},{"question":"Who holds the record for most Grammy Awards won?","options":["Beyoncé","Taylor Swift","Georg Solti","Quincy Jones"],"correct":0,"fact":"Beyoncé holds the record with 32 Grammy wins — the most of any artist ever."},{"question":"What is the highest-grossing film of all time (not adjusted for inflation)?","options":["Titanic","Avengers: Endgame","Avatar","Star Wars: The Force Awakens"],"correct":2,"fact":"Avatar (2009) grossed over $2.9 billion, reclaiming its record after its 2022 re-release."},{"question":"Which game console introduced the 'Wii' motion controller?","options":["PlayStation 2","Xbox 360","Nintendo Wii","GameCube"],"correct":2,"fact":"The Nintendo Wii sold over 100 million units and brought gaming to entirely new audiences."},{"question":"In Friends, what is the name of Ross's second wife?","options":["Carol","Emily","Rachel","Mona"],"correct":1,"fact":"Ross accidentally said Rachel's name at the altar during his wedding to Emily."},{"question":"Which artist released the album 'Thriller'?","options":["Prince","Michael Jackson","David Bowie","Elton John"],"correct":1,"fact":"Thriller remains the best-selling album of all time with an estimated 70 million copies sold."}],"geography":[{"question":"What is the longest river in the world?","options":["Amazon","Congo","Yangtze","Nile"],"correct":3,"fact":"The Nile stretches about 6,650 km — though some measurements put the Amazon marginally longer."},{"question":"Which country has the most natural lakes?","options":["USA","Russia","Brazil","Canada"],"correct":3,"fact":"Canada has an estimated 2 million lakes, containing about 20% of the world's fresh water."},{"question":"What is the smallest country in the world?","options":["Monaco","San Marino","Liechtenstein","Vatican City"],"correct":3,"fact":"Vatican City is just 0.44 square kilometres — smaller than most city parks."},{"question":"Which desert is the largest in the world?","options":["Sahara","Arabian","Gobi","Antarctic"],"correct":3,"fact":"Antarctica is technically a cold desert — it receives less than 200mm of precipitation per year."},{"question":"How many countries share a land border with Germany?","options":["7","8","9","10"],"correct":2,"fact":"Germany borders Denmark, Netherlands, Belgium, Luxembourg, France, Switzerland, Austria, Czech Republic, and Poland."},{"question":"On which continent is the Amazon rainforest located?","options":["Africa","Asia","North America","South America"],"correct":3,"fact":"The Amazon produces 20% of Earth's oxygen and houses 10% of all species on the planet."},{"question":"What is the capital of Canada?","options":["Toronto","Vancouver","Ottawa","Montreal"],"correct":2,"fact":"Ottawa was chosen as Canada's capital in 1857 by Queen Victoria as a compromise city."},{"question":"Which country has the longest coastline in the world?","options":["Russia","Australia","Norway","Canada"],"correct":3,"fact":"Canada's coastline stretches 202,080 km — nearly six times longer than second-place Norway."},{"question":"In which ocean is the island of Madagascar?","options":["Atlantic","Pacific","Indian","Arctic"],"correct":2,"fact":"Madagascar split from Africa 165 million years ago, allowing unique evolution of its wildlife."},{"question":"What is the tallest mountain in Africa?","options":["Mount Kenya","Mount Kilimanjaro","Ras Dashen","Mount Elgon"],"correct":1,"fact":"Kilimanjaro stands 5,895m and is the world's tallest free-standing mountain."}],"sports":[{"question":"How many players are on a standard football (soccer) team?","options":["9","10","11","12"],"correct":2,"fact":"Football's 11-player format was standardised in England in the 1860s."},{"question":"Which country has won the most FIFA World Cups?","options":["Germany","Argentina","Italy","Brazil"],"correct":3,"fact":"Brazil has won 5 World Cups (1958, 1962, 1970, 1994, 2002) — the most of any nation."},{"question":"In tennis, what is the term for winning a game without your opponent scoring?","options":["Ace","Love game","Bagel","Break"],"correct":1,"fact":"The term 'love' for zero in tennis may come from the French 'l'oeuf' meaning egg (the shape of 0)."},{"question":"How long is an Olympic swimming pool?","options":["25m","40m","50m","100m"],"correct":2,"fact":"Olympic pools hold 2.5 million litres of water and must be kept at exactly 25-28°C."},{"question":"Which sport uses a shuttlecock?","options":["Squash","Badminton","Racquetball","Lacrosse"],"correct":1,"fact":"A shuttlecock can travel over 200mph when struck by a professional badminton player."},{"question":"How many rings are on the Olympic flag?","options":["4","5","6","7"],"correct":1,"fact":"The five Olympic rings represent the five continents of the world united by sport."},{"question":"In basketball, how many points is a regular field goal worth?","options":["1","2","3","4"],"correct":1,"fact":"The three-point line was introduced to the NBA in 1979 and revolutionised the game."},{"question":"Which country invented the sport of cricket?","options":["Australia","India","England","South Africa"],"correct":2,"fact":"Cricket originated in England in the 16th century and was brought worldwide by the British Empire."},{"question":"How many holes are played in a standard round of golf?","options":["9","12","18","24"],"correct":2,"fact":"The 18-hole standard was set by St Andrews in 1858 when they merged their first 10 holes."},{"question":"What sport does Serena Williams play?","options":["Squash","Badminton","Table Tennis","Tennis"],"correct":3,"fact":"Serena Williams won 23 Grand Slam singles titles — the most by any player in the Open Era."}]};
+
+var CATS = {
+  mixed:      {label:"Mixed",       emoji:"&#x1F3B2;"},
+  science:    {label:"Science",     emoji:"&#x1F52C;"},
+  history:    {label:"History",     emoji:"&#x1F4DC;"},
+  popculture: {label:"Pop Culture", emoji:"&#x1F3AC;"},
+  geography:  {label:"Geography",   emoji:"&#x1F30D;"},
+  sports:     {label:"Sports",      emoji:"&#x26BD;"}
 };
-const MSGS = [
-  { min:9,  title:'🧠 Galaxy Brain!',    sub:'Absolutely crushed it. Top 1%!' },
-  { min:7,  title:'🔥 On Fire!',         sub:'Incredible performance. Almost perfect!' },
-  { min:5,  title:'💪 Solid Showing!',   sub:"You know your stuff. Keep it up!" },
-  { min:3,  title:'🌱 Room to Grow',     sub:'Not bad — come back stronger tomorrow!' },
-  { min:0,  title:'😅 Keep Practising!', sub:'Everyone starts somewhere. Tomorrow is yours.' },
+var CAT_KEYS = ["mixed","science","history","popculture","geography","sports"];
+var CAT_EMOJI = {mixed:"🎲",science:"🔬",history:"📜",popculture:"🎬",geography:"🌍",sports:"⚽"};
+
+var MSGS = [
+  {min:9, title:"🧠 Galaxy Brain!",    sub:"Absolutely crushed it. Top 1%!"},
+  {min:7, title:"🔥 On Fire!",         sub:"Incredible performance. Almost perfect!"},
+  {min:5, title:"💪 Solid Showing!",   sub:"You know your stuff. Keep it up!"},
+  {min:3, title:"🌱 Room to Grow",     sub:"Not bad - come back stronger tomorrow!"},
+  {min:0, title:"😅 Keep Practising!", sub:"Everyone starts somewhere. Tomorrow is yours."}
 ];
 
-// ══════════════════════════════════════════
-//  STATE
-// ══════════════════════════════════════════
-let cat = 'mixed';
-let questions = [];
-let qIdx = 0;
-let score = 0;
-let answers = [];
-let ticker = null;
-let timeLeft = 15;
-let totalTime = 0;
-let shareText = '';
-
-// ══════════════════════════════════════════
-//  STORAGE
-// ══════════════════════════════════════════
-const KEY_RES    = 'qp_result';
-const KEY_STREAK = 'qp_streak';
-const KEY_BEST   = 'qp_best';
+var cat = "mixed";
+var questions = [];
+var qIdx = 0;
+var score = 0;
+var answers = [];
+var ticker = null;
+var timeLeft = 15;
+var totalTime = 0;
+var shareText = "";
+var playingDate = "";
 
 function dayKey() {
-  const d = new Date();
-  return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+  var d = new Date();
+  return d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
 }
-function getStreak() { return JSON.parse(localStorage.getItem(KEY_STREAK)||'{"n":0}').n; }
-function getBest()   { return parseInt(localStorage.getItem(KEY_BEST)||'0'); }
 
-function saveResult() {
-  localStorage.setItem(KEY_RES, JSON.stringify({
-    date: dayKey(), score, cat,
-    answers, totalTime,
-    questions: questions.map(q=>({question:q.question,options:q.options,correct:q.correct,fact:q.fact}))
+function resultKey(date, catKey) { return "qp_res_" + date + "_" + catKey; }
+function getStreak() { return JSON.parse(localStorage.getItem("qp_streak") || '{"n":0}').n; }
+function getBest()   { return parseInt(localStorage.getItem("qp_best") || "0"); }
+
+function saveResult(date, catKey) {
+  var key = resultKey(date, catKey);
+  localStorage.setItem(key, JSON.stringify({
+    date:date, cat:catKey, score:score, answers:answers, totalTime:totalTime,
+    questions:questions.map(function(q){ return {question:q.question,options:q.options,correct:q.correct,fact:q.fact}; })
   }));
-  // streak
-  const prev = JSON.parse(localStorage.getItem(KEY_STREAK)||'{"n":0,"last":""}');
-  const yd   = (()=>{ const d=new Date(); d.setDate(d.getDate()-1); return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`; })();
-  const n    = prev.last===yd ? prev.n+1 : prev.last===dayKey() ? prev.n : 1;
-  localStorage.setItem(KEY_STREAK, JSON.stringify({n, last:dayKey()}));
-  if (score > getBest()) localStorage.setItem(KEY_BEST, score);
+  var prev = JSON.parse(localStorage.getItem("qp_streak") || '{"n":0,"last":""}');
+  var yd = (function(){ var d=new Date(); d.setDate(d.getDate()-1); return d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate(); })();
+  var n = prev.last===yd ? prev.n+1 : prev.last===dayKey() ? prev.n : 1;
+  localStorage.setItem("qp_streak", JSON.stringify({n:n, last:dayKey()}));
+  if (score > getBest()) localStorage.setItem("qp_best", score);
 }
 
-// ══════════════════════════════════════════
-//  SCREEN SWITCHING
-// ══════════════════════════════════════════
-function show(id) {
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+function getResult(date, catKey) {
+  var r = localStorage.getItem(resultKey(date, catKey));
+  return r ? JSON.parse(r) : null;
 }
 
-// ══════════════════════════════════════════
-//  INIT
-// ══════════════════════════════════════════
-window.addEventListener('load', () => {
-  syncStreakBadges();
-  const saved = JSON.parse(localStorage.getItem(KEY_RES)||'null');
-  if (saved && saved.date === dayKey()) {
-    // Restore state so results screen works
-    score = saved.score; cat = saved.cat||'mixed'; answers = saved.answers;
-    totalTime = saved.totalTime||0;
-    questions = saved.questions||[];
-    document.getElementById('apS').textContent  = `${saved.score}/10`;
-    document.getElementById('apSt').textContent = `${getStreak()}🔥`;
-    document.getElementById('apB').textContent  = getBest();
-    show('sAlready');
-    countdown('cdown2');
-  } else {
-    show('sHome');
+function getTodayResults() {
+  var out = {};
+  CAT_KEYS.forEach(function(k) { var r = getResult(dayKey(), k); if(r) out[k] = r; });
+  return out;
+}
+
+function getPastDays() {
+  var days = {};
+  var today = dayKey();
+  for (var i = 0; i < localStorage.length; i++) {
+    var k = localStorage.key(i);
+    if (!k || !k.startsWith("qp_res_")) continue;
+    var rest = k.replace("qp_res_", "");
+    var lastUnderscore = rest.lastIndexOf("_");
+    var datePart = rest.substring(0, lastUnderscore);
+    var catPart  = rest.substring(lastUnderscore + 1);
+    if (datePart === today) continue;
+    if (!days[datePart]) days[datePart] = {};
+    days[datePart][catPart] = JSON.parse(localStorage.getItem(k));
   }
-  countdown('cdown1');
+  return days;
+}
+
+function show(id) {
+  document.querySelectorAll(".screen").forEach(function(s){ s.classList.remove("active"); });
+  document.getElementById(id).classList.add("active");
+  window.scrollTo(0,0);
+}
+
+function syncBadges() {
+  var s = getStreak();
+  ["hStreak","rStreak"].forEach(function(id){ var e=document.getElementById(id); if(e) e.textContent=s; });
+  var ds = document.getElementById("dayStreakEl");
+  if (ds) ds.textContent = "🔥" + s;
+}
+
+function goHome() { show("sHome"); renderHome(); }
+
+function switchTab(tab) {
+  document.getElementById("panelToday").style.display = tab==="today" ? "block" : "none";
+  document.getElementById("panelPast").style.display  = tab==="past"  ? "block" : "none";
+  document.getElementById("tabToday").classList.toggle("active", tab==="today");
+  document.getElementById("tabPast").classList.toggle("active",  tab==="past");
+  if (tab==="past") renderPastList();
+}
+
+window.addEventListener("load", function() {
+  syncBadges();
+  renderHome();
+  countdown("cdown1");
 });
 
-function syncStreakBadges() {
-  const s = getStreak();
-  ['hStreak','rStreak','aStreak'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = s;
+function renderHome() {
+  syncBadges();
+  var todayResults = getTodayResults();
+  var completed = Object.keys(todayResults).length;
+  var totalScore = 0;
+  Object.values(todayResults).forEach(function(r){ totalScore += r.score; });
+
+  var arc = document.getElementById("dayArc");
+  if (arc) {
+    setTimeout(function(){
+      arc.style.transition = "stroke-dashoffset .8s cubic-bezier(.4,0,.2,1)";
+      arc.style.strokeDashoffset = String(138 - (138 * completed / 6));
+    }, 100);
+  }
+  document.getElementById("dayLbl").textContent = completed + "/6";
+
+  if (completed === 0) {
+    document.getElementById("dayTitle").textContent = "Start today's challenge!";
+    document.getElementById("daySub").textContent   = "Complete all 6 categories for a perfect day";
+  } else if (completed < 6) {
+    document.getElementById("dayTitle").textContent = completed + " of 6 done - " + totalScore + "/" + (completed*10) + " pts";
+    document.getElementById("daySub").textContent   = (6-completed) + " categor" + (6-completed===1?"y":"ies") + " remaining";
+  } else {
+    document.getElementById("dayTitle").textContent = "All done! " + totalScore + "/60 today!";
+    document.getElementById("daySub").textContent   = "Amazing - come back tomorrow for more!";
+  }
+
+  var grid = document.getElementById("catCards");
+  grid.innerHTML = "";
+  CAT_KEYS.forEach(function(k) {
+    var r = todayResults[k];
+    var c = CATS[k];
+    var emoji = CAT_EMOJI[k];
+    var card = document.createElement("div");
+    card.className = "cat-card" + (r ? " done" : "");
+
+    if (r) {
+      card.innerHTML =
+        '<span class="cc-emoji">' + emoji + '</span>' +
+        '<div class="cc-info">' +
+          '<div class="cc-name">' + c.label + '</div>' +
+          '<div class="cc-sub">Completed - ' + r.score + '/10 correct</div>' +
+        '</div>' +
+        '<span class="cc-score">' + r.score + '/10</span>' +
+        '<span class="cc-badge">Done</span>';
+      card.onclick = (function(catKey, result) {
+        return function() {
+          questions = result.questions;
+          cat = catKey;
+          score = result.score;
+          answers = result.answers;
+          totalTime = result.totalTime || 0;
+          playingDate = dayKey();
+          buildResults(dayKey());
+          show("sResults");
+          animateRing();
+        };
+      })(k, r);
+    } else {
+      card.innerHTML =
+        '<span class="cc-emoji">' + emoji + '</span>' +
+        '<div class="cc-info">' +
+          '<div class="cc-name">' + c.label + '</div>' +
+          '<div class="cc-sub">10 questions - 15s each</div>' +
+        '</div>' +
+        '<span class="cc-arrow">&#8594;</span>';
+      card.onclick = (function(catKey) {
+        return function() { startQuiz(catKey, dayKey(), TODAY_Q[catKey]); };
+      })(k);
+    }
+    grid.appendChild(card);
   });
 }
 
-// ══════════════════════════════════════════
-//  CATEGORY SELECT
-// ══════════════════════════════════════════
-function pickCat(el) {
-  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('sel'));
-  el.classList.add('sel');
-  cat = el.dataset.cat;
+function renderPastList() {
+  var past = getPastDays();
+  var list = document.getElementById("pastList");
+  list.innerHTML = "";
+  var dates = Object.keys(past).sort().reverse();
+
+  if (dates.length === 0) {
+    list.innerHTML = '<div class="no-past"><span class="np-emoji">&#x1F4C5;</span>No past quizzes yet.<br>Come back tomorrow!</div>';
+    return;
+  }
+
+  dates.forEach(function(date) {
+    var dayData = past[date];
+    var completed = Object.keys(dayData).length;
+    var totalScore = 0;
+    Object.values(dayData).forEach(function(r){ totalScore += r.score; });
+
+    var parts = date.split("-");
+    var d = new Date(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
+    var dateStr = d.toLocaleDateString("en-GB", {weekday:"short",day:"numeric",month:"short",year:"numeric"});
+
+    var chips = CAT_KEYS.map(function(k) {
+      var done = !!dayData[k];
+      return '<span class="pd-chip ' + (done?"done":"undone") + '">' + CAT_EMOJI[k] + " " + (done ? dayData[k].score+"/10" : "-") + '</span>';
+    }).join("");
+
+    var div = document.createElement("div");
+    div.className = "past-day";
+    div.innerHTML =
+      '<div class="pd-top">' +
+        '<span class="pd-date">' + dateStr + '</span>' +
+        '<span class="pd-score">' + totalScore + '/' + (completed*10) + ' (' + completed + '/6)</span>' +
+      '</div>' +
+      '<div class="pd-cats">' + chips + '</div>';
+
+    div.onclick = (function(d, dd) {
+      return function() { showPastDay(d, dd); };
+    })(date, dayData);
+
+    list.appendChild(div);
+  });
 }
 
-// ══════════════════════════════════════════
-//  START
-// ══════════════════════════════════════════
-async function startQuiz() {
-  const btn = document.getElementById('startBtn');
-  btn.disabled = true;
-  show('sLoad');
-  try {
-    await loadQuestions();
+function showPastDay(date, dayData) {
+  switchTab("today");
+  var completed = Object.keys(dayData).length;
+  var totalScore = 0;
+  Object.values(dayData).forEach(function(r){ totalScore += r.score; });
+
+  var parts = date.split("-");
+  var d = new Date(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
+  var dateStr = d.toLocaleDateString("en-GB", {weekday:"long",day:"numeric",month:"long"});
+
+  document.getElementById("dayTitle").textContent = dateStr + " - " + totalScore + "/" + (completed*10) + " pts";
+  document.getElementById("daySub").textContent   = completed + " of 6 categories completed";
+  document.getElementById("dayLbl").textContent   = completed + "/6";
+
+  var arc = document.getElementById("dayArc");
+  if (arc) arc.style.strokeDashoffset = String(138 - (138 * completed / 6));
+
+  var grid = document.getElementById("catCards");
+  grid.innerHTML = "";
+  CAT_KEYS.forEach(function(k) {
+    var r = dayData[k];
+    var emoji = CAT_EMOJI[k];
+    var card = document.createElement("div");
+
+    if (r) {
+      card.className = "cat-card done";
+      card.innerHTML =
+        '<span class="cc-emoji">' + emoji + '</span>' +
+        '<div class="cc-info">' +
+          '<div class="cc-name">' + CATS[k].label + '</div>' +
+          '<div class="cc-sub">Completed - ' + r.score + '/10 correct</div>' +
+        '</div>' +
+        '<span class="cc-score">' + r.score + '/10</span>' +
+        '<span class="cc-badge">Done</span>';
+      card.onclick = (function(catKey, result) {
+        return function() {
+          questions = result.questions;
+          cat = catKey;
+          score = result.score;
+          answers = result.answers;
+          totalTime = result.totalTime || 0;
+          playingDate = date;
+          buildResults(date);
+          show("sResults");
+          animateRing();
+        };
+      })(k, r);
+    } else {
+      card.className = "cat-card";
+      card.style.opacity = "0.4";
+      card.style.cursor = "default";
+      card.innerHTML =
+        '<span class="cc-emoji">' + emoji + '</span>' +
+        '<div class="cc-info">' +
+          '<div class="cc-name">' + CATS[k].label + '</div>' +
+          '<div class="cc-sub">Not played</div>' +
+        '</div>';
+    }
+    grid.appendChild(card);
+  });
+}
+
+function startQuiz(catKey, date, qs) {
+  var existing = getResult(date, catKey);
+  if (existing && date === dayKey()) {
+    questions = existing.questions;
+    cat = catKey; score = existing.score;
+    answers = existing.answers; totalTime = existing.totalTime || 0; playingDate = date;
+    buildResults(date); show("sResults"); animateRing(); return;
+  }
+  cat = catKey; playingDate = date;
+  show("sLoad");
+  setTimeout(function() {
+    questions = qs;
+    if (!questions || !questions.length) { alert("No questions found!"); goHome(); return; }
     qIdx=0; score=0; answers=[]; totalTime=0;
-    show('sQuiz');
-    renderQ();
-  } catch(e) {
-    console.error(e);
-    btn.disabled = false;
-    show('sHome');
-    alert('Could not load questions — please refresh and try again.');
-  }
+    show("sQuiz"); renderQ();
+  }, 500);
 }
 
-// ══════════════════════════════════════════
-//  LOAD QUESTIONS FROM PRE-GENERATED JSON
-// ══════════════════════════════════════════
-async function loadQuestions() {
-  // Fetch the static questions.json that was pre-generated by the daily cron job.
-  // Cache-bust with the day key so browsers always fetch today's file.
-  const res = await fetch(`data/questions.json?d=${dayKey()}`);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const data = await res.json();
-
-  const catQuestions = data.categories?.[cat];
-  if (!Array.isArray(catQuestions) || catQuestions.length === 0) {
-    throw new Error(`No questions found for category: ${cat}`);
-  }
-  questions = catQuestions;
-}
-
-// ══════════════════════════════════════════
-//  RENDER QUESTION
-// ══════════════════════════════════════════
 function renderQ() {
-  const q = questions[qIdx];
-  const total = questions.length;
-
-  document.getElementById('qCtr').textContent    = `${qIdx+1} / ${total}`;
-  document.getElementById('pBar').style.width    = `${((qIdx+1)/total)*100}%`;
-  document.getElementById('qTag').textContent    = `${CATS[cat].emoji} ${CATS[cat].label}`;
-  document.getElementById('qText').textContent   = q.question;
-  document.getElementById('factBox').classList.remove('show');
-  document.getElementById('nextBtn').style.display = 'none';
-
-  const opts = document.getElementById('opts');
-  opts.innerHTML = '';
-  ['A','B','C','D'].forEach((ltr, i) => {
-    const b = document.createElement('button');
-    b.className = 'opt';
-    b.innerHTML = `<span class="ol">${ltr}</span><span>${q.options[i]}</span>`;
-    b.onclick = () => pick(i);
+  var q = questions[qIdx];
+  var total = questions.length;
+  document.getElementById("qCtr").textContent = (qIdx+1) + " / " + total;
+  document.getElementById("pBar").style.width = ((qIdx+1)/total*100) + "%";
+  document.getElementById("qTag").textContent = CAT_EMOJI[cat] + " " + CATS[cat].label;
+  document.getElementById("qText").textContent = q.question;
+  document.getElementById("factBox").classList.remove("show");
+  document.getElementById("nextBtn").style.display = "none";
+  var opts = document.getElementById("opts");
+  opts.innerHTML = "";
+  ["A","B","C","D"].forEach(function(ltr, i) {
+    var b = document.createElement("button");
+    b.className = "opt";
+    b.innerHTML = '<span class="ol">' + ltr + '</span><span>' + q.options[i] + '</span>';
+    b.onclick = (function(idx){ return function(){ pick(idx); }; })(i);
     opts.appendChild(b);
   });
   startTimer();
 }
 
-// ══════════════════════════════════════════
-//  TIMER
-// ══════════════════════════════════════════
 function startTimer() {
-  clearInterval(ticker);
-  timeLeft = 15;
-  const tb = document.getElementById('timer');
-  tb.textContent = timeLeft;
-  tb.classList.remove('urg');
-  ticker = setInterval(() => {
+  clearInterval(ticker); timeLeft = 15;
+  var tb = document.getElementById("timer");
+  tb.textContent = 15; tb.classList.remove("urg");
+  ticker = setInterval(function() {
     timeLeft--;
     tb.textContent = timeLeft;
-    if (timeLeft <= 5) tb.classList.add('urg');
+    if (timeLeft <= 5) tb.classList.add("urg");
     if (timeLeft <= 0) { clearInterval(ticker); totalTime += 15; pick(-1); }
   }, 1000);
 }
 
-// ══════════════════════════════════════════
-//  ANSWER
-// ══════════════════════════════════════════
 function pick(idx) {
   clearInterval(ticker);
   totalTime += (15 - timeLeft);
-  const q   = questions[qIdx];
-  const btns = document.querySelectorAll('.opt');
-  btns.forEach(b => b.disabled = true);
-  const ok = idx === q.correct;
+  var q = questions[qIdx];
+  var btns = document.querySelectorAll(".opt");
+  btns.forEach(function(b){ b.disabled = true; });
+  var ok = idx === q.correct;
   if (ok) score++;
-  if (idx >= 0) btns[idx].classList.add(ok ? 'correct' : 'wrong');
-  btns[q.correct].classList.add('correct');
-  answers.push({ chosen:idx, correct:q.correct, isCorrect:ok });
-  document.getElementById('factTxt').textContent = q.fact || '';
-  document.getElementById('factBox').classList.add('show');
-  const nb = document.getElementById('nextBtn');
-  nb.style.display = 'block';
-  nb.textContent = qIdx < questions.length-1 ? 'Next Question →' : 'See My Results 🎉';
+  if (idx >= 0) btns[idx].classList.add(ok ? "correct" : "wrong");
+  btns[q.correct].classList.add("correct");
+  answers.push({chosen:idx, correct:q.correct, isCorrect:ok});
+  document.getElementById("factTxt").textContent = q.fact || "";
+  document.getElementById("factBox").classList.add("show");
+  var nb = document.getElementById("nextBtn");
+  nb.style.display = "block";
+  nb.textContent = qIdx < questions.length-1 ? "Next Question" : "See My Results!";
 }
 
-// ══════════════════════════════════════════
-//  NEXT / FINISH
-// ══════════════════════════════════════════
 function nextQ() {
   qIdx++;
   if (qIdx >= questions.length) finish();
@@ -655,122 +642,93 @@ function nextQ() {
 }
 
 function finish() {
-  saveResult();
-  syncStreakBadges();
-  buildResults();
-  show('sResults');
+  saveResult(playingDate, cat);
+  syncBadges();
+  buildResults(playingDate);
+  show("sResults");
   animateRing();
   if (score >= 7) confetti();
-  countdown('cdown1');
+  countdown("cdown1");
 }
 
-function goResults() {
-  buildResults();
-  show('sResults');
-  animateRing();
-  countdown('cdown1');
-}
-
-// ══════════════════════════════════════════
-//  RESULTS
-// ══════════════════════════════════════════
-function buildResults() {
-  const total = questions.length || 10;
-  const streak = getStreak();
-  document.getElementById('rScore').textContent  = score;
-  document.getElementById('rTotal').textContent  = `/ ${total}`;
-  document.getElementById('rStreak').textContent = streak;
-  const msg = MSGS.find(m => score >= m.min);
-  document.getElementById('rTitle').textContent  = msg.title;
-  document.getElementById('rSub').textContent    = msg.sub;
-  const avg = answers.length ? Math.round(totalTime/answers.length) : 0;
-  document.getElementById('stC').textContent = score;
-  document.getElementById('stT').textContent = `${avg}s`;
-  document.getElementById('stS').textContent = `${streak}🔥`;
-
-  // Share card
-  const squares = answers.map(a => a.isCorrect?'🟩':(a.chosen===-1?'⬛':'🟥')).join('');
-  const dateStr = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short'});
-  shareText = `QuizPop ${dateStr}\n${score}/${total} ${CATS[cat].emoji}\n\n${squares}\n\nPlay free → quizpop.app 🧠`;
-  document.getElementById('shareCard').textContent = shareText;
-
-  // Review
-  const list = document.getElementById('rvwList');
-  list.innerHTML = '';
-  questions.forEach((q, i) => {
-    const a = answers[i];
-    if (!a) return;
-    const d = document.createElement('div');
-    d.className = `ri ${a.isCorrect?'ok':'bad'}`;
-    d.innerHTML = `
-      <span class="ri-ico">${a.isCorrect?'✅':'❌'}</span>
-      <div>
-        <div class="ri-q">${q.question}</div>
-        <div class="ri-a">${a.isCorrect
-          ? q.options[q.correct]
-          : `You: ${a.chosen>=0 ? q.options[a.chosen] : '⏱ Timed out'} · Correct: ${q.options[q.correct]}`
-        }</div>
-      </div>`;
+function buildResults(date) {
+  var total = questions.length || 10;
+  var streak = getStreak();
+  document.getElementById("rScore").textContent = score;
+  document.getElementById("rTotal").textContent = "/ " + total;
+  document.getElementById("rStreak").textContent = streak;
+  var msg = MSGS.find(function(m){ return score >= m.min; });
+  document.getElementById("rTitle").textContent = msg.title;
+  document.getElementById("rSub").textContent   = msg.sub;
+  var avg = answers.length ? Math.round(totalTime / answers.length) : 0;
+  document.getElementById("stC").textContent = score;
+  document.getElementById("stT").textContent = avg + "s";
+  document.getElementById("stS").textContent = streak + "🔥";
+  var sq = answers.map(function(a){ return a.isCorrect ? "🟩" : (a.chosen===-1 ? "⬛" : "🟥"); }).join("");
+  var ds = new Date().toLocaleDateString("en-GB", {day:"numeric",month:"short"});
+  shareText = "QuizPop " + ds + " " + CAT_EMOJI[cat] + "\n" + score + "/" + total + " " + CATS[cat].label + "\n\n" + sq + "\n\nPlay free at quizpop.co.uk";
+  document.getElementById("shareCard").textContent = shareText;
+  var list = document.getElementById("rvwList");
+  list.innerHTML = "";
+  questions.forEach(function(q, i) {
+    var a = answers[i]; if (!a) return;
+    var d = document.createElement("div");
+    d.className = "ri " + (a.isCorrect ? "ok" : "bad");
+    d.innerHTML =
+      '<span class="ri-ico">' + (a.isCorrect ? "✅" : "❌") + '</span>' +
+      '<div><div class="ri-q">' + q.question + '</div>' +
+      '<div class="ri-a">' + (a.isCorrect ? q.options[q.correct] : "You: " + (a.chosen>=0 ? q.options[a.chosen] : "Timed out") + " - Correct: " + q.options[q.correct]) + '</div></div>';
     list.appendChild(d);
   });
 }
 
 function animateRing() {
-  const arc = document.getElementById('sArc');
-  arc.style.strokeDashoffset = 377;
-  const pct = score / (questions.length || 10);
-  setTimeout(() => {
-    arc.style.transition = 'stroke-dashoffset 1s cubic-bezier(.4,0,.2,1)';
-    arc.style.strokeDashoffset = 377 - (377 * pct);
+  var arc = document.getElementById("sArc");
+  arc.style.strokeDashoffset = "345";
+  setTimeout(function(){
+    arc.style.transition = "stroke-dashoffset 1s cubic-bezier(.4,0,.2,1)";
+    arc.style.strokeDashoffset = String(345 - (345 * score / (questions.length || 10)));
   }, 120);
 }
 
-// ══════════════════════════════════════════
-//  SHARE
-// ══════════════════════════════════════════
-function doShare(platform) {
-  const txt = encodeURIComponent(shareText||'Check out QuizPop!');
-  if (platform==='whatsapp') window.open(`https://wa.me/?text=${txt}`,'_blank');
-  if (platform==='twitter')  window.open(`https://twitter.com/intent/tweet?text=${txt}`,'_blank');
+function doShare(p) {
+  var t = encodeURIComponent(shareText || "Check out QuizPop!");
+  if (p==="whatsapp") window.open("https://wa.me/?text="+t, "_blank");
+  if (p==="twitter")  window.open("https://twitter.com/intent/tweet?text="+t, "_blank");
 }
+
 function doCopy() {
-  navigator.clipboard.writeText(shareText||'').then(() => {
-    const b = document.getElementById('copyBtn');
-    b.textContent = '✅ Copied!'; b.classList.add('done');
-    setTimeout(()=>{ b.textContent='📋 Copy'; b.classList.remove('done'); }, 2000);
+  navigator.clipboard.writeText(shareText || "").then(function() {
+    var b = document.getElementById("copyBtn");
+    b.textContent = "Copied!"; b.classList.add("done");
+    setTimeout(function(){ b.textContent="Copy"; b.classList.remove("done"); }, 2000);
   });
 }
 
-// ══════════════════════════════════════════
-//  COUNTDOWN
-// ══════════════════════════════════════════
 function countdown(id) {
-  const tick = () => {
-    const now  = new Date();
-    const tmrw = new Date(now); tmrw.setDate(tmrw.getDate()+1); tmrw.setHours(0,0,0,0);
-    const diff = tmrw - now;
-    const h = String(Math.floor(diff/3600000)).padStart(2,'0');
-    const m = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
-    const s = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
-    const el = document.getElementById(id);
-    if (el) el.textContent = `${h}:${m}:${s}`;
+  var tick = function() {
+    var now = new Date();
+    var tmrw = new Date(now); tmrw.setDate(tmrw.getDate()+1); tmrw.setHours(0,0,0,0);
+    var diff = tmrw - now;
+    var h = String(Math.floor(diff/3600000)).padStart(2,"0");
+    var m = String(Math.floor(diff%3600000/60000)).padStart(2,"0");
+    var s = String(Math.floor(diff%60000/1000)).padStart(2,"0");
+    var el = document.getElementById(id); if(el) el.textContent = h+":"+m+":"+s;
   };
   tick(); setInterval(tick, 1000);
 }
 
-// ══════════════════════════════════════════
-//  CONFETTI
-// ══════════════════════════════════════════
 function confetti() {
-  const cols = ['#ff6b35','#ffd166','#06d6a0','#ef476f','#a8dadc'];
-  for (let i=0;i<55;i++) {
-    setTimeout(()=>{
-      const el = document.createElement('div');
-      el.className = 'cf';
-      el.style.cssText = `left:${Math.random()*100}vw;background:${cols[i%cols.length]};animation-duration:${1.5+Math.random()*2}s;animation-delay:${Math.random()*0.4}s;transform:rotate(${Math.random()*360}deg)`;
-      document.body.appendChild(el);
-      setTimeout(()=>el.remove(), 4000);
-    }, i*25);
+  var cols = ["#ff6b35","#ffd166","#06d6a0","#ef476f","#a8dadc"];
+  for (var i=0; i<55; i++) {
+    (function(i){
+      setTimeout(function(){
+        var el = document.createElement("div"); el.className = "cf";
+        el.style.cssText = "left:"+Math.random()*100+"vw;background:"+cols[i%5]+";animation-duration:"+(1.5+Math.random()*2)+"s;animation-delay:"+Math.random()*0.4+"s;transform:rotate("+Math.random()*360+"deg)";
+        document.body.appendChild(el);
+        setTimeout(function(){ el.remove(); }, 4000);
+      }, i*25);
+    })(i);
   }
 }
 </script>
