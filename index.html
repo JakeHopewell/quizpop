@@ -684,24 +684,38 @@ function showPastDay(date,dayData){
   showTab("today");
   var comp=Object.keys(dayData).length,ts=0;
   Object.values(dayData).forEach(function(r){ts+=r.score;});
-  var parts=date.split("-"),d=new Date(parseInt(parts[0]),parseInt(parts[1]),parseInt(parts[2]));
+  var parts=date.split("-");
+  var d=new Date(parseInt(parts[0]),parseInt(parts[1]),parseInt(parts[2]));
+  var archiveDate=parts[0]+"-"+String(parseInt(parts[1])+1).padStart(2,"0")+"-"+String(parseInt(parts[2])).padStart(2,"0");
   document.getElementById("dayTitle").textContent=d.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"})+" - "+ts+"/"+(comp*10);
   document.getElementById("daySub").textContent=comp+" of 12 completed";
   document.getElementById("dayLbl").textContent=comp+"/12";
   var arc=document.getElementById("dayArc");if(arc)arc.style.strokeDashoffset=String(126-(126*comp/12));
   var grid=document.getElementById("catCards");grid.innerHTML="";
-  CAT_KEYS.forEach(function(k){
-    var r=dayData[k],card=document.createElement("div");
-    if(r){
-      card.className="cat-card done";
-      card.innerHTML='<span class="cc-emoji">'+CATS[k].emoji+'</span><div class="cc-info"><div class="cc-name">'+CATS[k].label+'</div><div class="cc-sub">'+r.score+'/10 correct</div></div><span class="cc-score">'+r.score+'/10</span><span class="cc-badge">Done</span>';
-      card.onclick=(function(ck,res){return function(){questions=res.questions;cat=ck;score=res.score;answers=res.answers;totalTime=res.totalTime||0;playingDate=date;buildResults(date);show("sResults");animateRing();};})(k,r);
-    }else{
-      card.className="cat-card";card.style.opacity="0.4";card.style.cursor="default";
-      card.innerHTML='<span class="cc-emoji">'+CATS[k].emoji+'</span><div class="cc-info"><div class="cc-name">'+CATS[k].label+'</div><div class="cc-sub">Not played</div></div>';
-    }
-    grid.appendChild(card);
-  });
+  var archivedQ=null;
+  fetch("data/questions-"+archiveDate+".json")
+    .then(function(r){if(!r.ok)throw new Error("no archive");return r.json();})
+    .then(function(data){archivedQ=data&&data.categories?data.categories:null;renderPastCards();})
+    .catch(function(){renderPastCards();});
+  function renderPastCards(){
+    grid.innerHTML="";
+    CAT_KEYS.forEach(function(k){
+      var r=dayData[k],card=document.createElement("div");
+      if(r){
+        card.className="cat-card done";
+        card.innerHTML='<span class="cc-emoji">'+CATS[k].emoji+'</span><div class="cc-info"><div class="cc-name">'+CATS[k].label+'</div><div class="cc-sub">'+r.score+'/10 correct</div></div><span class="cc-score">'+r.score+'/10</span><span class="cc-badge">Done</span>';
+        card.onclick=(function(ck,res){return function(){questions=res.questions;cat=ck;score=res.score;answers=res.answers;totalTime=res.totalTime||0;playingDate=date;buildResults(date);show("sResults");animateRing();};})(k,r);
+      }else if(archivedQ&&archivedQ[k]){
+        card.className="cat-card";
+        card.innerHTML='<span class="cc-emoji">'+CATS[k].emoji+'</span><div class="cc-info"><div class="cc-name">'+CATS[k].label+'</div><div class="cc-sub">Missed - play now!</div></div><span class="cc-arrow" style="color:var(--accent2)">&#8594;</span>';
+        card.onclick=(function(ck,qs,dt){return function(){startQuiz(ck,dt,qs);};})(k,archivedQ[k],date);
+      }else{
+        card.className="cat-card";card.style.opacity="0.35";card.style.cursor="default";
+        card.innerHTML='<span class="cc-emoji">'+CATS[k].emoji+'</span><div class="cc-info"><div class="cc-name">'+CATS[k].label+'</div><div class="cc-sub">Not available</div></div>';
+      }
+      grid.appendChild(card);
+    });
+  }
 }
 
 // ── QUIZ ──
