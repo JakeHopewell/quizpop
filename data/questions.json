@@ -1,117 +1,117 @@
 {
   "date": "2026-03-11",
-  "generated": "2026-03-11T05:04:06.892Z",
+  "generated": "2026-03-11T19:08:52.303Z",
   "categories": {
     "mixed": [
       {
-        "question": "What is the largest organ in the human body?",
+        "question": "What is the capital city of Australia?",
         "options": [
-          "Liver",
-          "Brain",
-          "Skin",
-          "Lungs"
+          "Sydney",
+          "Melbourne",
+          "Canberra",
+          "Brisbane"
         ],
         "correct": 2,
-        "fact": "An adult's skin weighs about 8 pounds and covers roughly 22 square feet!"
+        "fact": "Canberra was chosen as a compromise between rival cities Sydney and Melbourne in 1908."
       },
       {
-        "question": "Which planet in our solar system has the most moons?",
+        "question": "Which planet in our solar system is known as the Red Planet?",
         "options": [
+          "Venus",
+          "Mars",
           "Jupiter",
-          "Saturn",
-          "Uranus",
-          "Neptune"
+          "Saturn"
         ],
         "correct": 1,
-        "fact": "Saturn has over 140 confirmed moons, surpassing Jupiter's count in recent discoveries!"
+        "fact": "Mars appears red due to iron oxide (rust) covering much of its surface."
       },
       {
-        "question": "In what year did the Berlin Wall fall?",
+        "question": "How many strings does a standard ukulele have?",
+        "options": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "correct": 1,
+        "fact": "The ukulele originated in Hawaii in the 1880s, inspired by Portuguese instruments."
+      },
+      {
+        "question": "Which artist painted 'Girl with a Pearl Earring'?",
+        "options": [
+          "Rembrandt",
+          "Johannes Vermeer",
+          "Peter Paul Rubens",
+          "Jan van Eyck"
+        ],
+        "correct": 1,
+        "fact": "Vermeer's masterpiece is sometimes called the 'Mona Lisa of the North.'"
+      },
+      {
+        "question": "What chemical element has the atomic number 79?",
+        "options": [
+          "Silver",
+          "Platinum",
+          "Gold",
+          "Copper"
+        ],
+        "correct": 2,
+        "fact": "Gold's chemical symbol Au comes from the Latin word 'aurum,' meaning shining dawn."
+      },
+      {
+        "question": "In which year did the Berlin Wall fall?",
         "options": [
           "1987",
           "1989",
           "1991",
-          "1985"
+          "1993"
         ],
         "correct": 1,
-        "fact": "The Wall fell on November 9, 1989, after a confused press conference accidentally triggered it!"
+        "fact": "The Berlin Wall fell on November 9, 1989, after standing for 28 years."
       },
       {
-        "question": "What color do you get when you mix blue and yellow paint?",
+        "question": "Which enzyme is primarily responsible for unwinding DNA during replication?",
         "options": [
-          "Orange",
-          "Purple",
-          "Green",
-          "Brown"
+          "DNA polymerase",
+          "Ligase",
+          "Helicase",
+          "Primase"
         ],
         "correct": 2,
-        "fact": "This works with paint (subtractive mixing) but not with light, where blue+yellow makes white!"
+        "fact": "Helicase breaks hydrogen bonds between base pairs, unzipping the double helix at incredible speed."
       },
       {
-        "question": "Which country consumes the most coffee per capita?",
+        "question": "The Strait of Malacca separates which two landmasses?",
         "options": [
-          "Brazil",
-          "United States",
-          "Italy",
-          "Finland"
+          "Borneo and Java",
+          "Malay Peninsula and Sumatra",
+          "India and Sri Lanka",
+          "Philippines and Taiwan"
         ],
-        "correct": 3,
-        "fact": "Finns drink roughly 12 kg of coffee per person per year — that's about 4 cups daily!"
+        "correct": 1,
+        "fact": "The Strait of Malacca is one of the world's most important shipping lanes for global trade."
       },
       {
-        "question": "How many bones does a shark's skeleton contain?",
+        "question": "Which composer wrote the opera 'The Marriage of Figaro'?",
         "options": [
-          "About 200",
-          "About 50",
-          "Zero",
-          "About 100"
-        ],
-        "correct": 2,
-        "fact": "Sharks have no bones at all — their entire skeleton is made of flexible cartilage!"
-      },
-      {
-        "question": "Who composed the famous 'Moonlight Sonata'?",
-        "options": [
-          "Wolfgang Amadeus Mozart",
           "Ludwig van Beethoven",
-          "Frédéric Chopin",
-          "Johann Sebastian Bach"
+          "Wolfgang Amadeus Mozart",
+          "Giuseppe Verdi",
+          "Richard Wagner"
         ],
         "correct": 1,
-        "fact": "Beethoven actually hated the nickname 'Moonlight' — a critic coined it after his death!"
+        "fact": "Mozart composed The Marriage of Figaro in just six weeks in 1786."
       },
       {
-        "question": "Which ancient civilization built Machu Picchu?",
+        "question": "What is the Mohs hardness rating of topaz?",
         "options": [
-          "Aztec",
-          "Maya",
-          "Inca",
-          "Olmec"
-        ],
-        "correct": 2,
-        "fact": "Machu Picchu was built around 1450 AD and was unknown to Spanish colonizers!"
-      },
-      {
-        "question": "What is the chemical symbol for tungsten?",
-        "options": [
-          "Tu",
-          "Tn",
-          "W",
-          "Tg"
-        ],
-        "correct": 2,
-        "fact": "The 'W' comes from 'Wolfram,' its German name meaning 'wolf's cream' from tin mining!"
-      },
-      {
-        "question": "How many time zones does Russia span?",
-        "options": [
+          "6",
           "7",
-          "9",
-          "11",
-          "13"
+          "8",
+          "9"
         ],
         "correct": 2,
-        "fact": "Russia spans 11 time zones, meaning one end sees sunrise while the other sees sunset!"
+        "fact": "Topaz ranks 8 on the Mohs scale, making it harder than quartz but softer than corundum."
       }
     ],
     "science": [
@@ -127,103 +127,103 @@
         "fact": "Au comes from the Latin word 'aurum,' meaning shining dawn."
       },
       {
-        "question": "Which planet in our solar system has the most moons?",
+        "question": "Which planet in our solar system is known as the Red Planet?",
         "options": [
+          "Venus",
           "Jupiter",
-          "Saturn",
-          "Uranus",
-          "Neptune"
-        ],
-        "correct": 1,
-        "fact": "Saturn has over 140 confirmed moons, surpassing Jupiter's count in recent discoveries!"
-      },
-      {
-        "question": "What type of animal is a seahorse?",
-        "options": [
-          "Mollusk",
-          "Crustacean",
-          "Fish",
-          "Amphibian"
+          "Mars",
+          "Saturn"
         ],
         "correct": 2,
-        "fact": "Seahorses are fish with bony plates instead of scales, and males carry the babies!"
+        "fact": "Mars appears red due to iron oxide (rust) covering its surface."
       },
       {
-        "question": "Which element makes up approximately 78% of Earth's atmosphere?",
+        "question": "What gas do plants primarily absorb from the atmosphere during photosynthesis?",
         "options": [
           "Oxygen",
-          "Carbon dioxide",
           "Nitrogen",
-          "Argon"
+          "Carbon Dioxide",
+          "Hydrogen"
         ],
         "correct": 2,
-        "fact": "Despite being everywhere we breathe, nitrogen is surprisingly unreactive in its molecular form."
+        "fact": "Plants convert carbon dioxide and water into glucose and oxygen using sunlight."
       },
       {
-        "question": "How many hearts does an octopus have?",
+        "question": "What is the approximate speed of light in a vacuum?",
         "options": [
-          "1",
-          "2",
-          "3",
-          "4"
+          "300,000 km/s",
+          "150,000 km/s",
+          "500,000 km/s",
+          "1,000,000 km/s"
         ],
-        "correct": 2,
-        "fact": "Two hearts pump blood to the gills, while the third pumps it to the rest of the body."
+        "correct": 0,
+        "fact": "Light travels at exactly 299,792,458 meters per second in a vacuum."
       },
       {
-        "question": "What phenomenon causes the Northern Lights (Aurora Borealis)?",
+        "question": "Which organelle is responsible for producing ATP, the cell's energy currency?",
         "options": [
-          "Moonlight refraction through ice",
-          "Charged solar particles hitting atmospheric gases",
-          "Volcanic gas emissions",
-          "Reflection of sunlight off polar ice"
-        ],
-        "correct": 1,
-        "fact": "Different atmospheric gases produce different colors — oxygen glows green, nitrogen creates purple!"
-      },
-      {
-        "question": "Which organelle is known as the 'powerhouse of the cell'?",
-        "options": [
-          "Nucleus",
           "Ribosome",
+          "Golgi apparatus",
           "Mitochondria",
-          "Golgi apparatus"
+          "Endoplasmic reticulum"
         ],
         "correct": 2,
-        "fact": "Mitochondria have their own DNA, inherited exclusively from your mother!"
+        "fact": "Mitochondria are often called the 'powerhouses' of the cell."
       },
       {
-        "question": "What is the hardest known natural mineral on the Mohs scale?",
+        "question": "What type of bond involves the sharing of electron pairs between atoms?",
         "options": [
-          "Quartz",
-          "Topaz",
-          "Corundum",
-          "Diamond"
-        ],
-        "correct": 3,
-        "fact": "Diamond is four times harder than corundum, the second-hardest mineral on the scale."
-      },
-      {
-        "question": "In what year was the Higgs boson particle experimentally confirmed at CERN?",
-        "options": [
-          "2008",
-          "2010",
-          "2012",
-          "2015"
-        ],
-        "correct": 2,
-        "fact": "Peter Higgs predicted the particle in 1964 — he waited nearly 50 years for confirmation!"
-      },
-      {
-        "question": "Which deep-sea phenomenon supports entire ecosystems without sunlight through chemosynthesis?",
-        "options": [
-          "Coral reefs",
-          "Hydrothermal vents",
-          "Abyssal plains",
-          "Submarine canyons"
+          "Ionic bond",
+          "Covalent bond",
+          "Metallic bond",
+          "Hydrogen bond"
         ],
         "correct": 1,
-        "fact": "Hydrothermal vents can reach 400°C, yet host thriving colonies of giant tube worms and shrimp!"
+        "fact": "Covalent bonds are common in organic molecules and can be single, double, or triple."
+      },
+      {
+        "question": "Which phenomenon explains why a neutron star can spin hundreds of times per second?",
+        "options": [
+          "Thermal expansion",
+          "Conservation of angular momentum",
+          "Gravitational lensing",
+          "Magnetic reconnection"
+        ],
+        "correct": 1,
+        "fact": "As a star's core collapses, its rotation speed increases dramatically, like a spinning ice skater."
+      },
+      {
+        "question": "What is the Hardy-Weinberg principle used to describe in population genetics?",
+        "options": [
+          "Mutation rates over time",
+          "Allele frequency equilibrium",
+          "Natural selection strength",
+          "Genetic drift patterns"
+        ],
+        "correct": 1,
+        "fact": "Hardy-Weinberg equilibrium assumes no mutation, migration, selection, or genetic drift is occurring."
+      },
+      {
+        "question": "Which element has the highest electronegativity on the Pauling scale?",
+        "options": [
+          "Oxygen",
+          "Chlorine",
+          "Fluorine",
+          "Nitrogen"
+        ],
+        "correct": 2,
+        "fact": "Fluorine has an electronegativity of 3.98, making it the most electron-hungry element."
+      },
+      {
+        "question": "In quantum mechanics, what does the Heisenberg Uncertainty Principle state cannot be simultaneously known with precision?",
+        "options": [
+          "Mass and charge",
+          "Position and momentum",
+          "Spin and color",
+          "Energy and mass"
+        ],
+        "correct": 1,
+        "fact": "The more precisely you know a particle's position, the less precisely you know its momentum."
       }
     ],
     "history": [
@@ -236,7 +236,7 @@
           "1985"
         ],
         "correct": 1,
-        "fact": "East German guards opened the gates on November 9, 1989, after a confused press conference announcement!"
+        "fact": "The Berlin Wall fell on November 9, 1989, reuniting East and West Berlin after 28 years."
       },
       {
         "question": "Who was the first President of the United States?",
@@ -247,242 +247,242 @@
           "Benjamin Franklin"
         ],
         "correct": 2,
-        "fact": "Washington is the only president unanimously elected by the Electoral College — twice!"
+        "fact": "George Washington was inaugurated on April 30, 1789, in New York City."
       },
       {
-        "question": "Which ancient civilization built Machu Picchu?",
+        "question": "Which ancient civilization built the pyramids at Giza?",
         "options": [
-          "Aztec",
-          "Maya",
-          "Inca",
-          "Olmec"
+          "Romans",
+          "Greeks",
+          "Egyptians",
+          "Persians"
         ],
         "correct": 2,
-        "fact": "Machu Picchu was built around 1450 AD and was unknown to the outside world until 1911!"
+        "fact": "The Great Pyramid of Giza was built around 2560 BCE and stood as the tallest structure for millennia."
       },
       {
-        "question": "What was the shortest war in recorded history?",
+        "question": "The Treaty of Tordesillas (1494) divided newly discovered lands between which two countries?",
         "options": [
-          "Anglo-Zanzibar War",
-          "Six-Day War",
-          "Football War",
-          "Falklands War"
+          "England and France",
+          "Spain and Portugal",
+          "Spain and England",
+          "Portugal and the Netherlands"
         ],
-        "correct": 0,
-        "fact": "The Anglo-Zanzibar War of 1896 lasted between 38 and 45 minutes — basically a lunch break!"
+        "correct": 1,
+        "fact": "Pope Alexander VI mediated the treaty, splitting the New World along a meridian line."
       },
       {
-        "question": "Which empire was ruled by Suleiman the Magnificent?",
+        "question": "What was the primary cause of the Thirty Years' War (1618–1648)?",
+        "options": [
+          "Colonial trade disputes",
+          "Religious conflicts between Catholics and Protestants",
+          "Succession to the French throne",
+          "Ottoman expansion into Europe"
+        ],
+        "correct": 1,
+        "fact": "The war devastated Central Europe, killing an estimated eight million people across the continent."
+      },
+      {
+        "question": "Which battle in 1805 established British naval supremacy during the Napoleonic Wars?",
+        "options": [
+          "Battle of Waterloo",
+          "Battle of Austerlitz",
+          "Battle of Trafalgar",
+          "Battle of Leipzig"
+        ],
+        "correct": 2,
+        "fact": "Admiral Horatio Nelson died during his greatest victory at Trafalgar off the coast of Spain."
+      },
+      {
+        "question": "The Meiji Restoration in Japan began in which year?",
+        "options": [
+          "1853",
+          "1868",
+          "1895",
+          "1912"
+        ],
+        "correct": 1,
+        "fact": "The Meiji Restoration ended feudal rule and rapidly modernized Japan into an industrial power."
+      },
+      {
+        "question": "Who was the last Tsar of Russia before the 1917 revolution?",
+        "options": [
+          "Alexander III",
+          "Nicholas II",
+          "Peter the Great",
+          "Ivan IV"
+        ],
+        "correct": 1,
+        "fact": "Nicholas II abdicated in March 1917 and was executed with his family in July 1918."
+      },
+      {
+        "question": "The Defenestration of Prague in 1618 involved throwing officials out of a window in protest. How many officials were thrown?",
+        "options": [
+          "Two",
+          "Three",
+          "Four",
+          "Five"
+        ],
+        "correct": 1,
+        "fact": "Three Catholic officials were thrown from a window but survived by landing in a dung heap."
+      },
+      {
+        "question": "Which empire was ruled by Suleiman the Magnificent during the 16th century?",
         "options": [
           "Mughal Empire",
+          "Byzantine Empire",
           "Ottoman Empire",
-          "Persian Empire",
-          "Byzantine Empire"
-        ],
-        "correct": 1,
-        "fact": "Suleiman's reign from 1520–1566 is considered the Ottoman Empire's golden age of art and architecture."
-      },
-      {
-        "question": "In what year did the Great Fire of London occur?",
-        "options": [
-          "1666",
-          "1712",
-          "1588",
-          "1642"
-        ],
-        "correct": 0,
-        "fact": "The fire destroyed 13,200 houses but officially only six people were recorded as dying!"
-      },
-      {
-        "question": "Who was the Egyptian queen famous for her relationships with Julius Caesar and Mark Antony?",
-        "options": [
-          "Nefertiti",
-          "Hatshepsut",
-          "Cleopatra VII",
-          "Ankhesenamun"
+          "Safavid Empire"
         ],
         "correct": 2,
-        "fact": "Cleopatra spoke nine languages and was the first Ptolemaic ruler to learn Egyptian!"
-      },
-      {
-        "question": "Which medieval event killed an estimated 30–60% of Europe's population?",
-        "options": [
-          "The Crusades",
-          "The Black Death",
-          "The Hundred Years' War",
-          "The Great Famine"
-        ],
-        "correct": 1,
-        "fact": "The Black Death of 1347–1353 killed up to 200 million people and reshaped European society forever."
-      },
-      {
-        "question": "How many days did the siege of Constantinople last before it fell to the Ottomans in 1453?",
-        "options": [
-          "53 days",
-          "21 days",
-          "97 days",
-          "120 days"
-        ],
-        "correct": 0,
-        "fact": "Sultan Mehmed II was only 21 years old when he conquered the mighty city using massive cannons!"
-      },
-      {
-        "question": "Which treaty ended World War I and controversially imposed heavy penalties on Germany?",
-        "options": [
-          "Treaty of Paris",
-          "Treaty of Versailles",
-          "Treaty of Ghent",
-          "Treaty of Westphalia"
-        ],
-        "correct": 1,
-        "fact": "Germany didn't finish paying its WWI reparations from Versailles until October 2010!"
+        "fact": "Suleiman's reign from 1520 to 1566 is considered the golden age of the Ottoman Empire."
       }
     ],
     "popculture": [
       {
-        "question": "Which TV show features a character named Eleven with telekinetic powers?",
+        "question": "Which pop star is known as the 'Queen of Christmas' for her iconic holiday hit?",
+        "options": [
+          "Beyoncé",
+          "Mariah Carey",
+          "Whitney Houston",
+          "Celine Dion"
+        ],
+        "correct": 1,
+        "fact": "Mariah Carey's 'All I Want for Christmas Is You' first topped the Billboard Hot 100 in 2019."
+      },
+      {
+        "question": "What is the name of the fictional country in the Marvel movie 'Black Panther'?",
+        "options": [
+          "Zamunda",
+          "Wakanda",
+          "Genosha",
+          "Latveria"
+        ],
+        "correct": 1,
+        "fact": "Wakanda is depicted as the most technologically advanced nation on Earth in the MCU."
+      },
+      {
+        "question": "Which TV series features a character named Eleven with telekinetic powers?",
         "options": [
           "The OA",
           "Stranger Things",
           "Dark",
-          "Fringe"
+          "Westworld"
         ],
         "correct": 1,
-        "fact": "Millie Bobby Brown shaved her head for the role and was only 12 when the show premiered!"
+        "fact": "Millie Bobby Brown was only 12 years old when Stranger Things premiered in 2016."
       },
       {
-        "question": "What is the highest-grossing animated film of all time (as of early 2026)?",
+        "question": "In 2025, which artist broke Spotify's record for most monthly listeners, surpassing 130 million?",
         "options": [
-          "Toy Story 4",
-          "Frozen II",
-          "Inside Out 2",
-          "The Lion King (1994)"
+          "Bad Bunny",
+          "Taylor Swift",
+          "The Weeknd",
+          "Drake"
         ],
         "correct": 2,
-        "fact": "Inside Out 2 surpassed Frozen II to claim the animated box office crown in 2024!"
+        "fact": "The Weeknd's global streaming dominance grew massively after his 'Hurry Up Tomorrow' album era."
       },
       {
-        "question": "Who played Barbie in the 2023 blockbuster film directed by Greta Gerwig?",
+        "question": "Which director is known for films like 'Inception,' 'Interstellar,' and 'Oppenheimer'?",
         "options": [
-          "Emma Stone",
-          "Margot Robbie",
-          "Florence Pugh",
-          "Saoirse Ronan"
+          "Denis Villeneuve",
+          "Christopher Nolan",
+          "Steven Spielberg",
+          "Ridley Scott"
         ],
         "correct": 1,
-        "fact": "The film's production reportedly used so much pink paint it caused a global shortage of Rosco pink!"
+        "fact": "Christopher Nolan won his first Best Director Oscar for 'Oppenheimer' in 2024."
       },
       {
-        "question": "Which K-pop group performed at the 2022 Grammy Awards and holds the record for most weeks at #1 on the Billboard Hot 100 by a Korean act?",
+        "question": "What reality TV franchise features couples meeting at the altar for the first time?",
+        "options": [
+          "Love Is Blind",
+          "Married at First Sight",
+          "The Bachelor",
+          "90 Day Fiancé"
+        ],
+        "correct": 1,
+        "fact": "Married at First Sight originated in Denmark before being adapted for American television."
+      },
+      {
+        "question": "Which K-pop group released the album 'MAP OF THE SOUL: 7' and performed at multiple sold-out stadium tours?",
         "options": [
           "BLACKPINK",
+          "EXO",
           "BTS",
-          "Stray Kids",
-          "SEVENTEEN"
-        ],
-        "correct": 1,
-        "fact": "BTS's \"Dynamite\" was their first all-English single and debuted at number one on the Hot 100!"
-      },
-      {
-        "question": "In what year did the original 'Star Wars' film first hit theaters?",
-        "options": [
-          "1975",
-          "1977",
-          "1979",
-          "1980"
-        ],
-        "correct": 1,
-        "fact": "George Lucas originally envisioned the film as a Flash Gordon adaptation before creating his own universe!"
-      },
-      {
-        "question": "Which streaming platform originally released the series 'Squid Game'?",
-        "options": [
-          "Hulu",
-          "Disney+",
-          "Amazon Prime Video",
-          "Netflix"
-        ],
-        "correct": 3,
-        "fact": "Creator Hwang Dong-hyuk spent over 10 years trying to get Squid Game produced before Netflix picked it up!"
-      },
-      {
-        "question": "Who became the first artist to have an entire album occupy the Top 10 of the Billboard Hot 100 simultaneously?",
-        "options": [
-          "Taylor Swift",
-          "Drake",
-          "Beyoncé",
-          "Bad Bunny"
-        ],
-        "correct": 0,
-        "fact": "Taylor Swift achieved this with 'Midnights' in 2022, holding all top 10 spots at once!"
-      },
-      {
-        "question": "Which actor has portrayed Wolverine in the most films as of 2025?",
-        "options": [
-          "Taron Egerton",
-          "Henry Cavill",
-          "Hugh Jackman",
-          "Daniel Radcliffe"
+          "Stray Kids"
         ],
         "correct": 2,
-        "fact": "Hugh Jackman holds the Guinness World Record for longest career as a live-action Marvel superhero!"
+        "fact": "BTS became the first K-pop act to top the Billboard Hot 100 with 'Dynamite' in 2020."
       },
       {
-        "question": "What was the name of the fictional country in Marvel's 'Black Panther'?",
+        "question": "In the 'Barbie' movie (2023), who played the role of Ken opposite Margot Robbie?",
         "options": [
-          "Genosha",
-          "Latveria",
-          "Wakanda",
-          "Sokovia"
-        ],
-        "correct": 2,
-        "fact": "Wakanda's language in the film is actually isiXhosa, a real South African language with click consonants!"
-      },
-      {
-        "question": "Which legendary musician's hologram performed at Coachella in 2012, stunning live audiences worldwide?",
-        "options": [
-          "Prince",
-          "Tupac Shakur",
-          "Michael Jackson",
-          "Freddie Mercury"
+          "Timothée Chalamet",
+          "Ryan Gosling",
+          "Chris Evans",
+          "Jacob Elordi"
         ],
         "correct": 1,
-        "fact": "The Tupac hologram cost roughly $400,000 to create using a 19th-century illusion technique called Pepper's Ghost!"
+        "fact": "Ryan Gosling's performance of 'I'm Just Ken' became a viral sensation and Oscar-nominated song."
+      },
+      {
+        "question": "Which video game franchise features a character named Master Chief?",
+        "options": [
+          "Gears of War",
+          "Destiny",
+          "Halo",
+          "Call of Duty"
+        ],
+        "correct": 2,
+        "fact": "Master Chief's full designation is Master Chief Petty Officer John-117 in the Halo universe."
+      },
+      {
+        "question": "Which animated studio produced 'Spider-Man: Across the Spider-Verse' using a groundbreaking mixed-media art style?",
+        "options": [
+          "Pixar",
+          "DreamWorks Animation",
+          "Sony Pictures Animation",
+          "Illumination"
+        ],
+        "correct": 2,
+        "fact": "Each universe in the film was animated in a completely different art style by different teams."
       }
     ],
     "geography": [
       {
-        "question": "What is the smallest country in the world by land area?",
-        "options": [
-          "Monaco",
-          "Vatican City",
-          "San Marino",
-          "Liechtenstein"
-        ],
-        "correct": 1,
-        "fact": "Vatican City is only about 0.44 square kilometers — smaller than most city parks!"
-      },
-      {
-        "question": "Which river is the longest in Africa?",
-        "options": [
-          "Congo River",
-          "Zambezi River",
-          "Niger River",
-          "Nile River"
-        ],
-        "correct": 3,
-        "fact": "The Nile stretches approximately 6,650 kilometers from Burundi to the Mediterranean Sea."
-      },
-      {
-        "question": "On which continent would you find the Atacama Desert?",
+        "question": "What is the largest continent by land area?",
         "options": [
           "Africa",
+          "North America",
           "Asia",
-          "South America",
-          "Australia"
+          "Europe"
         ],
         "correct": 2,
-        "fact": "Parts of the Atacama went without recorded rainfall for over 500 years!"
+        "fact": "Asia covers about 44.6 million square kilometers, making it larger than all other continents."
+      },
+      {
+        "question": "Which river is the longest in the world?",
+        "options": [
+          "Amazon",
+          "Nile",
+          "Yangtze",
+          "Mississippi"
+        ],
+        "correct": 1,
+        "fact": "The Nile stretches approximately 6,650 kilometers through northeastern Africa."
+      },
+      {
+        "question": "What is the capital city of Australia?",
+        "options": [
+          "Sydney",
+          "Melbourne",
+          "Canberra",
+          "Brisbane"
+        ],
+        "correct": 2,
+        "fact": "Canberra was purpose-built as the capital to settle rivalry between Sydney and Melbourne."
       },
       {
         "question": "Which country has the most time zones, including overseas territories?",
@@ -490,76 +490,76 @@
           "Russia",
           "United States",
           "France",
-          "China"
+          "United Kingdom"
         ],
         "correct": 2,
-        "fact": "France spans 12 time zones thanks to its scattered overseas territories across the globe."
+        "fact": "France spans 12 time zones thanks to its many overseas territories across the globe."
       },
       {
-        "question": "What is the deepest lake in the world?",
+        "question": "The Strait of Malacca separates which two landmasses?",
         "options": [
-          "Lake Tanganyika",
-          "Caspian Sea",
-          "Lake Baikal",
-          "Lake Superior"
-        ],
-        "correct": 2,
-        "fact": "Lake Baikal in Siberia reaches 1,642 meters deep and holds 20% of Earth's unfrozen freshwater."
-      },
-      {
-        "question": "Which capital city sits at the highest elevation above sea level?",
-        "options": [
-          "Quito, Ecuador",
-          "Bogotá, Colombia",
-          "La Paz, Bolivia",
-          "Addis Ababa, Ethiopia"
-        ],
-        "correct": 2,
-        "fact": "La Paz sits at roughly 3,640 meters, making even simple walks feel breathless for visitors!"
-      },
-      {
-        "question": "How many countries does the equator pass through?",
-        "options": [
-          "9",
-          "11",
-          "13",
-          "15"
-        ],
-        "correct": 2,
-        "fact": "The equator crosses 13 countries including Ecuador, Brazil, Kenya, and Indonesia."
-      },
-      {
-        "question": "Which strait separates Europe from Africa at its narrowest point?",
-        "options": [
-          "Strait of Hormuz",
-          "Strait of Malacca",
-          "Strait of Gibraltar",
-          "Strait of Messina"
-        ],
-        "correct": 2,
-        "fact": "At its narrowest, the Strait of Gibraltar is only 14.3 kilometers wide — visible from either shore!"
-      },
-      {
-        "question": "Which country is home to the world's largest island that isn't a continent?",
-        "options": [
-          "Indonesia",
-          "Canada",
-          "Denmark (Greenland)",
-          "Papua New Guinea"
-        ],
-        "correct": 2,
-        "fact": "Greenland covers over 2.1 million square kilometers but has a population of only about 56,000."
-      },
-      {
-        "question": "What is the only country that borders both the Caspian Sea and the Persian Gulf?",
-        "options": [
-          "Turkmenistan",
-          "Iran",
-          "Iraq",
-          "Azerbaijan"
+          "Borneo and Java",
+          "Malay Peninsula and Sumatra",
+          "India and Sri Lanka",
+          "Australia and Papua New Guinea"
         ],
         "correct": 1,
-        "fact": "Iran's geography is incredibly diverse, ranging from lush forests to vast deserts between two major waters."
+        "fact": "The Strait of Malacca is one of the world's busiest shipping lanes for international trade."
+      },
+      {
+        "question": "Which African country is entirely surrounded by South Africa?",
+        "options": [
+          "Eswatini",
+          "Lesotho",
+          "Malawi",
+          "Botswana"
+        ],
+        "correct": 1,
+        "fact": "Lesotho is one of only three countries in the world completely enclosed by another country."
+      },
+      {
+        "question": "What is the deepest point in the world's oceans?",
+        "options": [
+          "Tonga Trench",
+          "Puerto Rico Trench",
+          "Challenger Deep",
+          "Java Trench"
+        ],
+        "correct": 2,
+        "fact": "Challenger Deep in the Mariana Trench reaches nearly 11,000 meters below sea level."
+      },
+      {
+        "question": "Which desert is the largest hot desert on Earth?",
+        "options": [
+          "Gobi",
+          "Kalahari",
+          "Arabian",
+          "Sahara"
+        ],
+        "correct": 3,
+        "fact": "The Sahara Desert covers about 9.2 million square kilometers across northern Africa."
+      },
+      {
+        "question": "Lake Titicaca, the highest navigable lake in the world, borders which two countries?",
+        "options": [
+          "Chile and Argentina",
+          "Peru and Bolivia",
+          "Ecuador and Colombia",
+          "Brazil and Paraguay"
+        ],
+        "correct": 1,
+        "fact": "Lake Titicaca sits at about 3,812 meters above sea level in the Andes Mountains."
+      },
+      {
+        "question": "Which narrow body of water separates the European and Asian parts of Istanbul?",
+        "options": [
+          "Suez Canal",
+          "Strait of Hormuz",
+          "Bosporus",
+          "Dardanelles"
+        ],
+        "correct": 2,
+        "fact": "The Bosporus is only about 700 meters wide at its narrowest point in Istanbul."
       }
     ],
     "sports": [
@@ -572,106 +572,778 @@
           "7"
         ],
         "correct": 1,
-        "fact": "Five players per side has been the rule since basketball was formalized in the early 1900s."
+        "fact": "Each basketball team plays with 5 players on the court simultaneously."
       },
       {
-        "question": "Which country has won the most FIFA World Cup titles?",
+        "question": "Which country won the FIFA World Cup in 2022?",
         "options": [
-          "Germany",
-          "Argentina",
+          "France",
           "Brazil",
-          "Italy"
+          "Argentina",
+          "Croatia"
         ],
         "correct": 2,
-        "fact": "Brazil has won the World Cup five times — more than any other nation in history!"
+        "fact": "Argentina beat France in a thrilling penalty shootout in the 2022 Qatar World Cup final."
       },
       {
-        "question": "In what sport would you perform a 'slam dunk'?",
+        "question": "In tennis, what is a score of 40-40 called?",
         "options": [
-          "Volleyball",
-          "Basketball",
-          "Tennis",
-          "Cricket"
+          "Match point",
+          "Deuce",
+          "Advantage",
+          "Love"
         ],
         "correct": 1,
-        "fact": "The slam dunk was actually banned in college basketball from 1967 to 1976!"
+        "fact": "When both players reach 40, it's called deuce, and one must win two consecutive points."
       },
       {
-        "question": "Who holds the record for the most Grand Slam singles titles in men's tennis?",
+        "question": "Which NFL team won Super Bowl LVIII in February 2024?",
         "options": [
-          "Roger Federer",
-          "Rafael Nadal",
-          "Novak Djokovic",
-          "Pete Sampras"
-        ],
-        "correct": 2,
-        "fact": "Novak Djokovic surpassed 24 Grand Slam titles, an unprecedented achievement in men's tennis."
-      },
-      {
-        "question": "Which NFL team completed the only perfect season (including Super Bowl win) in 1972?",
-        "options": [
-          "Dallas Cowboys",
-          "Pittsburgh Steelers",
-          "Miami Dolphins",
-          "Green Bay Packers"
-        ],
-        "correct": 2,
-        "fact": "The 1972 Miami Dolphins went 17-0, a feat no NFL team has matched since!"
-      },
-      {
-        "question": "In which year were the first modern Olympic Games held?",
-        "options": [
-          "1888",
-          "1896",
-          "1900",
-          "1912"
+          "San Francisco 49ers",
+          "Kansas City Chiefs",
+          "Baltimore Ravens",
+          "Detroit Lions"
         ],
         "correct": 1,
-        "fact": "The 1896 Athens Olympics featured just 241 athletes — all men — competing in 43 events."
+        "fact": "The Chiefs defeated the 49ers 25-22 in overtime for their fourth Super Bowl title."
       },
       {
-        "question": "What is the maximum score possible with a single throw in darts?",
+        "question": "Which swimmer holds the record for the most Olympic gold medals of all time?",
         "options": [
-          "50",
-          "57",
-          "60",
-          "100"
-        ],
-        "correct": 2,
-        "fact": "A triple 20 scores 60 points — that tiny wedge is every dart player's prime target!"
-      },
-      {
-        "question": "Which boxer was famously known as 'The Greatest' and 'The Louisville Lip'?",
-        "options": [
-          "Mike Tyson",
-          "Muhammad Ali",
-          "Joe Frazier",
-          "Sugar Ray Leonard"
-        ],
-        "correct": 1,
-        "fact": "Muhammad Ali's real name was Cassius Clay — he changed it after joining the Nation of Islam."
-      },
-      {
-        "question": "How many dimples does a standard golf ball typically have?",
-        "options": [
-          "212",
-          "336",
-          "422",
-          "500"
-        ],
-        "correct": 1,
-        "fact": "Dimples create turbulence that reduces drag, letting golf balls fly nearly twice as far as smooth ones!"
-      },
-      {
-        "question": "Which athlete has won the most Olympic gold medals of all time?",
-        "options": [
-          "Usain Bolt",
-          "Carl Lewis",
+          "Mark Spitz",
+          "Ian Thorpe",
           "Michael Phelps",
-          "Paavo Nurmi"
+          "Ryan Lochte"
         ],
         "correct": 2,
-        "fact": "Michael Phelps won an astonishing 23 Olympic gold medals across five Games from 2000 to 2016."
+        "fact": "Michael Phelps won an incredible 23 Olympic gold medals across five Olympic Games."
+      },
+      {
+        "question": "In cricket, what is a 'googly'?",
+        "options": [
+          "A type of batting stance",
+          "A leg-spin delivery that turns the opposite way",
+          "A fielding position",
+          "A type of cricket bat"
+        ],
+        "correct": 1,
+        "fact": "A googly deceives batters by spinning opposite to what a leg-spinner's action suggests."
+      },
+      {
+        "question": "Which city hosted the 2024 Summer Olympic Games?",
+        "options": [
+          "Los Angeles",
+          "Tokyo",
+          "Paris",
+          "Brisbane"
+        ],
+        "correct": 2,
+        "fact": "Paris hosted the Olympics for the third time, previously hosting in 1900 and 1924."
+      },
+      {
+        "question": "What is the only Grand Slam tennis tournament played on clay courts?",
+        "options": [
+          "Wimbledon",
+          "US Open",
+          "Australian Open",
+          "French Open"
+        ],
+        "correct": 3,
+        "fact": "The French Open at Roland Garros is played on red clay, favoring baseline players."
+      },
+      {
+        "question": "In the sport of curling, what is the circular target area on the ice called?",
+        "options": [
+          "The bullseye",
+          "The house",
+          "The ring",
+          "The zone"
+        ],
+        "correct": 1,
+        "fact": "The house consists of four concentric circles, and stones closest to center score points."
+      },
+      {
+        "question": "Which boxer retired undefeated with a professional record of 50-0?",
+        "options": [
+          "Manny Pacquiao",
+          "Floyd Mayweather Jr.",
+          "Mike Tyson",
+          "Lennox Lewis"
+        ],
+        "correct": 1,
+        "fact": "Floyd Mayweather Jr. achieved 50-0 after defeating Conor McGregor in his final fight in 2017."
+      }
+    ],
+    "food": [
+      {
+        "question": "What type of pasta is shaped like small butterflies or bow ties?",
+        "options": [
+          "Penne",
+          "Farfalle",
+          "Rigatoni",
+          "Linguine"
+        ],
+        "correct": 1,
+        "fact": "Farfalle means 'butterflies' in Italian and dates back to the 16th century."
+      },
+      {
+        "question": "Which fruit is known as the 'king of fruits' in Southeast Asia?",
+        "options": [
+          "Mango",
+          "Jackfruit",
+          "Durian",
+          "Papaya"
+        ],
+        "correct": 2,
+        "fact": "Durian is so pungent it's banned on public transport in several Asian countries!"
+      },
+      {
+        "question": "What is the main ingredient in traditional hummus?",
+        "options": [
+          "Lentils",
+          "Chickpeas",
+          "Black beans",
+          "Kidney beans"
+        ],
+        "correct": 1,
+        "fact": "Hummus literally means 'chickpeas' in Arabic and has been eaten for centuries."
+      },
+      {
+        "question": "Which Japanese fermented soybean paste is essential in miso soup?",
+        "options": [
+          "Natto",
+          "Tofu",
+          "Miso",
+          "Tempeh"
+        ],
+        "correct": 2,
+        "fact": "Miso fermentation can range from a few weeks to several years for deeper flavor."
+      },
+      {
+        "question": "What does the Scoville scale measure?",
+        "options": [
+          "Sweetness of sugar",
+          "Bitterness of coffee",
+          "Heat of chili peppers",
+          "Acidity of citrus"
+        ],
+        "correct": 2,
+        "fact": "The Carolina Reaper has exceeded 2.2 million Scoville Heat Units!"
+      },
+      {
+        "question": "Which country is credited with inventing the cocktail known as the Caipirinha?",
+        "options": [
+          "Mexico",
+          "Portugal",
+          "Cuba",
+          "Brazil"
+        ],
+        "correct": 3,
+        "fact": "Caipirinha is made with cachaça, a spirit distilled from fresh sugarcane juice."
+      },
+      {
+        "question": "In French cuisine, what is a 'mirepoix'?",
+        "options": [
+          "A dessert custard",
+          "A mix of diced celery, carrots, and onions",
+          "A type of pastry dough",
+          "A cream-based sauce"
+        ],
+        "correct": 1,
+        "fact": "Mirepoix is named after the 18th-century French duke Charles-Pierre-Gaston de Lévis."
+      },
+      {
+        "question": "Which high-end spice comes from the stigmas of Crocus sativus flowers?",
+        "options": [
+          "Turmeric",
+          "Saffron",
+          "Cardamom",
+          "Vanilla"
+        ],
+        "correct": 1,
+        "fact": "It takes roughly 75,000 crocus flowers to produce just one pound of saffron!"
+      },
+      {
+        "question": "What is the traditional base spirit in a classic Sazerac cocktail?",
+        "options": [
+          "Bourbon",
+          "Rye whiskey",
+          "Cognac",
+          "Gin"
+        ],
+        "correct": 1,
+        "fact": "The Sazerac originated in 1850s New Orleans and is one of America's oldest cocktails."
+      },
+      {
+        "question": "Which high-protein ancient grain, native to the Andes, was called 'the mother of all grains' by the Incas?",
+        "options": [
+          "Amaranth",
+          "Quinoa",
+          "Farro",
+          "Teff"
+        ],
+        "correct": 1,
+        "fact": "Quinoa is technically a seed, not a grain, and is related to spinach and beets."
+      }
+    ],
+    "music": [
+      {
+        "question": "Which Beatles album features the iconic Abbey Road crossing on its cover?",
+        "options": [
+          "Sgt. Pepper's Lonely Hearts Club Band",
+          "Abbey Road",
+          "Let It Be",
+          "Revolver"
+        ],
+        "correct": 1,
+        "fact": "The Abbey Road zebra crossing in London is now a Grade II listed structure."
+      },
+      {
+        "question": "What instrument does a pianist play?",
+        "options": [
+          "Drums",
+          "Guitar",
+          "Piano",
+          "Violin"
+        ],
+        "correct": 2,
+        "fact": "The modern piano has 88 keys — 52 white and 36 black."
+      },
+      {
+        "question": "Which pop star is known as the 'Queen of Pop'?",
+        "options": [
+          "Whitney Houston",
+          "Madonna",
+          "Beyoncé",
+          "Lady Gaga"
+        ],
+        "correct": 1,
+        "fact": "Madonna has sold over 300 million records worldwide throughout her career."
+      },
+      {
+        "question": "Which composer wrote 'The Four Seasons'?",
+        "options": [
+          "Johann Sebastian Bach",
+          "Wolfgang Amadeus Mozart",
+          "Antonio Vivaldi",
+          "Ludwig van Beethoven"
+        ],
+        "correct": 2,
+        "fact": "Vivaldi composed The Four Seasons around 1720 as part of a larger violin concerto set."
+      },
+      {
+        "question": "What key signature has no sharps or flats?",
+        "options": [
+          "G major",
+          "D major",
+          "C major",
+          "F major"
+        ],
+        "correct": 2,
+        "fact": "C major is often the first scale beginners learn due to its simplicity."
+      },
+      {
+        "question": "Which artist released the critically acclaimed album 'To Pimp a Butterfly' in 2015?",
+        "options": [
+          "Drake",
+          "J. Cole",
+          "Kendrick Lamar",
+          "Kanye West"
+        ],
+        "correct": 2,
+        "fact": "To Pimp a Butterfly blends jazz, funk, and spoken word with hip-hop storytelling."
+      },
+      {
+        "question": "In music theory, how many semitones make up a tritone interval?",
+        "options": [
+          "4",
+          "5",
+          "6",
+          "7"
+        ],
+        "correct": 2,
+        "fact": "The tritone was called 'diabolus in musica' (the devil in music) during the Middle Ages."
+      },
+      {
+        "question": "Which progressive rock band released the concept album 'The Wall' in 1979?",
+        "options": [
+          "Genesis",
+          "Pink Floyd",
+          "Yes",
+          "King Crimson"
+        ],
+        "correct": 1,
+        "fact": "The Wall was inspired by Roger Waters' feelings of alienation during live performances."
+      },
+      {
+        "question": "Which Romantic-era composer wrote the 'Liebestraum' piano pieces?",
+        "options": [
+          "Frédéric Chopin",
+          "Franz Liszt",
+          "Robert Schumann",
+          "Johannes Brahms"
+        ],
+        "correct": 1,
+        "fact": "Liebestraum No. 3 in A-flat major remains one of the most beloved piano pieces ever."
+      },
+      {
+        "question": "What unusual time signature is Dave Brubeck's jazz classic 'Take Five' written in?",
+        "options": [
+          "7/8",
+          "5/4",
+          "6/8",
+          "9/8"
+        ],
+        "correct": 1,
+        "fact": "Take Five was one of the first jazz singles to sell over a million copies."
+      }
+    ],
+    "technology": [
+      {
+        "question": "What does 'CPU' stand for?",
+        "options": [
+          "Central Processing Unit",
+          "Computer Personal Unit",
+          "Central Program Utility",
+          "Core Processing Unit"
+        ],
+        "correct": 0,
+        "fact": "The CPU is often called the 'brain' of the computer, executing billions of instructions per second!"
+      },
+      {
+        "question": "Which company created the iPhone?",
+        "options": [
+          "Samsung",
+          "Apple",
+          "Google",
+          "Microsoft"
+        ],
+        "correct": 1,
+        "fact": "The first iPhone was unveiled by Steve Jobs on January 9, 2007, revolutionizing mobile phones."
+      },
+      {
+        "question": "What does 'HTTP' stand for in a web address?",
+        "options": [
+          "HyperText Transfer Protocol",
+          "High Tech Transfer Program",
+          "HyperText Transmission Port",
+          "Home Tool Transfer Protocol"
+        ],
+        "correct": 0,
+        "fact": "HTTP was invented by Tim Berners-Lee in 1989 as part of the World Wide Web."
+      },
+      {
+        "question": "Which programming language was originally developed by Brendan Eich in just 10 days?",
+        "options": [
+          "Python",
+          "Java",
+          "JavaScript",
+          "Ruby"
+        ],
+        "correct": 2,
+        "fact": "JavaScript was created in 10 days in May 1995 and is now the web's most popular language."
+      },
+      {
+        "question": "What year did IBM introduce its first personal computer (the IBM PC)?",
+        "options": [
+          "1975",
+          "1981",
+          "1984",
+          "1977"
+        ],
+        "correct": 1,
+        "fact": "The IBM PC Model 5150 launched August 12, 1981, and defined the PC standard for decades."
+      },
+      {
+        "question": "In networking, what does 'DNS' resolve?",
+        "options": [
+          "IP addresses to MAC addresses",
+          "Domain names to IP addresses",
+          "Ports to protocols",
+          "Emails to servers"
+        ],
+        "correct": 1,
+        "fact": "DNS is like the internet's phone book, translating human-readable names into numerical IP addresses."
+      },
+      {
+        "question": "Which data structure uses a LIFO (Last In, First Out) principle?",
+        "options": [
+          "Queue",
+          "Stack",
+          "Linked List",
+          "Binary Tree"
+        ],
+        "correct": 1,
+        "fact": "Stacks are used everywhere — from browser back buttons to function calls in your code!"
+      },
+      {
+        "question": "What is the maximum number of hosts in a /24 IPv4 subnet?",
+        "options": [
+          "256",
+          "254",
+          "255",
+          "128"
+        ],
+        "correct": 1,
+        "fact": "A /24 subnet has 256 addresses, but network and broadcast addresses reduce usable hosts to 254."
+      },
+      {
+        "question": "Which encryption standard replaced DES as the U.S. federal encryption standard in 2001?",
+        "options": [
+          "RSA",
+          "AES",
+          "Blowfish",
+          "3DES"
+        ],
+        "correct": 1,
+        "fact": "AES was selected from 15 candidates, with the Rijndael cipher winning the competition."
+      },
+      {
+        "question": "In computer architecture, what does a Translation Lookaside Buffer (TLB) cache?",
+        "options": [
+          "CPU instructions",
+          "Virtual-to-physical address mappings",
+          "Branch predictions",
+          "Disk sector locations"
+        ],
+        "correct": 1,
+        "fact": "TLB misses can significantly slow down programs because page table walks are expensive operations."
+      }
+    ],
+    "nature": [
+      {
+        "question": "What is the largest land animal on Earth?",
+        "options": [
+          "White Rhinoceros",
+          "African Elephant",
+          "Hippopotamus",
+          "Giraffe"
+        ],
+        "correct": 1,
+        "fact": "African elephants can weigh up to 14,000 pounds and stand 13 feet tall at the shoulder!"
+      },
+      {
+        "question": "Which bird is known for its ability to mimic human speech?",
+        "options": [
+          "Eagle",
+          "Parrot",
+          "Sparrow",
+          "Penguin"
+        ],
+        "correct": 1,
+        "fact": "African grey parrots can learn over 1,000 words and use them in context!"
+      },
+      {
+        "question": "What do caterpillars eventually transform into?",
+        "options": [
+          "Beetles",
+          "Butterflies or Moths",
+          "Dragonflies",
+          "Wasps"
+        ],
+        "correct": 1,
+        "fact": "During metamorphosis, caterpillars dissolve almost entirely into a cellular soup before reforming!"
+      },
+      {
+        "question": "Which marine animal has three hearts and blue blood?",
+        "options": [
+          "Jellyfish",
+          "Sea Turtle",
+          "Octopus",
+          "Dolphin"
+        ],
+        "correct": 2,
+        "fact": "Octopus blood is blue because it uses copper-based hemocyanin instead of iron-based hemoglobin."
+      },
+      {
+        "question": "What phenomenon causes trees in 'crooked forests' to grow with bent trunks?",
+        "options": [
+          "Persistent strong winds",
+          "Gravitational anomalies",
+          "Cause still debated by scientists",
+          "Underground magnetic fields"
+        ],
+        "correct": 2,
+        "fact": "Poland's famous Crooked Forest has about 400 mysteriously bent pine trees planted around 1930."
+      },
+      {
+        "question": "Which plant is known for closing its leaves when touched?",
+        "options": [
+          "Venus Flytrap",
+          "Mimosa pudica",
+          "Sundew",
+          "Pitcher Plant"
+        ],
+        "correct": 1,
+        "fact": "Mimosa pudica folds its leaves within seconds through rapid water movement in its cells!"
+      },
+      {
+        "question": "What is the term for animals that are most active during twilight hours at dawn and dusk?",
+        "options": [
+          "Nocturnal",
+          "Diurnal",
+          "Crepuscular",
+          "Cathemeral"
+        ],
+        "correct": 2,
+        "fact": "Deer, rabbits, and many cats are crepuscular, avoiding both midday heat and nighttime predators."
+      },
+      {
+        "question": "Which fungus is the largest known living organism on Earth by area?",
+        "options": [
+          "Amanita muscaria",
+          "Armillaria ostoyae",
+          "Cantharellus cibarius",
+          "Trametes versicolor"
+        ],
+        "correct": 1,
+        "fact": "Oregon's honey fungus spans 2,385 acres underground and is estimated to be over 2,400 years old!"
+      },
+      {
+        "question": "How do dolphins sleep without drowning?",
+        "options": [
+          "They float on the surface",
+          "They sleep with half their brain at a time",
+          "They hold their breath for hours",
+          "They sleep on the ocean floor"
+        ],
+        "correct": 1,
+        "fact": "Unihemispheric sleep lets dolphins rest one brain half while the other controls breathing and watches for danger."
+      },
+      {
+        "question": "Which deep-sea creature produces light through a symbiotic relationship with bioluminescent bacteria?",
+        "options": [
+          "Giant Squid",
+          "Anglerfish",
+          "Goblin Shark",
+          "Coelacanth"
+        ],
+        "correct": 1,
+        "fact": "Female anglerfish use their glowing lure to attract prey in the pitch-black deep ocean!"
+      }
+    ],
+    "film": [
+      {
+        "question": "Which film won the Academy Award for Best Picture in 2024?",
+        "options": [
+          "Oppenheimer",
+          "Barbie",
+          "Killers of the Flower Moon",
+          "Poor Things"
+        ],
+        "correct": 0,
+        "fact": "Oppenheimer swept the 2024 Oscars with 7 wins including Best Director for Christopher Nolan."
+      },
+      {
+        "question": "What is the name of the fictional continent in 'Game of Thrones' where most of the action takes place?",
+        "options": [
+          "Essos",
+          "Westeros",
+          "Sothoryos",
+          "Ulthos"
+        ],
+        "correct": 1,
+        "fact": "Westeros is roughly the size of South America according to George R.R. Martin."
+      },
+      {
+        "question": "Who directed the 1994 classic 'The Shawshank Redemption'?",
+        "options": [
+          "Steven Spielberg",
+          "Frank Darabont",
+          "Martin Scorsese",
+          "David Fincher"
+        ],
+        "correct": 1,
+        "fact": "Frank Darabont adapted it from Stephen King's novella 'Rita Hayworth and Shawshank Redemption.'"
+      },
+      {
+        "question": "In 'The Bear' (FX/Hulu), what is the name of the sandwich shop that Carmy inherits?",
+        "options": [
+          "The Original Beef of Chicagoland",
+          "Carmy's Kitchen",
+          "The Chicago Cut",
+          "Berzatto's Deli"
+        ],
+        "correct": 0,
+        "fact": "The show was filmed on location in Chicago and became one of Hulu's biggest hits."
+      },
+      {
+        "question": "Which actor plays Willy Wonka in the 2023 film 'Wonka'?",
+        "options": [
+          "Tom Holland",
+          "Timothée Chalamet",
+          "Austin Butler",
+          "Tom Hiddleston"
+        ],
+        "correct": 1,
+        "fact": "Timothée Chalamet performed his own singing in the musical prequel film."
+      },
+      {
+        "question": "What 1982 sci-fi film features the quote 'All those moments will be lost in time, like tears in rain'?",
+        "options": [
+          "E.T. the Extra-Terrestrial",
+          "The Thing",
+          "Blade Runner",
+          "Tron"
+        ],
+        "correct": 2,
+        "fact": "Rutger Hauer partially improvised that iconic monologue in his final scene as Roy Batty."
+      },
+      {
+        "question": "Which TV series features a character named Walter White?",
+        "options": [
+          "Dexter",
+          "Breaking Bad",
+          "The Wire",
+          "Fargo"
+        ],
+        "correct": 1,
+        "fact": "Bryan Cranston won four Emmy Awards for his portrayal of Walter White."
+      },
+      {
+        "question": "In film terminology, what does the acronym 'CGI' stand for?",
+        "options": [
+          "Computer Generated Imagery",
+          "Central Graphics Interface",
+          "Computer Graphic Illustration",
+          "Cinema Grade Imaging"
+        ],
+        "correct": 0,
+        "fact": "The first major CGI character in film was the water creature in 'The Abyss' (1989)."
+      },
+      {
+        "question": "Which cinematographer is known for their long collaboration with the Coen Brothers, including 'No Country for Old Men'?",
+        "options": [
+          "Janusz Kamiński",
+          "Roger Deakins",
+          "Emmanuel Lubezki",
+          "Robert Richardson"
+        ],
+        "correct": 1,
+        "fact": "Roger Deakins has been nominated for 16 Academy Awards and won twice."
+      },
+      {
+        "question": "Which 2025 film sequel reunited the original cast of 'The Fantastic Four' under Marvel Studios?",
+        "options": [
+          "The Fantastic Four: First Steps",
+          "Avengers: Secret Wars",
+          "Fantastic Four: Reborn",
+          "Marvel's First Family"
+        ],
+        "correct": 0,
+        "fact": "The Fantastic Four: First Steps features a retro-styled 1960s setting inspired by classic Marvel comics."
+      }
+    ],
+    "politics": [
+      {
+        "question": "Which country holds the rotating presidency of the Council of the European Union in the first half of 2025?",
+        "options": [
+          "Poland",
+          "Spain",
+          "Denmark",
+          "Belgium"
+        ],
+        "correct": 0,
+        "fact": "Poland took over the EU Council presidency on January 1, 2025, for the first time since 2011."
+      },
+      {
+        "question": "What is the name of the United Nations' highest court that settles disputes between nations?",
+        "options": [
+          "International Criminal Court",
+          "International Court of Justice",
+          "European Court of Human Rights",
+          "World Trade Organization Tribunal"
+        ],
+        "correct": 1,
+        "fact": "The ICJ, located in The Hague, was established in 1945 as the UN's principal judicial organ."
+      },
+      {
+        "question": "Who became the Prime Minister of the United Kingdom in July 2024?",
+        "options": [
+          "Rishi Sunak",
+          "Keir Starmer",
+          "Jeremy Hunt",
+          "David Lammy"
+        ],
+        "correct": 1,
+        "fact": "Keir Starmer led Labour to a landslide victory, ending 14 years of Conservative rule."
+      },
+      {
+        "question": "Which Southeast Asian country officially became the 10th member of the Comprehensive and Progressive Agreement for Trans-Pacific Partnership (CPTPP)?",
+        "options": [
+          "Indonesia",
+          "Thailand",
+          "Philippines",
+          "United Kingdom"
+        ],
+        "correct": 3,
+        "fact": "The UK became the first non-founding member to join CPTPP, acceding in December 2024."
+      },
+      {
+        "question": "Which African nation experienced a military coup in July 2023 that led to prolonged tensions with ECOWAS?",
+        "options": [
+          "Mali",
+          "Niger",
+          "Burkina Faso",
+          "Guinea"
+        ],
+        "correct": 1,
+        "fact": "Niger's coup ousted President Bazoum, prompting ECOWAS sanctions and threats of military intervention."
+      },
+      {
+        "question": "What is the minimum number of member states needed to pass a qualified majority vote in the EU Council?",
+        "options": [
+          "10 states",
+          "15 states",
+          "20 states",
+          "27 states"
+        ],
+        "correct": 1,
+        "fact": "A qualified majority requires 55% of member states (at least 15) representing 65% of EU population."
+      },
+      {
+        "question": "Which country's president Javier Milei took office in December 2023 with a radical economic reform agenda?",
+        "options": [
+          "Chile",
+          "Argentina",
+          "Colombia",
+          "Peru"
+        ],
+        "correct": 1,
+        "fact": "Milei promised dollarization and dramatically slashing government spending to fight Argentina's hyperinflation crisis."
+      },
+      {
+        "question": "The BRICS alliance expanded in January 2024. Which of these countries was NOT among the new members?",
+        "options": [
+          "Ethiopia",
+          "Iran",
+          "Egypt",
+          "Turkey"
+        ],
+        "correct": 3,
+        "fact": "Turkey was not part of the 2024 BRICS expansion, though it expressed interest in joining."
+      },
+      {
+        "question": "Which international body is headquartered in Geneva and oversees global trade rules and disputes?",
+        "options": [
+          "World Bank",
+          "International Monetary Fund",
+          "World Trade Organization",
+          "OECD"
+        ],
+        "correct": 2,
+        "fact": "The WTO was established in 1995 and has over 160 member nations regulating international trade."
+      },
+      {
+        "question": "In 2025, which Pacific Island nation raised alarm at the UN about becoming uninhabitable due to rising sea levels?",
+        "options": [
+          "Fiji",
+          "Tuvalu",
+          "Papua New Guinea",
+          "Samoa"
+        ],
+        "correct": 1,
+        "fact": "Tuvalu's highest point is only 4.6 meters above sea level, making it extremely vulnerable."
       }
     ]
   }
