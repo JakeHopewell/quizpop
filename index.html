@@ -5,7 +5,154 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QuizPop - Daily Brain Challenge</title>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3563124573162722"
-     crossorigin="anonymous"></script>
+     crossorigin="anonymous">
+// ── SUPABASE CONFIG ──
+var SB_URL = "https://npfgbenpcgnwuqtugsdt.supabase.co";
+var SB_KEY = "sb_publishable_YpoH_hvAXwpWWBK1SXZmAg_x7XgqdHO";
+
+function sbFetch(endpoint, options) {
+  var url = SB_URL + "/rest/v1/" + endpoint;
+  var headers = {
+    "apikey": SB_KEY,
+    "Authorization": "Bearer " + SB_KEY,
+    "Content-Type": "application/json",
+    "Prefer": options && options.upsert ? "resolution=merge-duplicates" : "return=minimal"
+  };
+  return fetch(url, {
+    method: options && options.method ? options.method : "GET",
+    headers: headers,
+    body: options && options.body ? JSON.stringify(options.body) : undefined
+  }).then(function(r) {
+    if (r.status === 204 || r.status === 201) return [];
+    return r.json();
+  });
+}
+
+// Submit score to Supabase after every quiz
+function submitScoreToLeaderboard() {
+  var username = getUsername();
+  if (!username) return;
+  var dateKey = playingDate || dayKey();
+
+  // Submit individual score
+  sbFetch("scores", {
+    method: "POST",
+    body: { username: username, category: cat, score: score, date: dateKey }
+  }).catch(function(e) { console.warn("Score submit failed:", e); });
+
+  // Upsert streak
+  var streak = getStreak();
+  sbFetch("streaks?username=eq." + encodeURIComponent(username), {})
+    .then(function(rows) {
+      var bestEver = rows && rows.length > 0 ? Math.max(rows[0].best_streak || 0, streak) : streak;
+      return sbFetch("streaks", {
+        method: "POST",
+        upsert: true,
+        body: { username: username, current_streak: streak, best_streak: bestEver, last_updated: dateKey }
+      });
+    })
+    .catch(function(e) { console.warn("Streak submit failed:", e); });
+}
+
+// ── RENDER LEADERBOARD ──
+function renderLeaderboard() {
+  var username = getUsername();
+  var today = dayKey();
+
+  // Show player count
+  sbFetch("scores?date=eq." + today + "&select=username")
+    .then(function(rows) {
+      var unique = new Set((rows||[]).map(function(r){return r.username;}));
+      document.getElementById("lbPlayerCount").textContent = unique.size + " people played today";
+    }).catch(function(){
+      document.getElementById("lbPlayerCount").textContent = "Live scores";
+    });
+
+  // Today's leaderboard — sum scores per user for today
+  sbFetch("scores?date=eq." + today + "&select=username,score&order=score.desc")
+    .then(function(rows) {
+      // Aggregate total score per username
+      var totals = {};
+      (rows||[]).forEach(function(r) {
+        totals[r.username] = (totals[r.username] || 0) + r.score;
+      });
+      // Sort by total
+      var sorted = Object.keys(totals).map(function(u) {
+        return { username: u, total: totals[u] };
+      }).sort(function(a,b) { return b.total - a.total; }).slice(0, 10);
+
+      var myRank = -1;
+      var myTotal = totals[username] || 0;
+      var allSorted = Object.keys(totals).map(function(u){
+        return {username:u,total:totals[u]};
+      }).sort(function(a,b){return b.total-a.total;});
+      allSorted.forEach(function(r,i){if(r.username===username)myRank=i+1;});
+
+      var container = document.getElementById("lbToday");
+      container.innerHTML = "";
+
+      // My position banner
+      if (myRank > 0) {
+        var pos = document.createElement("div");
+        pos.className = "lb-position";
+        pos.innerHTML = '<span class="lbp-label">Your position today</span><span class="lbp-rank">#' + myRank + ' of ' + allSorted.length + '</span>';
+        container.appendChild(pos);
+      }
+
+      if (sorted.length === 0) {
+        container.innerHTML += '<div class="lb-empty">No scores yet today — be the first!</div>';
+        return;
+      }
+
+      var medals = ["&#x1F947;","&#x1F948;","&#x1F949;"];
+      sorted.forEach(function(row, i) {
+        var isMe = row.username === username;
+        var div = document.createElement("div");
+        div.className = "lb-row" + (isMe?" me":"") + (i<3?" top3":"");
+        var rankClass = i===0?"r1":i===1?"r2":i===2?"r3":"";
+        var rankDisplay = i < 3 ? medals[i] : "#"+(i+1);
+        div.innerHTML =
+          '<span class="lb-rank ' + rankClass + '">' + rankDisplay + '</span>' +
+          '<span class="lb-name">' + row.username + (isMe?'<span class="lb-you">you</span>':'') + '</span>' +
+          '<span class="lb-val">' + row.total + ' pts</span>';
+        container.appendChild(div);
+      });
+    })
+    .catch(function() {
+      document.getElementById("lbToday").innerHTML = '<div class="lb-empty">Could not load scores</div>';
+    });
+
+  // All time streaks leaderboard
+  sbFetch("streaks?select=username,best_streak&order=best_streak.desc&limit=10")
+    .then(function(rows) {
+      var container = document.getElementById("lbStreaks");
+      container.innerHTML = "";
+
+      if (!rows || rows.length === 0) {
+        container.innerHTML = '<div class="lb-empty">No streaks yet — keep playing!</div>';
+        return;
+      }
+
+      var medals = ["&#x1F947;","&#x1F948;","&#x1F949;"];
+      rows.forEach(function(row, i) {
+        var isMe = row.username === username;
+        var div = document.createElement("div");
+        div.className = "lb-row" + (isMe?" me":"") + (i<3?" top3":"");
+        var rankClass = i===0?"r1":i===1?"r2":i===2?"r3":"";
+        var rankDisplay = i < 3 ? medals[i] : "#"+(i+1);
+        div.innerHTML =
+          '<span class="lb-rank ' + rankClass + '">' + rankDisplay + '</span>' +
+          '<span class="lb-name">' + row.username + (isMe?'<span class="lb-you">you</span>':'') + '</span>' +
+          '<span class="lb-val streak">' + row.best_streak + ' &#x1F525;</span>';
+        container.appendChild(div);
+      });
+    })
+    .catch(function() {
+      document.getElementById("lbStreaks").innerHTML = '<div class="lb-empty">Could not load streaks</div>';
+    });
+}
+
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Righteous&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0f0e17;--surface:#1a1826;--card:#22203a;--accent:#ff6b35;--accent2:#ffd166;--green:#06d6a0;--red:#ef476f;--text:#fffffe;--muted:#a7a5b8;--border:rgba(255,255,255,0.08);--blue:#4cc9f0}
@@ -182,6 +329,30 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
 @keyframes cfall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
 .footer{text-align:center;font-size:11px;color:#555;padding:20px 0}
 .footer a{color:#555}
+
+/* LEADERBOARD */
+.lb-hero{text-align:center;padding:10px 0 16px}
+.lb-live{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--border);padding:6px 14px;border-radius:20px;font-size:12px;color:var(--muted);margin-bottom:4px}
+.lb-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:14px}
+.lb-title{font-family:'Righteous',cursive;font-size:15px;margin-bottom:3px}
+.lb-sub{font-size:11px;color:var(--muted);margin-bottom:14px}
+.lb-list{display:grid;gap:8px}
+.lb-loading{text-align:center;color:var(--muted);font-size:13px;padding:20px}
+.lb-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--surface);border-radius:11px;border:1px solid var(--border);transition:all .2s}
+.lb-row.me{border-color:var(--accent2);background:rgba(255,209,102,0.07)}
+.lb-row.top3{border-color:var(--accent)}
+.lb-rank{font-family:'Righteous',cursive;font-size:16px;width:28px;text-align:center;flex-shrink:0}
+.lb-rank.r1{color:#ffd700}
+.lb-rank.r2{color:#c0c0c0}
+.lb-rank.r3{color:#cd7f32}
+.lb-name{flex:1;font-weight:600;font-size:13px}
+.lb-name .lb-you{font-size:10px;color:var(--accent2);margin-left:5px;font-weight:400}
+.lb-val{font-family:'Righteous',cursive;font-size:15px;color:var(--accent2);flex-shrink:0}
+.lb-val.streak{color:#ff6b35}
+.lb-position{background:rgba(255,107,53,0.1);border:1px solid rgba(255,107,53,0.3);border-radius:11px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.lb-position .lbp-label{font-size:12px;color:var(--muted)}
+.lb-position .lbp-rank{font-family:'Righteous',cursive;font-size:18px;color:var(--accent)}
+.lb-empty{text-align:center;color:var(--muted);font-size:13px;padding:20px}
 </style>
 </head>
 <body>
@@ -223,9 +394,10 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
       <div class="ds-streak" id="dayStreakEl">&#x1F525;0</div>
     </div>
     <div class="tabs">
-      <button class="tab active" id="tabToday"  onclick="showTab('today')">Today</button>
-      <button class="tab"        id="tabPast"   onclick="showTab('past')">Past</button>
-      <button class="tab"        id="tabAch"    onclick="showTab('ach')">Badges</button>
+      <button class="tab active" id="tabToday"   onclick="showTab('today')">Today</button>
+      <button class="tab"        id="tabPast"    onclick="showTab('past')">Past</button>
+      <button class="tab"        id="tabAch"     onclick="showTab('ach')">Badges</button>
+      <button class="tab"        id="tabBoard"   onclick="showTab('board')">&#x1F3C6;</button>
       <button class="tab"        id="tabProfile" onclick="showTab('profile')">Profile</button>
     </div>
     <div id="panelToday"><div class="cat-cards" id="catCards"></div></div>
@@ -233,6 +405,21 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
     <div id="panelAch"     style="display:none">
       <div class="ach-summary"><span class="as-count" id="achCount">0</span><div class="as-info"><div class="as-title">Achievements Unlocked</div><div class="as-sub" id="achSubtitle">Keep playing to earn badges!</div></div></div>
       <div class="ach-grid" id="achGrid"></div>
+    </div>
+    <div id="panelBoard" style="display:none">
+      <div class="lb-hero">
+        <div class="lb-live"><span class="live-dot"></span><span id="lbPlayerCount">Loading...</span></div>
+      </div>
+      <div class="lb-section">
+        <div class="lb-title">&#x1F3C6; Today's Top 10</div>
+        <div class="lb-sub">Combined score across all categories played today</div>
+        <div id="lbToday" class="lb-list"><div class="lb-loading">Loading...</div></div>
+      </div>
+      <div class="lb-section">
+        <div class="lb-title">&#x1F525; All Time Streaks</div>
+        <div class="lb-sub">Highest streaks ever recorded</div>
+        <div id="lbStreaks" class="lb-list"><div class="lb-loading">Loading...</div></div>
+      </div>
     </div>
     <div id="panelProfile" style="display:none" id="panelProfile">
       <div class="profile-card" id="profileCard"></div>
@@ -557,13 +744,16 @@ function show(id){
 }
 
 function showTab(tab){
-  ["today","past","ach","profile"].forEach(function(t){
-    document.getElementById("panel"+t.charAt(0).toUpperCase()+t.slice(1)).style.display=t===tab?"block":"none";
-    document.getElementById("tab"+t.charAt(0).toUpperCase()+t.slice(1)).classList.toggle("active",t===tab);
+  ["today","past","ach","board","profile"].forEach(function(t){
+    var panel=document.getElementById("panel"+t.charAt(0).toUpperCase()+t.slice(1));
+    var tabEl=document.getElementById("tab"+t.charAt(0).toUpperCase()+t.slice(1));
+    if(panel)panel.style.display=t===tab?"block":"none";
+    if(tabEl)tabEl.classList.toggle("active",t===tab);
   });
   if(tab==="past")    renderPastList();
   if(tab==="ach")     renderAchievements();
   if(tab==="profile") renderProfile();
+  if(tab==="board")   renderLeaderboard();
 }
 
 function goHome(){show("sHome");renderHome();}
@@ -780,6 +970,7 @@ function nextQ(){qIdx++;if(qIdx>=questions.length)finish();else renderQ();}
 function finish(){
   saveResult(playingDate,cat);
   syncBadges();
+  submitScoreToLeaderboard();
   var newAch=checkAchievements();
   buildResults(playingDate,newAch);
   show("sResults");animateRing();
@@ -889,6 +1080,132 @@ function playTone(freq,gain,duration){
     o.start(ctx.currentTime);o.stop(ctx.currentTime+duration);
   }catch(e){}
 }
+
+
+// Submit score to Supabase after every quiz
+function submitScoreToLeaderboard() {
+  var username = getUsername();
+  if (!username) return;
+  var dateKey = playingDate || dayKey();
+
+  // Submit individual score
+  sbFetch("scores", {
+    method: "POST",
+    body: { username: username, category: cat, score: score, date: dateKey }
+  }).catch(function(e) { console.warn("Score submit failed:", e); });
+
+  // Upsert streak
+  var streak = getStreak();
+  sbFetch("streaks?username=eq." + encodeURIComponent(username), {})
+    .then(function(rows) {
+      var bestEver = rows && rows.length > 0 ? Math.max(rows[0].best_streak || 0, streak) : streak;
+      return sbFetch("streaks", {
+        method: "POST",
+        upsert: true,
+        body: { username: username, current_streak: streak, best_streak: bestEver, last_updated: dateKey }
+      });
+    })
+    .catch(function(e) { console.warn("Streak submit failed:", e); });
+}
+
+// ── RENDER LEADERBOARD ──
+function renderLeaderboard() {
+  var username = getUsername();
+  var today = dayKey();
+
+  // Show player count
+  sbFetch("scores?date=eq." + today + "&select=username")
+    .then(function(rows) {
+      var unique = new Set((rows||[]).map(function(r){return r.username;}));
+      document.getElementById("lbPlayerCount").textContent = unique.size + " people played today";
+    }).catch(function(){
+      document.getElementById("lbPlayerCount").textContent = "Live scores";
+    });
+
+  // Today's leaderboard — sum scores per user for today
+  sbFetch("scores?date=eq." + today + "&select=username,score&order=score.desc")
+    .then(function(rows) {
+      // Aggregate total score per username
+      var totals = {};
+      (rows||[]).forEach(function(r) {
+        totals[r.username] = (totals[r.username] || 0) + r.score;
+      });
+      // Sort by total
+      var sorted = Object.keys(totals).map(function(u) {
+        return { username: u, total: totals[u] };
+      }).sort(function(a,b) { return b.total - a.total; }).slice(0, 10);
+
+      var myRank = -1;
+      var myTotal = totals[username] || 0;
+      var allSorted = Object.keys(totals).map(function(u){
+        return {username:u,total:totals[u]};
+      }).sort(function(a,b){return b.total-a.total;});
+      allSorted.forEach(function(r,i){if(r.username===username)myRank=i+1;});
+
+      var container = document.getElementById("lbToday");
+      container.innerHTML = "";
+
+      // My position banner
+      if (myRank > 0) {
+        var pos = document.createElement("div");
+        pos.className = "lb-position";
+        pos.innerHTML = '<span class="lbp-label">Your position today</span><span class="lbp-rank">#' + myRank + ' of ' + allSorted.length + '</span>';
+        container.appendChild(pos);
+      }
+
+      if (sorted.length === 0) {
+        container.innerHTML += '<div class="lb-empty">No scores yet today — be the first!</div>';
+        return;
+      }
+
+      var medals = ["&#x1F947;","&#x1F948;","&#x1F949;"];
+      sorted.forEach(function(row, i) {
+        var isMe = row.username === username;
+        var div = document.createElement("div");
+        div.className = "lb-row" + (isMe?" me":"") + (i<3?" top3":"");
+        var rankClass = i===0?"r1":i===1?"r2":i===2?"r3":"";
+        var rankDisplay = i < 3 ? medals[i] : "#"+(i+1);
+        div.innerHTML =
+          '<span class="lb-rank ' + rankClass + '">' + rankDisplay + '</span>' +
+          '<span class="lb-name">' + row.username + (isMe?'<span class="lb-you">you</span>':'') + '</span>' +
+          '<span class="lb-val">' + row.total + ' pts</span>';
+        container.appendChild(div);
+      });
+    })
+    .catch(function() {
+      document.getElementById("lbToday").innerHTML = '<div class="lb-empty">Could not load scores</div>';
+    });
+
+  // All time streaks leaderboard
+  sbFetch("streaks?select=username,best_streak&order=best_streak.desc&limit=10")
+    .then(function(rows) {
+      var container = document.getElementById("lbStreaks");
+      container.innerHTML = "";
+
+      if (!rows || rows.length === 0) {
+        container.innerHTML = '<div class="lb-empty">No streaks yet — keep playing!</div>';
+        return;
+      }
+
+      var medals = ["&#x1F947;","&#x1F948;","&#x1F949;"];
+      rows.forEach(function(row, i) {
+        var isMe = row.username === username;
+        var div = document.createElement("div");
+        div.className = "lb-row" + (isMe?" me":"") + (i<3?" top3":"");
+        var rankClass = i===0?"r1":i===1?"r2":i===2?"r3":"";
+        var rankDisplay = i < 3 ? medals[i] : "#"+(i+1);
+        div.innerHTML =
+          '<span class="lb-rank ' + rankClass + '">' + rankDisplay + '</span>' +
+          '<span class="lb-name">' + row.username + (isMe?'<span class="lb-you">you</span>':'') + '</span>' +
+          '<span class="lb-val streak">' + row.best_streak + ' &#x1F525;</span>';
+        container.appendChild(div);
+      });
+    })
+    .catch(function() {
+      document.getElementById("lbStreaks").innerHTML = '<div class="lb-empty">Could not load streaks</div>';
+    });
+}
+
 </script>
 </body>
 </html>
