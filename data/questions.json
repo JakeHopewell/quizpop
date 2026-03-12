@@ -1,1349 +1,1469 @@
 {
   "date": "2026-03-12",
-  "generated": "2026-03-12T05:08:34.639Z",
+  "generated": "2026-03-12T19:49:31.719Z",
   "categories": {
     "mixed": [
       {
-        "question": "What is the hardest natural substance on Earth?",
+        "question": "What surprising discovery did scientists make in 2025 about the deep ocean's role in climate regulation?",
         "options": [
-          "Titanium",
-          "Diamond",
-          "Quartz",
-          "Tungsten carbide"
+          "The ocean floor absorbs UV radiation",
+          "Deep-sea microbes produce more oxygen than previously thought",
+          "Ocean trenches trap carbon dioxide as solid crystals",
+          "Underwater volcanoes cool surface temperatures"
         ],
         "correct": 1,
-        "fact": "Diamonds are so hard they can only be scratched by other diamonds!"
+        "fact": "Deep-sea microbial oxygen production was found to be vastly underestimated, reshaping ocean carbon cycle models.",
+        "_subtopic": "Scientific Discoveries"
       },
       {
-        "question": "Which country has the most official languages?",
+        "question": "Which element was first synthesized in a laboratory before it was ever found occurring naturally on Earth?",
         "options": [
-          "India",
-          "South Africa",
-          "Zimbabwe",
-          "Bolivia"
-        ],
-        "correct": 2,
-        "fact": "Zimbabwe recognizes 16 official languages, including Shona, Ndebele, and English!"
-      },
-      {
-        "question": "How many bones does an adult human body have?",
-        "options": [
-          "186",
-          "206",
-          "226",
-          "256"
+          "Francium",
+          "Technetium",
+          "Promethium",
+          "Astatine"
         ],
         "correct": 1,
-        "fact": "Babies are born with about 270 bones, but many fuse together as they grow!"
+        "fact": "Technetium was created artificially in 1937 — its name literally means 'artificial' in Greek.",
+        "_subtopic": "Scientific Discoveries"
       },
       {
-        "question": "In March 2026, which country made headlines by officially joining the European Union's Schengen Area after years of waiting?",
+        "question": "True or False: Helicobacter pylori, the bacterium that causes stomach ulcers, was discovered when a researcher deliberately infected himself.",
         "options": [
-          "Romania",
-          "Cyprus",
-          "Croatia",
-          "Bulgaria"
+          "True — Barry Marshall drank the bacteria",
+          "False — it was found in lab mice",
+          "True — but the researcher was Robert Koch",
+          "False — it was discovered by accident in surgery"
         ],
         "correct": 0,
-        "fact": "Romania and Bulgaria finally achieved full Schengen membership after over a decade of negotiations!"
+        "fact": "Barry Marshall drank a petri dish of H. pylori in 1984 and developed ulcers, winning a Nobel Prize.",
+        "_subtopic": "Scientific Discoveries"
       },
       {
-        "question": "Which famous painting was stolen from the Louvre in 1911 and missing for two years?",
+        "question": "What did physicist Satyendra Nath Bose's 1924 paper predict that was only directly observed in a laboratory in 1995?",
         "options": [
-          "The Last Supper",
-          "Girl with a Pearl Earring",
-          "Mona Lisa",
-          "Starry Night"
-        ],
-        "correct": 2,
-        "fact": "An Italian handyman named Vincenzo Peruggia simply hid in a closet and walked out with it!"
-      },
-      {
-        "question": "What does the acronym 'Wi-Fi' actually stand for?",
-        "options": [
-          "Wireless Fidelity",
-          "Wide Frequency",
-          "Wired Filter",
-          "It doesn't stand for anything"
-        ],
-        "correct": 3,
-        "fact": "Wi-Fi is just a catchy brand name created by a marketing firm — it's not an acronym at all!"
-      },
-      {
-        "question": "Which element has the chemical symbol 'K'?",
-        "options": [
-          "Krypton",
-          "Potassium",
-          "Calcium",
-          "Phosphorus"
+          "Gravitational waves",
+          "Bose-Einstein condensate",
+          "Dark matter particles",
+          "Quantum entanglement at macro scale"
         ],
         "correct": 1,
-        "fact": "The 'K' comes from 'Kalium,' the Latin word for potassium derived from Arabic 'al-qalyah' (plant ashes)!"
+        "fact": "It took 71 years to cool atoms close enough to absolute zero to create this exotic fifth state of matter.",
+        "_subtopic": "Scientific Discoveries"
       },
       {
-        "question": "As the 2026 FIFA World Cup approaches, how many host cities across the USA, Canada, and Mexico will stage matches?",
+        "question": "How many times per day does the average human produce enough saliva to fill roughly how many bathtubs per year?",
         "options": [
-          "12",
-          "14",
-          "16",
-          "18"
+          "Half a bathtub",
+          "One bathtub",
+          "Two bathtubs",
+          "Five bathtubs"
         ],
         "correct": 2,
-        "fact": "The 2026 World Cup will be the first with 48 teams and the first hosted by three countries!"
+        "fact": "Humans produce about 1–1.5 liters of saliva daily, totaling roughly two full bathtubs per year.",
+        "_subtopic": "Weird & Wonderful Facts"
       },
       {
-        "question": "Which animal has the longest migration of any mammal?",
+        "question": "Which animal's fingerprints are virtually indistinguishable from human fingerprints, even under a microscope?",
         "options": [
-          "Wildebeest",
-          "Caribou",
-          "Gray whale",
-          "Humpback whale"
+          "Chimpanzees",
+          "Koalas",
+          "Gorillas",
+          "Raccoons"
         ],
-        "correct": 3,
-        "fact": "Humpback whales travel up to 16,000 miles round-trip annually between feeding and breeding grounds!"
+        "correct": 1,
+        "fact": "Koala fingerprints have confused forensic scientists at crime scenes in Australia — they're nearly identical to ours.",
+        "_subtopic": "Weird & Wonderful Facts"
       },
       {
-        "question": "True or False style: Honey never spoils — archaeologists have found 3,000-year-old edible honey in Egyptian tombs.",
+        "question": "What happens to a teaspoon of neutron star material if placed on Earth's surface?",
         "options": [
-          "True — it's been verified",
-          "False — it was too crystallized to eat",
-          "False — only the jars survived",
-          "True — but only because of the tomb's temperature"
+          "It evaporates instantly",
+          "It weighs about 6 billion tons",
+          "It creates a small black hole",
+          "It becomes radioactive gas"
         ],
-        "correct": 0,
-        "fact": "Honey's low moisture and acidic pH create an inhospitable environment for bacteria and microorganisms!"
+        "correct": 1,
+        "fact": "Neutron star matter is so dense that one teaspoon weighs roughly as much as Mount Everest.",
+        "_subtopic": "Weird & Wonderful Facts"
+      },
+      {
+        "question": "In which country is it illegal to own just one guinea pig, as it is considered animal cruelty due to loneliness?",
+        "options": [
+          "Germany",
+          "Switzerland",
+          "Sweden",
+          "Netherlands"
+        ],
+        "correct": 1,
+        "fact": "Switzerland's animal welfare laws recognize guinea pigs as social animals — solo ownership is legally forbidden.",
+        "_subtopic": "Unusual Laws Around the World"
+      },
+      {
+        "question": "Which country has a law making it illegal to step on money because it bears the monarch's image?",
+        "options": [
+          "Japan",
+          "Thailand",
+          "Bhutan",
+          "Morocco"
+        ],
+        "correct": 1,
+        "fact": "In Thailand, stepping on a banknote or coin is an insult to the King and punishable by imprisonment.",
+        "_subtopic": "Unusual Laws Around the World"
+      },
+      {
+        "question": "In which Australian state was it historically illegal to change a light bulb unless you were a licensed electrician?",
+        "options": [
+          "New South Wales",
+          "Queensland",
+          "Victoria",
+          "Western Australia"
+        ],
+        "correct": 2,
+        "fact": "Victoria's strict electrical safety regulations technically required a licensed electrician for even simple bulb changes.",
+        "_subtopic": "Unusual Laws Around the World"
       }
     ],
     "science": [
       {
-        "question": "How many bones does a shark's skeleton contain?",
+        "question": "What is the name of the persistent anticyclonic storm on Jupiter that has been shrinking over the past century?",
         "options": [
-          "Zero — sharks have cartilage instead",
-          "About 50",
-          "About 200",
-          "Over 500"
+          "The Great Red Spot",
+          "The Great Dark Spot",
+          "Jupiter's Eye",
+          "The Red Cyclone"
         ],
         "correct": 0,
-        "fact": "Sharks are entirely boneless! Their skeletons are made of flexible cartilage, like your ear."
+        "fact": "The Great Red Spot has shrunk by over 50% since the 1800s and may eventually become circular.",
+        "_subtopic": "Climate & Weather"
       },
       {
-        "question": "Which planet in our solar system has the most moons as of 2026?",
+        "question": "True or False: Lightning can occur during a snowstorm, a phenomenon known as 'thundersnow.'",
         "options": [
-          "Jupiter",
-          "Saturn",
-          "Uranus",
-          "Neptune"
-        ],
-        "correct": 1,
-        "fact": "Saturn surpassed Jupiter with over 140 confirmed moons, with new ones still being discovered!"
-      },
-      {
-        "question": "What is the hardest natural substance on Earth?",
-        "options": [
-          "Titanium",
-          "Quartz",
-          "Diamond",
-          "Tungsten carbide"
-        ],
-        "correct": 2,
-        "fact": "Diamonds score a perfect 10 on the Mohs hardness scale — only another diamond can scratch one."
-      },
-      {
-        "question": "In March 2026, ESA's JUICE spacecraft is approaching Jupiter's system. What does JUICE stand for?",
-        "options": [
-          "Jupiter Icy Cartography Explorer",
-          "Jupiter Ice and Composition Experiment",
-          "JUpiter ICy moons Explorer",
-          "Joint Universal Ice Core Expedition"
-        ],
-        "correct": 2,
-        "fact": "JUICE launched in 2023 and will study Europa, Ganymede, and Callisto for signs of habitable oceans."
-      },
-      {
-        "question": "What phenomenon causes the Northern Lights (aurora borealis)?",
-        "options": [
-          "Moonlight reflecting off ice crystals",
-          "Charged solar particles hitting atmospheric gases",
-          "Lightning in the upper atmosphere",
-          "Volcanic gases glowing at high altitude"
-        ],
-        "correct": 1,
-        "fact": "Solar wind particles collide with oxygen and nitrogen, making them glow green, purple, and red!"
-      },
-      {
-        "question": "Which tree species can live for over 5,000 years, making it the oldest known non-clonal organism?",
-        "options": [
-          "Giant sequoia",
-          "Bristlecone pine",
-          "Baobab",
-          "Olive tree"
-        ],
-        "correct": 1,
-        "fact": "A bristlecone pine named Methuselah in California is over 4,850 years old and still growing!"
-      },
-      {
-        "question": "How long does it take sunlight to reach Earth?",
-        "options": [
-          "About 8 minutes",
-          "About 1 minute",
-          "About 30 minutes",
-          "About 3 hours"
+          "True",
+          "False",
+          "Only in tropical regions",
+          "Only above 3,000 meters altitude"
         ],
         "correct": 0,
-        "fact": "Light travels 93 million miles from the Sun to Earth in roughly 8 minutes and 20 seconds."
+        "fact": "Thundersnow is rare but real—the snow muffles thunder so it's typically heard only within 3 km.",
+        "_subtopic": "Climate & Weather"
       },
       {
-        "question": "What is the term for an animal that can generate its own body heat internally?",
+        "question": "In 2025, scientists confirmed that which ocean current system showed its weakest flow in over 1,000 years?",
         "options": [
-          "Ectotherm",
-          "Endotherm",
-          "Mesotherm",
-          "Poikilotherm"
+          "Atlantic Meridional Overturning Circulation",
+          "Antarctic Circumpolar Current",
+          "Kuroshio Current",
+          "Agulhas Current"
+        ],
+        "correct": 0,
+        "fact": "A weakened AMOC could paradoxically cause severe cooling in northwestern Europe despite global warming.",
+        "_subtopic": "Climate & Weather"
+      },
+      {
+        "question": "Which rare weather phenomenon produces ball-shaped lightning that can float through walls and aircraft cabins?",
+        "options": [
+          "St. Elmo's Fire",
+          "Ball lightning",
+          "Sprite lightning",
+          "Crown flash"
         ],
         "correct": 1,
-        "fact": "Endotherms like mammals and birds maintain constant body temperatures regardless of their environment."
+        "fact": "Ball lightning remains so poorly understood that some physicists debated its existence until video evidence emerged.",
+        "_subtopic": "Climate & Weather"
       },
       {
-        "question": "With solar maximum activity peaking around 2025-2026, which layer of the Sun's atmosphere is visible during a total solar eclipse?",
+        "question": "Which disease is caused by prions rather than bacteria, viruses, or fungi?",
         "options": [
-          "The photosphere",
-          "The chromosphere",
-          "The corona",
-          "The radiative zone"
+          "Lyme disease",
+          "Creutzfeldt-Jakob disease",
+          "Lupus",
+          "Leptospirosis"
+        ],
+        "correct": 1,
+        "fact": "Prions are misfolded proteins that force normal proteins to misfold—they contain no DNA or RNA at all.",
+        "_subtopic": "Medicine & Disease"
+      },
+      {
+        "question": "How many bones does a human baby have at birth compared to an adult's 206?",
+        "options": [
+          "About 150",
+          "About 270",
+          "About 206",
+          "About 350"
+        ],
+        "correct": 1,
+        "fact": "Many baby bones are cartilage that gradually fuses together, which is why their skulls have soft spots.",
+        "_subtopic": "Medicine & Disease"
+      },
+      {
+        "question": "Which parasitic disease, transmitted by freshwater snails, is considered second only to malaria in global tropical disease burden?",
+        "options": [
+          "Dengue fever",
+          "Schistosomiasis",
+          "Leishmaniasis",
+          "Chagas disease"
+        ],
+        "correct": 1,
+        "fact": "Over 200 million people are infected worldwide—the parasitic worms can live inside humans for decades.",
+        "_subtopic": "Medicine & Disease"
+      },
+      {
+        "question": "What is the Casimir effect?",
+        "options": [
+          "Gravity bending light around massive objects",
+          "A force between two uncharged plates caused by quantum vacuum fluctuations",
+          "The tendency of electrons to tunnel through barriers",
+          "Magnetic repulsion at absolute zero temperature"
+        ],
+        "correct": 1,
+        "fact": "Two metal plates placed nanometers apart are pushed together by 'nothing'—virtual particles in empty space.",
+        "_subtopic": "Physics & Forces"
+      },
+      {
+        "question": "Which fundamental force is responsible for holding quarks together inside protons and neutrons?",
+        "options": [
+          "Electromagnetic force",
+          "Weak nuclear force",
+          "Strong nuclear force",
+          "Gravitational force"
         ],
         "correct": 2,
-        "fact": "The corona is millions of degrees hotter than the Sun's surface — a mystery scientists still study!"
+        "fact": "The strong force gets stronger as quarks move apart—meaning quarks can never be isolated individually.",
+        "_subtopic": "Physics & Forces"
       },
       {
-        "question": "A tardigrade (water bear) can survive in the vacuum of outer space. What is its primary survival strategy?",
+        "question": "When a neutron star's mass exceeds the Tolman–Oppenheimer–Volkoff limit, what does it collapse into?",
         "options": [
-          "Rapid cell division",
-          "Cryptobiosis — entering a dehydrated dormant state",
-          "Generating a protective slime cocoon",
-          "Photosynthesis to sustain energy"
+          "A white dwarf",
+          "A magnetar",
+          "A black hole",
+          "A quark star"
         ],
-        "correct": 1,
-        "fact": "Tardigrades curl into a 'tun' state, losing 97% of their water, and can survive for decades!"
+        "correct": 2,
+        "fact": "This mass limit is roughly 2–3 solar masses—beyond it, no known force can prevent gravitational collapse.",
+        "_subtopic": "Physics & Forces"
       }
     ],
     "history": [
       {
-        "question": "Which ancient civilization built the famous road system that inspired the saying 'All roads lead to...'?",
+        "question": "During the American Revolution, which unlikely item did Continental soldiers stuff into their shoes when leather was unavailable?",
         "options": [
-          "Ancient Greece",
-          "Ancient Rome",
-          "Persian Empire",
-          "Ancient Egypt"
+          "Corn husks",
+          "Newspaper and raw cowhide",
+          "Tree bark strips",
+          "Dried fish skins"
         ],
         "correct": 1,
-        "fact": "The Roman road network spanned over 250,000 miles, with 50,000 miles of paved roads!"
+        "fact": "Soldiers at Valley Forge wrapped feet in newspaper and untreated hides, leaving bloody footprints in snow.",
+        "_subtopic": "American Revolution"
       },
       {
-        "question": "In what year did the Berlin Wall fall, reuniting East and West Germany?",
+        "question": "Which American Revolution battle is often called 'the battle that saved the Revolution' after Washington's famous Delaware crossing?",
         "options": [
-          "1987",
-          "1989",
-          "1991",
-          "1985"
+          "Battle of Saratoga",
+          "Battle of Trenton",
+          "Battle of Brandywine",
+          "Battle of Monmouth"
         ],
         "correct": 1,
-        "fact": "The Wall fell on November 9, 1989, after standing for 28 years dividing Berlin."
+        "fact": "Washington captured nearly 1,000 Hessian soldiers at Trenton with zero American combat deaths.",
+        "_subtopic": "American Revolution"
       },
       {
-        "question": "Who was the first woman to win a Nobel Prize?",
+        "question": "True or False: Benedict Arnold was once one of the most decorated and trusted generals in the Continental Army before his betrayal.",
         "options": [
-          "Rosalind Franklin",
-          "Marie Curie",
-          "Dorothy Hodgkin",
-          "Lise Meitner"
+          "True",
+          "False",
+          "He was a civilian advisor, not a general",
+          "He served only in the British Navy"
+        ],
+        "correct": 0,
+        "fact": "Arnold was wounded twice in battle and his heroism at Saratoga was crucial to American victory there.",
+        "_subtopic": "American Revolution"
+      },
+      {
+        "question": "In 2025, archaeologists in Yorktown uncovered artifacts linked to which often-overlooked group's role in the American Revolution?",
+        "options": [
+          "French naval officers",
+          "Enslaved African Americans who served",
+          "Hessian mercenaries' families",
+          "Native American diplomats"
         ],
         "correct": 1,
-        "fact": "Marie Curie won twice — Physics in 1903 and Chemistry in 1911. The only person to win in two sciences!"
+        "fact": "Thousands of enslaved people sought freedom by joining both sides during the Revolution, a frequently erased history.",
+        "_subtopic": "American Revolution"
       },
       {
-        "question": "March 2026 marks 190 years since the fall of the Alamo. In which modern-day U.S. state did this battle take place?",
+        "question": "Which Mesopotamian king created what is widely considered the first known empire in human history?",
         "options": [
-          "California",
-          "New Mexico",
-          "Texas",
-          "Arizona"
+          "Hammurabi",
+          "Sargon of Akkad",
+          "Nebuchadnezzar II",
+          "Gilgamesh"
+        ],
+        "correct": 1,
+        "fact": "Sargon of Akkad rose from humble origins—legend says he was a cupbearer before conquering all of Sumer.",
+        "_subtopic": "Ancient Mesopotamia"
+      },
+      {
+        "question": "The ancient Mesopotamian city of Ur featured a massive stepped temple called a ziggurat dedicated to which deity?",
+        "options": [
+          "Marduk",
+          "Enlil",
+          "Nanna (the moon god)",
+          "Ishtar"
         ],
         "correct": 2,
-        "fact": "The Battle of the Alamo in March 1836 lasted 13 days and became a rallying cry for Texas independence."
+        "fact": "Ur's Great Ziggurat was dedicated to the moon god Nanna—moonlight was considered more useful than sunlight in the desert.",
+        "_subtopic": "Ancient Mesopotamia"
       },
       {
-        "question": "Which empire was ruled by Suleiman the Magnificent during its golden age in the 1500s?",
+        "question": "What surprising mathematical concept did ancient Babylonians use over 1,000 years before Pythagoras was born?",
         "options": [
-          "Mughal Empire",
-          "Ottoman Empire",
-          "Byzantine Empire",
-          "Holy Roman Empire"
+          "The concept of zero",
+          "Pythagorean triples on clay tablets",
+          "Decimal fractions",
+          "Logarithmic tables"
         ],
         "correct": 1,
-        "fact": "Suleiman's reign lasted 46 years, making the Ottoman Empire a dominant world power across three continents."
+        "fact": "Tablet Plimpton 322 contains Pythagorean triples dating to 1800 BCE, predating Pythagoras by over a millennium.",
+        "_subtopic": "Ancient Mesopotamia"
       },
       {
-        "question": "The Rosetta Stone, which helped decode Egyptian hieroglyphics, was written in how many scripts?",
+        "question": "During the Cold War, how many nuclear weapons did the US accidentally drop on its own soil in the 1961 Goldsboro incident?",
         "options": [
+          "One",
           "Two",
           "Three",
-          "Four",
-          "Five"
+          "Four"
         ],
         "correct": 1,
-        "fact": "It featured hieroglyphics, Demotic script, and Ancient Greek — the Greek text was key to cracking the code."
+        "fact": "Two hydrogen bombs fell on North Carolina; one had three of four safety switches fail—nearly detonating.",
+        "_subtopic": "The Cold War"
       },
       {
-        "question": "Which medieval pandemic, arriving in Europe in 1347, killed an estimated one-third of the continent's population?",
+        "question": "Which Cold War-era Soviet project secretly mapped the entire world in extraordinary detail, with maps only fully revealed in recent decades?",
         "options": [
-          "The Great Plague of London",
-          "The Black Death",
-          "The Antonine Plague",
-          "The Plague of Justinian"
+          "Project Azorian",
+          "The Soviet Military Mapping Program",
+          "Operation RYAN",
+          "The Venona Project"
         ],
         "correct": 1,
-        "fact": "The Black Death killed 75–200 million people worldwide, reshaping European society and economics forever."
+        "fact": "Soviet cartographers secretly mapped foreign cities in more detail than those nations' own governments had.",
+        "_subtopic": "The Cold War"
       },
       {
-        "question": "Who was the only U.S. president to serve two non-consecutive terms, making him both the 22nd and 24th president?",
+        "question": "Who was the only US president to have served as Director of Central Intelligence before taking office?",
         "options": [
-          "Rutherford B. Hayes",
-          "Grover Cleveland",
-          "Benjamin Harrison",
-          "James Garfield"
-        ],
-        "correct": 1,
-        "fact": "Cleveland lost to Harrison in 1888 then beat him in a rematch in 1892 — political revenge served cold!"
-      },
-      {
-        "question": "The ancient Library of Alexandria, one of the largest in the ancient world, was located in which modern country?",
-        "options": [
-          "Greece",
-          "Iraq",
-          "Egypt",
-          "Turkey"
+          "Dwight Eisenhower",
+          "Richard Nixon",
+          "George H.W. Bush",
+          "Harry Truman"
         ],
         "correct": 2,
-        "fact": "The library may have held 400,000 scrolls and attracted scholars from across the ancient Mediterranean world."
-      },
-      {
-        "question": "As commemorations continue in 2026 for the 250th anniversary of American independence, in which city was the Declaration of Independence signed?",
-        "options": [
-          "Boston",
-          "New York City",
-          "Philadelphia",
-          "Washington, D.C."
-        ],
-        "correct": 2,
-        "fact": "Philadelphia's Independence Hall hosted the signing in 1776 — Washington, D.C. didn't even exist yet!"
+        "fact": "George H.W. Bush led the CIA in 1976–77, making him uniquely experienced in intelligence among all presidents.",
+        "_subtopic": "The Cold War"
       }
     ],
     "popculture": [
       {
-        "question": "Which pop star's 'Thriller' music video was the first to be inducted into the National Film Registry?",
+        "question": "Which superhero film was the first to gross over $1 billion worldwide without being a sequel?",
         "options": [
-          "Prince",
-          "Michael Jackson",
-          "Madonna",
-          "David Bowie"
-        ],
-        "correct": 1,
-        "fact": "Thriller's 14-minute music video revolutionized the art form and was preserved by the Library of Congress in 2009."
-      },
-      {
-        "question": "In the TV show 'Friends,' what is the name of Ross's pet monkey?",
-        "options": [
-          "Coco",
-          "Marcel",
-          "George",
-          "Bubbles"
-        ],
-        "correct": 1,
-        "fact": "Marcel was played by a capuchin monkey named Katie who later appeared in commercials and other shows!"
-      },
-      {
-        "question": "Which 2026 Oscar-nominated film reignited debate about AI-generated performances in Hollywood?",
-        "options": [
-          "The Last Circuit",
-          "Synthetic Minds",
-          "The Rendering",
-          "Digital Souls"
-        ],
-        "correct": 3,
-        "fact": "The 2026 awards season has intensified discussions about SAG-AFTRA's evolving AI usage guidelines in film."
-      },
-      {
-        "question": "What board game requires players to solve a murder by figuring out the suspect, weapon, and room?",
-        "options": [
-          "Monopoly",
-          "Risk",
-          "Clue (Cluedo)",
-          "Battleship"
-        ],
-        "correct": 2,
-        "fact": "Clue was invented in 1943 by Anthony Pratt, a British musician, during WWII air raid blackouts!"
-      },
-      {
-        "question": "Which streaming platform originally launched as a DVD-by-mail rental service in 1997?",
-        "options": [
-          "Hulu",
-          "Amazon Prime Video",
-          "Netflix",
-          "Disney+"
-        ],
-        "correct": 2,
-        "fact": "Netflix's first DVD shipped in 1998 — co-founder Reed Hastings tested the mail system with a single CD."
-      },
-      {
-        "question": "How many Infinity Stones are there in the Marvel Cinematic Universe?",
-        "options": [
-          "4",
-          "5",
-          "6",
-          "8"
-        ],
-        "correct": 2,
-        "fact": "The six stones are Space, Mind, Reality, Power, Time, and Soul — each controlling a cosmic force."
-      },
-      {
-        "question": "Which musician holds the record for the most Grammy Awards ever won by a single artist?",
-        "options": [
-          "Quincy Jones",
-          "Beyoncé",
-          "Georg Solti",
-          "Stevie Wonder"
-        ],
-        "correct": 1,
-        "fact": "Beyoncé surpassed Georg Solti's long-held record, accumulating over 30 Grammys across her career!"
-      },
-      {
-        "question": "In the Harry Potter series, what magical substance is hidden on the third floor of Hogwarts in the first book?",
-        "options": [
-          "The Elder Wand",
-          "The Philosopher's Stone",
-          "A Horcrux",
-          "The Sword of Gryffindor"
-        ],
-        "correct": 1,
-        "fact": "The Philosopher's Stone produces the Elixir of Life — the real legend dates back to medieval alchemy."
-      },
-      {
-        "question": "As of March 2026, which franchise surpassed $30 billion in total worldwide box office revenue?",
-        "options": [
-          "Marvel Cinematic Universe",
-          "Star Wars",
-          "Harry Potter",
-          "James Bond"
+          "Black Panther",
+          "Guardians of the Galaxy",
+          "Deadpool",
+          "Doctor Strange"
         ],
         "correct": 0,
-        "fact": "The MCU's continued expansion with new phases keeps it far ahead as the highest-grossing franchise ever."
+        "fact": "Black Panther (2018) earned $1.35 billion, making it the first non-sequel superhero film to cross that threshold.",
+        "_subtopic": "Superhero Movies & Comics"
       },
       {
-        "question": "Which iconic video game character was originally called 'Jumpman' when he first appeared in 1981?",
+        "question": "In Marvel Comics, what is Wolverine's skeleton laced with?",
         "options": [
-          "Sonic",
-          "Link",
-          "Mario",
-          "Pac-Man"
+          "Vibranium",
+          "Adamantium",
+          "Carbonadium",
+          "Uru"
         ],
-        "correct": 2,
-        "fact": "Mario debuted as Jumpman in the arcade game Donkey Kong — he was named after Nintendo's warehouse landlord!"
+        "correct": 1,
+        "fact": "Adamantium is fictional but was inspired by the word 'adamant,' meaning unbreakable — it doesn't exist on the periodic table.",
+        "_subtopic": "Superhero Movies & Comics"
+      },
+      {
+        "question": "Which 2025 superhero film featured the first live-action portrayal of DC's Mister Terrific?",
+        "options": [
+          "Superman",
+          "The Brave and the Bold",
+          "Supergirl: Woman of Tomorrow",
+          "Blue Beetle 2"
+        ],
+        "correct": 0,
+        "fact": "Edi Gathegi played Mister Terrific in James Gunn's Superman (2025), the character's live-action film debut.",
+        "_subtopic": "Superhero Movies & Comics"
+      },
+      {
+        "question": "True or False: The original comic book version of Iron Man's origin story was set during the Vietnam War, not Afghanistan.",
+        "options": [
+          "True",
+          "False",
+          "It was set during the Korean War",
+          "It was set during World War II"
+        ],
+        "correct": 0,
+        "fact": "Iron Man debuted in Tales of Suspense #39 (1963), with Tony Stark injured and captured in Vietnam.",
+        "_subtopic": "Superhero Movies & Comics"
+      },
+      {
+        "question": "Which streaming series featured a fictional Korean survival game that became Netflix's most-watched show ever?",
+        "options": [
+          "Alice in Borderland",
+          "Squid Game",
+          "The 8 Show",
+          "Sweet Home"
+        ],
+        "correct": 1,
+        "fact": "Squid Game Season 1 was watched by 265 million households in its first 91 days on Netflix.",
+        "_subtopic": "Streaming Era TV"
+      },
+      {
+        "question": "What is the name of the fictional AI assistant in the Apple TV+ series 'Severance'?",
+        "options": [
+          "Ms. Casey",
+          "Ms. Huang",
+          "Kier",
+          "The Board"
+        ],
+        "correct": 0,
+        "fact": "Ms. Casey is actually a severed version of Mark's wife, making her dual identity one of the show's biggest twists.",
+        "_subtopic": "Streaming Era TV"
+      },
+      {
+        "question": "Which 2025 Netflix series became the platform's most-watched limited series, depicting a real-life British crime story?",
+        "options": [
+          "Black Doves",
+          "Adolescence",
+          "The Residence",
+          "Missing You"
+        ],
+        "correct": 1,
+        "fact": "Adolescence was filmed with remarkably long single-take episodes, a technique rarely used in streaming television.",
+        "_subtopic": "Streaming Era TV"
+      },
+      {
+        "question": "The 'Distracted Boyfriend' meme originated from a stock photo taken by a photographer from which country?",
+        "options": [
+          "United States",
+          "Spain",
+          "Brazil",
+          "Turkey"
+        ],
+        "correct": 1,
+        "fact": "Photographer Antonio Guillem shot the image in Girona, Spain — it was just one of a series featuring the same models.",
+        "_subtopic": "Famous Memes & Viral Moments"
+      },
+      {
+        "question": "Which 2024 viral moment involved a giant statue of a cat becoming a global meme after appearing in a Turkish city?",
+        "options": [
+          "The Ankara Cat",
+          "The Istanbul Whiskers",
+          "Tombili the Cat statue copycat",
+          "The Kadıköy Cat"
+        ],
+        "correct": 0,
+        "fact": "Turkey's love of street cats is so famous that Istanbul alone is estimated to have over 130,000 stray cats.",
+        "_subtopic": "Famous Memes & Viral Moments"
+      },
+      {
+        "question": "The 'Woman Yelling at a Cat' meme combines a Real Housewives scene with a photo of a cat named what?",
+        "options": [
+          "Grumpy",
+          "Smudge",
+          "Pickles",
+          "Bongo"
+        ],
+        "correct": 1,
+        "fact": "Smudge the cat's owner said he always sat at the table like that — the photo wasn't staged for the meme.",
+        "_subtopic": "Famous Memes & Viral Moments"
       }
     ],
     "geography": [
       {
-        "question": "Which country has the most natural lakes in the world?",
+        "question": "Which African country contains the Danakil Depression, one of the hottest inhabited places on Earth?",
         "options": [
-          "Russia",
-          "Canada",
-          "United States",
-          "Brazil"
-        ],
-        "correct": 1,
-        "fact": "Canada has over 60% of the world's lakes — more than all other countries combined!"
-      },
-      {
-        "question": "What is the smallest country in the world by land area?",
-        "options": [
-          "Monaco",
-          "San Marino",
-          "Vatican City",
-          "Liechtenstein"
-        ],
-        "correct": 2,
-        "fact": "Vatican City is only about 0.17 square miles — roughly the size of a golf course!"
-      },
-      {
-        "question": "Which African country changed its official name to 'eSwatini' in 2018?",
-        "options": [
-          "Lesotho",
-          "Swaziland",
-          "Malawi",
-          "Botswana"
-        ],
-        "correct": 1,
-        "fact": "King Mswati III renamed Swaziland to eSwatini, meaning 'land of the Swazis' in Swazi."
-      },
-      {
-        "question": "In March 2026, which megacity is facing critical water shortage headlines again due to record low reservoir levels?",
-        "options": [
-          "Mexico City",
-          "Cairo",
-          "Cape Town",
-          "Mumbai"
-        ],
-        "correct": 0,
-        "fact": "Mexico City's aquifer is depleting rapidly, and the city sinks up to 20 inches per year!"
-      },
-      {
-        "question": "Which capital city sits on two continents?",
-        "options": [
-          "Cairo",
-          "Moscow",
-          "Istanbul",
-          "Athens"
-        ],
-        "correct": 2,
-        "fact": "Istanbul straddles Europe and Asia across the Bosphorus Strait — though it's not Turkey's capital!"
-      },
-      {
-        "question": "What is the longest river in Asia?",
-        "options": [
-          "Mekong",
-          "Ganges",
-          "Yellow River",
-          "Yangtze"
-        ],
-        "correct": 3,
-        "fact": "The Yangtze stretches about 3,917 miles and is the third-longest river on Earth!"
-      },
-      {
-        "question": "Which country contains the geographic point farthest from the center of the Earth?",
-        "options": [
-          "Nepal",
-          "Ecuador",
-          "Tanzania",
-          "China"
-        ],
-        "correct": 1,
-        "fact": "Mount Chimborazo in Ecuador beats Everest because Earth bulges at the equator!"
-      },
-      {
-        "question": "How many countries does the Danube River flow through?",
-        "options": [
-          "6",
-          "8",
-          "10",
-          "12"
-        ],
-        "correct": 2,
-        "fact": "The Danube passes through 10 countries — more than any other river in the world!"
-      },
-      {
-        "question": "Which desert is the largest hot desert on Earth?",
-        "options": [
-          "Arabian Desert",
-          "Gobi Desert",
-          "Sahara Desert",
-          "Kalahari Desert"
-        ],
-        "correct": 2,
-        "fact": "The Sahara is roughly the same size as the entire United States, covering 3.6 million square miles!"
-      },
-      {
-        "question": "The island of Borneo is shared by three countries. Which of these is NOT one of them?",
-        "options": [
-          "Malaysia",
-          "Indonesia",
-          "Brunei",
-          "Philippines"
-        ],
-        "correct": 3,
-        "fact": "Borneo is divided among Malaysia, Indonesia, and tiny Brunei — making it uniquely tri-national!"
-      }
-    ],
-    "sports": [
-      {
-        "question": "How many players are on a standard soccer (football) team on the field at one time?",
-        "options": [
-          "9",
-          "10",
-          "11",
-          "12"
-        ],
-        "correct": 2,
-        "fact": "Each team fields 11 players including the goalkeeper, for 22 total players on the pitch!"
-      },
-      {
-        "question": "Which country has won the most FIFA World Cup titles as of 2026?",
-        "options": [
-          "Germany",
-          "Argentina",
-          "Italy",
-          "Brazil"
-        ],
-        "correct": 3,
-        "fact": "Brazil has won the World Cup five times (1958, 1962, 1970, 1994, 2002) — more than any other nation!"
-      },
-      {
-        "question": "In basketball, how many points is a shot made from beyond the arc worth?",
-        "options": [
-          "1",
-          "2",
-          "3",
-          "4"
-        ],
-        "correct": 2,
-        "fact": "The three-point line was introduced to the NBA in 1979 and completely transformed the game's strategy!"
-      },
-      {
-        "question": "With the 2026 FIFA World Cup expanding this summer, how many teams will compete in the tournament for the first time?",
-        "options": [
-          "32 teams",
-          "36 teams",
-          "40 teams",
-          "48 teams"
-        ],
-        "correct": 3,
-        "fact": "The 2026 World Cup will be the first with 48 teams, up from 32 — the biggest expansion in tournament history!"
-      },
-      {
-        "question": "Which tennis player holds the record for the most Grand Slam men's singles titles?",
-        "options": [
-          "Roger Federer",
-          "Rafael Nadal",
-          "Novak Djokovic",
-          "Pete Sampras"
-        ],
-        "correct": 2,
-        "fact": "Novak Djokovic surpassed both Federer and Nadal with 24 Grand Slam singles titles — an incredible feat!"
-      },
-      {
-        "question": "What is the only sport to have been played on the Moon?",
-        "options": [
-          "Baseball",
-          "Golf",
-          "Cricket",
-          "Tennis"
-        ],
-        "correct": 1,
-        "fact": "Astronaut Alan Shepard hit two golf balls on the Moon during the Apollo 14 mission in 1971!"
-      },
-      {
-        "question": "In March Madness 2026, how many teams compete in the NCAA Division I Men's Basketball Tournament?",
-        "options": [
-          "32",
-          "48",
-          "64",
-          "68"
-        ],
-        "correct": 3,
-        "fact": "Since 2011, the tournament has featured 68 teams including four 'First Four' play-in games!"
-      },
-      {
-        "question": "Which boxer was known as 'The Greatest' and famously said 'Float like a butterfly, sting like a bee'?",
-        "options": [
-          "Mike Tyson",
-          "Muhammad Ali",
-          "Joe Frazier",
-          "Sugar Ray Leonard"
-        ],
-        "correct": 1,
-        "fact": "Muhammad Ali won Olympic gold at age 18 and became the first fighter to win the heavyweight title three times!"
-      },
-      {
-        "question": "In cricket, what is a score of zero by a batsman called?",
-        "options": [
-          "Nil",
-          "Duck",
-          "Goose",
-          "Blank"
-        ],
-        "correct": 1,
-        "fact": "The term 'duck' comes from 'duck's egg' — because a zero on the scoreboard looks like an egg!"
-      },
-      {
-        "question": "Which Olympic sport involves performing routines on a 10-centimeter-wide apparatus raised 125 cm off the ground?",
-        "options": [
-          "Vault",
-          "Balance Beam",
-          "Uneven Bars",
-          "Pommel Horse"
-        ],
-        "correct": 1,
-        "fact": "The balance beam is only 4 inches wide — roughly the width of a smartphone — yet gymnasts do flips on it!"
-      }
-    ],
-    "food": [
-      {
-        "question": "What common spice comes from the dried stigmas of a flower and is worth more by weight than gold?",
-        "options": [
-          "Turmeric",
-          "Saffron",
-          "Paprika",
-          "Cardamom"
-        ],
-        "correct": 1,
-        "fact": "It takes about 75,000 crocus flowers to produce just one pound of saffron!"
-      },
-      {
-        "question": "Which country is the world's largest producer of coffee?",
-        "options": [
-          "Colombia",
-          "Vietnam",
+          "Somalia",
           "Ethiopia",
-          "Brazil"
+          "Eritrea",
+          "Djibouti"
         ],
-        "correct": 3,
-        "fact": "Brazil has been the world's top coffee producer for over 150 years, growing about a third of all coffee."
+        "correct": 1,
+        "fact": "The Danakil Depression averages 34°C annually and drops to 125 meters below sea level.",
+        "_subtopic": "African Geography"
       },
       {
-        "question": "What type of pasta's name literally translates to 'little worms' in Italian?",
+        "question": "True or False: Lake Chad, once one of Africa's largest lakes, has shrunk by roughly 90% since the 1960s.",
         "options": [
-          "Vermicelli",
-          "Linguine",
-          "Penne",
-          "Farfalle"
+          "True",
+          "False",
+          "It grew by 50%",
+          "It completely dried up in 2010"
         ],
         "correct": 0,
-        "fact": "Vermicelli comes from 'verme,' meaning worm — a delicious name for a beloved pasta!"
+        "fact": "Lake Chad shrank from 25,000 km² to under 2,500 km², affecting 30 million people across four nations.",
+        "_subtopic": "African Geography"
       },
       {
-        "question": "In March 2026, the World's 50 Best Restaurants list preparation is underway. Which city hosted the inaugural 2002 awards ceremony?",
+        "question": "In 2025, which African nation officially opened the Grand Ethiopian Renaissance Dam's final turbines after years of dispute?",
         "options": [
-          "Paris",
-          "New York",
-          "London",
-          "Tokyo"
+          "Sudan",
+          "Egypt",
+          "Ethiopia",
+          "South Sudan"
         ],
         "correct": 2,
-        "fact": "The awards began at a London ceremony organized by Restaurant magazine and have grown into a global event."
+        "fact": "The GERD is Africa's largest hydroelectric dam, generating 5,150 MW on the Blue Nile.",
+        "_subtopic": "African Geography"
       },
       {
-        "question": "What is the primary ingredient in traditional Japanese miso paste?",
+        "question": "What is the only African capital city that sits directly on the Equator's latitude at 0°?",
         "options": [
-          "Rice",
-          "Soybeans",
-          "Seaweed",
-          "Wheat"
+          "Kampala, Uganda",
+          "Libreville, Gabon",
+          "Nairobi, Kenya",
+          "São Tomé, São Tomé and Príncipe"
+        ],
+        "correct": 0,
+        "fact": "Kampala sits just 0.3° north of the Equator—closer than any other African capital city.",
+        "_subtopic": "African Geography"
+      },
+      {
+        "question": "Which desert holds the record for the highest reliably recorded air temperature on Earth at 56.7°C (134°F)?",
+        "options": [
+          "Sahara Desert",
+          "Mojave Desert",
+          "Lut Desert",
+          "Arabian Desert"
         ],
         "correct": 1,
-        "fact": "Miso is made by fermenting soybeans with salt and koji mold, sometimes for years!"
+        "fact": "Death Valley in the Mojave hit 56.7°C in 1913—though some scientists still debate its accuracy.",
+        "_subtopic": "Deserts & Extreme Climates"
       },
       {
-        "question": "Which fruit is known as 'the king of fruits' in Southeast Asia despite its notoriously strong smell?",
+        "question": "The Atacama Desert receives so little rainfall that NASA uses it to test what?",
         "options": [
-          "Jackfruit",
-          "Mangosteen",
-          "Durian",
-          "Rambutan"
-        ],
-        "correct": 2,
-        "fact": "Durian is banned from many hotels and public transport in Asia due to its overpowering odor."
-      },
-      {
-        "question": "How many standard teaspoons are in one tablespoon?",
-        "options": [
-          "2",
-          "3",
-          "4",
-          "5"
+          "Submarine technology",
+          "Mars rover instruments",
+          "Hurricane prediction models",
+          "Deep-sea drilling equipment"
         ],
         "correct": 1,
-        "fact": "This simple kitchen ratio — 3 teaspoons per tablespoon — is one of the most useful cooking facts!"
+        "fact": "Parts of the Atacama went without measurable rain for over 500 years, mimicking Martian conditions.",
+        "_subtopic": "Deserts & Extreme Climates"
       },
       {
-        "question": "What is the Japanese term for the pleasant savory taste found in foods like Parmesan cheese and soy sauce?",
+        "question": "Which cold desert is the world's largest by total area, surpassing even the Sahara?",
         "options": [
-          "Wasabi",
-          "Dashi",
-          "Umami",
-          "Ponzu"
-        ],
-        "correct": 2,
-        "fact": "Umami was identified as a fifth basic taste in 1908 by chemist Kikunae Ikeda in Tokyo."
-      },
-      {
-        "question": "With plant-based foods trending in 2026, which legume is used to make the traditional Middle Eastern dish falafel?",
-        "options": [
-          "Lentils",
-          "Black beans",
-          "Chickpeas",
-          "Kidney beans"
-        ],
-        "correct": 2,
-        "fact": "Falafel dates back centuries and has become one of the world's most popular street foods."
-      },
-      {
-        "question": "Which high-proof spirit is traditionally distilled from blue agave plants and can only be legally produced in specific regions of Mexico?",
-        "options": [
-          "Mezcal",
-          "Rum",
-          "Tequila",
-          "Pisco"
-        ],
-        "correct": 2,
-        "fact": "True tequila must be made from at least 51% blue Weber agave in designated Mexican regions."
-      }
-    ],
-    "music": [
-      {
-        "question": "What instrument does a pianist play with both hands and feet?",
-        "options": [
-          "Harpsichord",
-          "Piano",
-          "Organ",
-          "Accordion"
-        ],
-        "correct": 2,
-        "fact": "Organists use foot pedals to play bass notes, making it a full-body instrument!"
-      },
-      {
-        "question": "Which pop star is known as the 'Queen of Pop'?",
-        "options": [
-          "Whitney Houston",
-          "Madonna",
-          "Beyoncé",
-          "Lady Gaga"
+          "Gobi Desert",
+          "Antarctic Desert",
+          "Patagonian Desert",
+          "Arctic Desert"
         ],
         "correct": 1,
-        "fact": "Madonna has sold over 300 million records worldwide since her 1983 debut."
+        "fact": "Antarctica's polar desert covers 14.2 million km², nearly double the Sahara's 9.2 million km².",
+        "_subtopic": "Deserts & Extreme Climates"
       },
       {
-        "question": "How many strings does a standard guitar have?",
+        "question": "How many countries does the Mekong River flow through before reaching the South China Sea?",
         "options": [
           "4",
           "5",
           "6",
+          "7"
+        ],
+        "correct": 2,
+        "fact": "The Mekong flows through China, Myanmar, Laos, Thailand, Cambodia, and Vietnam—six nations total.",
+        "_subtopic": "Asian Geography"
+      },
+      {
+        "question": "Which Asian island is split between three countries: Indonesia, Malaysia, and Brunei?",
+        "options": [
+          "Sumatra",
+          "Java",
+          "Borneo",
+          "Sulawesi"
+        ],
+        "correct": 2,
+        "fact": "Borneo is the world's third-largest island, and Brunei occupies less than 1% of its total area.",
+        "_subtopic": "Asian Geography"
+      },
+      {
+        "question": "What is unusual about the Tonle Sap River in Cambodia compared to most rivers?",
+        "options": [
+          "It flows underground for half its length",
+          "It reverses direction seasonally",
+          "It is saltwater year-round",
+          "It freezes every winter"
+        ],
+        "correct": 1,
+        "fact": "During monsoon season, Mekong floodwaters force the Tonle Sap to reverse, expanding its lake fivefold.",
+        "_subtopic": "Asian Geography"
+      }
+    ],
+    "sports": [
+      {
+        "question": "Which Tennis Grand Slam tournament is played on a surface made of crushed brick?",
+        "options": [
+          "Australian Open",
+          "French Open",
+          "Wimbledon",
+          "US Open"
+        ],
+        "correct": 1,
+        "fact": "Roland Garros uses crushed white limestone topped with crushed red brick, not actual clay soil.",
+        "_subtopic": "Tennis Grand Slams"
+      },
+      {
+        "question": "Who was the last man to win the Calendar Year Grand Slam in tennis?",
+        "options": [
+          "Roger Federer",
+          "Rod Laver",
+          "Novak Djokovic",
+          "Rafael Nadal"
+        ],
+        "correct": 1,
+        "fact": "Rod Laver achieved this feat twice (1962 and 1969) — no man has done it since.",
+        "_subtopic": "Tennis Grand Slams"
+      },
+      {
+        "question": "At the 2025 Australian Open, which player won his record-extending 25th Grand Slam singles title?",
+        "options": [
+          "Carlos Alcaraz",
+          "Novak Djokovic",
+          "Jannik Sinner",
+          "Daniil Medvedev"
+        ],
+        "correct": 2,
+        "fact": "Jannik Sinner defended his Australian Open title in January 2025, cementing his rise to dominance.",
+        "_subtopic": "Tennis Grand Slams"
+      },
+      {
+        "question": "True or False: The US Open was the first Grand Slam tournament to use a tiebreak system.",
+        "options": [
+          "True",
+          "False",
+          "Only in doubles",
+          "Only in women's singles"
+        ],
+        "correct": 0,
+        "fact": "The US Open introduced the tiebreak in 1970, decades before the other Slams fully adopted it.",
+        "_subtopic": "Tennis Grand Slams"
+      },
+      {
+        "question": "Which NBA player holds the record for most points scored in a single game?",
+        "options": [
+          "Michael Jordan",
+          "Kobe Bryant",
+          "Wilt Chamberlain",
+          "LeBron James"
+        ],
+        "correct": 2,
+        "fact": "Wilt Chamberlain scored 100 points on March 2, 1962 — no official video footage exists of the game.",
+        "_subtopic": "NBA Basketball"
+      },
+      {
+        "question": "How many NBA teams have never won a championship as of the 2024-25 season?",
+        "options": [
+          "8",
+          "10",
+          "11",
+          "13"
+        ],
+        "correct": 2,
+        "fact": "Eleven franchises including the Suns, Jazz, and Pacers have never won an NBA title.",
+        "_subtopic": "NBA Basketball"
+      },
+      {
+        "question": "Which NBA player became the first to record a triple-double in points, rebounds, and blocks?",
+        "options": [
+          "Hakeem Olajuwon",
+          "Alvin Robertson",
+          "Kareem Abdul-Jabbar",
+          "Bill Walton"
+        ],
+        "correct": 0,
+        "fact": "Hakeem Olajuwon achieved this rare feat multiple times — he's the all-time leader in blocks.",
+        "_subtopic": "NBA Basketball"
+      },
+      {
+        "question": "Who became the first athlete to run a sub-two-hour marathon in an official competition?",
+        "options": [
+          "Eliud Kipchoge",
+          "Kelvin Kiptum",
+          "Kenenisa Bekele",
+          "Dennis Kimetto"
+        ],
+        "correct": 1,
+        "fact": "Kelvin Kiptum ran 2:00:35 in Chicago 2023; Kipchoge's sub-2 in Vienna was unofficial and pace-assisted.",
+        "_subtopic": "Sports Records & Firsts"
+      },
+      {
+        "question": "Which sport saw the first known use of instant video replay to assist officials?",
+        "options": [
+          "American Football",
+          "Cricket",
+          "Ice Hockey",
+          "Tennis"
+        ],
+        "correct": 2,
+        "fact": "The NHL tested video replay for disputed goals in 1991, years before the NFL formally adopted it.",
+        "_subtopic": "Sports Records & Firsts"
+      },
+      {
+        "question": "Who was the first female jockey to win the Kentucky Derby?",
+        "options": [
+          "Julie Krone",
+          "Rosie Napravnik",
+          "No female jockey has won",
+          "Chantal Sutherland"
+        ],
+        "correct": 2,
+        "fact": "Despite over 150 runnings, no female jockey has ever won the Kentucky Derby as of early 2026.",
+        "_subtopic": "Sports Records & Firsts"
+      }
+    ],
+    "food": [
+      {
+        "question": "Which Italian pasta shape's name literally translates to 'little worms'?",
+        "options": [
+          "Vermicelli",
+          "Capellini",
+          "Linguine",
+          "Bucatini"
+        ],
+        "correct": 0,
+        "fact": "Vermicelli comes from 'verme' meaning worm — an unappetizing origin for a beloved pasta.",
+        "_subtopic": "Italian Cuisine"
+      },
+      {
+        "question": "In traditional Italian cuisine, what ingredient is strictly forbidden in a genuine carbonara sauce?",
+        "options": [
+          "Egg yolks",
+          "Cream",
+          "Pecorino Romano",
+          "Guanciale"
+        ],
+        "correct": 1,
+        "fact": "Adding cream to carbonara is considered culinary heresy in Rome — the creaminess comes entirely from eggs and cheese.",
+        "_subtopic": "Italian Cuisine"
+      },
+      {
+        "question": "Which Italian region unexpectedly became UNESCO-recognized in 2025 for its ancient sourdough bread-making traditions?",
+        "options": [
+          "Tuscany",
+          "Puglia",
+          "Sardinia",
+          "Basilicata"
+        ],
+        "correct": 2,
+        "fact": "Sardinia's 'pane carasau' tradition dates back over 3,000 years to the Nuragic civilization.",
+        "_subtopic": "Italian Cuisine"
+      },
+      {
+        "question": "True or False: The Italian dish 'puttanesca' was originally invented in Naples as a quick meal for time-pressed customers.",
+        "options": [
+          "True — invented in Naples",
+          "False — invented in Rome",
+          "False — invented in Sicily",
+          "False — invented in Ischia"
+        ],
+        "correct": 3,
+        "fact": "Many food historians trace puttanesca to the island of Ischia in the 1950s, not mainland Naples.",
+        "_subtopic": "Italian Cuisine"
+      },
+      {
+        "question": "What is 'bloom' on chocolate?",
+        "options": [
+          "Mold growth from moisture",
+          "White streaks from fat or sugar crystallization",
+          "A flavor enhancement technique",
+          "The first stage of tempering"
+        ],
+        "correct": 1,
+        "fact": "Bloom looks unappetizing but is completely safe to eat — it's just cocoa butter migrating to the surface.",
+        "_subtopic": "Chocolate & Sweets"
+      },
+      {
+        "question": "Which country consumes the most chocolate per capita, averaging over 8 kg per person annually?",
+        "options": [
+          "Belgium",
+          "Switzerland",
+          "Germany",
+          "United States"
+        ],
+        "correct": 1,
+        "fact": "Swiss people eat roughly 8.8 kg of chocolate per person yearly — nearly one small bar every single day.",
+        "_subtopic": "Chocolate & Sweets"
+      },
+      {
+        "question": "How many cacao beans does it take to produce approximately one pound of chocolate?",
+        "options": [
+          "About 50",
+          "About 150",
+          "About 400",
+          "About 800"
+        ],
+        "correct": 2,
+        "fact": "A single cacao tree produces only enough beans for about 2 pounds of chocolate per year.",
+        "_subtopic": "Chocolate & Sweets"
+      },
+      {
+        "question": "What is the traditional British dessert 'Eton Mess' primarily made from?",
+        "options": [
+          "Sponge cake, custard, and jam",
+          "Meringue, cream, and strawberries",
+          "Bread, butter, and dried fruit",
+          "Pastry, treacle, and cream"
+        ],
+        "correct": 1,
+        "fact": "Legend claims it originated when a Labrador dog sat on a pavlova at an Eton College picnic.",
+        "_subtopic": "British Cuisine"
+      },
+      {
+        "question": "Which cut of meat is traditionally used in a genuine Cornish pasty, as protected by its PGI status?",
+        "options": [
+          "Minced beef",
+          "Diced beef skirt",
+          "Lamb shoulder",
+          "Pork loin"
+        ],
+        "correct": 1,
+        "fact": "A real Cornish pasty must be crimped on the side, never on top — top-crimped versions are 'Devon' pasties.",
+        "_subtopic": "British Cuisine"
+      },
+      {
+        "question": "What unusual ingredient is found in traditional British 'Stargazy Pie' from Cornwall?",
+        "options": [
+          "Seaweed wrapped pastry",
+          "Fish heads poking through the crust",
+          "Live eels sealed inside",
+          "Clotted cream in the filling"
+        ],
+        "correct": 1,
+        "fact": "Pilchard heads protrude through the pastry so their oils drip back into the pie during baking.",
+        "_subtopic": "British Cuisine"
+      }
+    ],
+    "music": [
+      {
+        "question": "Which opera features a character who freezes to death in a Parisian garret, inspiring the musical 'Rent'?",
+        "options": [
+          "La Traviata",
+          "La Bohème",
+          "Tosca",
+          "Madama Butterfly"
+        ],
+        "correct": 1,
+        "fact": "Puccini's Mimì dies of tuberculosis in the cold, directly inspiring Jonathan Larson's modern retelling.",
+        "_subtopic": "Opera & Classical"
+      },
+      {
+        "question": "In 2025, which legendary soprano made headlines by announcing her final farewell tour at age 59?",
+        "options": [
+          "Anna Netrebko",
+          "Renée Fleming",
+          "Diana Damrau",
+          "Angela Gheorghiu"
+        ],
+        "correct": 1,
+        "fact": "Renée Fleming's farewell operatic appearances drew massive crowds, though she continues non-opera concerts.",
+        "_subtopic": "Opera & Classical"
+      },
+      {
+        "question": "True or False: Mozart's opera 'The Marriage of Figaro' was temporarily banned in Vienna before its premiere.",
+        "options": [
+          "True — the play it was based on was banned",
+          "False — it was always welcomed",
+          "True — Mozart was personally exiled",
+          "False — only banned in Paris"
+        ],
+        "correct": 0,
+        "fact": "Beaumarchais' original play was banned by Emperor Joseph II, but he allowed Mozart's operatic adaptation.",
+        "_subtopic": "Opera & Classical"
+      },
+      {
+        "question": "Which composer wrote over 100 symphonies, earning the nickname 'Father of the Symphony'?",
+        "options": [
+          "Wolfgang Amadeus Mozart",
+          "Joseph Haydn",
+          "Antonio Salieri",
+          "Carl Philipp Emanuel Bach"
+        ],
+        "correct": 1,
+        "fact": "Haydn wrote 104 numbered symphonies — more than Mozart, Beethoven, and Brahms combined.",
+        "_subtopic": "Opera & Classical"
+      },
+      {
+        "question": "Which Beatles song was the first to feature only one Beatle performing, with no other band members present?",
+        "options": [
+          "Yesterday",
+          "Blackbird",
+          "Eleanor Rigby",
+          "The Ballad of John and Yoko"
+        ],
+        "correct": 0,
+        "fact": "Paul McCartney recorded 'Yesterday' completely solo with a string quartet — no other Beatles played.",
+        "_subtopic": "The Beatles Era"
+      },
+      {
+        "question": "What was the working title of 'Yesterday' before Paul McCartney wrote the final lyrics?",
+        "options": [
+          "Scrambled Eggs",
+          "Bacon Strips",
+          "Morning Song",
+          "Ham and Cheese"
+        ],
+        "correct": 0,
+        "fact": "McCartney sang 'Scrambled eggs, oh my baby how I love your legs' as a placeholder for months.",
+        "_subtopic": "The Beatles Era"
+      },
+      {
+        "question": "Which Beatles album was the first major pop record to include a continuous sequence with no gaps between songs?",
+        "options": [
+          "Revolver",
+          "Abbey Road",
+          "Sgt. Pepper's Lonely Hearts Club Band",
+          "The White Album"
+        ],
+        "correct": 2,
+        "fact": "Sgt. Pepper's crossfaded tracks were revolutionary — the concept album format changed recording history forever.",
+        "_subtopic": "The Beatles Era"
+      },
+      {
+        "question": "Who ghostwrote the massive 1984 hit 'Ghostbusters' in just two days after initially refusing the project?",
+        "options": [
+          "Prince",
+          "Ray Parker Jr.",
+          "Huey Lewis",
+          "Stevie Wonder"
+        ],
+        "correct": 1,
+        "fact": "Ray Parker Jr. was sued by Huey Lewis for similarities to 'I Want a New Drug' — they settled privately.",
+        "_subtopic": "80s Pop Icons"
+      },
+      {
+        "question": "Which 80s pop icon holds the record for the most consecutive top-five Billboard Hot 100 hits by a female artist?",
+        "options": [
+          "Whitney Houston",
+          "Madonna",
+          "Janet Jackson",
+          "Cyndi Lauper"
+        ],
+        "correct": 1,
+        "fact": "Madonna placed her first 17 singles in the top five — a streak unmatched by any solo female artist.",
+        "_subtopic": "80s Pop Icons"
+      },
+      {
+        "question": "How many instruments did Prince play on his debut album 'For You' (1978)?",
+        "options": [
+          "13",
+          "27",
+          "19",
           "8"
         ],
-        "correct": 2,
-        "fact": "The six strings are traditionally tuned to E-A-D-G-B-E from lowest to highest."
-      },
-      {
-        "question": "Which legendary musician was famously left-handed and played a right-handed guitar flipped upside down?",
-        "options": [
-          "Eric Clapton",
-          "Jimi Hendrix",
-          "Chuck Berry",
-          "B.B. King"
-        ],
         "correct": 1,
-        "fact": "Hendrix restrung right-handed Fender Stratocasters, creating his iconic reversed headstock look."
-      },
-      {
-        "question": "In music terminology, what does 'fortissimo' mean?",
-        "options": [
-          "Very slow",
-          "Very fast",
-          "Very loud",
-          "Very soft"
-        ],
-        "correct": 2,
-        "fact": "Fortissimo (ff) comes from Italian, where 'forte' means strong and the suffix intensifies it."
-      },
-      {
-        "question": "Which country is the birthplace of reggae music?",
-        "options": [
-          "Cuba",
-          "Trinidad and Tobago",
-          "Jamaica",
-          "Brazil"
-        ],
-        "correct": 2,
-        "fact": "Reggae emerged in Jamaica in the late 1960s, with Bob Marley becoming its global ambassador."
-      },
-      {
-        "question": "The theremin, one of the earliest electronic instruments, is unique because the player does what?",
-        "options": [
-          "Blows into it",
-          "Never physically touches it",
-          "Strikes it with mallets",
-          "Shakes it rhythmically"
-        ],
-        "correct": 1,
-        "fact": "Invented in 1920, the theremin is played by moving hands near two metal antennas."
-      },
-      {
-        "question": "As of March 2026, which K-pop group's members are reuniting after completing their mandatory South Korean military service?",
-        "options": [
-          "BLACKPINK",
-          "BTS",
-          "EXO",
-          "TWICE"
-        ],
-        "correct": 1,
-        "fact": "BTS members enlisted between 2022-2023, with the group planning their highly anticipated reunion in 2025-2026."
-      },
-      {
-        "question": "What is the lowest female singing voice classification in opera?",
-        "options": [
-          "Soprano",
-          "Mezzo-soprano",
-          "Contralto",
-          "Tenor"
-        ],
-        "correct": 2,
-        "fact": "True contraltos are extremely rare — Marian Anderson and Kathleen Ferrier were famous examples."
-      },
-      {
-        "question": "Which composer wrote 'The Rite of Spring,' a piece so controversial it caused a near-riot at its 1913 premiere?",
-        "options": [
-          "Claude Debussy",
-          "Igor Stravinsky",
-          "Sergei Rachmaninoff",
-          "Maurice Ravel"
-        ],
-        "correct": 1,
-        "fact": "The audience at Paris's Théâtre des Champs-Élysées reportedly threw objects and fistfights broke out!"
+        "fact": "Prince played all 27 instruments and sang every vocal on 'For You' — he was just 19 years old.",
+        "_subtopic": "80s Pop Icons"
       }
     ],
     "technology": [
       {
-        "question": "What does 'HTTP' stand for in a website address?",
+        "question": "Which 1993 video game was secretly developed under the codename 'Bullfrog' to prevent leaks about its controversial content?",
         "options": [
-          "HyperText Transfer Protocol",
-          "High Tech Transfer Program",
-          "HyperText Transmission Process",
-          "Home Tool Transfer Protocol"
-        ],
-        "correct": 0,
-        "fact": "HTTP was invented by Tim Berners-Lee in 1989 as part of his proposal for the World Wide Web!"
-      },
-      {
-        "question": "How many bits are in a single byte?",
-        "options": [
-          "4",
-          "8",
-          "16",
-          "12"
+          "Mortal Kombat II",
+          "Doom",
+          "Syndicate",
+          "Myst"
         ],
         "correct": 1,
-        "fact": "The 8-bit byte was standardized by IBM in the 1960s and became the universal building block of computing!"
+        "fact": "id Software used minimal codenames, but Doom's development was so secretive that early builds were shared only via private FTP.",
+        "_subtopic": "Video Game History"
       },
       {
-        "question": "Which programming language was originally called 'Oak' before being renamed?",
+        "question": "True or False: The original 1980 Pac-Man arcade game has a kill screen at level 256 caused by an integer overflow.",
         "options": [
-          "Python",
+          "True — it's an 8-bit overflow",
+          "False — it loops endlessly",
+          "True — but at level 255",
+          "False — it crashes at level 128"
+        ],
+        "correct": 0,
+        "fact": "The 8-bit level counter overflows at 256, corrupting half the screen with random symbols and making it unbeatable.",
+        "_subtopic": "Video Game History"
+      },
+      {
+        "question": "Which classic console's launch title 'Altered Beast' was eventually replaced as the pack-in game by Sonic the Hedgehog?",
+        "options": [
+          "Super Nintendo",
+          "Sega Genesis",
+          "TurboGrafx-16",
+          "Neo Geo"
+        ],
+        "correct": 1,
+        "fact": "Altered Beast shipped with every Genesis from 1989 until Sonic replaced it in 1991, transforming Sega's brand identity.",
+        "_subtopic": "Video Game History"
+      },
+      {
+        "question": "In early 2026, which retro gaming company officially released a new cartridge-based game for the Nintendo 64 through a licensed revival program?",
+        "options": [
+          "Retro-Bit",
+          "Limited Run Games",
+          "Analogue",
+          "Hyperkin"
+        ],
+        "correct": 1,
+        "fact": "Limited Run Games has pushed boundaries by producing brand-new physical cartridges for long-discontinued consoles.",
+        "_subtopic": "Video Game History"
+      },
+      {
+        "question": "What was the name of the first humanoid robot to be sent to space, arriving at the International Space Station in 2011?",
+        "options": [
+          "ASIMO",
+          "Robonaut 2",
+          "Atlas",
+          "CIMON"
+        ],
+        "correct": 1,
+        "fact": "Robonaut 2, built by NASA and GM, had no legs initially — they were added two years later in orbit.",
+        "_subtopic": "Robotics & Automation"
+      },
+      {
+        "question": "Which country operates the most industrial robots per 10,000 manufacturing workers, surpassing even Japan and Germany?",
+        "options": [
+          "China",
+          "South Korea",
+          "Singapore",
+          "United States"
+        ],
+        "correct": 1,
+        "fact": "South Korea has over 1,000 robots per 10,000 workers — nearly ten times the global average density.",
+        "_subtopic": "Robotics & Automation"
+      },
+      {
+        "question": "The 'uncanny valley' concept in robotics was originally proposed in 1970 by a researcher from which country?",
+        "options": [
+          "United States",
+          "Germany",
+          "Japan",
+          "South Korea"
+        ],
+        "correct": 2,
+        "fact": "Masahiro Mori coined 'bukimi no tani' (uncanny valley) — he was still alive at 97 when his idea became mainstream AI discourse.",
+        "_subtopic": "Robotics & Automation"
+      },
+      {
+        "question": "Which programming language, created in 1995, was originally called 'Mocha' during its ten-day development period?",
+        "options": [
           "Java",
-          "C++",
-          "Ruby"
+          "JavaScript",
+          "Ruby",
+          "PHP"
         ],
         "correct": 1,
-        "fact": "Java was renamed because 'Oak' was already trademarked — the new name was inspired by Java coffee!"
+        "fact": "Brendan Eich created JavaScript in just 10 days — it was renamed from Mocha to LiveScript before becoming JavaScript.",
+        "_subtopic": "Programming Languages"
       },
       {
-        "question": "In March 2026, which company's AI assistant has sparked debate after reportedly passing a Turing Test in a peer-reviewed study?",
+        "question": "How many times has Python's major version number changed since its initial release in 1991?",
         "options": [
-          "Google DeepMind",
-          "OpenAI",
-          "Anthropic",
-          "Meta AI"
+          "Once",
+          "Twice",
+          "Three times",
+          "Four times"
         ],
         "correct": 1,
-        "fact": "The validity of modern Turing Tests remains hotly debated, as the original 1950 test had very different criteria!"
+        "fact": "Python went from 1.x to 2.0 in 2000 and to 3.0 in 2008 — the Python 2 to 3 migration took the community over a decade.",
+        "_subtopic": "Programming Languages"
       },
       {
-        "question": "What was the first commercially successful smartphone with a capacitive touchscreen?",
+        "question": "Which programming language introduced the concept of 'borrow checking' to enforce memory safety without garbage collection?",
         "options": [
-          "Samsung Galaxy S",
-          "BlackBerry Storm",
-          "iPhone",
-          "HTC Dream"
+          "Go",
+          "Swift",
+          "Rust",
+          "Zig"
         ],
         "correct": 2,
-        "fact": "The original iPhone in 2007 revolutionized phones — Steve Jobs famously mocked styluses during its launch!"
-      },
-      {
-        "question": "What does the acronym 'GPU' stand for?",
-        "options": [
-          "General Processing Unit",
-          "Graphics Performance Utility",
-          "Graphics Processing Unit",
-          "Global Power Unit"
-        ],
-        "correct": 2,
-        "fact": "GPUs were designed for rendering graphics but now power most AI training — NVIDIA's stock soared because of this!"
-      },
-      {
-        "question": "Which scientist is considered the father of modern computer science and proposed a theoretical computing machine in 1936?",
-        "options": [
-          "John von Neumann",
-          "Alan Turing",
-          "Charles Babbage",
-          "Claude Shannon"
-        ],
-        "correct": 1,
-        "fact": "Turing's theoretical machine could simulate any algorithm — and he was only 24 when he conceived it!"
-      },
-      {
-        "question": "In computing, what does 'DNS' translate domain names into?",
-        "options": [
-          "MAC addresses",
-          "IP addresses",
-          "Port numbers",
-          "Binary code"
-        ],
-        "correct": 1,
-        "fact": "DNS is often called the 'phone book of the internet' — it handles trillions of lookups every day!"
-      },
-      {
-        "question": "What is the maximum number of devices that can theoretically be assigned unique IPv6 addresses?",
-        "options": [
-          "About 4.3 billion",
-          "About 340 undecillion (3.4×10³⁸)",
-          "About 1 trillion",
-          "About 16 million"
-        ],
-        "correct": 1,
-        "fact": "IPv6 can assign an address to every atom on Earth's surface — and still have addresses left over!"
-      },
-      {
-        "question": "With quantum computing advancing in early 2026, what term describes a quantum bit that can be both 0 and 1 simultaneously?",
-        "options": [
-          "Superposition",
-          "Entanglement",
-          "Quantum tunneling",
-          "Decoherence"
-        ],
-        "correct": 0,
-        "fact": "Superposition collapses the moment you measure a qubit — Schrödinger's famous cat illustrates this bizarre principle!"
+        "fact": "Rust's borrow checker catches memory errors at compile time, which is why the Linux kernel began adopting Rust in 2022.",
+        "_subtopic": "Programming Languages"
       }
     ],
     "nature": [
       {
-        "question": "How many noses does a slug have?",
+        "question": "Which bird of prey can spot a rabbit from over two miles away, thanks to vision roughly 8 times sharper than a human's?",
         "options": [
-          "1",
-          "2",
-          "4",
-          "6"
-        ],
-        "correct": 2,
-        "fact": "Slugs have four noses — two for seeing/feeling and two tentacles specifically for smelling!"
-      },
-      {
-        "question": "Which animal has the highest blood pressure of any living creature?",
-        "options": [
-          "Elephant",
-          "Giraffe",
-          "Blue Whale",
-          "Gorilla"
+          "Bald Eagle",
+          "Golden Eagle",
+          "Red-tailed Hawk",
+          "Peregrine Falcon"
         ],
         "correct": 1,
-        "fact": "Giraffes need extremely high blood pressure to pump blood up their long necks to their brains!"
+        "fact": "Golden eagles have over a million photoreceptors per square millimeter in their retinas—far exceeding humans.",
+        "_subtopic": "Birds of Prey"
       },
       {
-        "question": "What is the largest living organism on Earth by area?",
-        "options": [
-          "Blue Whale",
-          "Giant Sequoia",
-          "A honey fungus in Oregon",
-          "Great Barrier Reef"
-        ],
-        "correct": 2,
-        "fact": "The Armillaria ostoyae fungus in Oregon spans over 2,385 acres — roughly 1,665 football fields!"
-      },
-      {
-        "question": "Which bird can fly backward?",
-        "options": [
-          "Hummingbird",
-          "Kingfisher",
-          "Swift",
-          "Woodpecker"
-        ],
-        "correct": 0,
-        "fact": "Hummingbirds are the only birds that can sustain true backward flight thanks to rotating wing joints!"
-      },
-      {
-        "question": "In March 2026, conservationists celebrated as the population of which critically endangered species passed 1,000 in the wild for the first time in decades?",
-        "options": [
-          "Mountain Gorilla",
-          "Amur Leopard",
-          "Sumatran Rhino",
-          "Vaquita"
-        ],
-        "correct": 0,
-        "fact": "Mountain gorillas are a rare conservation success story, rebounding from just 620 individuals in 1989!"
-      },
-      {
-        "question": "What percentage of the Earth's water is freshwater?",
-        "options": [
-          "About 3%",
-          "About 10%",
-          "About 25%",
-          "About 50%"
-        ],
-        "correct": 0,
-        "fact": "Only about 3% of Earth's water is fresh, and most of that is locked in glaciers and ice caps!"
-      },
-      {
-        "question": "Which sea creature has three hearts AND the ability to regenerate lost limbs?",
-        "options": [
-          "Octopus",
-          "Starfish",
-          "Sea Cucumber",
-          "Nautilus"
-        ],
-        "correct": 0,
-        "fact": "Octopuses have three hearts, and some species can regrow severed tentacles completely!"
-      },
-      {
-        "question": "True or False: A group of porcupines is called a 'prickle.'",
+        "question": "True or False: The Secretary Bird kills its prey primarily by stomping, delivering kicks with a force five times its own body weight.",
         "options": [
           "True",
-          "False — it's called a 'spike'",
-          "False — it's called a 'quill'",
-          "False — it's called a 'thorn'"
+          "False",
+          "True, but only twice its body weight",
+          "True, but it primarily uses its beak"
         ],
         "correct": 0,
-        "fact": "A prickle of porcupines is one of the most perfectly named animal groups in the English language!"
+        "fact": "Secretary birds can deliver kicks in just 15 milliseconds—faster than the blink of a human eye.",
+        "_subtopic": "Birds of Prey"
       },
       {
-        "question": "Which plant can grow up to 35 inches in a single day?",
+        "question": "In 2025, conservationists celebrated the first wild breeding success in England of which reintroduced raptor after nearly 200 years?",
         "options": [
-          "Kudzu vine",
-          "Giant bamboo",
-          "Giant kelp",
-          "Sunflower"
+          "White-tailed Eagle",
+          "Osprey",
+          "Red Kite",
+          "Golden Eagle"
         ],
-        "correct": 1,
-        "fact": "Giant bamboo holds the record as the fastest-growing plant on Earth at nearly 1.5 inches per hour!"
+        "correct": 0,
+        "fact": "White-tailed eagles were extinct in England since 1780; Isle of Wight reintroductions finally produced wild-bred chicks.",
+        "_subtopic": "Birds of Prey"
       },
       {
-        "question": "With UN World Wildlife Day 2026 focusing on ocean ecosystems, which marine animal produces over 50% of Earth's oxygen?",
+        "question": "Which owl species is known for decorating the entrance of its burrow with animal dung to attract dung beetles as prey?",
         "options": [
-          "Coral reefs",
-          "Phytoplankton",
-          "Seaweed forests",
-          "Mangrove roots"
+          "Barn Owl",
+          "Burrowing Owl",
+          "Great Horned Owl",
+          "Snowy Owl"
         ],
         "correct": 1,
-        "fact": "Tiny phytoplankton in the ocean generate more oxygen than all the world's forests combined!"
+        "fact": "Burrowing owls are among the few birds known to use tools—bait—to lure insect prey.",
+        "_subtopic": "Birds of Prey"
+      },
+      {
+        "question": "Which dog breed has a unique \"split nose\" (double nose) and was originally bred in Bolivia for jungle hunting?",
+        "options": [
+          "Catalburun",
+          "Pachón Navarro",
+          "Double-Nosed Andean Tiger Hound",
+          "Basenji"
+        ],
+        "correct": 2,
+        "fact": "The Double-Nosed Andean Tiger Hound's split nose was once thought to give it superior scent-tracking ability.",
+        "_subtopic": "Dogs & Domesticated Animals"
+      },
+      {
+        "question": "How many toes does a domestic cat have in total on all four paws (standard, non-polydactyl)?",
+        "options": [
+          "16",
+          "18",
+          "20",
+          "22"
+        ],
+        "correct": 1,
+        "fact": "Cats have 5 toes on each front paw but only 4 on each back paw, totaling 18.",
+        "_subtopic": "Dogs & Domesticated Animals"
+      },
+      {
+        "question": "What surprising ability do goats possess regarding their rectangular pupils?",
+        "options": [
+          "They can see behind themselves without turning their heads",
+          "They can see ultraviolet light",
+          "Their pupils rotate to stay horizontal even when their head tilts",
+          "They have telescopic zoom vision"
+        ],
+        "correct": 2,
+        "fact": "Goats' rectangular pupils rotate up to 50 degrees to stay level, giving them a panoramic predator-detection view.",
+        "_subtopic": "Dogs & Domesticated Animals"
+      },
+      {
+        "question": "Which fungus, found in the Chernobyl reactor, actually thrives on and grows toward ionizing radiation?",
+        "options": [
+          "Cladosporium sphaerospermum",
+          "Aspergillus niger",
+          "Ophiocordyceps sinensis",
+          "Amanita muscaria"
+        ],
+        "correct": 0,
+        "fact": "Cladosporium sphaerospermum uses melanin to convert gamma radiation into chemical energy, like a radiation-powered photosynthesis.",
+        "_subtopic": "Fungi & Microorganisms"
+      },
+      {
+        "question": "What is the largest known single organism on Earth by area, a honey fungus network in Oregon's Blue Mountains?",
+        "options": [
+          "Armillaria ostoyae",
+          "Armillaria mellea",
+          "Fomitopsis pinicola",
+          "Ganoderma lucidum"
+        ],
+        "correct": 0,
+        "fact": "This single fungal network spans roughly 2,385 acres—larger than 1,600 football fields—and is thousands of years old.",
+        "_subtopic": "Fungi & Microorganisms"
+      },
+      {
+        "question": "Which microorganism holds the record for surviving the longest in space, enduring 553 days on the exterior of the ISS?",
+        "options": [
+          "Tardigrades",
+          "Deinococcus radiodurans",
+          "Bacillus subtilis spores",
+          "Aspergillus fumigatus"
+        ],
+        "correct": 1,
+        "fact": "Deinococcus radiodurans can reassemble its own shattered DNA after extreme radiation—earning the nickname 'Conan the Bacterium.'",
+        "_subtopic": "Fungi & Microorganisms"
       }
     ],
     "film": [
       {
-        "question": "Which 1994 film features a character who says, 'Life is like a box of chocolates'?",
+        "question": "Which 2024 indie film directed by Sean Baker won the Palme d'Or at Cannes and follows a Brooklyn exotic dancer?",
         "options": [
-          "The Shawshank Redemption",
-          "Forrest Gump",
-          "Pulp Fiction",
-          "The Lion King"
+          "Anora",
+          "The Substance",
+          "All We Imagine as Light",
+          "Bird"
+        ],
+        "correct": 0,
+        "fact": "Sean Baker cast Mikey Madison after seeing her in Once Upon a Time in Hollywood's brief Manson family scenes.",
+        "_subtopic": "Independent & Arthouse Cinema"
+      },
+      {
+        "question": "In Jim Jarmusch's 'Dead Man' (1995), which musician composed the entirely improvised electric guitar soundtrack?",
+        "options": [
+          "Tom Waits",
+          "Neil Young",
+          "Iggy Pop",
+          "Jack White"
         ],
         "correct": 1,
-        "fact": "Tom Hanks improvised some of Forrest's mannerisms, and the bench scenes were filmed in Savannah, Georgia!"
+        "fact": "Neil Young recorded the score alone while watching the film, improvising every note in a single continuous session.",
+        "_subtopic": "Independent & Arthouse Cinema"
       },
       {
-        "question": "In the original 'Star Wars' trilogy, who revealed 'I am your father' to Luke Skywalker?",
+        "question": "Which silent film star performed all his own dangerous stunts, including hanging from a real clock face in 'Safety Last!' (1923)?",
         "options": [
-          "Obi-Wan Kenobi",
-          "Emperor Palpatine",
-          "Darth Vader",
-          "Yoda"
-        ],
-        "correct": 2,
-        "fact": "The line is often misquoted — the actual dialogue is 'No, I am your father,' not 'Luke, I am your father.'"
-      },
-      {
-        "question": "Which actor has won the most Academy Awards for Best Actor?",
-        "options": [
-          "Jack Nicholson",
-          "Daniel Day-Lewis",
-          "Tom Hanks",
-          "Marlon Brando"
+          "Buster Keaton",
+          "Harold Lloyd",
+          "Charlie Chaplin",
+          "Douglas Fairbanks"
         ],
         "correct": 1,
-        "fact": "Daniel Day-Lewis won three Best Actor Oscars and is famous for his extreme method acting techniques!"
+        "fact": "Harold Lloyd was missing a thumb and finger from a 1919 prop bomb accident, yet still did his own stunts.",
+        "_subtopic": "Independent & Arthouse Cinema"
       },
       {
-        "question": "With the FIFA World Cup 2026 approaching, which 2005 film follows a young woman defying cultural norms to play soccer?",
+        "question": "True or False: The original 1922 film 'Nosferatu' was almost entirely destroyed because Bram Stoker's estate won a copyright lawsuit.",
         "options": [
-          "She's the Man",
-          "Bend It Like Beckham",
-          "Goal!",
-          "Gracie"
+          "True — courts ordered all copies destroyed",
+          "False — Stoker's estate approved the film",
+          "True — but only in Germany",
+          "False — it was never challenged legally"
+        ],
+        "correct": 0,
+        "fact": "A court ruled Nosferatu illegally copied Dracula and ordered every print burned, but some copies survived abroad.",
+        "_subtopic": "Independent & Arthouse Cinema"
+      },
+      {
+        "question": "Which arthouse director's 2023 film 'Past Lives' was notably the first Best Picture nominee directed by a Korean-born woman?",
+        "options": [
+          "Celine Song",
+          "Bong Joon-ho",
+          "Greta Gerwig",
+          "Chloé Zhao"
+        ],
+        "correct": 0,
+        "fact": "Celine Song wrote Past Lives inspired by a real-life reunion with a childhood sweetheart from Seoul.",
+        "_subtopic": "Silent & Golden Era Film"
+      },
+      {
+        "question": "In the 1920 German Expressionist film 'The Cabinet of Dr. Caligari,' what distinctive visual technique defines its sets?",
+        "options": [
+          "Rear projection landscapes",
+          "Painted distorted angles and shadows",
+          "Early stop-motion miniatures",
+          "Underwater photography"
         ],
         "correct": 1,
-        "fact": "Bend It Like Beckham (actually 2002) launched Keira Knightley's career and grossed over $76 million worldwide!"
+        "fact": "The wildly tilted, hand-painted sets were designed to literally represent the twisted mind of a madman.",
+        "_subtopic": "Silent & Golden Era Film"
       },
       {
-        "question": "Which TV show, returning with new episodes in early 2026, features dragons and a battle for the Iron Throne's legacy?",
+        "question": "Which horror film's iconic scene required actress Shelley Duvall to perform the baseball bat staircase take 127 times?",
         "options": [
-          "The Witcher",
-          "House of the Dragon",
-          "Rings of Power",
-          "Wheel of Time"
+          "Psycho",
+          "The Shining",
+          "Rosemary's Baby",
+          "The Exorcist"
         ],
         "correct": 1,
-        "fact": "House of the Dragon is set about 200 years before Game of Thrones during the Targaryen civil war!"
+        "fact": "Kubrick's relentless retakes caused Duvall such stress that her hair began falling out during production.",
+        "_subtopic": "Silent & Golden Era Film"
       },
       {
-        "question": "What was the first feature-length animated film ever released?",
+        "question": "What was unusual about the marketing of 'The Blair Witch Project' (1999) that helped make it a massive hit?",
         "options": [
-          "Fantasia",
-          "Snow White and the Seven Dwarfs",
-          "Pinocchio",
-          "Bambi"
+          "It was released only on VHS",
+          "Its website claimed the footage and disappearances were real",
+          "It had no trailer at all",
+          "It was marketed as a documentary sequel"
         ],
         "correct": 1,
-        "fact": "Walt Disney mortgaged his house to fund Snow White (1937) — critics called it 'Disney's Folly' before release!"
+        "fact": "IMDb initially listed the cast as 'missing, presumed dead,' and many audiences genuinely believed it was real.",
+        "_subtopic": "Horror Films"
       },
       {
-        "question": "In 'The Silence of the Lambs,' what type of professional is Clarice Starling?",
+        "question": "Which Golden Age actress starred in 'Sunset Boulevard' (1950) and was herself a real silent film star?",
         "options": [
-          "CIA Agent",
-          "Police Detective",
-          "FBI Trainee",
-          "Forensic Scientist"
-        ],
-        "correct": 2,
-        "fact": "The film won all five major Oscars (Best Picture, Director, Actor, Actress, Screenplay) — only the third to do so!"
-      },
-      {
-        "question": "Which director is known for the 'Dollars Trilogy' of spaghetti westerns starring Clint Eastwood?",
-        "options": [
-          "Federico Fellini",
-          "Sergio Leone",
-          "Sam Peckinpah",
-          "John Ford"
+          "Bette Davis",
+          "Gloria Swanson",
+          "Joan Crawford",
+          "Norma Shearer"
         ],
         "correct": 1,
-        "fact": "Sergio Leone originally wanted Henry Fonda for the Man with No Name, but Eastwood accepted for just $15,000!"
+        "fact": "Gloria Swanson's line 'I am big — it's the pictures that got small' eerily mirrored her own career decline.",
+        "_subtopic": "Horror Films"
       },
       {
-        "question": "How many Oscar nominations did the film 'Titanic' (1997) receive?",
+        "question": "In independent cinema, the Dogme 95 manifesto — requiring handheld cameras and no artificial lighting — was co-founded by Lars von Trier and which other director?",
         "options": [
-          "11",
-          "14",
-          "10",
-          "12"
+          "Nicolas Winding Refn",
+          "Thomas Vinterberg",
+          "Susanne Bier",
+          "Lukas Moodysson"
         ],
         "correct": 1,
-        "fact": "Titanic received 14 nominations and won 11, tying Ben-Hur's record that stood for nearly 40 years!"
-      },
-      {
-        "question": "Which classic TV show featured the fictional Bluth family and was narrated by Ron Howard?",
-        "options": [
-          "Modern Family",
-          "Schitt's Creek",
-          "Arrested Development",
-          "The Office"
-        ],
-        "correct": 2,
-        "fact": "Despite poor ratings initially, Arrested Development won six Emmys and became a cult classic revived by Netflix!"
+        "fact": "Vinterberg's 'The Celebration' (1998) was the first official Dogme 95 film and was shot entirely with a handheld Sony camcorder.",
+        "_subtopic": "Horror Films"
       }
     ],
     "politics": [
       {
-        "question": "Which country has the most time zones in the world, covering 12 different ones?",
+        "question": "As of early 2026, who serves as the President of Indonesia, having taken office in October 2024?",
         "options": [
-          "Russia",
-          "United States",
-          "France",
-          "China"
+          "Joko Widodo",
+          "Prabowo Subianto",
+          "Anies Baswedan",
+          "Ganjar Pranowo"
+        ],
+        "correct": 1,
+        "fact": "Prabowo lost two previous presidential bids before finally winning on his third attempt in 2024.",
+        "_subtopic": "Current World Leaders"
+      },
+      {
+        "question": "Which current world leader holds the title of Supreme Leader and has been in power since 1989?",
+        "options": [
+          "Bashar al-Assad",
+          "Ali Khamenei",
+          "Kim Jong-un",
+          "Xi Jinping"
+        ],
+        "correct": 1,
+        "fact": "Khamenei was actually considered a weak compromise choice when first appointed — he's now served over 35 years.",
+        "_subtopic": "Current World Leaders"
+      },
+      {
+        "question": "True or False: As of March 2026, France and the United Kingdom are both led by leaders who assumed office in 2024.",
+        "options": [
+          "True",
+          "False — only the UK changed leaders in 2024",
+          "False — only France changed leaders in 2024",
+          "False — neither changed leaders in 2024"
+        ],
+        "correct": 0,
+        "fact": "Keir Starmer became UK PM in July 2024, and François Bayrou became French PM in December 2024.",
+        "_subtopic": "Current World Leaders"
+      },
+      {
+        "question": "Who became the youngest-ever president of Ecuador when he took office in November 2023 at age 36?",
+        "options": [
+          "Guillermo Lasso",
+          "Daniel Noboa",
+          "Rafael Correa",
+          "Lenín Moreno"
+        ],
+        "correct": 1,
+        "fact": "Noboa's father, Álvaro Noboa, ran for president five times and never won — his son won on the first try.",
+        "_subtopic": "Current World Leaders"
+      },
+      {
+        "question": "In 2025, which country's prime minister faced a massive corruption scandal nicknamed the 'Golden Visa Affair'?",
+        "options": [
+          "Portugal",
+          "Greece",
+          "Malta",
+          "Cyprus"
+        ],
+        "correct": 0,
+        "fact": "Portugal's golden visa program generated billions but became a magnet for money laundering allegations across Europe.",
+        "_subtopic": "Political Scandals & Controversies"
+      },
+      {
+        "question": "Which South Korean president was arrested in January 2025 after briefly declaring martial law in December 2024?",
+        "options": [
+          "Moon Jae-in",
+          "Yoon Suk-yeol",
+          "Park Geun-hye",
+          "Lee Jae-myung"
+        ],
+        "correct": 1,
+        "fact": "Yoon's martial law lasted only about six hours before the National Assembly voted unanimously to overturn it.",
+        "_subtopic": "Political Scandals & Controversies"
+      },
+      {
+        "question": "The 'Partygate' scandal, involving lockdown-breaking gatherings, led to the eventual resignation of which leader?",
+        "options": [
+          "Scott Morrison",
+          "Boris Johnson",
+          "Sebastian Kurz",
+          "Giuseppe Conte"
+        ],
+        "correct": 1,
+        "fact": "Metropolitan Police issued 126 fines related to Downing Street gatherings — Johnson himself received one.",
+        "_subtopic": "Political Scandals & Controversies"
+      },
+      {
+        "question": "Which Pacific island nation has the world's smallest electorate with only about 500 registered voters?",
+        "options": [
+          "Tuvalu",
+          "Nauru",
+          "Tokelau",
+          "Pitcairn Islands"
         ],
         "correct": 2,
-        "fact": "France covers 12 time zones thanks to its overseas territories scattered across the globe!"
+        "fact": "Tokelau's referendums on self-determination have repeatedly fallen just short of the required two-thirds supermajority.",
+        "_subtopic": "Democracy & Voting Rights"
       },
       {
-        "question": "Who is the current Secretary-General of the United Nations as of March 2026?",
+        "question": "How many countries worldwide still use a system where voting is legally compulsory for citizens?",
         "options": [
-          "Ban Ki-moon",
-          "António Guterres",
-          "Kofi Annan",
-          "Christine Lagarde"
-        ],
-        "correct": 1,
-        "fact": "António Guterres, former Portuguese PM, began his second term as UN Secretary-General in January 2022."
-      },
-      {
-        "question": "Which country became the newest member of the European Union in 2013 and remains the most recent to join?",
-        "options": [
-          "Romania",
-          "Bulgaria",
-          "Croatia",
-          "Montenegro"
+          "About 5",
+          "About 10",
+          "About 20",
+          "About 40"
         ],
         "correct": 2,
-        "fact": "Croatia became the EU's 28th member state on July 1, 2013, and later adopted the euro in 2023."
+        "fact": "Though roughly 20 countries mandate voting, only about half actively enforce penalties for not participating.",
+        "_subtopic": "Democracy & Voting Rights"
       },
       {
-        "question": "In March 2026, tensions over semiconductor export controls continue between the US and which major global rival?",
+        "question": "Which country became the first in the world to grant women full national voting rights in 1893?",
         "options": [
-          "Russia",
-          "India",
-          "China",
-          "Brazil"
-        ],
-        "correct": 2,
-        "fact": "The US-China chip war has reshaped global tech supply chains and sparked massive domestic investments."
-      },
-      {
-        "question": "What is the minimum age to become President of the United States?",
-        "options": [
-          "30",
-          "35",
-          "40",
-          "25"
+          "Finland",
+          "New Zealand",
+          "Australia",
+          "Norway"
         ],
         "correct": 1,
-        "fact": "The U.S. Constitution requires presidents to be at least 35, a natural-born citizen, and a 14-year resident."
-      },
-      {
-        "question": "Which organization's five permanent Security Council members hold veto power?",
-        "options": [
-          "NATO",
-          "United Nations",
-          "World Trade Organization",
-          "G7"
-        ],
-        "correct": 1,
-        "fact": "The P5 — US, UK, France, Russia, and China — can each single-handedly block any Security Council resolution."
-      },
-      {
-        "question": "The African Union headquarters is located in which city?",
-        "options": [
-          "Nairobi, Kenya",
-          "Addis Ababa, Ethiopia",
-          "Lagos, Nigeria",
-          "Cairo, Egypt"
-        ],
-        "correct": 1,
-        "fact": "The AU headquarters was built largely with Chinese funding and opened its striking complex in 2012."
-      },
-      {
-        "question": "Which small European country is a co-principality led by both the French President and a Spanish bishop?",
-        "options": [
-          "Monaco",
-          "Liechtenstein",
-          "Andorra",
-          "San Marino"
-        ],
-        "correct": 2,
-        "fact": "Andorra's unique dual leadership dates back to a medieval agreement from 1278!"
-      },
-      {
-        "question": "As of 2026, BRICS has expanded significantly. Which of these countries was NOT part of the original BRICS grouping?",
-        "options": [
-          "Brazil",
-          "India",
-          "South Africa",
-          "Saudi Arabia"
-        ],
-        "correct": 3,
-        "fact": "Saudi Arabia joined the expanded BRICS+ in 2024, while the original group formed with Brazil, Russia, India, China, and South Africa."
-      },
-      {
-        "question": "What does the political term 'gerrymandering' refer to?",
-        "options": [
-          "Filibustering a bill in Congress",
-          "Manipulating electoral district boundaries for advantage",
-          "Lobbying foreign governments secretly",
-          "Switching political parties mid-term"
-        ],
-        "correct": 1,
-        "fact": "The term comes from Governor Elbridge Gerry, whose 1812 redistricting map resembled a salamander!"
+        "fact": "New Zealand women could vote in 1893 but couldn't stand for parliament themselves until 1919.",
+        "_subtopic": "Democracy & Voting Rights"
       }
     ]
   }
