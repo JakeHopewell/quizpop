@@ -1264,8 +1264,25 @@ function checkLeaderboardAchievements(username,dateKey){
     .catch(function(e){console.warn("Leaderboard achievement check failed:",e);});
 }
 
+function syncStreakToSupabase(){
+  var username=getUsername();
+  if(!username)return;
+  var streak=getStreak();
+  if(!streak||streak<1)return;
+  sbFetch("streaks?username=eq."+encodeURIComponent(username),{})
+    .then(function(rows){
+      var bestEver=rows&&rows.length>0?Math.max(rows[0].best_streak||0,streak):streak;
+      return sbFetch("streaks",{
+        method:"POST",upsert:true,
+        body:{username:username,current_streak:streak,best_streak:bestEver,last_updated:dayKey()}
+      });
+    })
+    .catch(function(e){console.warn("Streak sync failed:",e);});
+}
+
 function renderLeaderboard(){
   var username=getUsername();
+  syncStreakToSupabase();
   var today=dayKey();
   sbFetch("scores?date=eq."+today+"&select=username")
     .then(function(rows){
@@ -1303,7 +1320,7 @@ function renderLeaderboard(){
       });
     })
     .catch(function(){document.getElementById("lbToday").innerHTML='<div class="lb-empty">Could not load scores</div>';});
-  sbFetch("streaks?select=username,best_streak&order=best_streak.desc&limit=10")
+  sbFetch("streaks?select=username,current_streak,best_streak&order=current_streak.desc&limit=10")
     .then(function(rows){
       var container=document.getElementById("lbStreaks");
       container.innerHTML="";
@@ -1315,7 +1332,7 @@ function renderLeaderboard(){
         div.className="lb-row"+(isMe?" me":"")+(i<3?" top3":"");
         var rankClass=i===0?"r1":i===1?"r2":i===2?"r3":"";
         var rankDisplay=i<3?medals[i]:"#"+(i+1);
-        div.innerHTML='<span class="lb-rank '+rankClass+'">'+rankDisplay+'</span><span class="lb-name">'+row.username+(isMe?'<span class="lb-you">you</span>':'')+'</span><span class="lb-val streak">'+row.best_streak+' <span class="fire f2">&#x1F525;</span></span>';
+        div.innerHTML='<span class="lb-rank '+rankClass+'">'+rankDisplay+'</span><span class="lb-name">'+row.username+(isMe?'<span class="lb-you">you</span>':'')+'</span><span class="lb-val streak">'+row.current_streak+' <span class="fire f2">&#x1F525;</span></span>';
         container.appendChild(div);
       });
     })
