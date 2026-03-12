@@ -5,174 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QuizPop - Daily Brain Challenge</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3563124573162722"
-     crossorigin="anonymous">
-
-
-// Submit score to Supabase after every quiz
-function submitScoreToLeaderboard() {
-  var username = getUsername();
-  if (!username) return;
-  var dateKey = playingDate || dayKey();
-
-  // Submit individual score
-  sbFetch("scores", {
-    method: "POST",
-    body: { username: username, category: cat, score: score, date: dateKey }
-  }).then(function() {
-    // After submitting, check leaderboard position for achievements
-    checkLeaderboardAchievements(username, dateKey);
-    // Track wrong answers for hardest question feature
-    trackWrongAnswers();
-  }).catch(function(e) { console.warn("Score submit failed:", e); });
-
-  // Upsert streak
-  var streak = getStreak();
-  sbFetch("streaks?username=eq." + encodeURIComponent(username), {})
-    .then(function(rows) {
-      var bestEver = rows && rows.length > 0 ? Math.max(rows[0].best_streak || 0, streak) : streak;
-      return sbFetch("streaks", {
-        method: "POST",
-        upsert: true,
-        body: { username: username, current_streak: streak, best_streak: bestEver, last_updated: dateKey }
-      });
-    })
-    .catch(function(e) { console.warn("Streak submit failed:", e); });
-}
-
-// Check leaderboard position and award achievements
-function checkLeaderboardAchievements(username, dateKey) {
-  sbFetch("scores?date=eq." + dateKey + "&select=username,score")
-    .then(function(rows) {
-      // Aggregate total score per user
-      var totals = {};
-      (rows||[]).forEach(function(r) {
-        totals[r.username] = (totals[r.username] || 0) + r.score;
-      });
-      // Sort by total descending
-      var sorted = Object.keys(totals).sort(function(a,b) {
-        return totals[b] - totals[a];
-      });
-      var myRank = sorted.indexOf(username) + 1;
-      if (myRank === 0) return;
-
-      var ach = JSON.parse(localStorage.getItem("qp_ach") || "{}");
-      var newOnes = [];
-
-      if (myRank === 1  && !ach["lb_first"])  { ach["lb_first"]  = Date.now(); newOnes.push("lb_first"); }
-      if (myRank === 2  && !ach["lb_second"]) { ach["lb_second"] = Date.now(); newOnes.push("lb_second"); }
-      if (myRank === 3  && !ach["lb_third"])  { ach["lb_third"]  = Date.now(); newOnes.push("lb_third"); }
-      if (myRank <= 10  && !ach["lb_top10"])  { ach["lb_top10"]  = Date.now(); newOnes.push("lb_top10"); }
-
-      if (newOnes.length > 0) {
-        localStorage.setItem("qp_ach", JSON.stringify(ach));
-        // Show toast for first new achievement
-        var a = ACHIEVEMENTS.find(function(x){ return x.id === newOnes[0]; });
-        if (a) showAchToast(a);
-      }
-    })
-    .catch(function(e) { console.warn("Leaderboard achievement check failed:", e); });
-}
-
-// ── RENDER LEADERBOARD ──
-function renderLeaderboard() {
-  var username = getUsername();
-  var today = dayKey();
-
-  // Show player count
-  sbFetch("scores?date=eq." + today + "&select=username")
-    .then(function(rows) {
-      var unique = new Set((rows||[]).map(function(r){return r.username;}));
-      document.getElementById("lbPlayerCount").textContent = unique.size + " people played today";
-    }).catch(function(){
-      document.getElementById("lbPlayerCount").textContent = "Live scores";
-    });
-
-  // Today's leaderboard — sum scores per user for today
-  sbFetch("scores?date=eq." + today + "&select=username,score&order=score.desc")
-    .then(function(rows) {
-      // Aggregate total score per username
-      var totals = {};
-      (rows||[]).forEach(function(r) {
-        totals[r.username] = (totals[r.username] || 0) + r.score;
-      });
-      // Sort by total
-      var sorted = Object.keys(totals).map(function(u) {
-        return { username: u, total: totals[u] };
-      }).sort(function(a,b) { return b.total - a.total; }).slice(0, 10);
-
-      var myRank = -1;
-      var myTotal = totals[username] || 0;
-      var allSorted = Object.keys(totals).map(function(u){
-        return {username:u,total:totals[u]};
-      }).sort(function(a,b){return b.total-a.total;});
-      allSorted.forEach(function(r,i){if(r.username===username)myRank=i+1;});
-
-      var container = document.getElementById("lbToday");
-      container.innerHTML = "";
-
-      // My position banner
-      if (myRank > 0) {
-        var pos = document.createElement("div");
-        pos.className = "lb-position";
-        pos.innerHTML = '<span class="lbp-label">Your position today</span><span class="lbp-rank">#' + myRank + ' of ' + allSorted.length + '</span>';
-        container.appendChild(pos);
-      }
-
-      if (sorted.length === 0) {
-        container.innerHTML += '<div class="lb-empty">No scores yet today — be the first!</div>';
-        return;
-      }
-
-      var medals = ["&#x1F947;","&#x1F948;","&#x1F949;"];
-      sorted.forEach(function(row, i) {
-        var isMe = row.username === username;
-        var div = document.createElement("div");
-        div.className = "lb-row" + (isMe?" me":"") + (i<3?" top3":"");
-        var rankClass = i===0?"r1":i===1?"r2":i===2?"r3":"";
-        var rankDisplay = i < 3 ? medals[i] : "#"+(i+1);
-        div.innerHTML =
-          '<span class="lb-rank ' + rankClass + '">' + rankDisplay + '</span>' +
-          '<span class="lb-name">' + row.username + (isMe?'<span class="lb-you">you</span>':'') + '</span>' +
-          '<span class="lb-val">' + row.total + ' pts</span>';
-        container.appendChild(div);
-      });
-    })
-    .catch(function() {
-      document.getElementById("lbToday").innerHTML = '<div class="lb-empty">Could not load scores</div>';
-    });
-
-  // All time streaks leaderboard
-  sbFetch("streaks?select=username,best_streak&order=best_streak.desc&limit=10")
-    .then(function(rows) {
-      var container = document.getElementById("lbStreaks");
-      container.innerHTML = "";
-
-      if (!rows || rows.length === 0) {
-        container.innerHTML = '<div class="lb-empty">No streaks yet — keep playing!</div>';
-        return;
-      }
-
-      var medals = ["&#x1F947;","&#x1F948;","&#x1F949;"];
-      rows.forEach(function(row, i) {
-        var isMe = row.username === username;
-        var div = document.createElement("div");
-        div.className = "lb-row" + (isMe?" me":"") + (i<3?" top3":"");
-        var rankClass = i===0?"r1":i===1?"r2":i===2?"r3":"";
-        var rankDisplay = i < 3 ? medals[i] : "#"+(i+1);
-        div.innerHTML =
-          '<span class="lb-rank ' + rankClass + '">' + rankDisplay + '</span>' +
-          '<span class="lb-name">' + row.username + (isMe?'<span class="lb-you">you</span>':'') + '</span>' +
-          '<span class="lb-val streak">' + row.best_streak + ' &#x1F525;</span>';
-        container.appendChild(div);
-      });
-    })
-    .catch(function() {
-      document.getElementById("lbStreaks").innerHTML = '<div class="lb-empty">Could not load streaks</div>';
-    });
-}
-
-</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3563124573162722" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Righteous&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0f0e17;--surface:#1a1826;--card:#22203a;--accent:#ff6b35;--accent2:#ffd166;--green:#06d6a0;--red:#ef476f;--text:#fffffe;--muted:#a7a5b8;--border:rgba(255,255,255,0.08);--blue:#4cc9f0}
@@ -183,9 +16,11 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .ad-slot{background:linear-gradient(135deg,var(--surface),var(--card));border:1px solid var(--border);border-radius:12px;text-align:center;position:relative;min-height:80px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px}
 .ad-slot::after{content:'AD';position:absolute;top:5px;right:8px;font-size:9px;color:var(--muted);opacity:0.4;font-weight:700}
 .ad-top{margin:14px 0 20px}.ad-mid{margin:20px 0}.ad-bottom{margin:28px 0 0}
-.screen{display:none;animation:fadeUp .35s ease}
-.screen.active{display:block}
+.screen{display:none}
+.screen.active{display:block;animation:fadeUp .35s ease}
+.screen.leaving{animation:fadeOut .18s ease forwards}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-10px)}}
 header{display:flex;align-items:center;justify-content:space-between;padding:22px 0 10px}
 .logo{font-family:'Righteous',cursive;font-size:26px;color:var(--accent);letter-spacing:1px;cursor:pointer}
 .logo span{color:var(--accent2)}
@@ -204,6 +39,10 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
 .chip{background:var(--card);border:1px solid var(--border);padding:5px 11px;border-radius:20px;font-size:11px;display:flex;align-items:center;gap:5px}
 .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.fire{display:inline-block;animation:firePulse 1.8s ease-in-out infinite;transform-origin:center bottom}
+.fire.f2{animation-duration:1.9s}
+.fire.f3{animation-duration:2.0s}
+@keyframes firePulse{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.18);filter:brightness(1.35)}}
 .day-summary{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 16px;margin-bottom:18px;display:flex;align-items:center;gap:12px}
 .ds-ring{position:relative;width:52px;height:52px;flex-shrink:0}
 .ds-ring svg{transform:rotate(-90deg)}
@@ -213,10 +52,10 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
 .ds-sub{font-size:11px;color:var(--muted)}
 .ds-streak{font-family:'Righteous',cursive;font-size:20px}
 .cat-cards{display:grid;gap:9px;margin-bottom:6px}
-.cat-card{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:13px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .2s}
-.cat-card:hover{border-color:var(--accent);transform:translateX(3px)}
+.cat-card{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:13px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .22s cubic-bezier(.4,0,.2,1)}
+.cat-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 6px 24px rgba(255,107,53,0.22)}
 .cat-card.done{border-color:var(--green);background:rgba(6,214,160,0.05)}
-.cat-card.done:hover{border-color:var(--green);transform:translateX(3px)}
+.cat-card.done:hover{border-color:var(--green);transform:translateY(-3px);box-shadow:0 6px 24px rgba(6,214,160,0.22)}
 .cc-emoji{font-size:24px;flex-shrink:0}
 .cc-info{flex:1}
 .cc-name{font-weight:600;font-size:14px;margin-bottom:1px}
@@ -281,12 +120,51 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
 .qhdr{display:flex;align-items:center;gap:12px;padding:16px 0 12px}
 .qctr{font-family:'Righteous',cursive;font-size:13px;color:var(--muted);white-space:nowrap}
 .pbwrap{flex:1;height:6px;background:var(--card);border-radius:3px;overflow:hidden}
-.pbfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+.pbfill{height:100%;background:linear-gradient(90deg,var(--green),#4cc9f0);border-radius:3px;transition:width .4s cubic-bezier(.4,0,.2,1),background .6s ease}
+.pbfill.warn{background:linear-gradient(90deg,#ffd166,#ffaa00)}
+.pbfill.danger{background:linear-gradient(90deg,var(--accent),var(--red));animation:pbPulse .5s ease-in-out infinite}
+@keyframes pbPulse{0%,100%{opacity:1}50%{opacity:0.65}}
 .tbadge{background:var(--card);border:1px solid var(--border);padding:4px 11px;border-radius:20px;font-size:14px;font-weight:700;font-family:'Righteous',cursive;min-width:48px;text-align:center;transition:all .3s}
 .tbadge.urg{color:var(--red);border-color:var(--red);animation:shk .25s infinite}
 @keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
+/* GRADE BADGE */
+.grade-badge{display:inline-flex;align-items:center;gap:7px;padding:3px 12px;border-radius:20px;font-family:'Righteous',cursive;font-size:13px;font-weight:700;margin:0 0 6px;letter-spacing:.5px}
+.grade-s{background:linear-gradient(135deg,rgba(255,209,102,0.25),rgba(255,180,0,0.15));border:1.5px solid #ffd166;color:#ffd166}
+.grade-a{background:rgba(6,214,160,0.15);border:1.5px solid var(--green);color:var(--green)}
+.grade-b{background:rgba(255,107,53,0.15);border:1.5px solid var(--accent);color:var(--accent)}
+.grade-c{background:rgba(167,165,184,0.12);border:1.5px solid var(--muted);color:var(--muted)}
+/* ANSWER DOT GRID */
+.dot-grid{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-start;margin:4px 0 0}
+.dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.dot-correct{background:rgba(6,214,160,0.18);border:1.5px solid var(--green);color:var(--green)}
+.dot-wrong{background:rgba(239,71,111,0.18);border:1.5px solid var(--red);color:var(--red)}
+.dot-timeout{background:rgba(167,165,184,0.12);border:1.5px solid var(--muted);color:var(--muted)}
+/* SHARE ROW */
+.share-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
+.btn-x{background:#000;border:1px solid #333;color:#fff}
+.btn-x:hover{background:#111;border-color:#555}
+.btn-copy.done{border-color:var(--green)!important;color:var(--green)!important}
+/* QUESTION SLIDE-IN */
 .qcard{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px 20px 20px;margin-bottom:12px;position:relative;overflow:hidden}
 .qcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--green))}
+.qcard.slide-in{animation:slideInRight .28s cubic-bezier(.4,0,.2,1)}
+@keyframes slideInRight{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:translateX(0)}}
+/* SMOOTHER TAB FADE */
+.tab-panel-fade{animation:tabFadeIn .22s ease}
+@keyframes tabFadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+/* SKELETON LOADER */
+.skel{background:linear-gradient(90deg,var(--card) 25%,var(--surface) 50%,var(--card) 75%);background-size:200% 100%;animation:skelShimmer 1.4s infinite;border-radius:14px}
+@keyframes skelShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.skel-card{height:68px;margin-bottom:9px}
+/* BACKGROUND GRID */
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,0.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.045) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;z-index:0}
+/* DARK/LIGHT MODE */
+body.light{--bg:#f4f3ff;--surface:#e8e6ff;--card:#fff;--text:#1a1826;--muted:#6b68a0;--border:rgba(0,0,0,0.09)}
+body.light::after{background-image:linear-gradient(rgba(0,0,0,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.07) 1px,transparent 1px)}
+.mode-toggle{position:relative;width:56px;height:28px;background:var(--card);border:1px solid var(--border);border-radius:20px;cursor:pointer;transition:background .3s,border-color .3s;flex-shrink:0;padding:0}
+.mode-toggle:hover{border-color:var(--accent2)}
+.mode-toggle .toggle-knob{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:13px;transition:transform .3s cubic-bezier(.4,0,.2,1);line-height:1}
+body.light .mode-toggle .toggle-knob{transform:translateX(28px)}
 .qtag{display:inline-block;background:rgba(255,107,53,0.14);border:1px solid rgba(255,107,53,0.28);color:var(--accent);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:11px}
 .qtext{font-size:18px;font-weight:600;line-height:1.4}
 .opts{display:grid;gap:8px;margin-bottom:12px}
@@ -298,26 +176,42 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
 .opt.wrong{border-color:var(--red);background:rgba(239,71,111,0.1)}
 .opt.wrong .ol{background:var(--red);color:#fff}
 .opt:disabled{cursor:default}
+.opt.flash-correct{animation:flashGreen .5s ease forwards}
+.opt.flash-wrong{animation:flashRed .5s ease forwards}
+@keyframes flashGreen{0%{background:rgba(6,214,160,0.7);border-color:var(--green)}100%{background:rgba(6,214,160,0.1);border-color:var(--green)}}
+@keyframes flashRed{0%{background:rgba(239,71,111,0.65);border-color:var(--red)}100%{background:rgba(239,71,111,0.1);border-color:var(--red)}}
 .factbox{background:rgba(255,209,102,0.08);border:1px solid rgba(255,209,102,0.2);border-radius:11px;padding:10px 14px;font-size:12px;color:var(--accent2);line-height:1.5;display:none;margin-bottom:12px}
 .factbox.show{display:block;animation:fadeUp .3s ease}
 .factbox strong{display:block;margin-bottom:2px;font-size:10px;text-transform:uppercase;letter-spacing:.08em;opacity:.6}
 /* RESULTS */
-.res-hero{text-align:center;padding:20px 0 16px}
-.sring{width:120px;height:120px;margin:0 auto 14px;position:relative}
-.sring svg{transform:rotate(-90deg)}
+/* RESULTS HERO CARD */
+.res-card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:22px 18px 16px;margin-bottom:12px;position:relative;overflow:hidden}
+.res-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 55% at 50% -10%,rgba(255,107,53,0.11),transparent 65%);pointer-events:none}
+.res-top{display:flex;align-items:center;gap:18px;margin-bottom:16px}
+.res-info{flex:1;min-width:0;text-align:left}
+.res-divider{height:1px;background:var(--border);margin:0 -18px 14px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.sc{text-align:center;padding:6px 4px}
+.sc+.sc{border-left:1px solid var(--border)}
+.sv{font-family:'Righteous',cursive;font-size:20px;color:var(--accent2)}
+.sl{font-size:10px;color:var(--muted);margin-top:3px;letter-spacing:.04em;text-transform:uppercase}
+/* score ring */
+.sring{width:120px;height:120px;flex-shrink:0;position:relative}
+.sring svg{transform:rotate(-90deg);width:120px;height:120px}
 .sring-lbl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.snum{font-family:'Righteous',cursive;font-size:32px;line-height:1}
-.stot{font-size:11px;color:var(--muted)}
-.rtitle{font-family:'Righteous',cursive;font-size:21px;margin-bottom:5px}
-.rsub{color:var(--muted);font-size:13px;margin-bottom:18px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px}
-.sc{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:12px 8px;text-align:center}
-.sv{font-family:'Righteous',cursive;font-size:19px;color:var(--accent2)}
-.sl{font-size:10px;color:var(--muted);margin-top:2px}
-.share-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:13px;font-size:12px;font-family:monospace;color:var(--muted);white-space:pre-wrap;line-height:1.7;margin-bottom:11px}
+.snum{font-family:'Righteous',cursive;font-size:34px;line-height:1}
+.stot{font-size:11px;color:var(--muted);margin-top:1px}
+/* grade + title */
+.rtitle{font-family:'Righteous',cursive;font-size:19px;margin:4px 0 2px;line-height:1.2}
+.rsub{color:var(--muted);font-size:12px;margin-bottom:6px}
+/* dot grid inside hero */
+/* STAT PILLS - inline row */
+
+/* SHARE */
+.share-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:13px 15px;font-size:12px;font-family:monospace;color:var(--muted);white-space:pre-wrap;line-height:1.8;margin-bottom:9px}
 .share-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
 .btn-copy.done{border-color:var(--green);color:var(--green)}
-/* NEW ACHIEVEMENT TOAST */
+/* ACHIEVEMENT TOAST */
 .ach-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:linear-gradient(135deg,#2d2b4e,#3d3a6b);border:1px solid var(--accent2);border-radius:16px;padding:14px 20px;display:flex;align-items:center;gap:12px;z-index:1000;transition:transform .4s cubic-bezier(.34,1.56,.64,1);min-width:280px;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
 .ach-toast.show{transform:translateX(-50%) translateY(0)}
 .ach-toast .at-icon{font-size:28px}
@@ -335,6 +229,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
 .cdown{font-family:'Righteous',cursive;color:var(--accent2);font-size:17px;display:block;margin-top:3px}
 /* BUTTONS */
 .btn{display:block;width:100%;padding:13px;border-radius:13px;border:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .18s;text-align:center}
+.btn:active:not(:disabled){transform:scale(0.96)!important}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 .btn-primary{background:linear-gradient(135deg,var(--accent),#ff8c5a);color:#fff;box-shadow:0 4px 20px rgba(255,107,53,0.35)}
 .btn-primary:hover:not(:disabled){transform:translateY(-2px)}
@@ -344,12 +239,14 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
 .btn-green:hover:not(:disabled){transform:translateY(-2px)}
 .btn-back{background:transparent;border:none;color:var(--muted);font-size:12px;padding:8px 0;cursor:pointer;display:flex;align-items:center;gap:5px;margin-bottom:2px;font-family:'DM Sans',sans-serif}
 .btn-back:hover{color:var(--text)}
+.btn-back:active{transform:scale(0.95)}
+.tab:active{transform:scale(0.94)}
+.opt:active:not(:disabled){transform:scale(0.98)!important}
 .mt8{margin-top:8px}
 .cf{position:fixed;width:8px;height:12px;border-radius:2px;top:-20px;animation:cfall linear forwards;z-index:999;pointer-events:none}
 @keyframes cfall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
 .footer{text-align:center;font-size:11px;color:#555;padding:20px 0}
 .footer a{color:#555}
-
 /* LEADERBOARD */
 .lb-hero{text-align:center;padding:10px 0 16px}
 .lb-live{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--border);padding:6px 14px;border-radius:20px;font-size:12px;color:var(--muted);margin-bottom:4px}
@@ -373,7 +270,6 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
 .lb-position .lbp-label{font-size:12px;color:var(--muted)}
 .lb-position .lbp-rank{font-family:'Righteous',cursive;font-size:18px;color:var(--accent)}
 .lb-empty{text-align:center;color:var(--muted);font-size:13px;padding:20px}
-
 /* PROFILE EXTRAS */
 .profile-best-cat{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-top:14px}
 .pbc-emoji{font-size:28px;flex-shrink:0}
@@ -394,11 +290,14 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
 <div class="wrap">
   <div class="ad-slot ad-top">Advertisement</div>
 
-  <!-- ══ HOME ══ -->
+  <!-- HOME -->
   <div class="screen active" id="sHome">
     <header>
       <div class="logo" onclick="goHome()">Quiz<span>Pop</span></div>
-      <div class="streak-pill" onclick="showTab('profile')" title="View profile">&#x1F525; <span id="hStreak">0</span></div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="mode-toggle" onclick="toggleMode()" id="modeBtn" title="Toggle light/dark mode"><span class="toggle-knob">🌙</span></button>
+        <div class="streak-pill" onclick="showTab('profile')" title="View profile"><span class="fire">&#x1F525;</span> <span id="hStreak">0</span></div>
+      </div>
     </header>
     <div class="hero">
       <span class="hero-emoji">&#x1F9E0;</span>
@@ -456,14 +355,14 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
         <div id="lbStreaks" class="lb-list"><div class="lb-loading">Loading...</div></div>
       </div>
     </div>
-    <div id="panelProfile" style="display:none" id="panelProfile">
+    <div id="panelProfile" style="display:none">
       <div class="profile-card" id="profileCard"></div>
       <button class="btn btn-secondary mt8" onclick="changeUsername()" style="margin-bottom:8px">Change Username</button>
       <button class="btn btn-secondary" onclick="if(confirm('Clear all data?')){localStorage.clear();location.reload()}">Reset All Data</button>
     </div>
   </div>
 
-  <!-- ══ USERNAME SETUP ══ -->
+  <!-- USERNAME SETUP -->
   <div class="screen" id="sSetup">
     <div class="setup-wrap">
       <span class="setup-emoji">&#x1F9E0;</span>
@@ -475,7 +374,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
     </div>
   </div>
 
-  <!-- ══ LOADING ══ -->
+  <!-- LOADING -->
   <div class="screen" id="sLoad">
     <div class="loader-wrap">
       <div class="dots"><div class="dot-b"></div><div class="dot-b"></div><div class="dot-b"></div></div>
@@ -483,7 +382,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
     </div>
   </div>
 
-  <!-- ══ QUIZ ══ -->
+  <!-- QUIZ -->
   <div class="screen" id="sQuiz">
     <button class="btn-back" onclick="goHome()">&#8592; Back</button>
     <div class="qhdr">
@@ -500,39 +399,51 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
     <button class="btn btn-secondary" id="nextBtn" onclick="nextQ()" style="display:none">Next Question</button>
   </div>
 
-  <!-- ══ RESULTS ══ -->
+  <!-- RESULTS -->
   <div class="screen" id="sResults">
     <button class="btn-back" onclick="goHome()">&#8592; Back</button>
     <header>
       <div class="logo" onclick="goHome()">Quiz<span>Pop</span></div>
-      <div class="streak-pill">&#x1F525; <span id="rStreak">0</span></div>
+      <div class="streak-pill"><span class="fire f2">&#x1F525;</span> <span id="rStreak">0</span></div>
     </header>
-    <div class="res-hero">
-      <div class="sring">
-        <svg width="120" height="120" viewBox="0 0 120 120">
-          <circle cx="60" cy="60" r="50" fill="none" stroke="var(--card)" stroke-width="10"/>
-          <circle cx="60" cy="60" r="50" fill="none" stroke="url(#sg)" stroke-width="10"
-            stroke-linecap="round" stroke-dasharray="314" id="sArc" stroke-dashoffset="314"/>
-          <defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#ff6b35"/><stop offset="100%" stop-color="#ffd166"/>
-          </linearGradient></defs>
-        </svg>
-        <div class="sring-lbl"><span class="snum" id="rScore">0</span><span class="stot" id="rTotal">/10</span></div>
+
+    <!-- SCORE CARD -->
+    <div class="res-card">
+      <div class="res-top">
+        <div class="sring">
+          <svg width="120" height="120" viewBox="0 0 140 140">
+            <circle cx="70" cy="70" r="58" fill="none" stroke="var(--surface)" stroke-width="10"/>
+            <circle cx="70" cy="70" r="58" fill="none" stroke="url(#sg)" stroke-width="10"
+              stroke-linecap="round" stroke-dasharray="364" id="sArc" stroke-dashoffset="364"/>
+            <defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ff6b35"/><stop offset="100%" stop-color="#ffd166"/>
+            </linearGradient></defs>
+          </svg>
+          <div class="sring-lbl"><span class="snum" id="rScore">0</span><span class="stot" id="rTotal">/10</span></div>
+        </div>
+        <div class="res-info">
+          <div id="gradeBadge"></div>
+          <div class="rtitle" id="rTitle">...</div>
+          <div class="rsub" id="rSub"></div>
+          <div id="dotGrid" class="dot-grid"></div>
+        </div>
       </div>
-      <div class="rtitle" id="rTitle">...</div>
-      <div class="rsub" id="rSub"></div>
+      <div class="res-divider"></div>
+      <div class="stats">
+        <div class="sc"><div class="sv" id="stC">0</div><div class="sl">Correct</div></div>
+        <div class="sc"><div class="sv" id="stT">0s</div><div class="sl">Avg Time</div></div>
+        <div class="sc"><div class="sv" id="stS">0 🔥</div><div class="sl">Streak</div></div>
+      </div>
     </div>
-    <div class="stats">
-      <div class="sc"><div class="sv" id="stC">0</div><div class="sl">Correct</div></div>
-      <div class="sc"><div class="sv" id="stT">0s</div><div class="sl">Avg Time</div></div>
-      <div class="sc"><div class="sv" id="stS">0</div><div class="sl">Streak</div></div>
-    </div>
+
+    <!-- SHARE CARD + BUTTONS -->
     <div class="share-card" id="shareCard"></div>
-    <div class="share-btns">
+    <div class="share-row">
       <button class="btn btn-green" onclick="doShare('whatsapp')">&#x1F4F2; WhatsApp</button>
+      <button class="btn btn-x" onclick="doShare('twitter')">&#x1D54F; Post on X</button>
       <button class="btn btn-secondary btn-copy" id="copyBtn" onclick="doCopy()">&#x1F4CB; Copy</button>
     </div>
-    <button class="btn btn-secondary mt8" onclick="doShare('twitter')">Share on X</button>
+
     <div id="newAchievements" style="display:none;margin-top:16px"></div>
     <div class="ad-slot ad-mid">Advertisement</div>
     <div class="rvw-title">Review Your Answers</div>
@@ -626,18 +537,18 @@ var ACHIEVEMENTS = [
   {id:"total_500",       icon:"🧠", name:"Big Brain",           desc:"Answer 500 questions correctly in total"},
   {id:"total_1000",      icon:"🌌", name:"Galaxy Brain",        desc:"Answer 1000 questions correctly in total"},
   {id:"mixed_master",    icon:"🎲", name:"Jack of All Trades",  desc:"Complete all 12 categories in one day 3 times"},
-  {id:"lb_first",         icon:"🥇", name:"Quiz Overlord",         desc:"Finish #1 on the daily leaderboard"},
-  {id:"lb_second",        icon:"🥈", name:"Almost Had It",          desc:"Finish #2 on the daily leaderboard"},
-  {id:"lb_third",         icon:"🥉", name:"Show-Off",               desc:"Finish #3 on the daily leaderboard"},
-  {id:"lb_top10",         icon:"🎖️", name:"Not Bad, Not Bad",       desc:"Finish in the top 10 on the daily leaderboard"},
+  {id:"lb_first",        icon:"🥇", name:"Quiz Overlord",       desc:"Finish #1 on the daily leaderboard"},
+  {id:"lb_second",       icon:"🥈", name:"Almost Had It",       desc:"Finish #2 on the daily leaderboard"},
+  {id:"lb_third",        icon:"🥉", name:"Show-Off",            desc:"Finish #3 on the daily leaderboard"},
+  {id:"lb_top10",        icon:"🎖️", name:"Not Bad, Not Bad",    desc:"Finish in the top 10 on the daily leaderboard"},
 ];
 
 var MSGS = [
-  {min:9, title:"🧠 Galaxy Brain!",    sub:"Absolutely crushed it. Top 1%!"},
-  {min:7, title:"🔥 On Fire!",         sub:"Incredible performance. Almost perfect!"},
-  {min:5, title:"💪 Solid Showing!",   sub:"You know your stuff. Keep it up!"},
-  {min:3, title:"🌱 Room to Grow",     sub:"Not bad - come back stronger tomorrow!"},
-  {min:0, title:"😅 Keep Practising!", sub:"Everyone starts somewhere. Tomorrow is yours."}
+  {min:10, title:"Perfect 10!",          sub:"Absolutely flawless. Incredible!"},
+  {min:8,  title:"Outstanding!",          sub:"Near perfect — you really know your stuff."},
+  {min:6,  title:"Solid Performance",     sub:"Good showing. Keep building on this!"},
+  {min:4,  title:"Room to Grow",          sub:"Not bad — come back stronger tomorrow!"},
+  {min:0,  title:"Keep Practising!",      sub:"Everyone starts somewhere. Tomorrow is yours."}
 ];
 
 // State
@@ -662,16 +573,13 @@ function saveResult(date,catKey){
     date:date,cat:catKey,score:score,answers:answers,totalTime:totalTime,
     questions:questions.map(function(q){return{question:q.question,options:q.options,correct:q.correct,fact:q.fact};})
   }));
-  // streak
   var prev=JSON.parse(localStorage.getItem("qp_streak")||'{"n":0,"last":""}');
   var yd=(function(){var d=new Date();d.setDate(d.getDate()-1);return d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate();})();
   var n=prev.last===yd?prev.n+1:prev.last===dayKey()?prev.n:1;
   localStorage.setItem("qp_streak",JSON.stringify({n:n,last:dayKey()}));
   if(score>getBest())localStorage.setItem("qp_best",score);
-  // total correct
   var tc=getTotalCorrect()+score;
   localStorage.setItem("qp_total_correct",tc);
-  // days played
   var dp=getDaysPlayed();
   if(dp.indexOf(dayKey())<0){dp.push(dayKey());localStorage.setItem("qp_days_played",JSON.stringify(dp));}
 }
@@ -713,11 +621,9 @@ function checkAchievements(){
   function has(id){return unlocked.indexOf(id)>=0;}
   function award(id){if(!has(id)){unlocked.push(id);newOnes.push(id);}}
 
-  // Quiz counts
   if(dp>=1)                         award("first_quiz");
   if(dp>=10)                        award("quiz_10");
   if(dp>=30)                        award("quiz_30");
-  // Perfect scores
   if(score===10)                    award("perfect_10");
   if(score===10&&cat==="science")   award("science_ace");
   if(score===10&&cat==="history")   award("history_buff");
@@ -729,36 +635,28 @@ function checkAchievements(){
   if(score===10&&cat==="nature")    award("nature_lover");
   if(score===10&&cat==="film")      award("film_buff");
   if(score===10&&cat==="politics")  award("politico");
-  // Speed
   var avg=answers.length?totalTime/answers.length:99;
   if(avg<5&&answers.length===10)    award("speed_demon");
-  // Time of day
   if(h>=0&&h<5)                     award("night_owl");
   if(h>=5&&h<7)                     award("early_bird");
-  // Streaks
   if(streak>=3)                     award("streak_3");
   if(streak>=7)                     award("streak_7");
   if(streak>=14)                    award("streak_14");
   if(streak>=30)                    award("streak_30");
   if(streak>=100)                   award("streak_100");
-  // Total correct
   if(tc>=100)                       award("total_100");
   if(tc>=500)                       award("total_500");
   if(tc>=1000)                      award("total_1000");
-  // All categories today
   if(todayDone===12){
     award("all_cats_day");
-    // check if all 10/10
     var allPerfect=CAT_KEYS.every(function(k){return todayRes[k]&&todayRes[k].score===10;});
     if(allPerfect)award("perfect_day");
-    // perfect days count
     if(allPerfect){
       var pd=getPerfectDays()+1;
       localStorage.setItem("qp_perfect_days",pd);
       if(pd>=3)award("mixed_master");
     }
   }
-  // Comeback: check previous attempt at same cat today
   var prevAttempts=JSON.parse(localStorage.getItem("qp_prev_"+cat)||"[]");
   if(prevAttempts.length>0&&score>=prevAttempts[prevAttempts.length-1]+3)award("comeback");
   prevAttempts.push(score);
@@ -773,6 +671,15 @@ function showAchievementToast(id){
   if(!def)return;
   document.getElementById("achToastIcon").textContent=def.icon;
   document.getElementById("achToastName").textContent=def.name;
+  var t=document.getElementById("achToast");
+  t.classList.add("show");
+  setTimeout(function(){t.classList.remove("show");},3200);
+}
+
+// Alias used by leaderboard achievement check
+function showAchToast(a){
+  document.getElementById("achToastIcon").textContent=a.icon;
+  document.getElementById("achToastName").textContent=a.name;
   var t=document.getElementById("achToast");
   t.classList.add("show");
   setTimeout(function(){t.classList.remove("show");},3200);
@@ -799,16 +706,31 @@ function renderAchievements(){
 
 // ── SCREEN MANAGEMENT ──
 function show(id){
-  document.querySelectorAll(".screen").forEach(function(s){s.classList.remove("active");});
-  document.getElementById(id).classList.add("active");
-  window.scrollTo(0,0);
+  var current=document.querySelector(".screen.active");
+  var next=document.getElementById(id);
+  if(current&&current!==next){
+    current.classList.add("leaving");
+    setTimeout(function(){
+      current.classList.remove("active","leaving");
+      next.classList.add("active");
+      window.scrollTo(0,0);
+    },160);
+  }else{
+    document.querySelectorAll(".screen").forEach(function(s){s.classList.remove("active","leaving");});
+    next.classList.add("active");
+    window.scrollTo(0,0);
+  }
 }
 
 function showTab(tab){
   ["today","past","ach","board","profile"].forEach(function(t){
     var panel=document.getElementById("panel"+t.charAt(0).toUpperCase()+t.slice(1));
     var tabEl=document.getElementById("tab"+t.charAt(0).toUpperCase()+t.slice(1));
-    if(panel)panel.style.display=t===tab?"block":"none";
+    if(panel){
+      var visible=t===tab;
+      panel.style.display=visible?"block":"none";
+      if(visible){panel.classList.remove("tab-panel-fade");void panel.offsetWidth;panel.classList.add("tab-panel-fade");}
+    }
     if(tabEl)tabEl.classList.toggle("active",t===tab);
   });
   if(tab==="past")    renderPastList();
@@ -821,7 +743,7 @@ function goHome(){show("sHome");renderHome();}
 function syncBadges(){
   var s=getStreak();
   ["hStreak","rStreak"].forEach(function(id){var e=document.getElementById(id);if(e)e.textContent=s+" day streak";});
-  var ds=document.getElementById("dayStreakEl");if(ds)ds.textContent="🔥"+s;
+  var ds=document.getElementById("dayStreakEl");if(ds)ds.innerHTML='<span class="fire f3">&#x1F525;</span>'+s;
 }
 
 // ── USERNAME ──
@@ -840,41 +762,24 @@ function changeUsername(){
 
 // ── PROFILE ──
 function getBestCategory(){
-  // Scan all localStorage keys for results and find best avg score per category
-  var catScores={};
-  var catCounts={};
+  var catScores={};var catCounts={};
   for(var i=0;i<localStorage.length;i++){
     var k=localStorage.key(i);
     if(k&&k.indexOf("qp_res_")===0){
-      try{
-        var r=JSON.parse(localStorage.getItem(k));
-        if(r&&r.cat&&typeof r.score==="number"){
-          catScores[r.cat]=(catScores[r.cat]||0)+r.score;
-          catCounts[r.cat]=(catCounts[r.cat]||0)+1;
-        }
-      }catch(e){}
+      try{var r=JSON.parse(localStorage.getItem(k));if(r&&r.cat&&typeof r.score==="number"){catScores[r.cat]=(catScores[r.cat]||0)+r.score;catCounts[r.cat]=(catCounts[r.cat]||0)+1;}}catch(e){}
     }
   }
   var bestCat=null,bestAvg=0;
-  Object.keys(catScores).forEach(function(c){
-    var avg=catScores[c]/catCounts[c];
-    if(avg>bestAvg){bestAvg=avg;bestCat=c;}
-  });
+  Object.keys(catScores).forEach(function(c){var avg=catScores[c]/catCounts[c];if(avg>bestAvg){bestAvg=avg;bestCat=c;}});
   if(!bestCat)return null;
   return {cat:bestCat,avg:Math.round(bestAvg*10)/10,label:CATS[bestCat]?CATS[bestCat].label:bestCat,emoji:CATS[bestCat]?CATS[bestCat].emoji:"🎯"};
 }
 
 function getTotalTimePlayed(){
-  // Sum all totalTime values from saved results (in seconds)
   var total=0;
   for(var i=0;i<localStorage.length;i++){
     var k=localStorage.key(i);
-    if(k&&k.indexOf("qp_res_")===0){
-      try{
-        var r=JSON.parse(localStorage.getItem(k));
-        if(r&&r.totalTime)total+=r.totalTime;
-      }catch(e){}
-    }
+    if(k&&k.indexOf("qp_res_")===0){try{var r=JSON.parse(localStorage.getItem(k));if(r&&r.totalTime)total+=r.totalTime;}catch(e){}}
   }
   return total;
 }
@@ -882,8 +787,7 @@ function getTotalTimePlayed(){
 function formatTimePlayed(seconds){
   if(seconds<60)return seconds+"s";
   if(seconds<3600){var m=Math.floor(seconds/60);return m+" min"+(m!==1?"s":"");}
-  var h=Math.floor(seconds/3600);
-  var m=Math.floor((seconds%3600)/60);
+  var h=Math.floor(seconds/3600);var m=Math.floor((seconds%3600)/60);
   if(m===0)return h+" hour"+(h!==1?"s":"");
   return h+"h "+m+"m";
 }
@@ -896,20 +800,15 @@ function renderProfile(){
   var jd=new Date(parseInt(jparts[0]),parseInt(jparts[1]),parseInt(jparts[2]));
   var jstr=jd.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
   var initials=name.substring(0,2).toUpperCase();
-
-  // Best category
   var bestCat=getBestCategory();
   var bestCatHTML=bestCat
     ? '<div class="profile-best-cat"><span class="pbc-emoji">'+bestCat.emoji+'</span><div class="pbc-info"><div class="pbc-label">Best Category</div><div class="pbc-name">'+bestCat.label+'</div><div class="pbc-avg">'+bestCat.avg+'/10 average</div></div></div>'
     : '';
-
-  // Total time played
   var totalSecs=getTotalTimePlayed();
   var timeStr=formatTimePlayed(totalSecs);
   var timeHTML=totalSecs>0
     ? '<div class="profile-time-played"><span>&#x23F1;</span> You&#39;ve spent <strong>'+timeStr+'</strong> playing QuizPop</div>'
     : '';
-
   var card=document.getElementById("profileCard");
   card.innerHTML=
     '<div class="profile-avatar">'+initials+'</div>'+
@@ -925,14 +824,9 @@ function renderProfile(){
     '</div>'+
     bestCatHTML+
     timeHTML;
-
-  // Load hardest question from Supabase and append
   renderHardestQuestion(card);
 }
 
-
-
-// Track which questions players get wrong for hardest question feature
 function trackWrongAnswers(){
   if(!answers||!questions)return;
   answers.forEach(function(a,i){
@@ -941,46 +835,29 @@ function trackWrongAnswers(){
       sbFetch("wrong_answers?question_text=eq."+encodeURIComponent(qtext)+"&select=id,question_text,wrong_count,total_count")
         .then(function(rows){
           if(rows&&rows.length>0){
-            // Update existing record
             var r=rows[0];
-            return sbFetch("wrong_answers?id=eq."+r.id,{
-              method:"PATCH",
-              body:{wrong_count:r.wrong_count+1,total_count:r.total_count+1}
-            });
+            return sbFetch("wrong_answers?id=eq."+r.id,{method:"PATCH",body:{wrong_count:r.wrong_count+1,total_count:r.total_count+1}});
           }else{
-            // Insert new record
-            return sbFetch("wrong_answers",{
-              method:"POST",
-              body:{question_text:qtext,wrong_count:1,total_count:1}
-            });
+            return sbFetch("wrong_answers",{method:"POST",body:{question_text:qtext,wrong_count:1,total_count:1}});
           }
         }).catch(function(){});
     }else if(a.isCorrect&&questions[i]){
-      // Also increment total_count for correct answers
       var qtext=questions[i].question;
       sbFetch("wrong_answers?question_text=eq."+encodeURIComponent(qtext)+"&select=id,total_count")
         .then(function(rows){
           if(rows&&rows.length>0){
-            return sbFetch("wrong_answers?id=eq."+rows[0].id,{
-              method:"PATCH",
-              body:{total_count:rows[0].total_count+1}
-            });
+            return sbFetch("wrong_answers?id=eq."+rows[0].id,{method:"PATCH",body:{total_count:rows[0].total_count+1}});
           }
         }).catch(function(){});
     }
   });
 }
 
-// ── HARDEST QUESTION (from Supabase) ──
 function renderHardestQuestion(card){
   var div=document.createElement("div");
   div.className="profile-hardest";
   div.innerHTML='<div class="ph-label">&#x1F9E0; Hardest Question This Week</div><div class="ph-loading">Loading...</div>';
   card.appendChild(div);
-
-  // Fetch all scores with answers from last 7 days
-  // We track wrong answers per question text in Supabase scores
-  // Use a separate query to find questions with lowest correct rate
   sbFetch("wrong_answers?select=question_text,wrong_count,total_count&order=wrong_count.desc&limit=1")
     .then(function(rows){
       if(!rows||rows.length===0){
@@ -1001,24 +878,21 @@ function renderHardestQuestion(card){
 
 // ── INIT ──
 window.addEventListener("load",function(){
-  // Always load fallback immediately so the site works instantly
   TODAY_Q = FALLBACK_Q;
+  applyMode();
   if(!getUsername()){show("sSetup");return;}
   syncBadges();
   countdown("cdown1");
   renderHome();
-  // Then try to fetch fresh questions from the server (live site only)
   fetch("data/questions.json?v="+dayKey())
     .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();})
     .then(function(d){
       if(d&&d.categories){
         TODAY_Q=d.categories;
-        renderHome(); // re-render with fresh questions
+        renderHome();
       }
     })
-    .catch(function(){
-      // Silently keep using fallback - fine for preview/offline
-    });
+    .catch(function(){});
 });
 
 // ── RENDER HOME ──
@@ -1033,7 +907,6 @@ function renderHome(){
   if(completed===0){document.getElementById("dayTitle").textContent="Start today's challenge!";document.getElementById("daySub").textContent="Complete all 12 categories for a perfect day";}
   else if(completed<12){document.getElementById("dayTitle").textContent=completed+" of 12 done - "+totalScore+"/"+(completed*10)+" pts";document.getElementById("daySub").textContent=(12-completed)+" categor"+(12-completed===1?"y":"ies")+" remaining";}
   else{document.getElementById("dayTitle").textContent="All done! "+totalScore+"/120 today!";document.getElementById("daySub").textContent="Amazing — come back tomorrow for more!";}
-
   var grid=document.getElementById("catCards");grid.innerHTML="";
   CAT_KEYS.forEach(function(k){
     var r=tr[k],c=CATS[k];
@@ -1110,7 +983,11 @@ function showPastDay(date,dayData){
 function startQuiz(catKey,date,qs){
   var existing=getResult(date,catKey);
   if(existing&&date===dayKey()){questions=existing.questions;cat=catKey;score=existing.score;answers=existing.answers;totalTime=existing.totalTime||0;playingDate=date;buildResults(date);show("sResults");animateRing();return;}
-  cat=catKey;playingDate=date;show("sLoad");
+  cat=catKey;playingDate=date;
+  // Show skeleton cards while loading
+  var grid=document.getElementById("catCards");
+  if(grid){grid.innerHTML='<div class="skel skel-card"></div><div class="skel skel-card"></div><div class="skel skel-card"></div>';}
+  show("sLoad");
   setTimeout(function(){
     questions=qs;if(!questions||!questions.length){alert("No questions found!");goHome();return;}
     qIdx=0;score=0;answers=[];totalTime=0;show("sQuiz");renderQ();
@@ -1125,6 +1002,9 @@ function renderQ(){
   document.getElementById("qText").textContent=q.question;
   document.getElementById("factBox").classList.remove("show");
   document.getElementById("nextBtn").style.display="none";
+  // Slide-in animation
+  var qc=document.querySelector(".qcard");
+  if(qc){qc.classList.remove("slide-in");void qc.offsetWidth;qc.classList.add("slide-in");}
   var opts=document.getElementById("opts");opts.innerHTML="";
   ["A","B","C","D"].forEach(function(ltr,i){
     var b=document.createElement("button");b.className="opt";
@@ -1137,12 +1017,16 @@ function renderQ(){
 
 function startTimer(){
   clearInterval(ticker);timeLeft=15;
-  var tb=document.getElementById("timer");tb.textContent=15;tb.classList.remove("urg");
+  var tb=document.getElementById("timer");
+  var pb=document.getElementById("pBar");
+  tb.textContent=15;tb.classList.remove("urg");
+  pb.classList.remove("warn","danger");
   ticker=setInterval(function(){
     timeLeft--;tb.textContent=timeLeft;
-    if(timeLeft<=5)tb.classList.add("urg");
+    if(timeLeft<=4){tb.classList.add("urg");pb.classList.remove("warn");pb.classList.add("danger");}
+    else if(timeLeft<=8){pb.classList.add("warn");pb.classList.remove("danger");}
+    else{pb.classList.remove("warn","danger");}
     if(timeLeft<=0){clearInterval(ticker);totalTime+=15;pick(-1);}
-    // Subtle audio tick on last 5 seconds
     if(timeLeft<=5&&timeLeft>0)playTone(220,0.05,0.08);
   },1000);
 }
@@ -1152,8 +1036,12 @@ function pick(idx){
   var q=questions[qIdx];
   var btns=document.querySelectorAll(".opt");btns.forEach(function(b){b.disabled=true;});
   var ok=idx===q.correct;if(ok)score++;
-  if(idx>=0)btns[idx].classList.add(ok?"correct":"wrong");
+  if(idx>=0){
+    btns[idx].classList.add(ok?"correct":"wrong");
+    btns[idx].classList.add(ok?"flash-correct":"flash-wrong");
+  }
   btns[q.correct].classList.add("correct");
+  if(!ok)btns[q.correct].classList.add("flash-correct");
   answers.push({chosen:idx,correct:q.correct,isCorrect:ok});
   document.getElementById("factTxt").textContent=q.fact||"";
   document.getElementById("factBox").classList.add("show");
@@ -1173,7 +1061,6 @@ function finish(){
   buildResults(playingDate,newAch);
   show("sResults");animateRing();
   if(score===10){
-    // Epic confetti burst for perfect score
     confetti({particleCount:180,spread:100,origin:{y:0.55},colors:["#ff6b35","#ffd166","#06d6a0","#118ab2","#ef476f"]});
     setTimeout(function(){confetti({particleCount:80,angle:60,spread:70,origin:{x:0},colors:["#ff6b35","#ffd166"]});},300);
     setTimeout(function(){confetti({particleCount:80,angle:120,spread:70,origin:{x:1},colors:["#06d6a0","#118ab2"]});},500);
@@ -1185,47 +1072,64 @@ function finish(){
     var delay=1200;
     newAch.forEach(function(id){setTimeout(function(){showAchievementToast(id);},delay);delay+=3500;});
   }
-  // Mark share achievement when they click share later
 }
 
 function buildResults(date,newAch){
   var total=questions.length||10,streak=getStreak();
+  // Animated score count-up
   (function(){
     var el=document.getElementById("rScore");
-    var target=score;
-    var current=0;
+    var target=score,current=0;
     el.textContent="0";
-    var duration=800;
-    var steps=target>0?target:1;
+    var duration=800,steps=target>0?target:1;
     var interval=Math.max(30,Math.floor(duration/steps));
-    var timer=setInterval(function(){
-      current++;
-      el.textContent=current;
-      if(current>=target){clearInterval(timer);el.textContent=target;}
-    },interval);
+    var timer=setInterval(function(){current++;el.textContent=current;if(current>=target){clearInterval(timer);el.textContent=target;}},interval);
   })();
   document.getElementById("rTotal").textContent="/"+total;
   document.getElementById("rStreak").textContent=streak;
-  var msg=MSGS.find(function(m){return score>=m.min;});
+
+  // Grade badge
+  var grade, gradeClass, gradeLbl;
+  if(score===10){grade="S";gradeClass="grade-s";gradeLbl="S Rank — Perfect!";}
+  else if(score>=8){grade="A";gradeClass="grade-a";gradeLbl="A Rank";}
+  else if(score>=6){grade="B";gradeClass="grade-b";gradeLbl="B Rank";}
+  else{grade="C";gradeClass="grade-c";gradeLbl="C Rank";}
+  var gb=document.getElementById("gradeBadge");
+  gb.innerHTML='<span class="grade-badge '+gradeClass+'">'+grade+' Rank</span>';
+
+  var msg=MSGS.find(function(m){return score>=m.min;})||MSGS[MSGS.length-1];
   document.getElementById("rTitle").textContent=msg.title;
   document.getElementById("rSub").textContent=msg.sub;
   var avg=answers.length?Math.round(totalTime/answers.length):0;
   document.getElementById("stC").textContent=score;
   document.getElementById("stT").textContent=avg+"s";
-  document.getElementById("stS").textContent=streak+"🔥";
-  var sq=answers.map(function(a){return a.isCorrect?"🟩":(a.chosen===-1?"⬛":"🟥");}).join("");
+  document.getElementById("stS").textContent=streak;
+  document.getElementById("stS").innerHTML=streak+'<span class="fire f3">&#x1F525;</span>';
+
+  // Dot grid
+  var dg=document.getElementById("dotGrid");dg.innerHTML="";
+  answers.forEach(function(a){
+    var d=document.createElement("div");
+    if(a.chosen===-1){d.className="dot dot-timeout";d.textContent="−";}
+    else if(a.isCorrect){d.className="dot dot-correct";d.textContent="✓";}
+    else{d.className="dot dot-wrong";d.textContent="✗";}
+    dg.appendChild(d);
+  });
+
+  // Clean share text with filled/empty circles
+  var dots=answers.map(function(a){return a.isCorrect?"●":"○";}).join("");
   var ds=new Date().toLocaleDateString("en-GB",{day:"numeric",month:"short"});
   var uname=getUsername();
-  shareText="QuizPop "+ds+" "+CATS[cat].emoji+"\n"+(uname?uname+": ":"")+score+"/"+total+" "+CATS[cat].label+"\n\n"+sq+"\n\nPlay free at quizpop.co.uk";
+  shareText="QuizPop "+ds+" · "+CATS[cat].label+"\n"+(uname?uname+": ":"")+score+"/"+total+" ("+gradeLbl+")\n\n"+dots+"\n\nquizpop.co.uk";
   document.getElementById("shareCard").textContent=shareText;
+
   var list=document.getElementById("rvwList");list.innerHTML="";
   questions.forEach(function(q,i){
     var a=answers[i];if(!a)return;
     var d=document.createElement("div");d.className="ri "+(a.isCorrect?"ok":"bad");
-    d.innerHTML='<span class="ri-ico">'+(a.isCorrect?"✅":"❌")+'</span><div><div class="ri-q">'+q.question+'</div><div class="ri-a">'+(a.isCorrect?q.options[q.correct]:"You: "+(a.chosen>=0?q.options[a.chosen]:"Timed out")+" - Correct: "+q.options[q.correct])+'</div></div>';
+    d.innerHTML='<span class="ri-ico">'+(a.isCorrect?"✅":"❌")+'</span><div><div class="ri-q">'+q.question+'</div><div class="ri-a">'+(a.isCorrect?q.options[q.correct]:"You: "+(a.chosen>=0?q.options[a.chosen]:"Timed out")+" · Correct: "+q.options[q.correct])+'</div></div>';
     list.appendChild(d);
   });
-  // new achievements on results screen
   var naDiv=document.getElementById("newAchievements");
   if(newAch&&newAch.length>0){
     naDiv.style.display="block";
@@ -1240,12 +1144,11 @@ function buildResults(date,newAch){
 }
 
 function animateRing(){
-  var arc=document.getElementById("sArc");arc.style.strokeDashoffset="314";
-  setTimeout(function(){arc.style.transition="stroke-dashoffset 1s cubic-bezier(.4,0,.2,1)";arc.style.strokeDashoffset=String(314-(314*score/(questions.length||10)));},120);
+  var arc=document.getElementById("sArc");arc.style.strokeDashoffset="364";
+  setTimeout(function(){arc.style.transition="stroke-dashoffset 1s cubic-bezier(.4,0,.2,1)";arc.style.strokeDashoffset=String(364-(364*score/(questions.length||10)));},120);
 }
 
 function doShare(p){
-  // award share achievement
   var ach=getAchievements();
   if(ach.indexOf("share_result")<0){ach.push("share_result");localStorage.setItem("qp_ach",JSON.stringify(ach));showAchievementToast("share_result");}
   var t=encodeURIComponent(shareText||"Check out QuizPop!");
@@ -1273,18 +1176,33 @@ function countdown(id){
   };tick();setInterval(tick,1000);
 }
 
-function confetti(){
-  var cols=["#ff6b35","#ffd166","#06d6a0","#ef476f","#a8dadc"];
-  for(var i=0;i<55;i++){
+function confetti(opts){
+  var cols=(opts&&opts.colors)||["#ff6b35","#ffd166","#06d6a0","#ef476f","#a8dadc"];
+  var count=(opts&&opts.particleCount)||55;
+  for(var i=0;i<count;i++){
     (function(i){setTimeout(function(){
       var el=document.createElement("div");el.className="cf";
-      el.style.cssText="left:"+Math.random()*100+"vw;background:"+cols[i%5]+";animation-duration:"+(1.5+Math.random()*2)+"s;animation-delay:"+Math.random()*0.4+"s;transform:rotate("+Math.random()*360+"deg)";
+      el.style.cssText="left:"+Math.random()*100+"vw;background:"+cols[i%cols.length]+";animation-duration:"+(1.5+Math.random()*2)+"s;animation-delay:"+Math.random()*0.4+"s;transform:rotate("+Math.random()*360+"deg)";
       document.body.appendChild(el);setTimeout(function(){el.remove();},4000);
     },i*25);})(i);
   }
 }
 
-// ── SOUND EFFECTS (Web Audio API - no files needed) ──
+// ── DARK/LIGHT MODE ──
+function toggleMode(){
+  var isLight=document.body.classList.toggle("light");
+  localStorage.setItem("qp_mode",isLight?"light":"dark");
+  var knob=document.querySelector("#modeBtn .toggle-knob");
+  if(knob)knob.textContent=isLight?"☀️":"🌙";
+}
+function applyMode(){
+  var m=localStorage.getItem("qp_mode");
+  if(m==="light"){
+    document.body.classList.add("light");
+    var knob=document.querySelector("#modeBtn .toggle-knob");
+    if(knob)knob.textContent="☀️";
+  }
+}
 var audioCtx=null;
 function getAudio(){if(!audioCtx)try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}return audioCtx;}
 function playTone(freq,gain,duration){
@@ -1299,170 +1217,110 @@ function playTone(freq,gain,duration){
   }catch(e){}
 }
 
-
-// Submit score to Supabase after every quiz
-function submitScoreToLeaderboard() {
-  var username = getUsername();
-  if (!username) return;
-  var dateKey = playingDate || dayKey();
-
-  // Submit individual score
-  sbFetch("scores", {
-    method: "POST",
-    body: { username: username, category: cat, score: score, date: dateKey }
-  }).then(function() {
-    // After submitting, check leaderboard position for achievements
-    checkLeaderboardAchievements(username, dateKey);
-    // Track wrong answers for hardest question feature
+// ── LEADERBOARD & SCORING ──
+function submitScoreToLeaderboard(){
+  var username=getUsername();
+  if(!username)return;
+  var dateKey=playingDate||dayKey();
+  sbFetch("scores",{
+    method:"POST",
+    body:{username:username,category:cat,score:score,date:dateKey}
+  }).then(function(){
+    checkLeaderboardAchievements(username,dateKey);
     trackWrongAnswers();
-  }).catch(function(e) { console.warn("Score submit failed:", e); });
-
-  // Upsert streak
-  var streak = getStreak();
-  sbFetch("streaks?username=eq." + encodeURIComponent(username), {})
-    .then(function(rows) {
-      var bestEver = rows && rows.length > 0 ? Math.max(rows[0].best_streak || 0, streak) : streak;
-      return sbFetch("streaks", {
-        method: "POST",
-        upsert: true,
-        body: { username: username, current_streak: streak, best_streak: bestEver, last_updated: dateKey }
+  }).catch(function(e){console.warn("Score submit failed:",e);});
+  var streak=getStreak();
+  sbFetch("streaks?username=eq."+encodeURIComponent(username),{})
+    .then(function(rows){
+      var bestEver=rows&&rows.length>0?Math.max(rows[0].best_streak||0,streak):streak;
+      return sbFetch("streaks",{
+        method:"POST",upsert:true,
+        body:{username:username,current_streak:streak,best_streak:bestEver,last_updated:dateKey}
       });
     })
-    .catch(function(e) { console.warn("Streak submit failed:", e); });
+    .catch(function(e){console.warn("Streak submit failed:",e);});
 }
 
-// Check leaderboard position and award achievements
-function checkLeaderboardAchievements(username, dateKey) {
-  sbFetch("scores?date=eq." + dateKey + "&select=username,score")
-    .then(function(rows) {
-      // Aggregate total score per user
-      var totals = {};
-      (rows||[]).forEach(function(r) {
-        totals[r.username] = (totals[r.username] || 0) + r.score;
-      });
-      // Sort by total descending
-      var sorted = Object.keys(totals).sort(function(a,b) {
-        return totals[b] - totals[a];
-      });
-      var myRank = sorted.indexOf(username) + 1;
-      if (myRank === 0) return;
-
-      var ach = JSON.parse(localStorage.getItem("qp_ach") || "{}");
-      var newOnes = [];
-
-      if (myRank === 1  && !ach["lb_first"])  { ach["lb_first"]  = Date.now(); newOnes.push("lb_first"); }
-      if (myRank === 2  && !ach["lb_second"]) { ach["lb_second"] = Date.now(); newOnes.push("lb_second"); }
-      if (myRank === 3  && !ach["lb_third"])  { ach["lb_third"]  = Date.now(); newOnes.push("lb_third"); }
-      if (myRank <= 10  && !ach["lb_top10"])  { ach["lb_top10"]  = Date.now(); newOnes.push("lb_top10"); }
-
-      if (newOnes.length > 0) {
-        localStorage.setItem("qp_ach", JSON.stringify(ach));
-        // Show toast for first new achievement
-        var a = ACHIEVEMENTS.find(function(x){ return x.id === newOnes[0]; });
-        if (a) showAchToast(a);
+function checkLeaderboardAchievements(username,dateKey){
+  sbFetch("scores?date=eq."+dateKey+"&select=username,score")
+    .then(function(rows){
+      var totals={};
+      (rows||[]).forEach(function(r){totals[r.username]=(totals[r.username]||0)+r.score;});
+      var sorted=Object.keys(totals).sort(function(a,b){return totals[b]-totals[a];});
+      var myRank=sorted.indexOf(username)+1;
+      if(myRank===0)return;
+      var ach=JSON.parse(localStorage.getItem("qp_ach")||"[]");
+      var newOnes=[];
+      if(myRank===1 &&ach.indexOf("lb_first")<0) {ach.push("lb_first"); newOnes.push("lb_first");}
+      if(myRank===2 &&ach.indexOf("lb_second")<0){ach.push("lb_second");newOnes.push("lb_second");}
+      if(myRank===3 &&ach.indexOf("lb_third")<0) {ach.push("lb_third"); newOnes.push("lb_third");}
+      if(myRank<=10&&ach.indexOf("lb_top10")<0)  {ach.push("lb_top10"); newOnes.push("lb_top10");}
+      if(newOnes.length>0){
+        localStorage.setItem("qp_ach",JSON.stringify(ach));
+        var a=ACHIEVEMENTS.find(function(x){return x.id===newOnes[0];});
+        if(a)showAchToast(a);
       }
     })
-    .catch(function(e) { console.warn("Leaderboard achievement check failed:", e); });
+    .catch(function(e){console.warn("Leaderboard achievement check failed:",e);});
 }
 
-// ── RENDER LEADERBOARD ──
-function renderLeaderboard() {
-  var username = getUsername();
-  var today = dayKey();
-
-  // Show player count
-  sbFetch("scores?date=eq." + today + "&select=username")
-    .then(function(rows) {
-      var unique = new Set((rows||[]).map(function(r){return r.username;}));
-      document.getElementById("lbPlayerCount").textContent = unique.size + " people played today";
+function renderLeaderboard(){
+  var username=getUsername();
+  var today=dayKey();
+  sbFetch("scores?date=eq."+today+"&select=username")
+    .then(function(rows){
+      var unique=new Set((rows||[]).map(function(r){return r.username;}));
+      document.getElementById("lbPlayerCount").textContent=unique.size+" people played today";
     }).catch(function(){
-      document.getElementById("lbPlayerCount").textContent = "Live scores";
+      document.getElementById("lbPlayerCount").textContent="Live scores";
     });
-
-  // Today's leaderboard — sum scores per user for today
-  sbFetch("scores?date=eq." + today + "&select=username,score&order=score.desc")
-    .then(function(rows) {
-      // Aggregate total score per username
-      var totals = {};
-      (rows||[]).forEach(function(r) {
-        totals[r.username] = (totals[r.username] || 0) + r.score;
-      });
-      // Sort by total
-      var sorted = Object.keys(totals).map(function(u) {
-        return { username: u, total: totals[u] };
-      }).sort(function(a,b) { return b.total - a.total; }).slice(0, 10);
-
-      var myRank = -1;
-      var myTotal = totals[username] || 0;
-      var allSorted = Object.keys(totals).map(function(u){
-        return {username:u,total:totals[u]};
-      }).sort(function(a,b){return b.total-a.total;});
+  sbFetch("scores?date=eq."+today+"&select=username,score&order=score.desc")
+    .then(function(rows){
+      var totals={};
+      (rows||[]).forEach(function(r){totals[r.username]=(totals[r.username]||0)+r.score;});
+      var sorted=Object.keys(totals).map(function(u){return{username:u,total:totals[u]};}).sort(function(a,b){return b.total-a.total;}).slice(0,10);
+      var myRank=-1;
+      var allSorted=Object.keys(totals).map(function(u){return{username:u,total:totals[u]};}).sort(function(a,b){return b.total-a.total;});
       allSorted.forEach(function(r,i){if(r.username===username)myRank=i+1;});
-
-      var container = document.getElementById("lbToday");
-      container.innerHTML = "";
-
-      // My position banner
-      if (myRank > 0) {
-        var pos = document.createElement("div");
-        pos.className = "lb-position";
-        pos.innerHTML = '<span class="lbp-label">Your position today</span><span class="lbp-rank">#' + myRank + ' of ' + allSorted.length + '</span>';
+      var container=document.getElementById("lbToday");
+      container.innerHTML="";
+      if(myRank>0){
+        var pos=document.createElement("div");
+        pos.className="lb-position";
+        pos.innerHTML='<span class="lbp-label">Your position today</span><span class="lbp-rank">#'+myRank+' of '+allSorted.length+'</span>';
         container.appendChild(pos);
       }
-
-      if (sorted.length === 0) {
-        container.innerHTML += '<div class="lb-empty">No scores yet today — be the first!</div>';
-        return;
-      }
-
-      var medals = ["&#x1F947;","&#x1F948;","&#x1F949;"];
-      sorted.forEach(function(row, i) {
-        var isMe = row.username === username;
-        var div = document.createElement("div");
-        div.className = "lb-row" + (isMe?" me":"") + (i<3?" top3":"");
-        var rankClass = i===0?"r1":i===1?"r2":i===2?"r3":"";
-        var rankDisplay = i < 3 ? medals[i] : "#"+(i+1);
-        div.innerHTML =
-          '<span class="lb-rank ' + rankClass + '">' + rankDisplay + '</span>' +
-          '<span class="lb-name">' + row.username + (isMe?'<span class="lb-you">you</span>':'') + '</span>' +
-          '<span class="lb-val">' + row.total + ' pts</span>';
+      if(sorted.length===0){container.innerHTML+='<div class="lb-empty">No scores yet today — be the first!</div>';return;}
+      var medals=["&#x1F947;","&#x1F948;","&#x1F949;"];
+      sorted.forEach(function(row,i){
+        var isMe=row.username===username;
+        var div=document.createElement("div");
+        div.className="lb-row"+(isMe?" me":"")+(i<3?" top3":"");
+        var rankClass=i===0?"r1":i===1?"r2":i===2?"r3":"";
+        var rankDisplay=i<3?medals[i]:"#"+(i+1);
+        div.innerHTML='<span class="lb-rank '+rankClass+'">'+rankDisplay+'</span><span class="lb-name">'+row.username+(isMe?'<span class="lb-you">you</span>':'')+'</span><span class="lb-val">'+row.total+' pts</span>';
         container.appendChild(div);
       });
     })
-    .catch(function() {
-      document.getElementById("lbToday").innerHTML = '<div class="lb-empty">Could not load scores</div>';
-    });
-
-  // All time streaks leaderboard
+    .catch(function(){document.getElementById("lbToday").innerHTML='<div class="lb-empty">Could not load scores</div>';});
   sbFetch("streaks?select=username,best_streak&order=best_streak.desc&limit=10")
-    .then(function(rows) {
-      var container = document.getElementById("lbStreaks");
-      container.innerHTML = "";
-
-      if (!rows || rows.length === 0) {
-        container.innerHTML = '<div class="lb-empty">No streaks yet — keep playing!</div>';
-        return;
-      }
-
-      var medals = ["&#x1F947;","&#x1F948;","&#x1F949;"];
-      rows.forEach(function(row, i) {
-        var isMe = row.username === username;
-        var div = document.createElement("div");
-        div.className = "lb-row" + (isMe?" me":"") + (i<3?" top3":"");
-        var rankClass = i===0?"r1":i===1?"r2":i===2?"r3":"";
-        var rankDisplay = i < 3 ? medals[i] : "#"+(i+1);
-        div.innerHTML =
-          '<span class="lb-rank ' + rankClass + '">' + rankDisplay + '</span>' +
-          '<span class="lb-name">' + row.username + (isMe?'<span class="lb-you">you</span>':'') + '</span>' +
-          '<span class="lb-val streak">' + row.best_streak + ' &#x1F525;</span>';
+    .then(function(rows){
+      var container=document.getElementById("lbStreaks");
+      container.innerHTML="";
+      if(!rows||rows.length===0){container.innerHTML='<div class="lb-empty">No streaks yet — keep playing!</div>';return;}
+      var medals=["&#x1F947;","&#x1F948;","&#x1F949;"];
+      rows.forEach(function(row,i){
+        var isMe=row.username===username;
+        var div=document.createElement("div");
+        div.className="lb-row"+(isMe?" me":"")+(i<3?" top3":"");
+        var rankClass=i===0?"r1":i===1?"r2":i===2?"r3":"";
+        var rankDisplay=i<3?medals[i]:"#"+(i+1);
+        div.innerHTML='<span class="lb-rank '+rankClass+'">'+rankDisplay+'</span><span class="lb-name">'+row.username+(isMe?'<span class="lb-you">you</span>':'')+'</span><span class="lb-val streak">'+row.best_streak+' <span class="fire f2">&#x1F525;</span></span>';
         container.appendChild(div);
       });
     })
-    .catch(function() {
-      document.getElementById("lbStreaks").innerHTML = '<div class="lb-empty">Could not load streaks</div>';
-    });
+    .catch(function(){document.getElementById("lbStreaks").innerHTML='<div class="lb-empty">Could not load streaks</div>';});
 }
-
 </script>
 </body>
 </html>
