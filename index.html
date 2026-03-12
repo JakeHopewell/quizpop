@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QuizPop - Daily Brain Challenge</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3563124573162722"
      crossorigin="anonymous">
 
@@ -18,6 +19,11 @@ function submitScoreToLeaderboard() {
   sbFetch("scores", {
     method: "POST",
     body: { username: username, category: cat, score: score, date: dateKey }
+  }).then(function() {
+    // After submitting, check leaderboard position for achievements
+    checkLeaderboardAchievements(username, dateKey);
+    // Track wrong answers for hardest question feature
+    trackWrongAnswers();
   }).catch(function(e) { console.warn("Score submit failed:", e); });
 
   // Upsert streak
@@ -32,6 +38,40 @@ function submitScoreToLeaderboard() {
       });
     })
     .catch(function(e) { console.warn("Streak submit failed:", e); });
+}
+
+// Check leaderboard position and award achievements
+function checkLeaderboardAchievements(username, dateKey) {
+  sbFetch("scores?date=eq." + dateKey + "&select=username,score")
+    .then(function(rows) {
+      // Aggregate total score per user
+      var totals = {};
+      (rows||[]).forEach(function(r) {
+        totals[r.username] = (totals[r.username] || 0) + r.score;
+      });
+      // Sort by total descending
+      var sorted = Object.keys(totals).sort(function(a,b) {
+        return totals[b] - totals[a];
+      });
+      var myRank = sorted.indexOf(username) + 1;
+      if (myRank === 0) return;
+
+      var ach = JSON.parse(localStorage.getItem("qp_ach") || "{}");
+      var newOnes = [];
+
+      if (myRank === 1  && !ach["lb_first"])  { ach["lb_first"]  = Date.now(); newOnes.push("lb_first"); }
+      if (myRank === 2  && !ach["lb_second"]) { ach["lb_second"] = Date.now(); newOnes.push("lb_second"); }
+      if (myRank === 3  && !ach["lb_third"])  { ach["lb_third"]  = Date.now(); newOnes.push("lb_third"); }
+      if (myRank <= 10  && !ach["lb_top10"])  { ach["lb_top10"]  = Date.now(); newOnes.push("lb_top10"); }
+
+      if (newOnes.length > 0) {
+        localStorage.setItem("qp_ach", JSON.stringify(ach));
+        // Show toast for first new achievement
+        var a = ACHIEVEMENTS.find(function(x){ return x.id === newOnes[0]; });
+        if (a) showAchToast(a);
+      }
+    })
+    .catch(function(e) { console.warn("Leaderboard achievement check failed:", e); });
 }
 
 // ── RENDER LEADERBOARD ──
@@ -333,6 +373,21 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
 .lb-position .lbp-label{font-size:12px;color:var(--muted)}
 .lb-position .lbp-rank{font-family:'Righteous',cursive;font-size:18px;color:var(--accent)}
 .lb-empty{text-align:center;color:var(--muted);font-size:13px;padding:20px}
+
+/* PROFILE EXTRAS */
+.profile-best-cat{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-top:14px}
+.pbc-emoji{font-size:28px;flex-shrink:0}
+.pbc-info{flex:1}
+.pbc-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.pbc-name{font-weight:700;font-size:15px}
+.pbc-avg{font-size:12px;color:var(--accent2);margin-top:2px}
+.profile-time-played{text-align:center;font-size:13px;color:var(--muted);margin-top:12px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:11px}
+.profile-time-played strong{color:var(--text)}
+.profile-hardest{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-top:14px}
+.ph-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.ph-question{font-weight:600;font-size:14px;line-height:1.4;margin-bottom:6px}
+.ph-stat{font-size:12px;color:var(--accent);margin-top:4px}
+.ph-loading{font-size:12px;color:var(--muted);text-align:center;padding:8px}
 </style>
 </head>
 <body>
@@ -377,7 +432,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
       <button class="tab active" id="tabToday"   onclick="showTab('today')">Today</button>
       <button class="tab"        id="tabPast"    onclick="showTab('past')">Past</button>
       <button class="tab"        id="tabAch"     onclick="showTab('ach')">Badges</button>
-      <button class="tab"        id="tabBoard"   onclick="showTab('board')">&#x1F3C6;</button>
+      <button class="tab"        id="tabBoard"   onclick="showTab('board')">Leaderboard</button>
       <button class="tab"        id="tabProfile" onclick="showTab('profile')">Profile</button>
     </div>
     <div id="panelToday"><div class="cat-cards" id="catCards"></div></div>
@@ -414,7 +469,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
       <span class="setup-emoji">&#x1F9E0;</span>
       <div class="setup-title">Welcome to QuizPop!</div>
       <div class="setup-sub">Pick a username to track your scores,<br>streaks and achievements.</div>
-      <input class="setup-input" id="usernameInput" type="text" maxlength="18" placeholder="e.g. BrainiacJake" autocomplete="off"/>
+      <input class="setup-input" id="usernameInput" type="text" maxlength="18" placeholder="e.g. BrainBox42" autocomplete="off"/>
       <div class="setup-hint">Letters, numbers and underscores only</div>
       <button class="btn btn-primary" onclick="saveUsername()">Let's Go! &#x1F680;</button>
     </div>
@@ -571,6 +626,10 @@ var ACHIEVEMENTS = [
   {id:"total_500",       icon:"🧠", name:"Big Brain",           desc:"Answer 500 questions correctly in total"},
   {id:"total_1000",      icon:"🌌", name:"Galaxy Brain",        desc:"Answer 1000 questions correctly in total"},
   {id:"mixed_master",    icon:"🎲", name:"Jack of All Trades",  desc:"Complete all 12 categories in one day 3 times"},
+  {id:"lb_first",         icon:"🥇", name:"Quiz Overlord",         desc:"Finish #1 on the daily leaderboard"},
+  {id:"lb_second",        icon:"🥈", name:"Almost Had It",          desc:"Finish #2 on the daily leaderboard"},
+  {id:"lb_third",         icon:"🥉", name:"Show-Off",               desc:"Finish #3 on the daily leaderboard"},
+  {id:"lb_top10",         icon:"🎖️", name:"Not Bad, Not Bad",       desc:"Finish in the top 10 on the daily leaderboard"},
 ];
 
 var MSGS = [
@@ -780,6 +839,55 @@ function changeUsername(){
 }
 
 // ── PROFILE ──
+function getBestCategory(){
+  // Scan all localStorage keys for results and find best avg score per category
+  var catScores={};
+  var catCounts={};
+  for(var i=0;i<localStorage.length;i++){
+    var k=localStorage.key(i);
+    if(k&&k.indexOf("qp_res_")===0){
+      try{
+        var r=JSON.parse(localStorage.getItem(k));
+        if(r&&r.cat&&typeof r.score==="number"){
+          catScores[r.cat]=(catScores[r.cat]||0)+r.score;
+          catCounts[r.cat]=(catCounts[r.cat]||0)+1;
+        }
+      }catch(e){}
+    }
+  }
+  var bestCat=null,bestAvg=0;
+  Object.keys(catScores).forEach(function(c){
+    var avg=catScores[c]/catCounts[c];
+    if(avg>bestAvg){bestAvg=avg;bestCat=c;}
+  });
+  if(!bestCat)return null;
+  return {cat:bestCat,avg:Math.round(bestAvg*10)/10,label:CATS[bestCat]?CATS[bestCat].label:bestCat,emoji:CATS[bestCat]?CATS[bestCat].emoji:"🎯"};
+}
+
+function getTotalTimePlayed(){
+  // Sum all totalTime values from saved results (in seconds)
+  var total=0;
+  for(var i=0;i<localStorage.length;i++){
+    var k=localStorage.key(i);
+    if(k&&k.indexOf("qp_res_")===0){
+      try{
+        var r=JSON.parse(localStorage.getItem(k));
+        if(r&&r.totalTime)total+=r.totalTime;
+      }catch(e){}
+    }
+  }
+  return total;
+}
+
+function formatTimePlayed(seconds){
+  if(seconds<60)return seconds+"s";
+  if(seconds<3600){var m=Math.floor(seconds/60);return m+" min"+(m!==1?"s":"");}
+  var h=Math.floor(seconds/3600);
+  var m=Math.floor((seconds%3600)/60);
+  if(m===0)return h+" hour"+(h!==1?"s":"");
+  return h+"h "+m+"m";
+}
+
 function renderProfile(){
   var name=getUsername()||"Anonymous";
   var streak=getStreak(),best=getBest(),tc=getTotalCorrect(),dp=getDaysPlayed().length;
@@ -788,6 +896,20 @@ function renderProfile(){
   var jd=new Date(parseInt(jparts[0]),parseInt(jparts[1]),parseInt(jparts[2]));
   var jstr=jd.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
   var initials=name.substring(0,2).toUpperCase();
+
+  // Best category
+  var bestCat=getBestCategory();
+  var bestCatHTML=bestCat
+    ? '<div class="profile-best-cat"><span class="pbc-emoji">'+bestCat.emoji+'</span><div class="pbc-info"><div class="pbc-label">Best Category</div><div class="pbc-name">'+bestCat.label+'</div><div class="pbc-avg">'+bestCat.avg+'/10 average</div></div></div>'
+    : '';
+
+  // Total time played
+  var totalSecs=getTotalTimePlayed();
+  var timeStr=formatTimePlayed(totalSecs);
+  var timeHTML=totalSecs>0
+    ? '<div class="profile-time-played"><span>&#x23F1;</span> You&#39;ve spent <strong>'+timeStr+'</strong> playing QuizPop</div>'
+    : '';
+
   var card=document.getElementById("profileCard");
   card.innerHTML=
     '<div class="profile-avatar">'+initials+'</div>'+
@@ -800,7 +922,81 @@ function renderProfile(){
       '<div class="ps-item"><div class="ps-val">'+dp+'</div><div class="ps-lbl">Days Played</div></div>'+
       '<div class="ps-item"><div class="ps-val">'+getAchievements().length+'</div><div class="ps-lbl">Badges</div></div>'+
       '<div class="ps-item"><div class="ps-val">'+getPerfectDays()+'</div><div class="ps-lbl">Perfect Days</div></div>'+
-    '</div>';
+    '</div>'+
+    bestCatHTML+
+    timeHTML;
+
+  // Load hardest question from Supabase and append
+  renderHardestQuestion(card);
+}
+
+
+
+// Track which questions players get wrong for hardest question feature
+function trackWrongAnswers(){
+  if(!answers||!questions)return;
+  answers.forEach(function(a,i){
+    if(!a.isCorrect&&questions[i]){
+      var qtext=questions[i].question;
+      sbFetch("wrong_answers?question_text=eq."+encodeURIComponent(qtext)+"&select=id,question_text,wrong_count,total_count")
+        .then(function(rows){
+          if(rows&&rows.length>0){
+            // Update existing record
+            var r=rows[0];
+            return sbFetch("wrong_answers?id=eq."+r.id,{
+              method:"PATCH",
+              body:{wrong_count:r.wrong_count+1,total_count:r.total_count+1}
+            });
+          }else{
+            // Insert new record
+            return sbFetch("wrong_answers",{
+              method:"POST",
+              body:{question_text:qtext,wrong_count:1,total_count:1}
+            });
+          }
+        }).catch(function(){});
+    }else if(a.isCorrect&&questions[i]){
+      // Also increment total_count for correct answers
+      var qtext=questions[i].question;
+      sbFetch("wrong_answers?question_text=eq."+encodeURIComponent(qtext)+"&select=id,total_count")
+        .then(function(rows){
+          if(rows&&rows.length>0){
+            return sbFetch("wrong_answers?id=eq."+rows[0].id,{
+              method:"PATCH",
+              body:{total_count:rows[0].total_count+1}
+            });
+          }
+        }).catch(function(){});
+    }
+  });
+}
+
+// ── HARDEST QUESTION (from Supabase) ──
+function renderHardestQuestion(card){
+  var div=document.createElement("div");
+  div.className="profile-hardest";
+  div.innerHTML='<div class="ph-label">&#x1F9E0; Hardest Question This Week</div><div class="ph-loading">Loading...</div>';
+  card.appendChild(div);
+
+  // Fetch all scores with answers from last 7 days
+  // We track wrong answers per question text in Supabase scores
+  // Use a separate query to find questions with lowest correct rate
+  sbFetch("wrong_answers?select=question_text,wrong_count,total_count&order=wrong_count.desc&limit=1")
+    .then(function(rows){
+      if(!rows||rows.length===0){
+        div.innerHTML='<div class="ph-label">&#x1F9E0; Hardest Question This Week</div><div class="ph-loading">Not enough data yet — keep playing!</div>';
+        return;
+      }
+      var r=rows[0];
+      var pct=Math.round((r.wrong_count/r.total_count)*100);
+      div.innerHTML=
+        '<div class="ph-label">&#x1F9E0; Hardest Question This Week</div>'+
+        '<div class="ph-question">'+r.question_text+'</div>'+
+        '<div class="ph-stat">'+pct+'% of players got this wrong</div>';
+    })
+    .catch(function(){
+      div.innerHTML='<div class="ph-label">&#x1F9E0; Hardest Question This Week</div><div class="ph-loading">Not enough data yet — keep playing!</div>';
+    });
 }
 
 // ── INIT ──
@@ -976,7 +1172,14 @@ function finish(){
   var newAch=checkAchievements();
   buildResults(playingDate,newAch);
   show("sResults");animateRing();
-  if(score>=7)confetti();
+  if(score===10){
+    // Epic confetti burst for perfect score
+    confetti({particleCount:180,spread:100,origin:{y:0.55},colors:["#ff6b35","#ffd166","#06d6a0","#118ab2","#ef476f"]});
+    setTimeout(function(){confetti({particleCount:80,angle:60,spread:70,origin:{x:0},colors:["#ff6b35","#ffd166"]});},300);
+    setTimeout(function(){confetti({particleCount:80,angle:120,spread:70,origin:{x:1},colors:["#06d6a0","#118ab2"]});},500);
+  } else if(score>=7){
+    confetti({particleCount:60,spread:60,origin:{y:0.6}});
+  }
   countdown("cdown1");
   if(newAch.length>0){
     var delay=1200;
@@ -987,7 +1190,20 @@ function finish(){
 
 function buildResults(date,newAch){
   var total=questions.length||10,streak=getStreak();
-  document.getElementById("rScore").textContent=score;
+  (function(){
+    var el=document.getElementById("rScore");
+    var target=score;
+    var current=0;
+    el.textContent="0";
+    var duration=800;
+    var steps=target>0?target:1;
+    var interval=Math.max(30,Math.floor(duration/steps));
+    var timer=setInterval(function(){
+      current++;
+      el.textContent=current;
+      if(current>=target){clearInterval(timer);el.textContent=target;}
+    },interval);
+  })();
   document.getElementById("rTotal").textContent="/"+total;
   document.getElementById("rStreak").textContent=streak;
   var msg=MSGS.find(function(m){return score>=m.min;});
@@ -1094,6 +1310,11 @@ function submitScoreToLeaderboard() {
   sbFetch("scores", {
     method: "POST",
     body: { username: username, category: cat, score: score, date: dateKey }
+  }).then(function() {
+    // After submitting, check leaderboard position for achievements
+    checkLeaderboardAchievements(username, dateKey);
+    // Track wrong answers for hardest question feature
+    trackWrongAnswers();
   }).catch(function(e) { console.warn("Score submit failed:", e); });
 
   // Upsert streak
@@ -1108,6 +1329,40 @@ function submitScoreToLeaderboard() {
       });
     })
     .catch(function(e) { console.warn("Streak submit failed:", e); });
+}
+
+// Check leaderboard position and award achievements
+function checkLeaderboardAchievements(username, dateKey) {
+  sbFetch("scores?date=eq." + dateKey + "&select=username,score")
+    .then(function(rows) {
+      // Aggregate total score per user
+      var totals = {};
+      (rows||[]).forEach(function(r) {
+        totals[r.username] = (totals[r.username] || 0) + r.score;
+      });
+      // Sort by total descending
+      var sorted = Object.keys(totals).sort(function(a,b) {
+        return totals[b] - totals[a];
+      });
+      var myRank = sorted.indexOf(username) + 1;
+      if (myRank === 0) return;
+
+      var ach = JSON.parse(localStorage.getItem("qp_ach") || "{}");
+      var newOnes = [];
+
+      if (myRank === 1  && !ach["lb_first"])  { ach["lb_first"]  = Date.now(); newOnes.push("lb_first"); }
+      if (myRank === 2  && !ach["lb_second"]) { ach["lb_second"] = Date.now(); newOnes.push("lb_second"); }
+      if (myRank === 3  && !ach["lb_third"])  { ach["lb_third"]  = Date.now(); newOnes.push("lb_third"); }
+      if (myRank <= 10  && !ach["lb_top10"])  { ach["lb_top10"]  = Date.now(); newOnes.push("lb_top10"); }
+
+      if (newOnes.length > 0) {
+        localStorage.setItem("qp_ach", JSON.stringify(ach));
+        // Show toast for first new achievement
+        var a = ACHIEVEMENTS.find(function(x){ return x.id === newOnes[0]; });
+        if (a) showAchToast(a);
+      }
+    })
+    .catch(function(e) { console.warn("Leaderboard achievement check failed:", e); });
 }
 
 // ── RENDER LEADERBOARD ──
