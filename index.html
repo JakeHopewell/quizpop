@@ -102,6 +102,14 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
 .calling-card{border-radius:24px;margin-bottom:14px;position:relative;overflow:hidden;border:2px solid var(--border);background:var(--card);transition:border-color .4s,box-shadow .4s,transform .25s;cursor:pointer}
 .calling-card:hover{transform:translateY(-2px)}
 .calling-card.cc-expanded{cursor:default}
+.calling-card.cc-shop-neon  {background:linear-gradient(145deg,#001a1a,#003333);border-color:#00ffcc55}
+.calling-card.cc-shop-rose  {background:linear-gradient(145deg,#2e0a1e,#4e1535);border-color:#ff6b9d55}
+.calling-card.cc-shop-slate {background:linear-gradient(145deg,#0d1520,#1a2535);border-color:#4cc9f055}
+.calling-card.cc-shop-amber {background:linear-gradient(145deg,#1e1200,#3d2600);border-color:#ffd16655}
+.calling-card.cc-shop-ice   {background:linear-gradient(145deg,#0d1e2e,#0d2e3e);border-color:#a8e6ff55}
+.calling-card.cc-shop-toxic {background:linear-gradient(145deg,#0a1e00,#163300);border-color:#39ff1455}
+.calling-card.cc-shop-space {background:linear-gradient(145deg,#050010,#0f0025);border-color:#9b5de555}
+.calling-card.cc-shop-prism {background:linear-gradient(145deg,#1a001e,#001e1a,#1e1a00);border-color:#ffffff30}
 .calling-card.cc-blue  {background:linear-gradient(145deg,#0b1622,#162840);border-color:#4cc9f0}
 .calling-card.cc-green {background:linear-gradient(145deg,#0b1c14,#153322);border-color:#06d6a0}
 .calling-card.cc-purple{background:linear-gradient(145deg,#160b2a,#261642);border-color:#9b5de5}
@@ -281,7 +289,7 @@ body.light{
 body.light::after{background-image:linear-gradient(rgba(0,0,0,0.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.055) 1px,transparent 1px)}
 body.light body::before{background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(232,93,32,0.07),transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(201,144,10,0.06),transparent 60%)}
 /* Calling card always stays dark — force white text in light mode */
-body.light .calling-card,body.light .calling-card *{color:#fff!important}
+body.light .calling-card,body.light .calling-card *:not(.ne-rainbow):not(.ne-shimmer){color:#fff!important}
 body.light .calling-card .cc-expand-hint{color:rgba(255,255,255,0.25)!important}
 body.light .calling-card .cc-close-pill{color:rgba(255,255,255,0.35)!important}
 body.light .calling-card .cc-xp-next{color:rgba(255,255,255,0.4)!important}
@@ -433,10 +441,10 @@ body.light .mode-toggle .toggle-knob{transform:translateX(28px)}
 .ne-glow-purple{text-shadow:0 0 8px rgba(155,93,229,0.9),0 0 16px rgba(155,93,229,0.5)!important}
 .ne-glow-gold{text-shadow:0 0 8px rgba(255,209,102,0.9),0 0 16px rgba(255,209,102,0.5)!important}
 .ne-glow-red{text-shadow:0 0 8px rgba(239,71,111,0.9),0 0 16px rgba(239,71,111,0.5)!important}
-@keyframes neRainbow{0%{color:#ff6b35}16%{color:#ffd166}33%{color:#06d6a0}50%{color:#4cc9f0}66%{color:#9b5de5}83%{color:#ef476f}100%{color:#ff6b35}}
+@keyframes neRainbow{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(360deg)}}
+.ne-rainbow{color:#ff6b35!important;animation:neRainbow 2s linear infinite!important;display:inline-block}
 @keyframes nePulse{0%,100%{opacity:1}50%{opacity:0.55}}
 @keyframes neShimmer{0%{color:#fff}50%{color:#ffd166}100%{color:#fff}}
-.ne-rainbow{animation:neRainbow 3s linear infinite!important;color:unset!important}
 .ne-pulse-glow{animation:nePulse 1.8s ease infinite}
 .ne-shimmer{animation:neShimmer 2s ease infinite!important}
 </style>
@@ -518,6 +526,7 @@ body.light .mode-toggle .toggle-knob{transform:translateX(28px)}
           <button class="cc-sheet-tab active" id="cst-title"  onclick="ccSheetTab('title')">🏷️ Title</button>
           <button class="cc-sheet-tab"        id="cst-colour" onclick="ccSheetTab('colour')">🎨 Colour</button>
           <button class="cc-sheet-tab"        id="cst-avatar" onclick="ccSheetTab('avatar')">😀 Avatar</button>
+          <button class="cc-sheet-tab"        id="cst-effects" onclick="ccSheetTab('effects')">✨ Effects</button>
           <button class="cc-sheet-tab"        id="cst-name"   onclick="ccSheetTab('name')">✏️ Name</button>
         </div>
         <div class="cc-sheet-body" id="ccSheetBody"></div>
@@ -734,6 +743,22 @@ var ACHIEVEMENTS = [
   {id:"lb_second",       icon:"🥈", name:"Almost Had It",       desc:"Finish #2 on the daily leaderboard"},
   {id:"lb_third",        icon:"🥉", name:"Show-Off",            desc:"Finish #3 on the daily leaderboard"},
   {id:"lb_top10",        icon:"🎖️", name:"Not Bad, Not Bad",    desc:"Finish in the top 10 on the daily leaderboard"},
+  // Token / shop
+  {id:"first_purchase",  icon:"🛍️", name:"Window Shopper",      desc:"Make your first token shop purchase"},
+  {id:"spent_100",       icon:"💸", name:"High Roller",         desc:"Spend 100 tokens in the shop"},
+  {id:"spent_500",       icon:"🤑", name:"Loaded",              desc:"Spend 500 tokens in the shop"},
+  {id:"earned_50",       icon:"🪙", name:"Pocket Change",       desc:"Earn 50 tokens in total"},
+  {id:"earned_250",      icon:"💰", name:"Token Tycoon",        desc:"Earn 250 tokens in total"},
+  // Time / behaviour
+  {id:"weekend_warrior", icon:"📅", name:"Weekend Warrior",     desc:"Complete a quiz on a Saturday and Sunday"},
+  {id:"lunchtime",       icon:"🥪", name:"Lunchtime Learner",   desc:"Complete a quiz between 12pm and 1pm"},
+  {id:"hot_streak",      icon:"🌶️", name:"Hot Streak",          desc:"Score 8 or more three quizzes in a row"},
+  // Score / performance
+  {id:"no_wrong",        icon:"😤", name:"Flawless",            desc:"Complete a category without a single wrong answer"},
+  {id:"podium",          icon:"🏅", name:"Podium Finish",       desc:"Score 8 or higher in 5 different categories in one day"},
+  {id:"consistent",      icon:"📊", name:"Consistently Good",   desc:"Score 7 or higher across all 12 categories in one day"},
+  {id:"participation",   icon:"🤦", name:"Participation Award", desc:"Score 2/10 — at least you showed up"},
+  {id:"half_marks",      icon:"🙃", name:"Glass Half Full",     desc:"Score exactly 5/10 — perfectly average"},
 ];
 
 // Token rewards per achievement (one-time, awarded on first unlock)
@@ -772,6 +797,19 @@ var ACH_TOKEN_REWARDS={
   "lb_second":10,
   "lb_third":5,
   "lb_top10":3,
+  "first_purchase":5,
+  "spent_100":10,
+  "spent_500":25,
+  "earned_50":5,
+  "earned_250":15,
+  "weekend_warrior":10,
+  "lunchtime":5,
+  "hot_streak":15,
+  "no_wrong":10,
+  "podium":15,
+  "consistent":30,
+  "participation":3,
+  "half_marks":3,
 };
 
 var MSGS = [
@@ -900,6 +938,37 @@ function checkAchievements(){
   prevAttempts.push(score);
   localStorage.setItem("qp_prev_"+cat,JSON.stringify(prevAttempts));
 
+  if(score===2) award("participation");
+  if(score===5) award("half_marks");
+
+  // Time / behaviour
+  var h=new Date().getHours(), dow=new Date().getDay();
+  if(h>=12&&h<13) award("lunchtime");
+  var daysPlayed=getDaysPlayed();
+  var hasSat=daysPlayed.some(function(d){return new Date(d.replace(/-/g,'/')).getDay()===6;});
+  var hasSun=daysPlayed.some(function(d){return new Date(d.replace(/-/g,'/')).getDay()===0;});
+  if(hasSat&&hasSun) award("weekend_warrior");
+  // Hot streak — track last 3 scores
+  var recentScores=JSON.parse(localStorage.getItem("qp_recent_scores")||"[]");
+  recentScores.push(score);
+  if(recentScores.length>3)recentScores=recentScores.slice(-3);
+  localStorage.setItem("qp_recent_scores",JSON.stringify(recentScores));
+  if(recentScores.length===3&&recentScores.every(function(s){return s>=8;})) award("hot_streak");
+
+  // Score / performance
+  if(score===10) award("no_wrong"); // 10/10 with no wrong answers = flawless
+  if(todayDone>=5){
+    var todayScores=Object.values(todayRes).map(function(r){return r.score;});
+    var highCount=todayScores.filter(function(s){return s>=8;}).length;
+    if(highCount>=5) award("podium");
+    if(todayDone===12&&todayScores.every(function(s){return s>=7;})) award("consistent");
+  }
+
+  // Token / shop
+  var totalEarned=parseInt(localStorage.getItem("qp_tokens_earned")||"0");
+  if(totalEarned>=50)  award("earned_50");
+  if(totalEarned>=250) award("earned_250");
+
   localStorage.setItem("qp_ach",JSON.stringify(unlocked));
   return newOnes;
 }
@@ -935,7 +1004,9 @@ function renderAchievements(){
     var isU=unlocked.indexOf(a.id)>=0;
     var d=document.createElement("div");
     d.className="ach-card"+(isU?" unlocked":" locked");
-    d.innerHTML='<span class="ach-icon">'+a.icon+'</span><div class="ach-name">'+a.name+'</div><div class="ach-desc">'+a.desc+'</div>';
+    var reward=ACH_TOKEN_REWARDS[a.id]||0;
+    var tokenBadge=reward>0?'<div style="position:absolute;top:10px;right:10px;font-size:12px;font-weight:800;color:var(--accent2);background:rgba(255,209,102,0.12);border:1px solid rgba(255,209,102,0.3);border-radius:8px;padding:3px 7px;white-space:nowrap">+'+reward+' 🪙</div>':"";
+    d.innerHTML=tokenBadge+'<span class="ach-icon">'+a.icon+'</span><div class="ach-name">'+a.name+'</div><div class="ach-desc">'+a.desc+'</div>';
     grid.appendChild(d);
   });
   var count=unlocked.length;
@@ -1621,7 +1692,11 @@ function getNextRank(xp){
 var RANK_TOKEN_REWARDS=[3,5,8,10,15,20,30,50,75]; // indexed by rank position 0-8
 function getTokens(){return parseInt(localStorage.getItem("qp_tokens")||"0");}
 function setTokens(v){localStorage.setItem("qp_tokens",v);updateTokenUI();}
-function addTokens(n){setTokens(getTokens()+n);}
+function addTokens(n){
+  var earned=parseInt(localStorage.getItem("qp_tokens_earned")||"0")+n;
+  localStorage.setItem("qp_tokens_earned",earned);
+  setTokens(getTokens()+n);
+}
 function getOwnedItems(){return JSON.parse(localStorage.getItem("qp_owned_items")||"[]");}
 function ownsItem(id){return getOwnedItems().indexOf(id)>=0;}
 function buyItem(id){var o=getOwnedItems();if(o.indexOf(id)<0){o.push(id);localStorage.setItem("qp_owned_items",JSON.stringify(o));}}
@@ -1675,13 +1750,31 @@ var SHOP_COLOURS=[
   {id:"shop_prism", label:"Prism",     cls:"cc-shop-prism", style:"background:linear-gradient(135deg,#1a001e,#001e1a,#1e1a00)", cost:75},
 ];
 var SHOP_TITLES=[
-  {id:"st_token1",  label:"Big Spender",  rarity:"Uncommon", color:"#06d6a0", bg:"rgba(6,214,160,0.15)",  cost:30,  desc:"Spend tokens in the shop"},
-  {id:"st_gold1",   label:"Coin Collector",rarity:"Rare",    color:"#4cc9f0", bg:"rgba(76,201,240,0.15)", cost:60,  desc:"For the dedicated earner"},
-  {id:"st_elite",   label:"The Elite",    rarity:"Epic",     color:"#9b5de5", bg:"rgba(155,93,229,0.2)",  cost:100, desc:"For those who rise above"},
-  {id:"st_vip",     label:"VIP",          rarity:"Epic",     color:"#9b5de5", bg:"rgba(155,93,229,0.2)",  cost:150, desc:"Very Important Player"},
-  {id:"st_golden",  label:"Golden",       rarity:"Legendary",color:"#ffd166", bg:"rgba(255,209,102,0.2)", cost:200, desc:"Pure gold status"},
-  {id:"st_phantom", label:"The Phantom",  rarity:"Legendary",color:"#ffd166", bg:"rgba(255,209,102,0.2)", cost:250, desc:"A ghost in the machine"},
-  {id:"st_overlord",label:"Overlord",     rarity:"Mythic",   color:"#a78bfa", bg:"rgba(167,139,250,0.2)", cost:500, desc:"Supreme ruler of QuizPop"},
+  // Uncommon
+  {id:"st_token1",   label:"Big Spender",   rarity:"Uncommon", color:"#06d6a0", bg:"rgba(6,214,160,0.15)",   cost:30,  desc:"Spend tokens in the shop"},
+  {id:"st_tryhard",  label:"Try Hard",       rarity:"Uncommon", color:"#06d6a0", bg:"rgba(6,214,160,0.15)",   cost:30,  desc:"You really go for it"},
+  {id:"st_npc",      label:"Main Character", rarity:"Uncommon", color:"#06d6a0", bg:"rgba(6,214,160,0.15)",   cost:35,  desc:"Not like the others"},
+  {id:"st_brainworm",label:"Brainworm",      rarity:"Uncommon", color:"#06d6a0", bg:"rgba(6,214,160,0.15)",   cost:35,  desc:"Trivia lives rent-free in your head"},
+  // Rare
+  {id:"st_gold1",    label:"Coin Collector", rarity:"Rare",     color:"#4cc9f0", bg:"rgba(76,201,240,0.15)",  cost:60,  desc:"For the dedicated earner"},
+  {id:"st_nolife",   label:"No Life",        rarity:"Rare",     color:"#4cc9f0", bg:"rgba(76,201,240,0.15)",  cost:60,  desc:"Respects given"},
+  {id:"st_nerd",     label:"Certified Nerd", rarity:"Rare",     color:"#4cc9f0", bg:"rgba(76,201,240,0.15)",  cost:70,  desc:"Proud of it"},
+  {id:"st_respawn",  label:"Respawning...",  rarity:"Rare",     color:"#4cc9f0", bg:"rgba(76,201,240,0.15)",  cost:70,  desc:"Back after a bad quiz"},
+  // Epic
+  {id:"st_elite",    label:"The Elite",      rarity:"Epic",     color:"#9b5de5", bg:"rgba(155,93,229,0.2)",   cost:100, desc:"For those who rise above"},
+  {id:"st_vip",      label:"VIP",            rarity:"Epic",     color:"#9b5de5", bg:"rgba(155,93,229,0.2)",   cost:150, desc:"Very Important Player"},
+  {id:"st_gigabrain",label:"Gigabrain",      rarity:"Epic",     color:"#9b5de5", bg:"rgba(155,93,229,0.2)",   cost:120, desc:"Enormous. Throbbing. Brain."},
+  {id:"st_honourable",label:"The Honourable",rarity:"Epic",     color:"#9b5de5", bg:"rgba(155,93,229,0.2)",   cost:150, desc:"Distinguished beyond measure"},
+  {id:"st_gg",       label:"GG No Re",       rarity:"Epic",     color:"#9b5de5", bg:"rgba(155,93,229,0.2)",   cost:130, desc:"Game over. You won."},
+  // Legendary
+  {id:"st_golden",   label:"Golden",         rarity:"Legendary",color:"#ffd166", bg:"rgba(255,209,102,0.2)",  cost:200, desc:"Pure gold status"},
+  {id:"st_phantom",  label:"The Phantom",    rarity:"Legendary",color:"#ffd166", bg:"rgba(255,209,102,0.2)",  cost:250, desc:"A ghost in the machine"},
+  {id:"st_distinguished",label:"Distinguished",rarity:"Legendary",color:"#ffd166",bg:"rgba(255,209,102,0.2)", cost:225, desc:"A cut above the rest"},
+  {id:"st_final_boss",label:"Final Boss",    rarity:"Legendary",color:"#ffd166", bg:"rgba(255,209,102,0.2)",  cost:275, desc:"Nobody beats you"},
+  // Mythic
+  {id:"st_overlord", label:"Overlord",       rarity:"Mythic",   color:"#a78bfa", bg:"rgba(167,139,250,0.2)",  cost:500, desc:"Supreme ruler of QuizPop"},
+  {id:"st_goat",     label:"The G.O.A.T",    rarity:"Mythic",   color:"#a78bfa", bg:"rgba(167,139,250,0.2)",  cost:500, desc:"Greatest of all time. Obviously."},
+  {id:"st_prestige", label:"Prestige",       rarity:"Mythic",   color:"#a78bfa", bg:"rgba(167,139,250,0.2)",  cost:600, desc:"Reset the game. Won again."},
 ];
 
 function applyNameEffect(el,effectId){
@@ -1812,6 +1905,26 @@ function renderTsBody(){
   body.innerHTML=html;
 }
 
+function trackSpend(amount){
+  var spent=parseInt(localStorage.getItem("qp_tokens_spent")||"0")+amount;
+  localStorage.setItem("qp_tokens_spent",spent);
+  var ach=JSON.parse(localStorage.getItem("qp_ach")||"[]");
+  var newOnes=[];
+  function shopAward(id){
+    if(ach.indexOf(id)<0){ach.push(id);newOnes.push(id);var r=ACH_TOKEN_REWARDS[id]||0;if(r>0)addTokens(r);}
+  }
+  var purchases=JSON.parse(localStorage.getItem("qp_owned_items")||"[]");
+  if(purchases.length>=1) shopAward("first_purchase");
+  if(spent>=100) shopAward("spent_100");
+  if(spent>=500) shopAward("spent_500");
+  if(newOnes.length>0){
+    localStorage.setItem("qp_ach",JSON.stringify(ach));
+    var def=ACHIEVEMENTS.find(function(a){return a.id===newOnes[0];});
+    var reward=ACH_TOKEN_REWARDS[newOnes[0]]||0;
+    if(def)setTimeout(function(){showAchToast({icon:def.icon,name:def.name+(reward>0?" · +"+reward+"🪙":"")});},600);
+  }
+}
+
 function tsBuyOrEquipEffect(id){
   var eff=SHOP_EFFECTS.find(function(e){return e.id===id;});
   if(!eff)return;
@@ -1820,6 +1933,7 @@ function tsBuyOrEquipEffect(id){
   } else {
     if(getTokens()<eff.cost){return;}
     setTokens(getTokens()-eff.cost);
+    trackSpend(eff.cost);
     buyItem(id);
     setEquippedEffect(id);
     showAchToast({icon:"✨",name:"Effect unlocked: "+eff.name});
@@ -1835,6 +1949,7 @@ function tsBuyOrEquipAvatar(id,em){
   } else {
     if(getTokens()<av.cost)return;
     setTokens(getTokens()-av.cost);
+    trackSpend(av.cost);
     buyItem(id);
     localStorage.setItem("qp_cc_avatar",em);
     showAchToast({icon:em,name:"Avatar unlocked: "+av.name});
@@ -1850,6 +1965,7 @@ function tsBuyOrEquipColour(id){
   } else {
     if(getTokens()<col.cost)return;
     setTokens(getTokens()-col.cost);
+    trackSpend(col.cost);
     buyItem(id);
     localStorage.setItem("qp_cc_colour",id);
     showAchToast({icon:"🎨",name:"Colour unlocked: "+col.label});
@@ -1865,6 +1981,7 @@ function tsBuyOrEquipTitle(id){
   } else {
     if(getTokens()<ti.cost)return;
     setTokens(getTokens()-ti.cost);
+    trackSpend(ti.cost);
     buyItem(id);
     localStorage.setItem("qp_cc_title",id);
     showAchToast({icon:"🏷️",name:"Title unlocked: "+ti.label});
@@ -1907,8 +2024,16 @@ function getUnlockedTitles(){
 
 function getActiveTitle(){
   var saved=getCCTitle();
+  if(saved){
+    // Check gameplay titles first
+    var gt=TITLES.find(function(t){return t.id===saved;});
+    if(gt){var stats=getTitleStats();if(gt.check(stats))return gt;}
+    // Check purchased shop titles
+    var st=SHOP_TITLES.find(function(t){return t.id===saved;});
+    if(st&&ownsItem(saved))return st;
+  }
+  // Fall back to first unlocked gameplay title
   var unlocked=getUnlockedTitles();
-  if(saved&&unlocked.find(function(t){return t.id===saved;}))return TITLES.find(function(t){return t.id===saved;})||unlocked[0]||null;
   return unlocked[0]||null;
 }
 
@@ -2013,16 +2138,47 @@ function ccOpenCustomise(e){
 
 function ccSheetTab(tab){
   _ccSheetTab=tab;
-  ["title","colour","avatar","name"].forEach(function(t){
+  ["title","colour","avatar","effects","name"].forEach(function(t){
     var el=document.getElementById("cst-"+t);
     if(el)el.classList.toggle("active",t===tab);
   });
   var body=document.getElementById("ccSheetBody");
   if(!body)return;
-  if(tab==="title")  body.innerHTML=buildTitleHTML();
-  if(tab==="colour") body.innerHTML=buildColourHTML();
-  if(tab==="avatar") body.innerHTML=buildAvatarHTML();
-  if(tab==="name")   body.innerHTML=buildNameHTML();
+  if(tab==="title")   body.innerHTML=buildTitleHTML();
+  if(tab==="colour")  body.innerHTML=buildColourHTML();
+  if(tab==="avatar")  body.innerHTML=buildAvatarHTML();
+  if(tab==="effects") body.innerHTML=buildEffectsHTML();
+  if(tab==="name")    body.innerHTML=buildNameHTML();
+}
+
+function buildEffectsHTML(){
+  var equipped=getEquippedEffect();
+  var owned=SHOP_EFFECTS.filter(function(e){return ownsItem(e.id);});
+  if(owned.length===0){
+    return '<div style="text-align:center;padding:24px 0;color:var(--muted);font-size:13px">No effects yet — visit the 🪙 Token Shop to unlock some!</div>';
+  }
+  var html='';
+  owned.forEach(function(e){
+    var isEquipped=equipped===e.id;
+    html+='<div class="title-item'+(isEquipped?" t-active":"")+'" onclick="ccPickEffect(\''+e.id+'\')">'+
+      '<span style="font-size:22px;width:32px;text-align:center">'+e.preview+'</span>'+
+      '<div class="ti-info">'+
+        '<div class="ti-name"><span class="'+e.cls+'"'+(e.color&&!e.cls.includes('rainbow')&&!e.cls.includes('shimmer')?' style="color:'+e.color+'"':'')+'>'+e.name+'</span></div>'+
+        '<div class="ti-req"><span style="color:#06d6a0">✓ Owned</span></div>'+
+      '</div>'+
+      (isEquipped?'<span class="ti-check">✓</span>':'')+
+    '</div>';
+  });
+  if(equipped){
+    html+='<div style="text-align:center;margin-top:8px"><button onclick="ccPickEffect(\'\')" style="background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;text-decoration:underline">Remove effect</button></div>';
+  }
+  return html;
+}
+
+function ccPickEffect(id){
+  setEquippedEffect(id);
+  ccSheetTab("effects");
+  renderCallingCard();
 }
 
 function buildTitleHTML(){
@@ -2030,6 +2186,7 @@ function buildTitleHTML(){
   var active=getCCTitle();
   var rarityOrder=["Common","Uncommon","Rare","Epic","Legendary","Mythic"];
   var html='<div class="title-list">';
+  // Gameplay titles
   rarityOrder.forEach(function(rarity){
     var group=TITLES.filter(function(t){return t.rarity===rarity;});
     if(!group.length)return;
@@ -2045,6 +2202,20 @@ function buildTitleHTML(){
       '</div>';
     });
   });
+  // Purchased shop titles
+  var purchasedShopTitles=SHOP_TITLES.filter(function(t){return ownsItem(t.id);});
+  if(purchasedShopTitles.length>0){
+    html+='<div class="cc-rarity-label" style="color:var(--accent2);margin-top:10px">🪙 Purchased</div>';
+    purchasedShopTitles.forEach(function(t){
+      var isActive=t.id===active;
+      html+='<div class="title-item'+(isActive?" t-active":"")+'" onclick="ccPickTitle(\''+t.id+'\')">'+
+        '<span class="ti-badge" style="background:'+t.bg+';color:'+t.color+'">'+t.rarity+'</span>'+
+        '<div class="ti-info"><div class="ti-name" style="color:'+t.color+'">'+t.label+'</div>'+
+        '<div class="ti-req"><span style="color:#06d6a0">✓ Purchased</span></div></div>'+
+        (isActive?'<span class="ti-check">✓</span>':'')+
+      '</div>';
+    });
+  }
   return html+'</div>';
 }
 
@@ -2054,6 +2225,13 @@ function buildColourHTML(){
   CC_COLOURS.forEach(function(c){
     html+='<div class="cc-swatch'+(active===c.id?" c-active":"")+'" style="'+c.style+'" onclick="ccPickColour(\''+c.id+'\')">'+c.label+'</div>';
   });
+  var purchasedColours=SHOP_COLOURS.filter(function(c){return ownsItem(c.id);});
+  if(purchasedColours.length>0){
+    html+='</div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin:12px 0 7px">🪙 Purchased</div><div class="cc-colour-grid">';
+    purchasedColours.forEach(function(c){
+      html+='<div class="cc-swatch'+(active===c.id?" c-active":"")+'" style="'+c.style+'" onclick="ccPickColour(\''+c.id+'\')">'+c.label+'</div>';
+    });
+  }
   return html+'</div>';
 }
 
@@ -2063,6 +2241,13 @@ function buildAvatarHTML(){
   CC_AVATARS.forEach(function(em){
     html+='<div class="cc-avatar-opt'+(active===em?" a-active":"")+'" onclick="ccPickAvatar(\''+em+'\')">'+em+'</div>';
   });
+  var purchasedAvatars=SHOP_AVATARS.filter(function(a){return ownsItem(a.id);});
+  if(purchasedAvatars.length>0){
+    html+='</div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin:12px 0 7px">🪙 Purchased</div><div class="cc-avatar-grid">';
+    purchasedAvatars.forEach(function(a){
+      html+='<div class="cc-avatar-opt'+(active===a.em?" a-active":"")+'" onclick="ccPickAvatar(\''+a.em+'\')">'+a.em+'</div>';
+    });
+  }
   return html+'</div>';
 }
 
