@@ -98,6 +98,96 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
 .ps-item{background:var(--surface);border-radius:10px;padding:10px 6px;text-align:center}
 .ps-val{font-family:'Righteous',cursive;font-size:18px;color:var(--accent2)}
 .ps-lbl{font-size:10px;color:var(--muted);margin-top:2px}
+/* ── CALLING CARD ── */
+.calling-card{border-radius:24px;margin-bottom:14px;position:relative;overflow:hidden;border:2px solid var(--border);background:var(--card);transition:border-color .4s,box-shadow .4s,transform .25s;cursor:pointer}
+.calling-card:hover{transform:translateY(-2px)}
+.calling-card.cc-expanded{cursor:default}
+.calling-card.cc-blue  {background:linear-gradient(145deg,#0b1622,#162840);border-color:#4cc9f0}
+.calling-card.cc-green {background:linear-gradient(145deg,#0b1c14,#153322);border-color:#06d6a0}
+.calling-card.cc-purple{background:linear-gradient(145deg,#160b2a,#261642);border-color:#9b5de5}
+.calling-card.cc-red   {background:linear-gradient(145deg,#260a0a,#3e1414);border-color:#ef476f}
+.calling-card.cc-gold  {background:linear-gradient(145deg,#261a00,#3e2d00);border-color:#ffd166}
+.calling-card.cc-dark  {background:linear-gradient(145deg,#080810,#111120);border-color:#2a2a40}
+.calling-card.glow-orange{box-shadow:0 0 24px rgba(255,107,53,.35),0 4px 40px rgba(255,107,53,.1);border-color:#ff6b35}
+.calling-card.glow-red   {box-shadow:0 0 24px rgba(239,71,111,.35),0 4px 40px rgba(239,71,111,.1);border-color:#ef476f}
+.calling-card.glow-gold  {box-shadow:0 0 28px rgba(255,209,102,.45),0 4px 50px rgba(255,209,102,.12);border-color:#ffd166}
+.calling-card.glow-purple{box-shadow:0 0 24px rgba(155,93,229,.4),0 4px 40px rgba(155,93,229,.12);border-color:#9b5de5;animation:purpleShift 4s ease-in-out infinite}
+.calling-card.glow-cyan  {box-shadow:0 0 28px rgba(6,214,160,.4),0 4px 50px rgba(76,201,240,.12);border-color:#06d6a0;animation:cyanPulse 3s ease-in-out infinite}
+@keyframes purpleShift{0%,100%{box-shadow:0 0 24px rgba(155,93,229,.4),0 4px 40px rgba(155,93,229,.12)}50%{box-shadow:0 0 36px rgba(155,93,229,.65),0 4px 60px rgba(76,201,240,.22)}}
+@keyframes cyanPulse{0%,100%{box-shadow:0 0 28px rgba(6,214,160,.4),0 4px 50px rgba(76,201,240,.12)}50%{box-shadow:0 0 42px rgba(6,214,160,.7),0 4px 72px rgba(76,201,240,.3)}}
+.calling-card.glow-rainbow{animation:rainbowBorder 3s linear infinite}
+@keyframes rainbowBorder{0%{border-color:#ff6b35;box-shadow:0 0 20px rgba(255,107,53,.4)}16%{border-color:#ffd166;box-shadow:0 0 20px rgba(255,209,102,.4)}33%{border-color:#06d6a0;box-shadow:0 0 20px rgba(6,214,160,.4)}50%{border-color:#4cc9f0;box-shadow:0 0 20px rgba(76,201,240,.4)}66%{border-color:#9b5de5;box-shadow:0 0 20px rgba(155,93,229,.4)}83%{border-color:#ef476f;box-shadow:0 0 20px rgba(239,71,111,.4)}100%{border-color:#ff6b35;box-shadow:0 0 20px rgba(255,107,53,.4)}}
+/* Card inner glow */
+.cc-glow-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(255,255,255,0.06),transparent 70%)}
+/* Collapsed state */
+.cc-collapsed{padding:18px 18px 16px;display:flex;align-items:center;gap:14px}
+.cc-collapsed-avatar{width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;border:2px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.07)}
+.cc-collapsed-info{flex:1;min-width:0}
+.cc-collapsed-name{font-family:'Righteous',cursive;font-size:21px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.15}
+.cc-collapsed-title{margin-top:6px}
+.cc-collapsed-rank{font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;white-space:nowrap;flex-shrink:0;letter-spacing:.05em;align-self:center}
+.cc-expand-hint{font-size:10px;color:rgba(255,255,255,0.25);text-align:center;padding:0 0 12px;letter-spacing:.06em}
+/* Expanded state */
+.cc-expanded-inner{display:none;animation:fadeIn .2s}
+.cc-expanded .cc-expanded-inner{display:block}
+.cc-expanded .cc-expand-hint{display:none}
+.cc-hero{padding:28px 20px 20px;text-align:center;position:relative}
+.cc-hero-avatar{width:80px;height:80px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:38px;border:3px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.06)}
+.cc-hero-name{font-family:'Righteous',cursive;font-size:24px;margin-bottom:6px}
+.cc-hero-title{display:inline-block;font-size:12px;padding:3px 14px;border-radius:20px;font-weight:600;letter-spacing:.05em;margin-bottom:16px}
+/* XP section */
+.cc-xp-wrap{padding:0 20px 18px}
+.cc-rank-row{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.cc-rank-badge{font-size:11px;font-weight:700;padding:3px 11px;border-radius:20px;letter-spacing:.06em;white-space:nowrap}
+.cc-xp-track{flex:1;height:6px;background:rgba(255,255,255,0.1);border-radius:10px;overflow:hidden}
+.cc-xp-fill{height:100%;border-radius:10px;transition:width 1s cubic-bezier(.4,0,.2,1)}
+.cc-xp-meta{display:flex;justify-content:space-between}
+.cc-xp-num{font-family:'Righteous',cursive;font-size:13px}
+.cc-xp-next{font-size:10px;color:rgba(255,255,255,0.38)}
+/* Divider */
+.cc-divider{height:1px;background:rgba(255,255,255,0.07);margin:0 0 14px}
+/* Customise button */
+.cc-customise-btn{display:flex;align-items:center;justify-content:center;gap:7px;width:calc(100% - 40px);margin:0 20px 18px;padding:11px;border-radius:13px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.cc-customise-btn:hover{background:rgba(255,255,255,0.12)}
+/* Close pill */
+.cc-close-pill{display:flex;align-items:center;justify-content:center;padding:10px;border-top:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.3);font-size:11px;letter-spacing:.05em;cursor:pointer;transition:color .2s}
+.cc-close-pill:hover{color:rgba(255,255,255,0.6)}
+/* ── CUSTOMISE SHEET (bottom of profile, not a modal) ── */
+.cc-sheet{background:var(--card);border:1px solid var(--border);border-radius:20px;margin-bottom:14px;overflow:hidden;display:none}
+.cc-sheet.open{display:block;animation:fadeIn .2s}
+.cc-sheet-tabs{display:flex;border-bottom:1px solid var(--border)}
+.cc-sheet-tab{flex:1;padding:12px 4px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;text-align:center;border:none;background:none;font-family:'DM Sans',sans-serif;transition:all .2s}
+.cc-sheet-tab.active{color:var(--text);border-bottom:2px solid var(--accent);margin-bottom:-1px}
+.cc-sheet-body{padding:14px}
+/* Title list */
+.cc-rarity-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:10px 0 6px 2px}
+.cc-rarity-label:first-child{margin-top:0}
+.title-list{display:flex;flex-direction:column;gap:6px}
+.title-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1.5px solid var(--border);cursor:pointer;transition:all .18s;background:var(--surface)}
+.title-item:hover:not(.t-locked){border-color:rgba(255,255,255,0.2)}
+.title-item.t-active{border-color:var(--accent);background:rgba(255,107,53,.08)}
+.title-item.t-locked{opacity:.35;cursor:not-allowed}
+.ti-badge{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:700;white-space:nowrap;flex-shrink:0}
+.ti-info{flex:1;min-width:0}
+.ti-name{font-weight:600;font-size:13px}
+.ti-req{font-size:10px;color:var(--muted);margin-top:2px}
+.ti-check{color:#06d6a0;font-size:15px;flex-shrink:0}
+/* Colour swatches */
+.cc-colour-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.cc-swatch{height:52px;border-radius:12px;cursor:pointer;border:2px solid transparent;transition:all .2s;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;font-size:10px;font-weight:700;color:rgba(255,255,255,0.7)}
+.cc-swatch.c-active{border-color:#fff;transform:scale(1.05)}
+/* Avatar grid */
+.cc-avatar-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.cc-avatar-opt{aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;border:2px solid transparent;transition:all .2s;background:var(--surface)}
+.cc-avatar-opt:hover{background:var(--card)}
+.cc-avatar-opt.a-active{border-color:var(--accent);transform:scale(1.08)}
+/* Username edit inside sheet */
+.cc-username-wrap{display:flex;gap:8px;align-items:center}
+.cc-username-input{flex:1;background:var(--surface);border:1.5px solid var(--border);border-radius:11px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--text);outline:none;transition:border-color .2s}
+.cc-username-input:focus{border-color:var(--accent)}
+/* Legacy modal stubs */
+.cc-modal-overlay{display:none!important}
+.colour-grid,.avatar-grid,.title-grid{display:none!important}
 /* USERNAME SETUP */
 .setup-wrap{text-align:center;padding:40px 20px}
 .setup-emoji{font-size:56px;display:block;margin-bottom:16px;animation:float 3s ease-in-out infinite}
@@ -127,6 +217,23 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
 .tbadge{background:var(--card);border:1px solid var(--border);padding:4px 11px;border-radius:20px;font-size:14px;font-weight:700;font-family:'Righteous',cursive;min-width:48px;text-align:center;transition:all .3s}
 .tbadge.urg{color:var(--red);border-color:var(--red);animation:shk .25s infinite}
 @keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
+@keyframes wrongShake{0%{transform:translateX(0)}15%{transform:translateX(-10px)}30%{transform:translateX(9px)}45%{transform:translateX(-7px)}60%{transform:translateX(6px)}75%{transform:translateX(-3px)}90%{transform:translateX(2px)}100%{transform:translateX(0)}}
+@keyframes wrongBorder{0%{border-color:var(--red);box-shadow:0 0 0 3px rgba(239,71,111,0.25)}70%{border-color:var(--red);box-shadow:0 0 0 1px rgba(239,71,111,0.1)}100%{border-color:var(--border);box-shadow:none}}
+.qcard.wrong-shake{animation:wrongShake .45s cubic-bezier(.36,.07,.19,.97),wrongBorder .6s ease forwards}
+/* XP summary card */
+.xp-summary{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 18px;margin-bottom:12px;overflow:hidden}
+.xp-summary-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.xp-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;padding:3px 0}
+.xp-row-label{color:var(--muted)}
+.xp-row-val{font-family:'Righteous',cursive;font-size:14px}
+.xp-divider{height:1px;background:var(--border);margin:8px 0}
+.xp-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.xp-total-label{font-weight:700;font-size:14px}
+.xp-total-val{font-family:'Righteous',cursive;font-size:20px}
+.xp-bar-track{height:7px;background:var(--surface);border-radius:10px;overflow:hidden;margin-bottom:5px}
+.xp-bar-fill{height:100%;border-radius:10px;width:0%;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.xp-rank-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}
+.xp-rankup{text-align:center;margin-top:8px;font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;display:none}
 /* GRADE BADGE */
 .grade-badge{display:inline-flex;align-items:center;gap:7px;padding:3px 12px;border-radius:20px;font-family:'Righteous',cursive;font-size:13px;font-weight:700;margin:0 0 6px;letter-spacing:.5px}
 .grade-s{background:linear-gradient(135deg,rgba(255,209,102,0.25),rgba(255,180,0,0.15));border:1.5px solid #ffd166;color:#ffd166}
@@ -159,8 +266,28 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
 /* BACKGROUND GRID */
 body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,0.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.045) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;z-index:0}
 /* DARK/LIGHT MODE */
-body.light{--bg:#f4f3ff;--surface:#e8e6ff;--card:#fff;--text:#1a1826;--muted:#6b68a0;--border:rgba(0,0,0,0.09)}
-body.light::after{background-image:linear-gradient(rgba(0,0,0,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.07) 1px,transparent 1px)}
+body.light{
+  --bg:#f0ede8;
+  --surface:#e8e4de;
+  --card:#faf8f5;
+  --text:#1e1b18;
+  --muted:#7a7068;
+  --border:rgba(0,0,0,0.1);
+  --accent:#e85d20;
+  --accent2:#c9900a;
+  --green:#059c77;
+  --red:#d43f62;
+}
+body.light::after{background-image:linear-gradient(rgba(0,0,0,0.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.055) 1px,transparent 1px)}
+body.light body::before{background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(232,93,32,0.07),transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(201,144,10,0.06),transparent 60%)}
+/* Calling card always stays dark — force white text in light mode */
+body.light .calling-card,body.light .calling-card *{color:#fff!important}
+body.light .calling-card .cc-expand-hint{color:rgba(255,255,255,0.25)!important}
+body.light .calling-card .cc-close-pill{color:rgba(255,255,255,0.35)!important}
+body.light .calling-card .cc-xp-next{color:rgba(255,255,255,0.4)!important}
+body.light .calling-card .cc-customise-btn{color:rgba(255,255,255,0.85)!important;background:rgba(255,255,255,0.1)!important;border-color:rgba(255,255,255,0.15)!important}
+/* Default (no colour picked) card needs a dark bg in light mode */
+body.light .calling-card:not([class*="cc-blue"]):not([class*="cc-green"]):not([class*="cc-purple"]):not([class*="cc-red"]):not([class*="cc-gold"]):not([class*="cc-dark"]){background:linear-gradient(145deg,#1e1b2e,#2d2a45)!important;border-color:rgba(255,255,255,0.15)!important}
 .mode-toggle{position:relative;width:56px;height:28px;background:var(--card);border:1px solid var(--border);border-radius:20px;cursor:pointer;transition:background .3s,border-color .3s;flex-shrink:0;padding:0}
 .mode-toggle:hover{border-color:var(--accent2)}
 .mode-toggle .toggle-knob{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:13px;transition:transform .3s cubic-bezier(.4,0,.2,1);line-height:1}
@@ -171,15 +298,15 @@ body.light .mode-toggle .toggle-knob{transform:translateX(28px)}
 .opt{background:var(--surface);border:2px solid var(--border);border-radius:12px;padding:12px 14px;text-align:left;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);transition:all .15s;display:flex;align-items:center;gap:10px}
 .opt:hover:not(:disabled){border-color:var(--accent2);transform:translateX(3px)}
 .opt .ol{width:26px;height:26px;border-radius:7px;background:var(--card);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;transition:all .15s}
-.opt.correct{border-color:var(--green);background:rgba(6,214,160,0.1)}
+.opt.correct{border-color:var(--green);background:rgba(6,214,160,0.15);animation:flashGreen .4s ease}
 .opt.correct .ol{background:var(--green);color:#0f0e17}
-.opt.wrong{border-color:var(--red);background:rgba(239,71,111,0.1)}
+.opt.wrong{border-color:var(--red);background:rgba(239,71,111,0.15);animation:flashRed .4s ease}
 .opt.wrong .ol{background:var(--red);color:#fff}
 .opt:disabled{cursor:default}
-.opt.flash-correct{animation:flashGreen .5s ease forwards}
-.opt.flash-wrong{animation:flashRed .5s ease forwards}
-@keyframes flashGreen{0%{background:rgba(6,214,160,0.7);border-color:var(--green)}100%{background:rgba(6,214,160,0.1);border-color:var(--green)}}
-@keyframes flashRed{0%{background:rgba(239,71,111,0.65);border-color:var(--red)}100%{background:rgba(239,71,111,0.1);border-color:var(--red)}}
+.opt.flash-correct{animation:none}
+.opt.flash-wrong{animation:none}
+@keyframes flashGreen{0%{background:rgba(6,214,160,0.55);transform:scale(1.02)}60%{background:rgba(6,214,160,0.25)}100%{background:rgba(6,214,160,0.15);transform:scale(1)}}
+@keyframes flashRed{0%{background:rgba(239,71,111,0.6);transform:scale(0.98)}60%{background:rgba(239,71,111,0.3)}100%{background:rgba(239,71,111,0.15);transform:scale(1)}}
 .factbox{background:rgba(255,209,102,0.08);border:1px solid rgba(255,209,102,0.2);border-radius:11px;padding:10px 14px;font-size:12px;color:var(--accent2);line-height:1.5;display:none;margin-bottom:12px}
 .factbox.show{display:block;animation:fadeUp .3s ease}
 .factbox strong{display:block;margin-bottom:2px;font-size:10px;text-transform:uppercase;letter-spacing:.08em;opacity:.6}
@@ -356,9 +483,18 @@ body.light .mode-toggle .toggle-knob{transform:translateX(28px)}
       </div>
     </div>
     <div id="panelProfile" style="display:none">
+      <div class="calling-card" id="callingCard" onclick="ccHandleClick(event)"></div>
+      <div class="cc-sheet" id="ccSheet">
+        <div class="cc-sheet-tabs">
+          <button class="cc-sheet-tab active" id="cst-title"  onclick="ccSheetTab('title')">🏷️ Title</button>
+          <button class="cc-sheet-tab"        id="cst-colour" onclick="ccSheetTab('colour')">🎨 Colour</button>
+          <button class="cc-sheet-tab"        id="cst-avatar" onclick="ccSheetTab('avatar')">😀 Avatar</button>
+          <button class="cc-sheet-tab"        id="cst-name"   onclick="ccSheetTab('name')">✏️ Name</button>
+        </div>
+        <div class="cc-sheet-body" id="ccSheetBody"></div>
+      </div>
       <div class="profile-card" id="profileCard"></div>
-      <button class="btn btn-secondary mt8" onclick="changeUsername()" style="margin-bottom:8px">Change Username</button>
-      <button class="btn btn-secondary" onclick="if(confirm('Clear all data?')){localStorage.clear();location.reload()}">Reset All Data</button>
+      <button class="btn btn-secondary" style="margin-bottom:8px;border-color:var(--red);color:var(--red)" onclick="resetAllData()">🗑️ Reset All Data</button>
     </div>
   </div>
 
@@ -437,6 +573,7 @@ body.light .mode-toggle .toggle-knob{transform:translateX(28px)}
     </div>
 
     <!-- SHARE CARD + BUTTONS -->
+    <div id="xpSummary" class="xp-summary" style="display:none"></div>
     <div class="share-card" id="shareCard"></div>
     <div class="share-row">
       <button class="btn btn-green" onclick="doShare('whatsapp')">&#x1F4F2; WhatsApp</button>
@@ -453,6 +590,32 @@ body.light .mode-toggle .toggle-knob{transform:translateX(28px)}
 
   <div class="ad-slot ad-bottom">Advertisement</div>
   <div class="footer"><a href="/privacy.html">Privacy Policy</a> &middot; &copy; 2026 QuizPop</div>
+</div>
+
+<!-- CALLING CARD MODALS -->
+<div class="cc-modal-overlay" id="modalTitle" onclick="if(event.target===this)closeModal('modalTitle')">
+  <div class="cc-modal">
+    <button class="cc-modal-close" onclick="closeModal('modalTitle')">&#x2715;</button>
+    <div class="cc-modal-title">Choose Your Title</div>
+    <div class="cc-modal-sub">Earn achievements to unlock new titles</div>
+    <div class="title-grid" id="titleGrid"></div>
+  </div>
+</div>
+<div class="cc-modal-overlay" id="modalColour" onclick="if(event.target===this)closeModal('modalColour')">
+  <div class="cc-modal">
+    <button class="cc-modal-close" onclick="closeModal('modalColour')">&#x2715;</button>
+    <div class="cc-modal-title">Card Colour</div>
+    <div class="cc-modal-sub">Pick your calling card style</div>
+    <div class="colour-grid" id="colourGrid"></div>
+  </div>
+</div>
+<div class="cc-modal-overlay" id="modalAvatar" onclick="if(event.target===this)closeModal('modalAvatar')">
+  <div class="cc-modal">
+    <button class="cc-modal-close" onclick="closeModal('modalAvatar')">&#x2715;</button>
+    <div class="cc-modal-title">Choose Avatar</div>
+    <div class="cc-modal-sub">Pick an emoji to represent you</div>
+    <div class="avatar-grid" id="avatarGrid"></div>
+  </div>
 </div>
 
 <!-- Achievement toast -->
@@ -735,7 +898,7 @@ function showTab(tab){
   });
   if(tab==="past")    renderPastList();
   if(tab==="ach")     renderAchievements();
-  if(tab==="profile") renderProfile();
+  if(tab==="profile") {renderCallingCard();renderProfile();}
   if(tab==="board")   renderLeaderboard();
 }
 
@@ -1027,38 +1190,83 @@ function startTimer(){
     else if(timeLeft<=8){pb.classList.add("warn");pb.classList.remove("danger");}
     else{pb.classList.remove("warn","danger");}
     if(timeLeft<=0){clearInterval(ticker);totalTime+=15;pick(-1);}
-    if(timeLeft<=5&&timeLeft>0)playTone(220,0.05,0.08);
+    if(timeLeft<=5&&timeLeft>0)playTone(220,0.04,0.06);
   },1000);
 }
+
 
 function pick(idx){
   clearInterval(ticker);totalTime+=(15-timeLeft);
   var q=questions[qIdx];
-  var btns=document.querySelectorAll(".opt");btns.forEach(function(b){b.disabled=true;});
+  var btns=document.querySelectorAll(".opt");
+  btns.forEach(function(b){b.disabled=true;});
   var ok=idx===q.correct;if(ok)score++;
+
+  // Flash wrong button red, correct button green — using inline style for reliability
   if(idx>=0){
-    btns[idx].classList.add(ok?"correct":"wrong");
-    btns[idx].classList.add(ok?"flash-correct":"flash-wrong");
+    var chosen=btns[idx];
+    if(ok){
+      chosen.style.background="rgba(6,214,160,0.5)";
+      chosen.style.borderColor="var(--green)";
+      chosen.style.transition="background 0.6s ease, border-color 0.6s ease";
+      setTimeout(function(){chosen.style.background="rgba(6,214,160,0.15)";},50);
+    } else {
+      chosen.style.background="rgba(239,71,111,0.55)";
+      chosen.style.borderColor="var(--red)";
+      chosen.style.transition="background 0.7s ease, border-color 0.5s ease";
+      setTimeout(function(){chosen.style.background="rgba(239,71,111,0.15)";},50);
+    }
   }
-  btns[q.correct].classList.add("correct");
-  if(!ok)btns[q.correct].classList.add("flash-correct");
+  // Always highlight the correct answer green
+  if(!ok){
+    var corr=btns[q.correct];
+    corr.style.background="rgba(6,214,160,0.4)";
+    corr.style.borderColor="var(--green)";
+    corr.style.transition="background 0.6s ease";
+    setTimeout(function(){corr.style.background="rgba(6,214,160,0.15)";},80);
+  }
+
   answers.push({chosen:idx,correct:q.correct,isCorrect:ok});
   document.getElementById("factTxt").textContent=q.fact||"";
   document.getElementById("factBox").classList.add("show");
   var nb=document.getElementById("nextBtn");nb.style.display="block";
   nb.textContent=qIdx<questions.length-1?"Next Question":"See My Results!";
-  if(ok)playTone(523,0.12,0.18);
-  else  playTone(150,0.15,0.25);
+
+  if(ok){
+    sfxCorrect();
+  } else {
+    sfxWrong();
+    // Shake the question card
+    var qc=document.querySelector(".qcard");
+    if(qc){
+      qc.style.transition="none";
+      var shakeFrames=[0,-10,9,-7,6,-3,2,0];
+      var i=0;
+      var shakeTimer=setInterval(function(){
+        if(!qc)return;
+        qc.style.transform="translateX("+shakeFrames[i]+"px)";
+        i++;
+        if(i>=shakeFrames.length){
+          clearInterval(shakeTimer);
+          qc.style.transform="";
+          qc.style.transition="";
+        }
+      },50);
+    }
+  }
 }
+
 
 function nextQ(){qIdx++;if(qIdx>=questions.length)finish();else renderQ();}
 
 function finish(){
+  sfxFinish();
   saveResult(playingDate,cat);
   syncBadges();
+  var xpData=awardXP();
   submitScoreToLeaderboard();
   var newAch=checkAchievements();
-  buildResults(playingDate,newAch);
+  buildResults(playingDate,newAch,xpData);
   show("sResults");animateRing();
   if(score===10){
     confetti({particleCount:180,spread:100,origin:{y:0.55},colors:["#ff6b35","#ffd166","#06d6a0","#118ab2","#ef476f"]});
@@ -1074,7 +1282,7 @@ function finish(){
   }
 }
 
-function buildResults(date,newAch){
+function buildResults(date,newAch,xpData){
   var total=questions.length||10,streak=getStreak();
   // Animated score count-up
   (function(){
@@ -1122,6 +1330,11 @@ function buildResults(date,newAch){
   var uname=getUsername();
   shareText="QuizPop "+ds+" · "+CATS[cat].label+"\n"+(uname?uname+": ":"")+score+"/"+total+" ("+gradeLbl+")\n\n"+dots+"\n\nquizpop.co.uk";
   document.getElementById("shareCard").textContent=shareText;
+
+  // XP summary — only show on fresh quiz completion, not when reviewing past results
+  var xpEl=document.getElementById("xpSummary");
+  if(xpEl)xpEl.style.display="none";
+  if(xpData){setTimeout(function(){showXPSummary(xpData);},600);}
 
   var list=document.getElementById("rvwList");list.innerHTML="";
   questions.forEach(function(q,i){
@@ -1203,18 +1416,458 @@ function applyMode(){
     if(knob)knob.textContent="☀️";
   }
 }
-var audioCtx=null;
-function getAudio(){if(!audioCtx)try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}return audioCtx;}
+// ── AUDIO ──
+// Uses Audio() with data URIs — works on file://, https://, everywhere
+// Sounds generated as minimal WAV PCM via Web Audio, encoded to base64 on first call
+var _sfxCache={};
+function _makeWav(notes){
+  // notes: [{freq, start, dur, vol, type}]
+  // Render to offline context and return base64 WAV
+  var totalDur=0;
+  notes.forEach(function(n){if(n.start+n.dur>totalDur)totalDur=n.start+n.dur;});
+  totalDur+=0.1;
+  var sr=22050,len=Math.ceil(sr*totalDur);
+  var buf=new Float32Array(len);
+  notes.forEach(function(n){
+    var startSamp=Math.floor(n.start*sr);
+    var durSamp=Math.floor(n.dur*sr);
+    var vol=n.vol||0.18;
+    for(var i=0;i<durSamp;i++){
+      var t=i/sr;
+      var env=Math.min(t/0.01,1)*Math.exp(-t*(n.decay||6));
+      var wave;
+      if(n.type==="saw"){
+        wave=2*(n.freq*t%1)-1;
+      } else {
+        wave=Math.sin(2*Math.PI*n.freq*t);
+      }
+      var si=startSamp+i;
+      if(si<len)buf[si]+=wave*env*vol;
+    }
+  });
+  // Clamp
+  for(var i=0;i<len;i++)buf[i]=Math.max(-1,Math.min(1,buf[i]));
+  // Write WAV
+  var dataLen=len*2;
+  var ab=new ArrayBuffer(44+dataLen);
+  var view=new DataView(ab);
+  function ws(off,str){for(var i=0;i<str.length;i++)view.setUint8(off+i,str.charCodeAt(i));}
+  ws(0,"RIFF");view.setUint32(4,36+dataLen,true);ws(8,"WAVE");
+  ws(12,"fmt ");view.setUint32(16,16,true);view.setUint16(20,1,true);
+  view.setUint16(22,1,true);view.setUint32(24,sr,true);view.setUint32(28,sr*2,true);
+  view.setUint16(32,2,true);view.setUint16(34,16,true);
+  ws(36,"data");view.setUint32(40,dataLen,true);
+  for(var i=0;i<len;i++){
+    var s=Math.max(-32768,Math.min(32767,Math.round(buf[i]*32767)));
+    view.setInt16(44+i*2,s,true);
+  }
+  // Base64
+  var bytes=new Uint8Array(ab),b64="";
+  for(var i=0;i<bytes.length;i++)b64+=String.fromCharCode(bytes[i]);
+  return "data:audio/wav;base64,"+btoa(b64);
+}
+function _play(name,notes){
+  if(!_sfxCache[name])_sfxCache[name]=_makeWav(notes);
+  try{var a=new Audio(_sfxCache[name]);a.volume=0.6;a.play();}catch(e){}
+}
+function sfxCorrect(){
+  _play("correct",[
+    {freq:523,start:0,   dur:0.18,vol:0.22,decay:5},
+    {freq:659,start:0.1, dur:0.22,vol:0.22,decay:4}
+  ]);
+}
+function sfxWrong(){
+  _play("wrong",[
+    {freq:180,start:0,   dur:0.08,vol:0.25,decay:8,type:"saw"},
+    {freq:120,start:0.07,dur:0.18,vol:0.22,decay:6,type:"saw"}
+  ]);
+}
+function sfxFinish(){
+  _play("finish",[
+    {freq:392,start:0,   dur:0.14,vol:0.18,decay:5},
+    {freq:523,start:0.13,dur:0.14,vol:0.18,decay:5},
+    {freq:659,start:0.26,dur:0.14,vol:0.18,decay:5},
+    {freq:784,start:0.39,dur:0.28,vol:0.2, decay:3}
+  ]);
+}
+function sfxRankUp(){
+  _play("rankup",[
+    {freq:262,start:0,   dur:0.1, vol:0.16,decay:6},
+    {freq:330,start:0.1, dur:0.1, vol:0.16,decay:6},
+    {freq:392,start:0.2, dur:0.1, vol:0.16,decay:6},
+    {freq:523,start:0.3, dur:0.1, vol:0.16,decay:6},
+    {freq:659,start:0.4, dur:0.15,vol:0.18,decay:5},
+    {freq:784,start:0.52,dur:0.32,vol:0.2, decay:3}
+  ]);
+}
 function playTone(freq,gain,duration){
-  var ctx=getAudio();if(!ctx)return;
-  try{
-    var o=ctx.createOscillator(),g=ctx.createGain();
-    o.connect(g);g.connect(ctx.destination);
-    o.frequency.value=freq;o.type="sine";
-    g.gain.setValueAtTime(gain,ctx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+duration);
-    o.start(ctx.currentTime);o.stop(ctx.currentTime+duration);
-  }catch(e){}
+  _play("tick_"+freq,[{freq:freq,start:0,dur:duration,vol:gain,decay:8}]);
+}
+
+
+// ── XP & RANK SYSTEM ──
+var RANKS=[
+  {name:"Novice",    min:0,    color:"#a7a5b8", bg:"rgba(167,165,184,0.15)", glow:null},
+  {name:"Apprentice",min:100,  color:"#06d6a0", bg:"rgba(6,214,160,0.15)",   glow:null},
+  {name:"Scholar",   min:300,  color:"#4cc9f0", bg:"rgba(76,201,240,0.15)",  glow:null},
+  {name:"Expert",    min:600,  color:"#9b5de5", bg:"rgba(155,93,229,0.15)",  glow:null},
+  {name:"Master",    min:1000, color:"#ff6b35", bg:"rgba(255,107,53,0.2)",   glow:"glow-orange"},
+  {name:"Grandmaster",min:1500,color:"#ef476f", bg:"rgba(239,71,111,0.2)",   glow:"glow-red"},
+  {name:"Legend",    min:2500, color:"#ffd166", bg:"rgba(255,209,102,0.2)",  glow:"glow-gold"},
+  {name:"Mythic",    min:4000, color:"#9b5de5", bg:"rgba(155,93,229,0.2)",   glow:"glow-purple"},
+  {name:"Eternal",   min:6000, color:"#06d6a0", bg:"rgba(6,214,160,0.2)",    glow:"glow-cyan"}
+];
+
+var TITLES=[
+  // Common
+  {id:"t_rookie",     label:"The Rookie",      rarity:"Common",   color:"#a7a5b8", bg:"rgba(167,165,184,0.15)", req:"Play your first quiz",                 check:function(s){return s.dp>=1;}},
+  {id:"t_regular",    label:"The Regular",     rarity:"Common",   color:"#a7a5b8", bg:"rgba(167,165,184,0.15)", req:"Play 7 days",                          check:function(s){return s.dp>=7;}},
+  {id:"t_quizzer",    label:"Quiz Enthusiast", rarity:"Common",   color:"#a7a5b8", bg:"rgba(167,165,184,0.15)", req:"Answer 50 questions correctly",         check:function(s){return s.tc>=50;}},
+  // Uncommon
+  {id:"t_streak3",    label:"On Fire",         rarity:"Uncommon", color:"#06d6a0", bg:"rgba(6,214,160,0.15)",   req:"Reach a 3-day streak",                 check:function(s){return s.streak>=3;}},
+  {id:"t_sharpshooter",label:"Sharpshooter",   rarity:"Uncommon", color:"#06d6a0", bg:"rgba(6,214,160,0.15)",   req:"Score 8+ on 5 quizzes",                check:function(s){return s.highScores>=5;}},
+  {id:"t_scholar",    label:"The Scholar",     rarity:"Uncommon", color:"#06d6a0", bg:"rgba(6,214,160,0.15)",   req:"Play 20 days",                         check:function(s){return s.dp>=20;}},
+  {id:"t_correct100", label:"Century",         rarity:"Uncommon", color:"#06d6a0", bg:"rgba(6,214,160,0.15)",   req:"Answer 100 questions correctly",        check:function(s){return s.tc>=100;}},
+  // Rare
+  {id:"t_streak7",    label:"Week Warrior",    rarity:"Rare",     color:"#4cc9f0", bg:"rgba(76,201,240,0.15)",  req:"Reach a 7-day streak",                 check:function(s){return s.streak>=7;}},
+  {id:"t_perfectionist",label:"Perfectionist", rarity:"Rare",     color:"#4cc9f0", bg:"rgba(76,201,240,0.15)",  req:"Get a perfect 10 in any category",     check:function(s){return s.perfect>=1;}},
+  {id:"t_allrounder", label:"All Rounder",     rarity:"Rare",     color:"#4cc9f0", bg:"rgba(76,201,240,0.15)",  req:"Play 5 different categories",          check:function(s){return s.cats>=5;}},
+  {id:"t_veteran",    label:"The Veteran",     rarity:"Rare",     color:"#4cc9f0", bg:"rgba(76,201,240,0.15)",  req:"Play 50 days",                         check:function(s){return s.dp>=50;}},
+  // Epic
+  {id:"t_streak30",   label:"Unstoppable",     rarity:"Epic",     color:"#9b5de5", bg:"rgba(155,93,229,0.2)",   req:"Reach a 30-day streak",                check:function(s){return s.streak>=30;}},
+  {id:"t_perfect5",   label:"Flawless",        rarity:"Epic",     color:"#9b5de5", bg:"rgba(155,93,229,0.2)",   req:"Get 5 perfect 10s",                    check:function(s){return s.perfect>=5;}},
+  {id:"t_lbtop",      label:"Top of the Board",rarity:"Epic",     color:"#9b5de5", bg:"rgba(155,93,229,0.2)",   req:"Finish #1 on the leaderboard",         check:function(s){return s.ach.indexOf("lb_first")>=0;}},
+  {id:"t_correct500", label:"Knowledge Seeker",rarity:"Epic",     color:"#9b5de5", bg:"rgba(155,93,229,0.2)",   req:"Answer 500 questions correctly",        check:function(s){return s.tc>=500;}},
+  // Legendary
+  {id:"t_streak100",  label:"Centurion",       rarity:"Legendary",color:"#ffd166", bg:"rgba(255,209,102,0.2)",  req:"Reach a 100-day streak",               check:function(s){return s.streak>=100;}},
+  {id:"t_allperfect", label:"The Untouchable", rarity:"Legendary",color:"#ffd166", bg:"rgba(255,209,102,0.2)",  req:"Get a perfect 10 in every category",   check:function(s){return s.perfect>=12;}},
+  {id:"t_xp2500",     label:"Legend",          rarity:"Legendary",color:"#ffd166", bg:"rgba(255,209,102,0.2)",  req:"Reach Legend rank (2500 XP)",           check:function(s){return s.xp>=2500;}},
+  {id:"t_correct1000",label:"Brain of Britain",rarity:"Legendary",color:"#ffd166", bg:"rgba(255,209,102,0.2)",  req:"Answer 1000 questions correctly",       check:function(s){return s.tc>=1000;}},
+  // Mythic
+  {id:"t_eternal",    label:"The Eternal",     rarity:"Mythic",   color:"#a78bfa", bg:"rgba(167,139,250,0.2)",  req:"Reach Eternal rank (6000 XP)",          check:function(s){return s.xp>=6000;}},
+  {id:"t_allbadges",  label:"Badge Collector",  rarity:"Mythic",  color:"#a78bfa", bg:"rgba(167,139,250,0.2)",  req:"Unlock all achievements",               check:function(s){return s.ach.length>=34;}},
+  {id:"t_quizmaster", label:"QuizMaster",       rarity:"Mythic",  color:"#a78bfa", bg:"rgba(167,139,250,0.2)",  req:"Reach Eternal rank with all categories perfected",check:function(s){return s.xp>=6000&&s.perfect>=12;}}
+];
+
+var CC_COLOURS=[
+  {id:"default", label:"Default",  cls:"",        style:"background:var(--card)"},
+  {id:"blue",    label:"Ocean",    cls:"cc-blue",  style:"background:linear-gradient(135deg,#0d1b2a,#1a2f4e)"},
+  {id:"green",   label:"Forest",   cls:"cc-green", style:"background:linear-gradient(135deg,#0d2018,#1a3d28)"},
+  {id:"purple",  label:"Void",     cls:"cc-purple",style:"background:linear-gradient(135deg,#1a0d2e,#2d1b4e)"},
+  {id:"red",     label:"Ember",    cls:"cc-red",   style:"background:linear-gradient(135deg,#2e0d0d,#4e1b1b)"},
+  {id:"gold",    label:"Gold",     cls:"cc-gold",  style:"background:linear-gradient(135deg,#2e2000,#4e3800)"},
+  {id:"dark",    label:"Abyss",    cls:"cc-dark",  style:"background:linear-gradient(135deg,#0a0a0f,#151520)"}
+];
+
+var CC_AVATARS=["🧠","🔥","⚡","🎯","🏆","👑","🌟","💎","🦊","🐉","🎭","🚀","🌙","⚔️","🎪","🌊","🎲","🦁","🎓","🤖","💡","🌈","🔮","🎸","🧩"];
+
+function getXP(){return parseInt(localStorage.getItem("qp_xp")||"0");}
+function setXP(v){localStorage.setItem("qp_xp",v);}
+function getCCColour(){return localStorage.getItem("qp_cc_colour")||"default";}
+function getCCAvatar(){return localStorage.getItem("qp_cc_avatar")||"";}
+function getCCTitle(){return localStorage.getItem("qp_cc_title")||"";}
+
+function getRank(xp){
+  var r=RANKS[0];
+  for(var i=0;i<RANKS.length;i++){if(xp>=RANKS[i].min)r=RANKS[i];}
+  return r;
+}
+function getNextRank(xp){
+  for(var i=0;i<RANKS.length;i++){if(RANKS[i].min>xp)return RANKS[i];}
+  return null;
+}
+
+function calcXPGain(){
+  var base=score*10;
+  var avg=questions.length>0?totalTime/questions.length:15;
+  var speed=avg<5?2:avg<8?1.5:avg<11?1.2:1;
+  var bonus=score===10?50:0;
+  return Math.round(base*speed)+bonus;
+}
+
+function getTitleStats(){
+  var days=getDaysPlayed();
+  var perfect=getPerfectDays();
+  // count high scores (8+) from saved results
+  var highScores=0;
+  var cats=new Set();
+  for(var k in localStorage){
+    if(k.indexOf("qp_res_")===0){
+      try{var r=JSON.parse(localStorage.getItem(k));if(r&&r.score>=8)highScores++;if(r&&r.category)cats.add(r.category);}catch(e){}
+    }
+  }
+  return{
+    dp:days.length, streak:getStreak(), tc:getTotalCorrect(),
+    perfect:perfect, highScores:highScores, cats:cats.size,
+    ach:getAchievements(), xp:getXP()
+  };
+}
+
+function getUnlockedTitles(){
+  var stats=getTitleStats();
+  return TITLES.filter(function(t){return t.check(stats);});
+}
+
+function getActiveTitle(){
+  var saved=getCCTitle();
+  var unlocked=getUnlockedTitles();
+  if(saved&&unlocked.find(function(t){return t.id===saved;}))return TITLES.find(function(t){return t.id===saved;})||unlocked[0]||null;
+  return unlocked[0]||null;
+}
+
+var _ccExpanded=false;
+var _ccSheetTab="title";
+
+function renderCallingCard(){
+  var name=getUsername()||"Anonymous";
+  var xp=getXP(), rank=getRank(xp), nextRank=getNextRank(xp);
+  var colourId=getCCColour();
+  var colourDef=CC_COLOURS.find(function(c){return c.id===colourId;})||CC_COLOURS[0];
+  var avatarEmoji=getCCAvatar();
+  var initials=name.substring(0,2).toUpperCase();
+  var activeTitle=getActiveTitle();
+
+  var barPct=0, xpToNext="Max Rank";
+  if(nextRank){
+    var prev=rank.min;
+    barPct=Math.min(100,Math.round((xp-prev)/(nextRank.min-prev)*100));
+    xpToNext=(nextRank.min-xp)+" XP to "+nextRank.name;
+  } else { barPct=100; }
+
+  var colourClasses="calling-card "+colourDef.cls+(rank.glow?" "+rank.glow:"");
+  if(_ccExpanded) colourClasses+=" cc-expanded";
+  var card=document.getElementById("callingCard");
+  if(!card)return;
+  card.className=colourClasses;
+
+  var avatarHTML=avatarEmoji
+    ?'<span style="font-size:'+(  _ccExpanded?'38px':'26px')+'">'+avatarEmoji+'</span>'
+    :'<span style="font-family:Righteous,cursive;font-size:'+(_ccExpanded?'22px':'16px')+';color:'+rank.color+'">'+initials+'</span>';
+
+  var titleHTML=activeTitle
+    ?'<span style="background:'+activeTitle.bg+';color:'+activeTitle.color+';border:1px solid '+activeTitle.color+'35;font-size:'+(_ccExpanded?'13px':'12px')+';padding:3px 12px;border-radius:20px;font-weight:600;letter-spacing:.04em;display:inline-block">'+activeTitle.label+'</span>'
+    :'<span style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.3);font-size:12px;padding:3px 12px;border-radius:20px;display:inline-block">No Title Yet</span>';
+
+  var rankBadgeHTML='<span class="cc-rank-badge" style="background:'+rank.bg+';color:'+rank.color+'">'+rank.name.toUpperCase()+'</span>';
+  var xpBarHTML=
+    '<div class="cc-rank-row">'+
+      rankBadgeHTML+
+      '<div class="cc-xp-track"><div class="cc-xp-fill" id="ccXpFill" style="width:0%;background:'+rank.color+'"></div></div>'+
+    '</div>'+
+    '<div class="cc-xp-meta">'+
+      '<span class="cc-xp-num" style="color:'+rank.color+'">'+xp+' XP</span>'+
+      '<span class="cc-xp-next">'+xpToNext+'</span>'+
+    '</div>';
+
+  var html='<div class="cc-glow-bg"></div>';
+
+  if(!_ccExpanded){
+    // ── COLLAPSED ──
+    html+=
+      '<div class="cc-collapsed">'+
+        '<div class="cc-collapsed-avatar">'+avatarHTML+'</div>'+
+        '<div class="cc-collapsed-info">'+
+          '<div class="cc-collapsed-name">'+name+'</div>'+
+          '<div class="cc-collapsed-title">'+titleHTML+'</div>'+
+        '</div>'+
+        rankBadgeHTML+
+      '</div>'+
+      '<div class="cc-expand-hint">tap to expand ↓</div>';
+  } else {
+    // ── EXPANDED ──
+    html+=
+      '<div class="cc-hero">'+
+        '<div class="cc-hero-avatar">'+avatarHTML+'</div>'+
+        '<div class="cc-hero-name">'+name+'</div>'+
+        '<div style="margin-bottom:16px">'+titleHTML+'</div>'+
+      '</div>'+
+      '<div class="cc-xp-wrap">'+xpBarHTML+'</div>'+
+      '<div class="cc-divider"></div>'+
+      '<button class="cc-customise-btn" onclick="ccOpenCustomise(event)">✏️ Customise Card</button>'+
+      '<div class="cc-close-pill" onclick="ccCollapse(event)">▲ collapse</div>'+
+      '<div class="cc-expanded-inner"></div>';
+  }
+
+  card.innerHTML=html;
+  setTimeout(function(){var f=document.getElementById("ccXpFill");if(f)f.style.width=barPct+"%";},80);
+}
+
+function ccHandleClick(e){
+  if(_ccExpanded)return;
+  _ccExpanded=true;
+  renderCallingCard();
+}
+function ccCollapse(e){
+  e.stopPropagation();
+  _ccExpanded=false;
+  var sheet=document.getElementById("ccSheet");
+  if(sheet)sheet.classList.remove("open");
+  renderCallingCard();
+}
+function ccOpenCustomise(e){
+  e.stopPropagation();
+  var sheet=document.getElementById("ccSheet");
+  if(!sheet)return;
+  sheet.classList.toggle("open");
+  if(sheet.classList.contains("open")) ccSheetTab(_ccSheetTab);
+}
+
+function ccSheetTab(tab){
+  _ccSheetTab=tab;
+  ["title","colour","avatar","name"].forEach(function(t){
+    var el=document.getElementById("cst-"+t);
+    if(el)el.classList.toggle("active",t===tab);
+  });
+  var body=document.getElementById("ccSheetBody");
+  if(!body)return;
+  if(tab==="title")  body.innerHTML=buildTitleHTML();
+  if(tab==="colour") body.innerHTML=buildColourHTML();
+  if(tab==="avatar") body.innerHTML=buildAvatarHTML();
+  if(tab==="name")   body.innerHTML=buildNameHTML();
+}
+
+function buildTitleHTML(){
+  var stats=getTitleStats();
+  var active=getCCTitle();
+  var rarityOrder=["Common","Uncommon","Rare","Epic","Legendary","Mythic"];
+  var html='<div class="title-list">';
+  rarityOrder.forEach(function(rarity){
+    var group=TITLES.filter(function(t){return t.rarity===rarity;});
+    if(!group.length)return;
+    html+='<div class="cc-rarity-label" style="color:'+group[0].color+'">'+rarity+'</div>';
+    group.forEach(function(t){
+      var unlocked=t.check(stats);
+      var isActive=t.id===active||(active===""&&getActiveTitle()&&getActiveTitle().id===t.id);
+      html+='<div class="title-item'+(isActive?" t-active":"")+(unlocked?"":" t-locked")+'"'+(unlocked?' onclick="ccPickTitle(\''+t.id+'\')"':'')+'>'+
+        '<span class="ti-badge" style="background:'+t.bg+';color:'+t.color+'">'+t.rarity+'</span>'+
+        '<div class="ti-info"><div class="ti-name" style="color:'+t.color+'">'+t.label+'</div>'+
+        '<div class="ti-req">'+(unlocked?'<span style="color:#06d6a0">✓ Unlocked</span>':'🔒 '+t.req)+'</div></div>'+
+        (isActive?'<span class="ti-check">✓</span>':'')+
+      '</div>';
+    });
+  });
+  return html+'</div>';
+}
+
+function buildColourHTML(){
+  var active=getCCColour();
+  var html='<div class="cc-colour-grid">';
+  CC_COLOURS.forEach(function(c){
+    html+='<div class="cc-swatch'+(active===c.id?" c-active":"")+'" style="'+c.style+'" onclick="ccPickColour(\''+c.id+'\')">'+c.label+'</div>';
+  });
+  return html+'</div>';
+}
+
+function buildAvatarHTML(){
+  var active=getCCAvatar();
+  var html='<div class="cc-avatar-grid">';
+  CC_AVATARS.forEach(function(em){
+    html+='<div class="cc-avatar-opt'+(active===em?" a-active":"")+'" onclick="ccPickAvatar(\''+em+'\')">'+em+'</div>';
+  });
+  return html+'</div>';
+}
+
+function buildNameHTML(){
+  var name=getUsername()||"";
+  return '<div class="cc-username-wrap">'+
+    '<input class="cc-username-input" id="ccNameInput" type="text" maxlength="18" placeholder="Enter username" value="'+name+'" autocomplete="off"/>'+
+    '<button class="btn btn-primary" style="padding:11px 16px;font-size:13px" onclick="ccSaveName()">Save</button>'+
+  '</div>'+
+  '<div style="font-size:11px;color:var(--muted);margin-top:7px">Letters, numbers and underscores only</div>';
+}
+
+function ccPickTitle(id){localStorage.setItem("qp_cc_title",id);ccSheetTab("title");renderCallingCard();}
+function ccPickColour(id){localStorage.setItem("qp_cc_colour",id);ccSheetTab("colour");renderCallingCard();}
+function ccPickAvatar(em){localStorage.setItem("qp_cc_avatar",em);ccSheetTab("avatar");renderCallingCard();}
+function ccSaveName(){
+  var v=document.getElementById("ccNameInput");
+  if(!v)return;
+  var name=v.value.trim().replace(/[^a-zA-Z0-9_]/g,"");
+  if(name.length<2){v.style.borderColor="var(--red)";return;}
+  localStorage.setItem("qp_username",name);
+  ccSheetTab("name");
+  renderCallingCard();
+  renderProfile();
+}
+
+// Legacy stubs
+function openModal(){}
+function closeModal(id){var el=document.getElementById(id);if(el)el.classList.remove("open");document.body.style.overflow="";}
+function buildTitleGrid(){}
+function buildColourGrid(){}
+function buildAvatarGrid(){}
+
+
+function awardXP(){
+  var base=score*10;
+  var avg=questions.length>0?totalTime/questions.length:15;
+  var speedMult=avg<5?2:avg<8?1.5:avg<11?1.2:1;
+  var speedBonus=Math.round(base*speedMult)-base;
+  var perfectBonus=score===10?50:0;
+  var gain=base+speedBonus+perfectBonus;
+  var oldXP=getXP();
+  var newXP=oldXP+gain;
+  setXP(newXP);
+  var oldRank=getRank(oldXP);
+  var newRank=getRank(newXP);
+  var rankedUp=newRank.name!==oldRank.name;
+  if(rankedUp){
+    setTimeout(function(){sfxRankUp();showAchToast({icon:"⬆️",name:"Rank Up! You are now "+newRank.name});},1800);
+  }
+  return{base:base,speedBonus:speedBonus,perfectBonus:perfectBonus,total:gain,oldXP:oldXP,newXP:newXP,oldRank:oldRank,newRank:newRank,rankedUp:rankedUp};
+}
+
+function showXPSummary(xpData){
+  var el=document.getElementById("xpSummary");
+  if(!el)return;
+  var rank=xpData.newRank;
+  var nextRank=getNextRank(xpData.newXP);
+  var prev=rank.min;
+  var barPct=nextRank?Math.min(100,Math.round((xpData.newXP-prev)/(nextRank.min-prev)*100)):100;
+  var oldBarPct=nextRank?Math.min(100,Math.round((xpData.oldXP-prev)/(nextRank.min-prev)*100)):100;
+  // Handle rank-up bar — start from 0 if ranked up
+  if(xpData.rankedUp){oldBarPct=0;}
+
+  el.style.display="block";
+  el.innerHTML=
+    '<div class="xp-summary-title">⚡ XP Earned</div>'+
+    '<div class="xp-row"><span class="xp-row-label">Correct answers</span><span class="xp-row-val" style="color:'+rank.color+'">+'+xpData.base+'</span></div>'+
+    (xpData.speedBonus>0?'<div class="xp-row"><span class="xp-row-label">Speed bonus</span><span class="xp-row-val" style="color:#4cc9f0">+'+xpData.speedBonus+'</span></div>':'')+
+    (xpData.perfectBonus>0?'<div class="xp-row"><span class="xp-row-label">Perfect score!</span><span class="xp-row-val" style="color:#ffd166">+'+xpData.perfectBonus+'</span></div>':'')+
+    '<div class="xp-divider"></div>'+
+    '<div class="xp-total-row">'+
+      '<span class="xp-total-label">Total XP</span>'+
+      '<span class="xp-total-val" id="xpCountUp" style="color:'+rank.color+'">+0</span>'+
+    '</div>'+
+    '<div class="xp-bar-track"><div class="xp-bar-fill" id="xpBarFill" style="width:'+oldBarPct+'%;background:'+rank.color+'"></div></div>'+
+    '<div class="xp-rank-labels">'+
+      '<span style="color:'+rank.color+';font-weight:700">'+rank.name+'</span>'+
+      '<span>'+xpData.newXP+' / '+(nextRank?nextRank.min:'MAX')+' XP</span>'+
+      '<span style="color:'+(nextRank?nextRank.color:rank.color)+';font-weight:700">'+(nextRank?nextRank.name:'MAX')+'</span>'+
+    '</div>'+
+    (xpData.rankedUp?'<div class="xp-rankup" id="xpRankUp" style="background:'+rank.bg+';color:'+rank.color+';border:1px solid '+rank.color+'50">⬆️ Rank Up — '+rank.name+'!</div>':'')+
+    '<div style="font-size:10px;color:var(--muted);text-align:center;margin-top:6px">'+xpData.newXP+' total XP</div>';
+
+  // Count-up animation
+  var countEl=document.getElementById("xpCountUp");
+  var target=xpData.total,current=0,steps=20;
+  var inc=Math.ceil(target/steps);
+  var timer=setInterval(function(){
+    current=Math.min(current+inc,target);
+    if(countEl)countEl.textContent="+"+current;
+    if(current>=target){
+      clearInterval(timer);
+      // Animate bar after count finishes
+      setTimeout(function(){
+        var bar=document.getElementById("xpBarFill");
+        if(bar)bar.style.width=barPct+"%";
+        if(xpData.rankedUp){
+          var ru=document.getElementById("xpRankUp");
+          if(ru){ru.style.display="block";ru.style.animation="fadeIn .4s ease";}
+        }
+      },100);
+    }
+  },40);
 }
 
 // ── LEADERBOARD & SCORING ──
@@ -1338,6 +1991,32 @@ function renderLeaderboard(){
     })
     .catch(function(){document.getElementById("lbStreaks").innerHTML='<div class="lb-empty">Could not load streaks</div>';});
 }
+function resetAllData(){
+  document.getElementById("resetModal").style.display="flex";
+}
+function closeResetModal(){
+  document.getElementById("resetModal").style.display="none";
+}
+function confirmReset(){
+  var keys=[];
+  for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k&&k.startsWith("qp_"))keys.push(k);}
+  keys.forEach(function(k){localStorage.removeItem(k);});
+  location.reload();
+}
 </script>
+
+<!-- Reset confirmation modal -->
+<div id="resetModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px 24px;max-width:320px;width:100%;text-align:center">
+    <div style="font-size:36px;margin-bottom:12px">🗑️</div>
+    <div style="font-family:'Righteous',cursive;font-size:18px;margin-bottom:8px">Delete All Data?</div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:20px">This will permanently delete your streak, XP, badges, quiz history and username. <strong style="color:var(--red)">This cannot be undone.</strong></div>
+    <div style="display:flex;gap:10px">
+      <button onclick="closeResetModal()" style="flex:1;padding:12px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer">Cancel</button>
+      <button onclick="confirmReset()" style="flex:1;padding:12px;border-radius:12px;border:none;background:var(--red);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer">Yes, Delete</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
