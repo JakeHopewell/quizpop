@@ -1263,6 +1263,7 @@ function finish(){
   sfxFinish();
   saveResult(playingDate,cat);
   syncBadges();
+  syncStreakToSupabase();
   var xpData=awardXP();
   submitScoreToLeaderboard();
   var newAch=checkAchievements();
@@ -1417,92 +1418,54 @@ function applyMode(){
   }
 }
 // ── AUDIO ──
-// Uses Audio() with data URIs — works on file://, https://, everywhere
-// Sounds generated as minimal WAV PCM via Web Audio, encoded to base64 on first call
-var _sfxCache={};
-function _makeWav(notes){
-  // notes: [{freq, start, dur, vol, type}]
-  // Render to offline context and return base64 WAV
-  var totalDur=0;
-  notes.forEach(function(n){if(n.start+n.dur>totalDur)totalDur=n.start+n.dur;});
-  totalDur+=0.1;
-  var sr=22050,len=Math.ceil(sr*totalDur);
-  var buf=new Float32Array(len);
-  notes.forEach(function(n){
-    var startSamp=Math.floor(n.start*sr);
-    var durSamp=Math.floor(n.dur*sr);
-    var vol=n.vol||0.18;
-    for(var i=0;i<durSamp;i++){
-      var t=i/sr;
-      var env=Math.min(t/0.01,1)*Math.exp(-t*(n.decay||6));
-      var wave;
-      if(n.type==="saw"){
-        wave=2*(n.freq*t%1)-1;
-      } else {
-        wave=Math.sin(2*Math.PI*n.freq*t);
-      }
-      var si=startSamp+i;
-      if(si<len)buf[si]+=wave*env*vol;
-    }
-  });
-  // Clamp
-  for(var i=0;i<len;i++)buf[i]=Math.max(-1,Math.min(1,buf[i]));
-  // Write WAV
-  var dataLen=len*2;
-  var ab=new ArrayBuffer(44+dataLen);
-  var view=new DataView(ab);
-  function ws(off,str){for(var i=0;i<str.length;i++)view.setUint8(off+i,str.charCodeAt(i));}
-  ws(0,"RIFF");view.setUint32(4,36+dataLen,true);ws(8,"WAVE");
-  ws(12,"fmt ");view.setUint32(16,16,true);view.setUint16(20,1,true);
-  view.setUint16(22,1,true);view.setUint32(24,sr,true);view.setUint32(28,sr*2,true);
-  view.setUint16(32,2,true);view.setUint16(34,16,true);
-  ws(36,"data");view.setUint32(40,dataLen,true);
-  for(var i=0;i<len;i++){
-    var s=Math.max(-32768,Math.min(32767,Math.round(buf[i]*32767)));
-    view.setInt16(44+i*2,s,true);
-  }
-  // Base64
-  var bytes=new Uint8Array(ab),b64="";
-  for(var i=0;i<bytes.length;i++)b64+=String.fromCharCode(bytes[i]);
-  return "data:audio/wav;base64,"+btoa(b64);
+var _ac=null;
+function _getAC(){
+  if(!_ac){try{_ac=new(window.AudioContext||window.webkitAudioContext)();}catch(e){return null;}}
+  if(_ac.state==='suspended'){_ac.resume();}
+  return _ac;
 }
-function _play(name,notes){
-  if(!_sfxCache[name])_sfxCache[name]=_makeWav(notes);
-  try{var a=new Audio(_sfxCache[name]);a.volume=0.6;a.play();}catch(e){}
+function _note(ctx,freq,startT,dur,vol,type){
+  try{
+    var o=ctx.createOscillator(),g=ctx.createGain();
+    o.type=type||'sine';
+    o.frequency.setValueAtTime(freq,ctx.currentTime+startT);
+    g.gain.setValueAtTime(0.001,ctx.currentTime+startT);
+    g.gain.linearRampToValueAtTime(vol,ctx.currentTime+startT+0.015);
+    g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+startT+dur);
+    o.connect(g);g.connect(ctx.destination);
+    o.start(ctx.currentTime+startT);
+    o.stop(ctx.currentTime+startT+dur+0.02);
+  }catch(e){}
 }
 function sfxCorrect(){
-  _play("correct",[
-    {freq:523,start:0,   dur:0.18,vol:0.22,decay:5},
-    {freq:659,start:0.1, dur:0.22,vol:0.22,decay:4}
-  ]);
+  var ctx=_getAC();if(!ctx)return;
+  _note(ctx,523,0,   0.18,0.2);
+  _note(ctx,659,0.12,0.22,0.2);
 }
 function sfxWrong(){
-  _play("wrong",[
-    {freq:180,start:0,   dur:0.08,vol:0.25,decay:8,type:"saw"},
-    {freq:120,start:0.07,dur:0.18,vol:0.22,decay:6,type:"saw"}
-  ]);
+  var ctx=_getAC();if(!ctx)return;
+  _note(ctx,180,0,   0.1, 0.2,'sawtooth');
+  _note(ctx,120,0.08,0.2, 0.18,'sawtooth');
 }
 function sfxFinish(){
-  _play("finish",[
-    {freq:392,start:0,   dur:0.14,vol:0.18,decay:5},
-    {freq:523,start:0.13,dur:0.14,vol:0.18,decay:5},
-    {freq:659,start:0.26,dur:0.14,vol:0.18,decay:5},
-    {freq:784,start:0.39,dur:0.28,vol:0.2, decay:3}
-  ]);
+  var ctx=_getAC();if(!ctx)return;
+  [[392,0],[523,0.14],[659,0.28],[784,0.42]].forEach(function(n){
+    _note(ctx,n[0],n[1],0.18,0.18);
+  });
 }
 function sfxRankUp(){
-  _play("rankup",[
-    {freq:262,start:0,   dur:0.1, vol:0.16,decay:6},
-    {freq:330,start:0.1, dur:0.1, vol:0.16,decay:6},
-    {freq:392,start:0.2, dur:0.1, vol:0.16,decay:6},
-    {freq:523,start:0.3, dur:0.1, vol:0.16,decay:6},
-    {freq:659,start:0.4, dur:0.15,vol:0.18,decay:5},
-    {freq:784,start:0.52,dur:0.32,vol:0.2, decay:3}
-  ]);
+  var ctx=_getAC();if(!ctx)return;
+  [[262,0],[330,0.1],[392,0.2],[523,0.3],[659,0.42],[784,0.55]].forEach(function(n){
+    _note(ctx,n[0],n[1],0.15,0.16);
+  });
 }
-function playTone(freq,gain,duration){
-  _play("tick_"+freq,[{freq:freq,start:0,dur:duration,vol:gain,decay:8}]);
+function playTone(freq,gain,dur){
+  var ctx=_getAC();if(!ctx)return;
+  _note(ctx,freq,0,dur,gain);
 }
+// Unlock AudioContext on first tap (required by browsers)
+document.addEventListener('touchstart',function u(){_getAC();document.removeEventListener('touchstart',u);},{once:true,passive:true});
+document.addEventListener('click',function u(){_getAC();document.removeEventListener('click',u);},{once:true});
 
 
 // ── XP & RANK SYSTEM ──
@@ -1921,7 +1884,7 @@ function syncStreakToSupabase(){
   var username=getUsername();
   if(!username)return;
   var streak=getStreak();
-  if(!streak||streak<1)return;
+  if(streak<1)return;
   sbFetch("streaks?username=eq."+encodeURIComponent(username),{})
     .then(function(rows){
       var bestEver=rows&&rows.length>0?Math.max(rows[0].best_streak||0,streak):streak;
