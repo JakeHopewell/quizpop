@@ -1846,15 +1846,11 @@ function submitScoreToLeaderboard(){
     trackWrongAnswers();
   }).catch(function(e){console.warn("Score submit failed:",e);});
   var streak=getStreak();
-  sbFetch("streaks?username=eq."+encodeURIComponent(username),{})
-    .then(function(rows){
-      var bestEver=rows&&rows.length>0?Math.max(rows[0].best_streak||0,streak):streak;
-      return sbFetch("streaks",{
-        method:"POST",upsert:true,
-        body:{username:username,current_streak:streak,best_streak:bestEver,last_updated:dateKey}
-      });
-    })
-    .catch(function(e){console.warn("Streak submit failed:",e);});
+  var bestStreak=Math.max(streak,parseInt(localStorage.getItem("qp_best")||"0"));
+  sbFetch("streaks?on_conflict=username",{
+    method:"POST",upsert:true,
+    body:{username:username,current_streak:streak,best_streak:bestStreak,last_updated:dateKey}
+  }).catch(function(e){console.warn("Streak submit failed:",e);});
 }
 
 function checkLeaderboardAchievements(username,dateKey){
@@ -1885,15 +1881,12 @@ function syncStreakToSupabase(){
   if(!username)return;
   var streak=getStreak();
   if(streak<1)return;
-  sbFetch("streaks?username=eq."+encodeURIComponent(username),{})
-    .then(function(rows){
-      var bestEver=rows&&rows.length>0?Math.max(rows[0].best_streak||0,streak):streak;
-      return sbFetch("streaks",{
-        method:"POST",upsert:true,
-        body:{username:username,current_streak:streak,best_streak:bestEver,last_updated:dayKey()}
-      });
-    })
-    .catch(function(e){console.warn("Streak sync failed:",e);});
+  var bestStreak=parseInt(localStorage.getItem("qp_best")||"0");
+  var bestEver=Math.max(bestStreak,streak);
+  sbFetch("streaks?on_conflict=username",{
+    method:"POST",upsert:true,
+    body:{username:username,current_streak:streak,best_streak:bestEver,last_updated:dayKey()}
+  }).catch(function(e){console.warn("Streak sync failed:",e);});
 }
 
 function renderLeaderboard(){
