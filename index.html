@@ -411,6 +411,34 @@ body.light .mode-toggle .toggle-knob{transform:translateX(28px)}
 .ph-question{font-weight:600;font-size:14px;line-height:1.4;margin-bottom:6px}
 .ph-stat{font-size:12px;color:var(--accent);margin-top:4px}
 .ph-loading{font-size:12px;color:var(--muted);text-align:center;padding:8px}
+/* ── TOKEN SYSTEM ── */
+.token-pill{border-color:rgba(255,209,102,0.4)!important;color:var(--accent2)!important}
+.ts-tab{flex:1;padding:10px 4px;font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;text-align:center;border:none;background:none;font-family:'DM Sans',sans-serif;transition:all .2s;border-bottom:2px solid transparent;margin-bottom:-1px}
+.ts-tab.active{color:var(--text);border-bottom-color:var(--accent)}
+.ts-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:8px}
+.ts-item-info{flex:1;min-width:0}
+.ts-item-name{font-size:13px;font-weight:700}
+.ts-item-desc{font-size:11px;color:var(--muted);margin-top:2px}
+.ts-buy-btn{padding:6px 14px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;flex-shrink:0}
+.ts-buy-btn.cant-afford{background:var(--surface);border:1px solid var(--border);color:var(--muted);cursor:default}
+.ts-buy-btn.owned{background:rgba(6,214,160,0.15);border:1px solid var(--green);color:var(--green);cursor:pointer}
+.ts-buy-btn.equipped{background:var(--green);color:#fff;cursor:pointer}
+.ts-preview{font-size:24px;flex-shrink:0;width:36px;text-align:center}
+.ts-section-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:14px 0 7px}
+.ts-cost{font-family:'Righteous',cursive;font-size:12px;color:var(--accent2);margin-top:3px}
+/* Name effects */
+.ne-glow-orange{text-shadow:0 0 8px rgba(255,107,53,0.9),0 0 16px rgba(255,107,53,0.5)!important}
+.ne-glow-blue{text-shadow:0 0 8px rgba(76,201,240,0.9),0 0 16px rgba(76,201,240,0.5)!important}
+.ne-glow-green{text-shadow:0 0 8px rgba(6,214,160,0.9),0 0 16px rgba(6,214,160,0.5)!important}
+.ne-glow-purple{text-shadow:0 0 8px rgba(155,93,229,0.9),0 0 16px rgba(155,93,229,0.5)!important}
+.ne-glow-gold{text-shadow:0 0 8px rgba(255,209,102,0.9),0 0 16px rgba(255,209,102,0.5)!important}
+.ne-glow-red{text-shadow:0 0 8px rgba(239,71,111,0.9),0 0 16px rgba(239,71,111,0.5)!important}
+@keyframes neRainbow{0%{color:#ff6b35}16%{color:#ffd166}33%{color:#06d6a0}50%{color:#4cc9f0}66%{color:#9b5de5}83%{color:#ef476f}100%{color:#ff6b35}}
+@keyframes nePulse{0%,100%{opacity:1}50%{opacity:0.55}}
+@keyframes neShimmer{0%{color:#fff}50%{color:#ffd166}100%{color:#fff}}
+.ne-rainbow{animation:neRainbow 3s linear infinite!important;color:unset!important}
+.ne-pulse-glow{animation:nePulse 1.8s ease infinite}
+.ne-shimmer{animation:neShimmer 2s ease infinite!important}
 </style>
 </head>
 <body>
@@ -424,6 +452,7 @@ body.light .mode-toggle .toggle-knob{transform:translateX(28px)}
       <div style="display:flex;align-items:center;gap:8px">
         <button class="mode-toggle" onclick="toggleMode()" id="modeBtn" title="Toggle light/dark mode"><span class="toggle-knob">🌙</span></button>
         <div class="streak-pill" onclick="showTab('profile')" title="View profile"><span class="fire">&#x1F525;</span> <span id="hStreak">0</span></div>
+        <div class="streak-pill token-pill" onclick="showTab('profile');setTimeout(function(){openTokenShop();},100)" title="Tokens"><span>🪙</span> <span id="hTokens">0</span></div>
       </div>
     </header>
     <div class="hero">
@@ -494,6 +523,7 @@ body.light .mode-toggle .toggle-knob{transform:translateX(28px)}
         <div class="cc-sheet-body" id="ccSheetBody"></div>
       </div>
       <div class="profile-card" id="profileCard"></div>
+      <button class="btn btn-secondary" style="margin-bottom:8px;border-color:var(--accent2);color:var(--accent2)" onclick="openTokenShop()">🪙 Token Shop</button>
       <button class="btn btn-secondary" style="margin-bottom:8px;border-color:var(--red);color:var(--red)" onclick="resetAllData()">🗑️ Reset All Data</button>
     </div>
   </div>
@@ -706,6 +736,44 @@ var ACHIEVEMENTS = [
   {id:"lb_top10",        icon:"🎖️", name:"Not Bad, Not Bad",    desc:"Finish in the top 10 on the daily leaderboard"},
 ];
 
+// Token rewards per achievement (one-time, awarded on first unlock)
+var ACH_TOKEN_REWARDS={
+  "first_quiz":5,
+  "perfect_10":10,
+  "perfect_day":25,
+  "all_cats_day":15,
+  "streak_3":5,
+  "streak_7":10,
+  "streak_14":20,
+  "streak_30":40,
+  "streak_100":100,
+  "speed_demon":10,
+  "night_owl":5,
+  "early_bird":5,
+  "share_result":5,
+  "comeback":5,
+  "science_ace":5,
+  "history_buff":5,
+  "geography_pro":5,
+  "sports_fan":5,
+  "foodie":5,
+  "music_maestro":5,
+  "tech_wizard":5,
+  "nature_lover":5,
+  "film_buff":5,
+  "politico":5,
+  "quiz_10":10,
+  "quiz_30":25,
+  "total_100":10,
+  "total_500":30,
+  "total_1000":75,
+  "mixed_master":20,
+  "lb_first":20,
+  "lb_second":10,
+  "lb_third":5,
+  "lb_top10":3,
+};
+
 var MSGS = [
   {min:10, title:"Perfect 10!",          sub:"Absolutely flawless. Incredible!"},
   {min:8,  title:"Outstanding!",          sub:"Near perfect — you really know your stuff."},
@@ -782,7 +850,14 @@ function checkAchievements(){
   var h        = new Date().getHours();
 
   function has(id){return unlocked.indexOf(id)>=0;}
-  function award(id){if(!has(id)){unlocked.push(id);newOnes.push(id);}}
+  function award(id){
+    if(!has(id)){
+      unlocked.push(id);
+      newOnes.push(id);
+      var reward=ACH_TOKEN_REWARDS[id]||0;
+      if(reward>0)addTokens(reward);
+    }
+  }
 
   if(dp>=1)                         award("first_quiz");
   if(dp>=10)                        award("quiz_10");
@@ -832,8 +907,9 @@ function checkAchievements(){
 function showAchievementToast(id){
   var def=ACHIEVEMENTS.find(function(a){return a.id===id;});
   if(!def)return;
+  var reward=ACH_TOKEN_REWARDS[id]||0;
   document.getElementById("achToastIcon").textContent=def.icon;
-  document.getElementById("achToastName").textContent=def.name;
+  document.getElementById("achToastName").textContent=def.name+(reward>0?" · +"+reward+"🪙":"");
   var t=document.getElementById("achToast");
   t.classList.add("show");
   setTimeout(function(){t.classList.remove("show");},3200);
@@ -904,6 +980,7 @@ function showTab(tab){
 
 function goHome(){show("sHome");renderHome();}
 function syncBadges(){
+  updateTokenUI();
   var s=getStreak();
   ["hStreak","rStreak"].forEach(function(id){var e=document.getElementById(id);if(e)e.textContent=s+" day streak";});
   var ds=document.getElementById("dayStreakEl");if(ds)ds.innerHTML='<span class="fire f3">&#x1F525;</span>'+s;
@@ -1540,6 +1617,263 @@ function getNextRank(xp){
   return null;
 }
 
+// ── TOKEN SYSTEM ──
+var RANK_TOKEN_REWARDS=[3,5,8,10,15,20,30,50,75]; // indexed by rank position 0-8
+function getTokens(){return parseInt(localStorage.getItem("qp_tokens")||"0");}
+function setTokens(v){localStorage.setItem("qp_tokens",v);updateTokenUI();}
+function addTokens(n){setTokens(getTokens()+n);}
+function getOwnedItems(){return JSON.parse(localStorage.getItem("qp_owned_items")||"[]");}
+function ownsItem(id){return getOwnedItems().indexOf(id)>=0;}
+function buyItem(id){var o=getOwnedItems();if(o.indexOf(id)<0){o.push(id);localStorage.setItem("qp_owned_items",JSON.stringify(o));}}
+function getEquippedEffect(){return localStorage.getItem("qp_name_effect")||"";}
+function setEquippedEffect(id){localStorage.setItem("qp_name_effect",id);}
+function updateTokenUI(){
+  var t=getTokens();
+  var el=document.getElementById("hTokens");
+  if(el)el.textContent=t;
+  var sel=document.getElementById("shopTokenBal");
+  if(sel)sel.textContent=t;
+}
+
+// Token shop catalogue
+var SHOP_EFFECTS=[
+  {id:"ne_colour_orange", name:"Orange Name",    desc:"Your name glows orange",         cost:15,  cls:"ne-glow-orange", preview:"🔥", color:"#ff6b35"},
+  {id:"ne_colour_blue",   name:"Blue Name",      desc:"Your name glows blue",            cost:15,  cls:"ne-glow-blue",   preview:"💙", color:"#4cc9f0"},
+  {id:"ne_colour_green",  name:"Green Name",     desc:"Your name glows green",           cost:15,  cls:"ne-glow-green",  preview:"💚", color:"#06d6a0"},
+  {id:"ne_colour_purple", name:"Purple Name",    desc:"Your name glows purple",          cost:20,  cls:"ne-glow-purple", preview:"💜", color:"#9b5de5"},
+  {id:"ne_colour_gold",   name:"Gold Name",      desc:"Your name glows gold",            cost:25,  cls:"ne-glow-gold",   preview:"⭐", color:"#ffd166"},
+  {id:"ne_colour_red",    name:"Red Name",       desc:"Your name glows red",             cost:20,  cls:"ne-glow-red",    preview:"❤️", color:"#ef476f"},
+  {id:"ne_shimmer",       name:"Shimmer",        desc:"Your name shimmers gold & white", cost:40,  cls:"ne-shimmer",     preview:"✨", color:"#ffd166"},
+  {id:"ne_pulse_orange",  name:"Pulse",          desc:"Your name pulses with an orange glow",cost:50,cls:"ne-glow-orange ne-pulse-glow",preview:"💫",color:"#ff6b35"},
+  {id:"ne_rainbow",       name:"Rainbow",        desc:"Animated rainbow cycling colours", cost:100, cls:"ne-rainbow",    preview:"🌈", color:"#ffd166"},
+];
+var SHOP_AVATARS=[
+  {id:"av_👾","em":"👾","name":"Space Invader","cost":10},
+  {id:"av_🦋","em":"🦋","name":"Butterfly","cost":10},
+  {id:"av_🐺","em":"🐺","name":"Wolf","cost":10},
+  {id:"av_🦅","em":"🦅","name":"Eagle","cost":15},
+  {id:"av_🐙","em":"🐙","name":"Octopus","cost":15},
+  {id:"av_🦄","em":"🦄","name":"Unicorn","cost":20},
+  {id:"av_🐲","em":"🐲","name":"Dragon Face","cost":25},
+  {id:"av_💀","em":"💀","name":"Skull","cost":20},
+  {id:"av_🧿","em":"🧿","name":"Evil Eye","cost":25},
+  {id:"av_🌋","em":"🌋","name":"Volcano","cost":30},
+  {id:"av_⚗️","em":"⚗️","name":"Alchemy","cost":35},
+  {id:"av_🎱","em":"🎱","name":"Magic 8-Ball","cost":40},
+  {id:"av_🪐","em":"🪐","name":"Saturn","cost":50},
+  {id:"av_🃏","em":"🃏","name":"Joker","cost":60},
+  {id:"av_🌌","em":"🌌","name":"Galaxy","cost":75},
+];
+var SHOP_COLOURS=[
+  {id:"shop_neon",  label:"Neon",      cls:"cc-shop-neon",  style:"background:linear-gradient(135deg,#001a1a,#003333)", cost:20},
+  {id:"shop_rose",  label:"Rose",      cls:"cc-shop-rose",  style:"background:linear-gradient(135deg,#2e0a1e,#4e1535)", cost:20},
+  {id:"shop_slate", label:"Slate",     cls:"cc-shop-slate", style:"background:linear-gradient(135deg,#0d1520,#1a2535)", cost:20},
+  {id:"shop_amber", label:"Amber",     cls:"cc-shop-amber", style:"background:linear-gradient(135deg,#1e1200,#3d2600)", cost:30},
+  {id:"shop_ice",   label:"Ice",       cls:"cc-shop-ice",   style:"background:linear-gradient(135deg,#0d1e2e,#0d2e3e)", cost:30},
+  {id:"shop_toxic", label:"Toxic",     cls:"cc-shop-toxic", style:"background:linear-gradient(135deg,#0a1e00,#163300)", cost:40},
+  {id:"shop_space", label:"Space",     cls:"cc-shop-space", style:"background:linear-gradient(135deg,#050010,#0f0025)", cost:50},
+  {id:"shop_prism", label:"Prism",     cls:"cc-shop-prism", style:"background:linear-gradient(135deg,#1a001e,#001e1a,#1e1a00)", cost:75},
+];
+var SHOP_TITLES=[
+  {id:"st_token1",  label:"Big Spender",  rarity:"Uncommon", color:"#06d6a0", bg:"rgba(6,214,160,0.15)",  cost:30,  desc:"Spend tokens in the shop"},
+  {id:"st_gold1",   label:"Coin Collector",rarity:"Rare",    color:"#4cc9f0", bg:"rgba(76,201,240,0.15)", cost:60,  desc:"For the dedicated earner"},
+  {id:"st_elite",   label:"The Elite",    rarity:"Epic",     color:"#9b5de5", bg:"rgba(155,93,229,0.2)",  cost:100, desc:"For those who rise above"},
+  {id:"st_vip",     label:"VIP",          rarity:"Epic",     color:"#9b5de5", bg:"rgba(155,93,229,0.2)",  cost:150, desc:"Very Important Player"},
+  {id:"st_golden",  label:"Golden",       rarity:"Legendary",color:"#ffd166", bg:"rgba(255,209,102,0.2)", cost:200, desc:"Pure gold status"},
+  {id:"st_phantom", label:"The Phantom",  rarity:"Legendary",color:"#ffd166", bg:"rgba(255,209,102,0.2)", cost:250, desc:"A ghost in the machine"},
+  {id:"st_overlord",label:"Overlord",     rarity:"Mythic",   color:"#a78bfa", bg:"rgba(167,139,250,0.2)", cost:500, desc:"Supreme ruler of QuizPop"},
+];
+
+function applyNameEffect(el,effectId){
+  if(!effectId||!el)return;
+  var eff=SHOP_EFFECTS.find(function(e){return e.id===effectId;});
+  if(!eff)return;
+  eff.cls.split(" ").forEach(function(c){if(c)el.classList.add(c);});
+  if(eff.color&&!eff.cls.includes("ne-rainbow")&&!eff.cls.includes("ne-shimmer")){
+    el.style.color=eff.color;
+  }
+}
+
+function getTitleColor(label){
+  if(!label)return"var(--muted)";
+  var all=TITLES.concat(SHOP_TITLES);
+  var t=all.find(function(t){return t.label===label;});
+  return t?t.color:"var(--muted)";
+}
+
+function styledName(username,effectId){
+  if(!effectId)return username;
+  var eff=SHOP_EFFECTS.find(function(e){return e.id===effectId;});
+  if(!eff)return username;
+  var cls=eff.cls;
+  var style=(!cls.includes("ne-rainbow")&&!cls.includes("ne-shimmer"))?"color:"+eff.color:"";
+  return '<span class="'+cls+'"'+(style?' style="'+style+'"':'')+'>'+username+'</span>';
+}
+
+var _tsCurrentTab="effects";
+function openTokenShop(){
+  updateTokenUI();
+  document.getElementById("tokenShopModal").style.display="flex";
+  tsTab("effects");
+}
+function closeTokenShop(){
+  document.getElementById("tokenShopModal").style.display="none";
+}
+function tsTab(tab){
+  _tsCurrentTab=tab;
+  ["effects","avatars","colours","titles"].forEach(function(t){
+    var b=document.getElementById("tst-"+t);
+    if(b)b.className="ts-tab"+(t===tab?" active":"");
+  });
+  renderTsBody();
+}
+function renderTsBody(){
+  var body=document.getElementById("tsBody");
+  if(!body)return;
+  var tokens=getTokens();
+  var html="";
+  if(_tsCurrentTab==="effects"){
+    html+='<div class="ts-section-label">Name Effects — shown on calling card &amp; leaderboard</div>';
+    var equipped=getEquippedEffect();
+    SHOP_EFFECTS.forEach(function(e){
+      var owned=ownsItem(e.id);
+      var isEquipped=equipped===e.id;
+      var canAfford=tokens>=e.cost;
+      var btnText=isEquipped?"✓ Equipped":owned?"Equip":"🪙 "+e.cost;
+      var btnCls="ts-buy-btn"+(isEquipped?" equipped":owned?" owned":canAfford?"":" cant-afford");
+      html+='<div class="ts-item">'+
+        '<div class="ts-preview">'+e.preview+'</div>'+
+        '<div class="ts-item-info">'+
+          '<div class="ts-item-name"><span class="'+e.cls+'"'+(e.color&&!e.cls.includes('rainbow')&&!e.cls.includes('shimmer')?' style="color:'+e.color+'"':'')+'>'+e.name+'</span></div>'+
+          '<div class="ts-item-desc">'+e.desc+'</div>'+
+          (!owned?'<div class="ts-cost">🪙 '+e.cost+' tokens</div>':'<div class="ts-cost" style="color:var(--green)">Owned</div>')+
+        '</div>'+
+        '<button class="'+btnCls+'" onclick="tsBuyOrEquipEffect(\''+e.id+'\')">'+btnText+'</button>'+
+      '</div>';
+    });
+    if(equipped){
+      html+='<div style="text-align:center;margin-top:8px"><button onclick="setEquippedEffect(\'\');renderTsBody();renderCallingCard();" style="background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;text-decoration:underline">Remove effect</button></div>';
+    }
+  } else if(_tsCurrentTab==="avatars"){
+    html+='<div class="ts-section-label">Premium Avatars</div>';
+    var currentAv=getCCAvatar();
+    SHOP_AVATARS.forEach(function(a){
+      var owned=ownsItem(a.id);
+      var isEquipped=currentAv===a.em;
+      var canAfford=tokens>=a.cost;
+      var btnText=isEquipped?"✓ Using":owned?"Use":"🪙 "+a.cost;
+      var btnCls="ts-buy-btn"+(isEquipped?" equipped":owned?" owned":canAfford?"":" cant-afford");
+      html+='<div class="ts-item">'+
+        '<div class="ts-preview">'+a.em+'</div>'+
+        '<div class="ts-item-info">'+
+          '<div class="ts-item-name">'+a.name+'</div>'+
+          (!owned?'<div class="ts-cost">🪙 '+a.cost+' tokens</div>':'<div class="ts-cost" style="color:var(--green)">Owned</div>')+
+        '</div>'+
+        '<button class="'+btnCls+'" onclick="tsBuyOrEquipAvatar(\''+a.id+'\',\''+a.em+'\')">'+btnText+'</button>'+
+      '</div>';
+    });
+  } else if(_tsCurrentTab==="colours"){
+    html+='<div class="ts-section-label">Premium Card Colours</div>';
+    var currentCol=getCCColour();
+    SHOP_COLOURS.forEach(function(c){
+      var owned=ownsItem(c.id);
+      var isEquipped=currentCol===c.id;
+      var canAfford=tokens>=c.cost;
+      var btnText=isEquipped?"✓ Using":owned?"Use":"🪙 "+c.cost;
+      var btnCls="ts-buy-btn"+(isEquipped?" equipped":owned?" owned":canAfford?"":" cant-afford");
+      html+='<div class="ts-item">'+
+        '<div class="ts-preview" style="width:36px;height:36px;border-radius:8px;'+c.style+'"></div>'+
+        '<div class="ts-item-info">'+
+          '<div class="ts-item-name">'+c.label+'</div>'+
+          (!owned?'<div class="ts-cost">🪙 '+c.cost+' tokens</div>':'<div class="ts-cost" style="color:var(--green)">Owned</div>')+
+        '</div>'+
+        '<button class="'+btnCls+'" onclick="tsBuyOrEquipColour(\''+c.id+'\')">'+btnText+'</button>'+
+      '</div>';
+    });
+  } else if(_tsCurrentTab==="titles"){
+    html+='<div class="ts-section-label">Premium Titles</div>';
+    var currentTitle=getCCTitle();
+    SHOP_TITLES.forEach(function(t){
+      var owned=ownsItem(t.id);
+      var isEquipped=currentTitle===t.id;
+      var canAfford=tokens>=t.cost;
+      var btnText=isEquipped?"✓ Using":owned?"Use":"🪙 "+t.cost;
+      var btnCls="ts-buy-btn"+(isEquipped?" equipped":owned?" owned":canAfford?"":" cant-afford");
+      html+='<div class="ts-item">'+
+        '<div class="ts-item-info">'+
+          '<div class="ts-item-name"><span style="background:'+t.bg+';color:'+t.color+';border:1px solid '+t.color+'35;font-size:12px;padding:2px 10px;border-radius:20px;font-weight:600">'+t.label+'</span></div>'+
+          '<div class="ts-item-desc" style="margin-top:5px">'+t.desc+' · <span style="color:'+t.color+'">'+t.rarity+'</span></div>'+
+          (!owned?'<div class="ts-cost">🪙 '+t.cost+' tokens</div>':'<div class="ts-cost" style="color:var(--green)">Owned</div>')+
+        '</div>'+
+        '<button class="'+btnCls+'" onclick="tsBuyOrEquipTitle(\''+t.id+'\')">'+btnText+'</button>'+
+      '</div>';
+    });
+  }
+  body.innerHTML=html;
+}
+
+function tsBuyOrEquipEffect(id){
+  var eff=SHOP_EFFECTS.find(function(e){return e.id===id;});
+  if(!eff)return;
+  if(ownsItem(id)){
+    setEquippedEffect(getEquippedEffect()===id?"":id);
+  } else {
+    if(getTokens()<eff.cost){return;}
+    setTokens(getTokens()-eff.cost);
+    buyItem(id);
+    setEquippedEffect(id);
+    showAchToast({icon:"✨",name:"Effect unlocked: "+eff.name});
+  }
+  renderTsBody();
+  renderCallingCard();
+}
+function tsBuyOrEquipAvatar(id,em){
+  var av=SHOP_AVATARS.find(function(a){return a.id===id;});
+  if(!av)return;
+  if(ownsItem(id)){
+    localStorage.setItem("qp_cc_avatar",em);
+  } else {
+    if(getTokens()<av.cost)return;
+    setTokens(getTokens()-av.cost);
+    buyItem(id);
+    localStorage.setItem("qp_cc_avatar",em);
+    showAchToast({icon:em,name:"Avatar unlocked: "+av.name});
+  }
+  renderTsBody();
+  renderCallingCard();
+}
+function tsBuyOrEquipColour(id){
+  var col=SHOP_COLOURS.find(function(c){return c.id===id;});
+  if(!col)return;
+  if(ownsItem(id)){
+    localStorage.setItem("qp_cc_colour",id);
+  } else {
+    if(getTokens()<col.cost)return;
+    setTokens(getTokens()-col.cost);
+    buyItem(id);
+    localStorage.setItem("qp_cc_colour",id);
+    showAchToast({icon:"🎨",name:"Colour unlocked: "+col.label});
+  }
+  renderTsBody();
+  renderCallingCard();
+}
+function tsBuyOrEquipTitle(id){
+  var ti=SHOP_TITLES.find(function(t){return t.id===id;});
+  if(!ti)return;
+  if(ownsItem(id)){
+    localStorage.setItem("qp_cc_title",getCCTitle()===id?"":id);
+  } else {
+    if(getTokens()<ti.cost)return;
+    setTokens(getTokens()-ti.cost);
+    buyItem(id);
+    localStorage.setItem("qp_cc_title",id);
+    showAchToast({icon:"🏷️",name:"Title unlocked: "+ti.label});
+  }
+  renderTsBody();
+  renderCallingCard();
+}
+
+
 function calcXPGain(){
   var base=score*10;
   var avg=questions.length>0?totalTime/questions.length:15;
@@ -1585,10 +1919,12 @@ function renderCallingCard(){
   var name=getUsername()||"Anonymous";
   var xp=getXP(), rank=getRank(xp), nextRank=getNextRank(xp);
   var colourId=getCCColour();
-  var colourDef=CC_COLOURS.find(function(c){return c.id===colourId;})||CC_COLOURS[0];
+  var colourDef=CC_COLOURS.find(function(c){return c.id===colourId;})||SHOP_COLOURS.find(function(c){return c.id===colourId;})||CC_COLOURS[0];
   var avatarEmoji=getCCAvatar();
   var initials=name.substring(0,2).toUpperCase();
   var activeTitle=getActiveTitle();
+  var nameEffect=getEquippedEffect();
+  var styledNameHTML=nameEffect?styledName(name,nameEffect):name;
 
   var barPct=0, xpToNext="Max Rank";
   if(nextRank){
@@ -1630,7 +1966,7 @@ function renderCallingCard(){
       '<div class="cc-collapsed">'+
         '<div class="cc-collapsed-avatar">'+avatarHTML+'</div>'+
         '<div class="cc-collapsed-info">'+
-          '<div class="cc-collapsed-name">'+name+'</div>'+
+          '<div class="cc-collapsed-name">'+styledNameHTML+'</div>'+
           '<div class="cc-collapsed-title">'+titleHTML+'</div>'+
         '</div>'+
         rankBadgeHTML+
@@ -1641,7 +1977,7 @@ function renderCallingCard(){
     html+=
       '<div class="cc-hero">'+
         '<div class="cc-hero-avatar">'+avatarHTML+'</div>'+
-        '<div class="cc-hero-name">'+name+'</div>'+
+        '<div class="cc-hero-name">'+styledNameHTML+'</div>'+
         '<div style="margin-bottom:16px">'+titleHTML+'</div>'+
       '</div>'+
       '<div class="cc-xp-wrap">'+xpBarHTML+'</div>'+
@@ -1775,9 +2111,21 @@ function awardXP(){
   var newRank=getRank(newXP);
   var rankedUp=newRank.name!==oldRank.name;
   if(rankedUp){
-    setTimeout(function(){sfxRankUp();showAchToast({icon:"⬆️",name:"Rank Up! You are now "+newRank.name});},1800);
+    var rankIdx=RANKS.indexOf(newRank);
+    var tokenReward=RANK_TOKEN_REWARDS[rankIdx]||5;
+    addTokens(tokenReward);
+    setTimeout(function(){sfxRankUp();showAchToast({icon:"⬆️",name:"Rank Up! "+newRank.name+" · +"+tokenReward+"🪙"});},1800);
   }
-  return{base:base,speedBonus:speedBonus,perfectBonus:perfectBonus,total:gain,oldXP:oldXP,newXP:newXP,oldRank:oldRank,newRank:newRank,rankedUp:rankedUp};
+  // Award tokens for scoring 7+
+  if(score>=7){
+    var todayTokenKey="qp_token_awarded_"+dayKey()+"_"+cat;
+    if(!localStorage.getItem(todayTokenKey)){
+      localStorage.setItem(todayTokenKey,"1");
+      addTokens(2);
+    }
+  }
+  var tokenAwarded=score>=7&&!localStorage.getItem("qp_token_awarded_"+dayKey()+"_"+cat+"_check");
+  return{base:base,speedBonus:speedBonus,perfectBonus:perfectBonus,total:gain,oldXP:oldXP,newXP:newXP,oldRank:oldRank,newRank:newRank,rankedUp:rankedUp,tokenReward:rankedUp?(RANK_TOKEN_REWARDS[RANKS.indexOf(newRank)]||5):0,tokenAwarded:score>=7};
 }
 
 function showXPSummary(xpData){
@@ -1797,6 +2145,8 @@ function showXPSummary(xpData){
     '<div class="xp-row"><span class="xp-row-label">Correct answers</span><span class="xp-row-val" style="color:'+rank.color+'">+'+xpData.base+'</span></div>'+
     (xpData.speedBonus>0?'<div class="xp-row"><span class="xp-row-label">Speed bonus</span><span class="xp-row-val" style="color:#4cc9f0">+'+xpData.speedBonus+'</span></div>':'')+
     (xpData.perfectBonus>0?'<div class="xp-row"><span class="xp-row-label">Perfect score!</span><span class="xp-row-val" style="color:#ffd166">+'+xpData.perfectBonus+'</span></div>':'')+
+    (xpData.rankedUp?'<div class="xp-row"><span class="xp-row-label">Rank up bonus 🪙</span><span class="xp-row-val" style="color:var(--accent2)">+'+xpData.tokenReward+' tokens</span></div>':'')+
+    (xpData.tokenAwarded?'<div class="xp-row"><span class="xp-row-label">Score 7+ reward 🪙</span><span class="xp-row-val" style="color:var(--accent2)">+2 tokens</span></div>':'')+
     '<div class="xp-divider"></div>'+
     '<div class="xp-total-row">'+
       '<span class="xp-total-label">Total XP</span>'+
@@ -1847,9 +2197,13 @@ function submitScoreToLeaderboard(){
   }).catch(function(e){console.warn("Score submit failed:",e);});
   var streak=getStreak();
   var bestStreak=Math.max(streak,parseInt(localStorage.getItem("qp_best")||"0"));
+  var effect=getEquippedEffect()||"";
+  var titleId=getCCTitle()||"";
+  var titleDef=TITLES.find(function(t){return t.id===titleId;})||SHOP_TITLES.find(function(t){return t.id===titleId;})||null;
+  var titleLabel=titleDef?titleDef.label:"";
   sbFetch("streaks?on_conflict=username",{
     method:"POST",upsert:true,
-    body:{username:username,current_streak:streak,best_streak:bestStreak,last_updated:dateKey}
+    body:{username:username,current_streak:streak,best_streak:bestStreak,last_updated:dateKey,name_effect:effect,title:titleLabel}
   }).catch(function(e){console.warn("Streak submit failed:",e);});
 }
 
@@ -1863,14 +2217,32 @@ function checkLeaderboardAchievements(username,dateKey){
       if(myRank===0)return;
       var ach=JSON.parse(localStorage.getItem("qp_ach")||"[]");
       var newOnes=[];
-      if(myRank===1 &&ach.indexOf("lb_first")<0) {ach.push("lb_first"); newOnes.push("lb_first");}
-      if(myRank===2 &&ach.indexOf("lb_second")<0){ach.push("lb_second");newOnes.push("lb_second");}
-      if(myRank===3 &&ach.indexOf("lb_third")<0) {ach.push("lb_third"); newOnes.push("lb_third");}
-      if(myRank<=10&&ach.indexOf("lb_top10")<0)  {ach.push("lb_top10"); newOnes.push("lb_top10");}
+      function lbAward(id){
+        if(ach.indexOf(id)<0){
+          ach.push(id);
+          newOnes.push(id);
+          var reward=ACH_TOKEN_REWARDS[id]||0;
+          if(reward>0)addTokens(reward);
+        }
+      }
+      if(myRank===1) lbAward("lb_first");
+      if(myRank===2) lbAward("lb_second");
+      if(myRank===3) lbAward("lb_third");
+      if(myRank<=10) lbAward("lb_top10");
+      // Daily #1 bonus — 10 tokens every time you top the leaderboard that day
+      if(myRank===1){
+        var topKey="qp_token_top1_"+dateKey;
+        if(!localStorage.getItem(topKey)){
+          localStorage.setItem(topKey,"1");
+          addTokens(10);
+          setTimeout(function(){showAchToast({icon:"🥇",name:"Daily #1! +10🪙"});},newOnes.length>0?3500:800);
+        }
+      }
       if(newOnes.length>0){
         localStorage.setItem("qp_ach",JSON.stringify(ach));
         var a=ACHIEVEMENTS.find(function(x){return x.id===newOnes[0];});
-        if(a)showAchToast(a);
+        var reward=ACH_TOKEN_REWARDS[newOnes[0]]||0;
+        if(a)showAchToast({icon:a.icon,name:a.name+(reward>0?" · +"+reward+"🪙":"")});
       }
     })
     .catch(function(e){console.warn("Leaderboard achievement check failed:",e);});
@@ -1883,9 +2255,13 @@ function syncStreakToSupabase(){
   if(streak<1)return;
   var bestStreak=parseInt(localStorage.getItem("qp_best")||"0");
   var bestEver=Math.max(bestStreak,streak);
+  var effect=getEquippedEffect()||"";
+  var titleId=getCCTitle()||"";
+  var titleDef=TITLES.find(function(t){return t.id===titleId;})||SHOP_TITLES.find(function(t){return t.id===titleId;})||null;
+  var titleLabel=titleDef?titleDef.label:"";
   sbFetch("streaks?on_conflict=username",{
     method:"POST",upsert:true,
-    body:{username:username,current_streak:streak,best_streak:bestEver,last_updated:dayKey()}
+    body:{username:username,current_streak:streak,best_streak:bestEver,last_updated:dayKey(),name_effect:effect,title:titleLabel}
   }).catch(function(e){console.warn("Streak sync failed:",e);});
 }
 
@@ -1902,34 +2278,47 @@ function renderLeaderboard(){
     });
   sbFetch("scores?date=eq."+today+"&select=username,score&order=score.desc")
     .then(function(rows){
-      var totals={};
-      (rows||[]).forEach(function(r){totals[r.username]=(totals[r.username]||0)+r.score;});
-      var sorted=Object.keys(totals).map(function(u){return{username:u,total:totals[u]};}).sort(function(a,b){return b.total-a.total;}).slice(0,10);
-      var myRank=-1;
-      var allSorted=Object.keys(totals).map(function(u){return{username:u,total:totals[u]};}).sort(function(a,b){return b.total-a.total;});
-      allSorted.forEach(function(r,i){if(r.username===username)myRank=i+1;});
-      var container=document.getElementById("lbToday");
-      container.innerHTML="";
-      if(myRank>0){
-        var pos=document.createElement("div");
-        pos.className="lb-position";
-        pos.innerHTML='<span class="lbp-label">Your position today</span><span class="lbp-rank">#'+myRank+' of '+allSorted.length+'</span>';
-        container.appendChild(pos);
-      }
-      if(sorted.length===0){container.innerHTML+='<div class="lb-empty">No scores yet today — be the first!</div>';return;}
-      var medals=["&#x1F947;","&#x1F948;","&#x1F949;"];
-      sorted.forEach(function(row,i){
-        var isMe=row.username===username;
-        var div=document.createElement("div");
-        div.className="lb-row"+(isMe?" me":"")+(i<3?" top3":"");
-        var rankClass=i===0?"r1":i===1?"r2":i===2?"r3":"";
-        var rankDisplay=i<3?medals[i]:"#"+(i+1);
-        div.innerHTML='<span class="lb-rank '+rankClass+'">'+rankDisplay+'</span><span class="lb-name">'+row.username+(isMe?'<span class="lb-you">you</span>':'')+'</span><span class="lb-val">'+row.total+' pts</span>';
-        container.appendChild(div);
+      // Also fetch streak data to get name effects and titles for today's board
+      return sbFetch("streaks?select=username,name_effect,title").then(function(streakRows){
+        var effectMap={};
+        var titleMap={};
+        (streakRows||[]).forEach(function(r){
+          effectMap[r.username]=r.name_effect||"";
+          titleMap[r.username]=r.title||"";
+        });
+        var totals={};
+        (rows||[]).forEach(function(r){totals[r.username]=(totals[r.username]||0)+r.score;});
+        var sorted=Object.keys(totals).map(function(u){return{username:u,total:totals[u]};}).sort(function(a,b){return b.total-a.total;}).slice(0,10);
+        var myRank=-1;
+        var allSorted=Object.keys(totals).map(function(u){return{username:u,total:totals[u]};}).sort(function(a,b){return b.total-a.total;});
+        allSorted.forEach(function(r,i){if(r.username===username)myRank=i+1;});
+        var container=document.getElementById("lbToday");
+        container.innerHTML="";
+        if(myRank>0){
+          var pos=document.createElement("div");
+          pos.className="lb-position";
+          pos.innerHTML='<span class="lbp-label">Your position today</span><span class="lbp-rank">#'+myRank+' of '+allSorted.length+'</span>';
+          container.appendChild(pos);
+        }
+        if(sorted.length===0){container.innerHTML+='<div class="lb-empty">No scores yet today — be the first!</div>';return;}
+        var medals=["&#x1F947;","&#x1F948;","&#x1F949;"];
+        sorted.forEach(function(row,i){
+          var isMe=row.username===username;
+          var eff=isMe?getEquippedEffect():(effectMap[row.username]||"");
+          var titleLabel=isMe?(function(){var tid=getCCTitle();var td=TITLES.find(function(t){return t.id===tid;})||SHOP_TITLES.find(function(t){return t.id===tid;})||null;return td?td.label:"";}()):(titleMap[row.username]||"");
+          var titleColor=getTitleColor(titleLabel);
+          var titleHTML=titleLabel?'<span style="font-size:10px;font-weight:600;color:'+titleColor+';margin-left:5px;opacity:0.85">'+titleLabel+'</span>':"";
+          var div=document.createElement("div");
+          div.className="lb-row"+(isMe?" me":"")+(i<3?" top3":"");
+          var rankClass=i===0?"r1":i===1?"r2":i===2?"r3":"";
+          var rankDisplay=i<3?medals[i]:"#"+(i+1);
+          div.innerHTML='<span class="lb-rank '+rankClass+'">'+rankDisplay+'</span><span class="lb-name">'+styledName(row.username,eff)+titleHTML+(isMe?'<span class="lb-you">you</span>':'')+'</span><span class="lb-val">'+row.total+' pts</span>';
+          container.appendChild(div);
+        });
       });
     })
     .catch(function(){document.getElementById("lbToday").innerHTML='<div class="lb-empty">Could not load scores</div>';});
-  sbFetch("streaks?select=username,current_streak,best_streak&order=current_streak.desc&limit=10")
+  sbFetch("streaks?select=username,current_streak,best_streak,name_effect,title&order=current_streak.desc&limit=10")
     .then(function(rows){
       var container=document.getElementById("lbStreaks");
       container.innerHTML="";
@@ -1937,11 +2326,15 @@ function renderLeaderboard(){
       var medals=["&#x1F947;","&#x1F948;","&#x1F949;"];
       rows.forEach(function(row,i){
         var isMe=row.username===username;
+        var eff=isMe?getEquippedEffect():(row.name_effect||"");
+        var titleLabel=isMe?(function(){var tid=getCCTitle();var td=TITLES.find(function(t){return t.id===tid;})||SHOP_TITLES.find(function(t){return t.id===tid;})||null;return td?td.label:"";}()):(row.title||"");
+        var titleColor=getTitleColor(titleLabel);
+        var titleHTML=titleLabel?'<span style="font-size:10px;font-weight:600;color:'+titleColor+';margin-left:5px;opacity:0.85">'+titleLabel+'</span>':"";
         var div=document.createElement("div");
         div.className="lb-row"+(isMe?" me":"")+(i<3?" top3":"");
         var rankClass=i===0?"r1":i===1?"r2":i===2?"r3":"";
         var rankDisplay=i<3?medals[i]:"#"+(i+1);
-        div.innerHTML='<span class="lb-rank '+rankClass+'">'+rankDisplay+'</span><span class="lb-name">'+row.username+(isMe?'<span class="lb-you">you</span>':'')+'</span><span class="lb-val streak">'+row.current_streak+' <span class="fire f2">&#x1F525;</span></span>';
+        div.innerHTML='<span class="lb-rank '+rankClass+'">'+rankDisplay+'</span><span class="lb-name">'+styledName(row.username,eff)+titleHTML+(isMe?'<span class="lb-you">you</span>':'')+'</span><span class="lb-val streak">'+row.current_streak+' <span class="fire f2">&#x1F525;</span></span>';
         container.appendChild(div);
       });
     })
@@ -1961,7 +2354,28 @@ function confirmReset(){
 }
 </script>
 
+<!-- Token Shop Modal -->
+<div id="tokenShopModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto">
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:0;max-width:420px;width:100%;margin:auto">
+    <div style="padding:20px 20px 0;display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div style="font-family:'Righteous',cursive;font-size:20px">🪙 Token Shop</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">Balance: <span id="shopTokenBal" style="color:var(--accent2);font-weight:700">0</span> tokens</div>
+      </div>
+      <button onclick="closeTokenShop()" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 12px;color:var(--muted);cursor:pointer;font-size:13px">✕ Close</button>
+    </div>
+    <div style="display:flex;gap:0;border-bottom:1px solid var(--border);margin-top:16px;padding:0 20px">
+      <button class="ts-tab active" id="tst-effects" onclick="tsTab('effects')">✨ Effects</button>
+      <button class="ts-tab" id="tst-avatars" onclick="tsTab('avatars')">😀 Avatars</button>
+      <button class="ts-tab" id="tst-colours" onclick="tsTab('colours')">🎨 Colours</button>
+      <button class="ts-tab" id="tst-titles" onclick="tsTab('titles')">🏷️ Titles</button>
+    </div>
+    <div id="tsBody" style="padding:16px 20px 20px;min-height:200px"></div>
+  </div>
+</div>
+
 <!-- Reset confirmation modal -->
+
 <div id="resetModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px">
   <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px 24px;max-width:320px;width:100%;text-align:center">
     <div style="font-size:36px;margin-bottom:12px">🗑️</div>
